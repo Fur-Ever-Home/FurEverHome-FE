@@ -1,0 +1,56 @@
+
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+  push:
+    branches:
+      - develop
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check if frontend project exists
+        id: project
+        run: |
+          if [ -f package.json ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Node.js
+        if: steps.project.outputs.exists == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.project.outputs.exists == 'true'
+        run: npm ci
+
+      - name: Run tests
+        if: steps.project.outputs.exists == 'true'
+        run: npm test -- --run
+
+      - name: Build frontend
+        if: steps.project.outputs.exists == 'true'
+        run: npm run build
+
+      - name: Wait for frontend project
+        if: steps.project.outputs.exists == 'false'
+        run: echo "Frontend project not uploaded yet. Build check will run once package.json is added."
