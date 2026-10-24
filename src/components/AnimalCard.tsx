@@ -20,8 +20,8 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
 
       <div className="medical-icons-row">
         <span className={`icon-badge ${animal.vaccinated ? 'active' : ''}`} title="Vaccinat">💉</span>
-        <span className={`icon-badge ${animal.dewormed ? 'active' : ''}`} title="Deparazitat">💊</span>
-        <span className={`icon-badge ${animal.sterilized ? 'active' : ''}`} title="Sterilizat">{animal.gender === 'Mascul' ? '♂️' : '♀️'}</span>
+<span className={`icon-badge ${animal.dewormed ? 'active' : ''}`} title="Deparazitat">💊</span>
+<span className={`icon-badge ${animal.sterilized ? 'active' : ''}`} title="Sterilizat">⚥</span>
       </div>
 
       <div className="card-content">
