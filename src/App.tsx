@@ -1,10 +1,22 @@
- function App() {
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import GhidulAdoptatorului from './pages/GhidulAdoptatorului';
+import Catalog from './pages/Catalog';
+import Adaposturi from './pages/Adaposturi';
+import Colaborari from './pages/Colaborari';
+import DespreNoi from './pages/DespreNoi';
+import Login from './pages/Login';
+
+export default function App() {
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Platformă Adopții Animale</h1>
-      <p>Proiectul de Frontend este configurat!</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/ghidul-adoptatorului" element={<GhidulAdoptatorului />} />
+      <Route path="/catalog" element={<Catalog />} />
+      <Route path="/adaposturi" element={<Adaposturi />} />
+      <Route path="/colaborari" element={<Colaborari />} />
+      <Route path="/despre-noi" element={<DespreNoi />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
-
-export default App;

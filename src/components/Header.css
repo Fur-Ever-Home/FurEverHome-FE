@@ -1,0 +1,92 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background-color: #f7f4ed;
+  border-bottom: 1px solid #e5dfd3;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.logo-dark {
+  color: #2b231d;
+}
+
+.logo-gold {
+  color: #c89551;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #2b231d;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+/* Această clasă face butonul maro când pagina este activă */
+.nav-item.active {
+  background-color: #382c24;
+  color: #ffffff !important;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-auth {
+  text-decoration: none;
+  color: #c89551;
+  border: 1.5px solid #c89551;
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-auth.active {
+  background-color: #382c24;
+  color: #ffffff;
+  border-color: #382c24;
+}
+
+.lang-toggle {
+  display: flex;
+  background-color: #e8e2d5;
+  border-radius: 15px;
+  padding: 2px;
+}
+
+.lang-btn {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 12px;
+  color: #2b231d;
+}
+
+.lang-btn.active {
+  background-color: #382c24;
+  color: #ffffff;
+}
