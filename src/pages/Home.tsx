@@ -15,8 +15,8 @@ import Footer from '../components/Footer';
 
 import './Home.css';
 export default function Home() {
-
-  const [animals, setAnimals] = useState<Animal[]>([]);
+  
+const [animals, setAnimals] = useState<Animal[]>([]);
 const [loading, setLoading] = useState(true);
 const carouselRef = useRef<HTMLDivElement>(null);
 
