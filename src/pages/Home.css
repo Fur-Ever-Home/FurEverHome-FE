@@ -369,3 +369,22 @@
   background-color: #b38241;
   transform: translateY(-2px);
 }
+
+
+
+/* Adaptare pentru ecran de telefon (Mobile View) */
+@media (max-width: 768px) {
+    .container, .main-content {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+    }
+    header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .pet-card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
