@@ -1,0 +1,125 @@
+.animal-card {
+  background-color: #f7f4ef;
+  border-radius: 16px;
+  padding: 16px;
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #ede7df;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-badge {
+  background-color: #587b56;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.favorite-btn {
+  background: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #5a4e42;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card-image-container {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.placeholder-avatar {
+  font-size: 4rem;
+}
+
+.medical-icons-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.icon-badge {
+  background-color: #e5dfd7;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.icon-badge.active {
+  background-color: #587b56;
+  color: white;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.animal-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2b231d;
+  margin: 0;
+}
+
+.animal-info {
+  font-size: 0.85rem;
+  color: #7a6f65;
+  margin: 0;
+}
+
+.animal-shelter {
+  font-size: 0.8rem;
+  color: #9c9187;
+  margin: 0 0 12px 0;
+}
+
+.btn-details {
+  background-color: #3b3028;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-details:hover {
+  background-color: #2b231d;
+
+  .animal-card {
+  flex: 0 0 280px !important; /* Forțează cardul să aibă lățime fixă și să nu se micșoreze/coboare */
+  width: 280px !important;
+  background-color: #f7f4ef;
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid #ede7df;
+  box-sizing: border-box;
+}
+}
