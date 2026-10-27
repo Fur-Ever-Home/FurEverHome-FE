@@ -1,5 +1,4 @@
-
-name: Frontend CI
+name: Frontend CI/CD
 
 on:
   pull_request:
@@ -12,11 +11,11 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  build:
-    name: Build check
+  build-and-deploy:
+    name: Build check & Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -44,12 +43,16 @@ jobs:
         run: npm ci
 
       - name: Run tests
+        if: steps.project.outputs.exists == 'true'
         run: npm run test --if-present
 
       - name: Build frontend
         if: steps.project.outputs.exists == 'true'
         run: npm run build
 
-      - name: Wait for frontend project
-        if: steps.project.outputs.exists == 'false'
-        run: echo "Frontend project not uploaded yet. Build check will run once package.json is added."
+      - name: Deploy to GitHub Pages
+        if: steps.project.outputs.exists == 'true' && github.ref == 'refs/heads/develop' && github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
