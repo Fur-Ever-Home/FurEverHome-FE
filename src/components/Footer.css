@@ -132,3 +132,38 @@
   background-color: #b38241;
   transform: scale(1.05);
 }
+
+
+/* ========================================== */
+/* ADAPTARE FOOTER PENTRU TELEFON            */
+/* ========================================== */
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 30px 20px 20px 20px;
+  }
+
+  .footer-content {
+    flex-direction: column !important;
+    gap: 30px;
+    align-items: flex-start;
+  }
+
+  .footer-brand {
+    align-items: flex-start;
+  }
+
+  .footer-links-column {
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .footer-floating-btn {
+    align-self: flex-end;
+  }
+}

@@ -374,17 +374,98 @@
 
 /* Adaptare pentru ecran de telefon (Mobile View) */
 @media (max-width: 768px) {
-    .container, .main-content {
-        flex-direction: column;
-        width: 100%;
-        padding: 10px;
-    }
-    header {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .pet-card {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
+   /* 1. Secțiunea Hero (Prima secțiune) */
+  .hero-section {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 20px 15px !important;
+  }
+
+  .hero-content {
+    max-width: 100% !important;
+  }
+
+  .hero-title {
+    font-size: 26px !important;
+    line-height: 1.2;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-image-container {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+
+  .hero-image {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* 2. Secțiunea Categorii (Câini, Pisici, Altele) */
+  .categories-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0 15px;
+  }
+
+  .categories-cards {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 15px;
+  }
+
+  .category-card {
+    width: 100% !important;
+    justify-content: flex-start;
+  }
+
+  /* 3. Secțiunea Carusel și Pași */
+  .carousel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0 15px;
+  }
+
+  .carousel-legend {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .carousel-wrapper {
+    padding: 0 10px;
+  }
+
+  .carousel-arrow {
+    display: none;
+  }
+  /* 4. Secțiunea Pași (Adopția în 4 pași) și Banner */
+  .steps-section {
+    padding: 20px 10px;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .steps-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    padding: 15px;
+    margin: 20px 10px;
+  }
