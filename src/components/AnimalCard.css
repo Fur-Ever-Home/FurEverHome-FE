@@ -123,3 +123,17 @@
   box-sizing: border-box;
 }
 }
+
+
+
+
+/* ========================================== */
+/* ADAPTARE ANIMAL CARD PENTRU TELEFON       */
+/* ========================================== */
+
+@media (max-width: 768px) {
+  .animal-card {
+    width: 260px !important; /* Facem cardul puțin mai compact pe ecranele înguste de telefon */
+    flex: 0 0 260px !important;
+  }
+}

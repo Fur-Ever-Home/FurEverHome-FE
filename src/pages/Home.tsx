@@ -219,3 +219,49 @@ const handleScroll = (direction: 'left' | 'right') => {
   );
 }
   
+
+
+/* ========================================== */
+/* ADAPTARE PENTRU TELEFON (MOBILE RESPONSIVE) */
+/* ========================================== */
+
+@media (max-width: 768px) {
+  
+  /* 1. Secțiunea Hero (Prima secțiune) */
+  .hero-section {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 20px 15px !important;
+  }
+
+  .hero-content {
+    max-width: 100% !important;
+  }
+
+  .hero-title {
+    font-size: 26px !important; /* Reducem titlul să încapă frumos pe ecran mic */
+    line-height: 1.2;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-image-container {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+
+  .hero-image {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
