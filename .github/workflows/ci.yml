@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build-and-deploy:
-    name: Build check & Deploy
+    name: Build check
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +51,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        if: steps.project.outputs.exists == 'true' && github.ref == 'refs/heads/develop' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/develop'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
