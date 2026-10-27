@@ -1,0 +1,134 @@
+.site-footer {
+  background-color: #f7f3ed;
+  padding: 50px 80px 30px 80px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid #e8e2d8;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: flex-start; /* Le grupăm spre stânga */
+  gap: 200px; /* Controlează distanța exactă dintre logo și linkurile legale */
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+/* Stilizare Brand / Logo în stânga */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.footer-logo-text {
+  font-family: 'Libertinus Sans', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2b231d;
+  letter-spacing: 0.5px;
+}
+
+.footer-logo-highlight {
+  color: #c89551;
+}
+
+.footer-description {
+  font-size: 0.95rem;
+  color: #6e645a;
+  margin: 0;
+}
+
+.footer-contact-email {
+  font-size: 0.95rem;
+  color: #6e645a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-email:hover {
+  color: #c89551;
+}
+
+/* Stilizare Linkuri legale în dreapta, aliniate la stânga în blocul lor */
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.footer-link {
+  font-size: 0.95rem;
+  color: #5d534a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link.font-bold {
+  font-weight: 700;
+  color: #2b231d;
+}
+
+.footer-link:hover {
+  color: #c89551;
+}
+
+/* Linie de separare */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e5ddd0;
+  margin-bottom: 25px;
+}
+
+/* Partea inferioară */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  color: #8c8175;
+  margin: 0;
+}
+
+/* Butonul mic portocaliu din dreapta jos */
+.footer-floating-btn {
+  width: 44px;
+  height: 44px;
+  background-color: #c89551;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(200, 149, 81, 0.3);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.footer-floating-btn:hover {
+  background-color: #b38241;
+  transform: scale(1.05);
+}
