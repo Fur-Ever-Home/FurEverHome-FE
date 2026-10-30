@@ -4,6 +4,7 @@ import './Footer.css';
 
 export default function Footer() {
   return (
+    
     <footer className="site-footer">
       <div className="footer-content">
         {/* Partea stângă: Logo și descriere */}
@@ -22,7 +23,7 @@ export default function Footer() {
 
         {/* Partea dreaptă: Linkuri legale */}
         <div className="footer-links-column">
-          <Link to="/informatii-legale" className="footer-link font-bold">Informații legale</Link>
+          <span className="footer-link font-bold">Informații legale</span>
           <Link to="/politica-confidentialitate" className="footer-link">Politica de confidențialitate</Link>
           <Link to="/politica-cookies" className="footer-link">Politica de cookies</Link>
           <Link to="/gdpr" className="footer-link">GDPR – drepturile tale</Link>
@@ -36,11 +37,11 @@ export default function Footer() {
         <p className="footer-copyright">
           © 2026 FureverHome. Toate drepturile rezervate. Textele, logo-ul și designul site-ului nu pot fi copiate fără acordul nostru.
         </p>
-
-        <button className="footer-floating-btn" aria-label="Asistență">
-          💬
-        </button>
       </div>
     </footer>
+
+    
+
+
   );
 }
