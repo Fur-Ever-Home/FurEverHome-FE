@@ -40,6 +40,7 @@ const handleScroll = (direction: 'left' | 'right') => {
 
   
   return (
+    <>
     <div className="home-page">
       <Header />
       
@@ -77,36 +78,35 @@ const handleScroll = (direction: 'left' | 'right') => {
       <section className="categories-section">
         <div className="categories-header">
           <h2 className="categories-title">Pe cine cauți?</h2>
-          <Link to="/catalog" className="btn-view-all">
-            Vezi toate
-          </Link>
         </div>
 
-        <div className="categories-cards">
-          <Link to="/catalog?categorie=caini" className="category-card active">
-            <div className="category-icon">
-              <img src={dogIcon} alt="Câini" />
+          <div className="categories-cards">
+           <div className="category-card active">
+           <div className="category-icon">
+             <img src={dogIcon} alt="Câini" />
             </div>
-            <span>Câini</span>
-          </Link>
+               <span>Câini</span>
+            </div>
 
-          <Link to="/catalog?categorie=pisici" className="category-card">
+
+          <div className="category-card active">
             <div className="category-icon">
               <img src={catIcon} alt="Pisici" />
+             </div>
+                <span>Pisici</span>
             </div>
-            <span>Pisici</span>
-          </Link>
+           
 
-          <Link to="/catalog?categorie=altele" className="category-card">
+          <div className="category-card active">
             <div className="category-icon">
               <img src={otherIcon} alt="Alte animale" />
             </div>
-            <span>Alte animale</span>
-          </Link>
-        </div>
-      
+                 <span>Alte animale</span>
+           </div>
+      </div>
       
       <section className="carousel-section">
+  
   {/* Antetul secțiunii */}
   <div className="carousel-header">
     <div className="carousel-header-left">
@@ -152,13 +152,6 @@ const handleScroll = (direction: 'left' | 'right') => {
 </div>
    
 </section>
-
-     
-          
-          
-
-        
-      
 
       
       </section>
@@ -216,6 +209,12 @@ const handleScroll = (direction: 'left' | 'right') => {
       </section>
       <Footer />
     </div>
+
+     {/* Butonul de chatbot mutat aici, ca element independent */}
+    <button className="footer-floating-btn" aria-label="Asistență">
+        💬
+      </button>
+  </>
   );
 }
   
