@@ -106,9 +106,7 @@ const handleScroll = (direction: 'left' | 'right') => {
       <section className="categories-section">
         <div className="categories-header">
           <h2 className="categories-title">Pe cine cauți?</h2>
-	<Link to="/catalog" className="btn-view-all">
-            Vezi toate
-          </Link>
+	
         </div>
 
           <div className="categories-cards">
