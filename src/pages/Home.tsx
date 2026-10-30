@@ -8,24 +8,52 @@ import vaccineIcon from '../assets/vaccine-icon.svg';
 import dewormIcon from '../assets/deworm-icon.svg';
 import sterileIcon from '../assets/sterile-icon.svg';
 import { AnimalCard } from '../components/AnimalCard';
-import { fetchAnimals, Animal } from '../data/animalsMock';
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/Footer';
-
-
 import './Home.css';
+// Definim interfața pentru animal conform backend-ului tău Java
+interface Animal {
+  id: number;
+  name: string;
+  species: string;
+  status: string;
+  gender: string;
+  age: string;
+  size: string;
+  shelter: string;
+  vaccinated: boolean;
+  dewormed: boolean;
+  sterilized: boolean;
+  imageUrl: string;
+}
 export default function Home() {
-  
 const [animals, setAnimals] = useState<Animal[]>([]);
-const [loading, setLoading] = useState(true);
-const carouselRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedSpecies, setSelectedSpecies] = useState<string>(''); // Reține ce categorie e selectată
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-useEffect(() => {
-  fetchAnimals().then((data) => {
-    setAnimals(data);
-    setLoading(false);
-  });
-}, []);
+  // Conexiunea cu backend-ul care trimite și specia când o selectezi
+  useEffect(() => {
+    let url = 'http://localhost:8080/api/animals';
+    if (selectedSpecies) {
+      url += `?species=${encodeURIComponent(selectedSpecies)}`;
+    }
+
+    setLoading(true);
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setAnimals(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Eroare la preluarea animalelor:', error);
+        setLoading(false);
+      });
+  }, [selectedSpecies]); // Se actualizează automat când apeși o categorie
+
+
+
 
 const handleScroll = (direction: 'left' | 'right') => {
   if (carouselRef.current) {
@@ -78,26 +106,41 @@ const handleScroll = (direction: 'left' | 'right') => {
       <section className="categories-section">
         <div className="categories-header">
           <h2 className="categories-title">Pe cine cauți?</h2>
+	<Link to="/catalog" className="btn-view-all">
+            Vezi toate
+          </Link>
         </div>
 
           <div className="categories-cards">
-           <div className="category-card active">
-           <div className="category-icon">
-             <img src={dogIcon} alt="Câini" />
-            </div>
-               <span>Câini</span>
+          <div 
+            className={`category-card ${selectedSpecies === 'Caine' ? 'active' : ''}`}
+            onClick={() => setSelectedSpecies(selectedSpecies === 'Caine' ? '' : 'Caine')}
+            style={{ cursor: 'pointer' }}
+          >
+            <div className="category-icon">
+              <img src={dogIcon} alt="Câini" />
+              </div>
+			<span>Câini</span>
             </div>
 
-
-          <div className="category-card active">
+          <div 
+            className={`category-card ${selectedSpecies === 'Pisica' ? 'active' : ''}`}
+            onClick={() => setSelectedSpecies(selectedSpecies === 'Pisica' ? '' : 'Pisica')}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="category-icon">
               <img src={catIcon} alt="Pisici" />
+             
+             
              </div>
                 <span>Pisici</span>
             </div>
            
-
-          <div className="category-card active">
+		<div 
+            className={`category-card ${selectedSpecies === 'Altele' ? 'active' : ''}`}
+            onClick={() => setSelectedSpecies(selectedSpecies === 'Altele' ? '' : 'Altele')}
+            style={{ cursor: 'pointer' }}
+          >   
             <div className="category-icon">
               <img src={otherIcon} alt="Alte animale" />
             </div>
@@ -140,7 +183,14 @@ const handleScroll = (direction: 'left' | 'right') => {
         <p>Se încarcă...</p>
       ) : (
         animals.map((animal) => (
-          <AnimalCard key={animal.id} animal={animal} />
+          <AnimalCard 
+            key={animal.id} 
+            animal={{ 
+              ...animal, 
+              imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
+              image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
+            } as any} 
+          />
         ))
       )}
     </div>
