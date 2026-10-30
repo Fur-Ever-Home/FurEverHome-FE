@@ -1,13 +1,29 @@
 import React from 'react';
-import { Animal } from '../data/animalsMock';
 import './AnimalCard.css';
 
+// Interfața actualizată pentru a se potrivi cu backend-ul Java
+interface Animal {
+  id?: number;
+  name: string;
+  species: string;
+  status: string;
+  gender: string;
+  age: string;
+  size: string;
+  shelter: string;
+  vaccinated: boolean;
+  dewormed: boolean;
+  sterilized: boolean;
+  imageUrl?: string;
+  image?: string;
+}
 interface AnimalCardProps {
   animal: Animal;
 }
 
 export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
-  return (
+// Verificăm imaginea venită din backend
+  const imgSrc = animal.imageUrl || animal.image;  return (
     <div className="animal-card">
       <div className="card-top">
         <span className="status-badge">{animal.status}</span>
@@ -15,13 +31,17 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
       </div>
 
       <div className="card-image-container">
-        <div className="placeholder-avatar">🐶</div>
+        {imgSrc ? (
+          <img src={imgSrc} alt={animal.name} className="animal-real-image" />
+        ) : (
+          <div className="placeholder-avatar">🐶</div>
+        )}
       </div>
 
       <div className="medical-icons-row">
         <span className={`icon-badge ${animal.vaccinated ? 'active' : ''}`} title="Vaccinat">💉</span>
-<span className={`icon-badge ${animal.dewormed ? 'active' : ''}`} title="Deparazitat">💊</span>
-<span className={`icon-badge ${animal.sterilized ? 'active' : ''}`} title="Sterilizat">⚥</span>
+		<span className={`icon-badge ${animal.dewormed ? 'active' : ''}`} title="Deparazitat">💊</span>
+		<span className={`icon-badge ${animal.sterilized ? 'active' : ''}`} title="Sterilizat">⚥</span>
       </div>
 
       <div className="card-content">
