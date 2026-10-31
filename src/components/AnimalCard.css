@@ -123,3 +123,16 @@
   box-sizing: border-box;
 }
 }
+.medical-icons-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+/* Forțăm toate iconițele (indiferent că sunt SVG sau PNG) să aibă exact aceeași dimensiune */
+.medical-icon-img {
+  width: 38px;   /* Lățime fixă */
+  height: 38px;  /* Înălțime fixă */
+  object-fit: contain;
+}

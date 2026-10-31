@@ -8,7 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 80px;
+  padding: 10px 80px;
+  padding-top: 10px;
+  font-family: 'Libertinus Sans';
 }
 
 .hero-content {
@@ -16,7 +18,7 @@
 }
 
 .hero-tag {
-  font-size: 0.85rem;
+  font-size: 1.20rem;
   font-weight: 700;
   color: #c89551;
   letter-spacing: 1px;
@@ -27,14 +29,16 @@
 .hero-title {
   font-size: 3rem;
   font-weight: 800;
-  color: #2b231d;
+  color:#3F2C20;
   line-height: 1.2;
   margin-bottom: 20px;
+  font-family: 'Libertinus Sans';
 }
 
 .hero-title-gold {
   color: #c89551;
   display: block;
+  font-family: 'Libertinus Sans';
 }
 
 .hero-description {
@@ -42,6 +46,7 @@
   color: #5d534a;
   line-height: 1.6;
   margin-bottom: 30px;
+  font-family: 'Libertinus Sans';
 }
 
 .hero-buttons {
@@ -65,7 +70,7 @@
 
 .btn-secondary {
   background-color: transparent;
-  color: #2b231d;
+  color:#3F2C20;
   border: 1.5px solid #dcd5c7;
   padding: 12px 28px;
   border-radius: 25px;
@@ -81,23 +86,20 @@
 
 /* Imaginea Hero cu dimensiuni și mască de estompare */
 .hero-image-container {
-  max-width: 560px;
+  max-width: 600px;
 }
 
 .hero-image {
-  width: 534px;
-  height: 334px;
+  width: 570px;
+  height: 434px;
   object-fit: cover;
   display: block;
-  border-radius: 20px;
+
   
   -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
   mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
 
-  .hero-image-fade {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-}
+  
 }
 
 /* Secțiunea „Pe cine cauți?” */
@@ -111,7 +113,7 @@
   font-family: 'Libertinus Sans';
   font-size: 2rem;
   font-weight: 700;
-  color: #362c23;
+  color: #3F2C20;
   margin-bottom: 0 0 8px 0;
 }
 
@@ -136,18 +138,17 @@
 }
 
 /* Când treci cu cursorul sau când cardul este activ, devine portocaliu/crem cald */
-.category-card:hover,
-.category-card.active {
-  background-color: #fcefdc;
-  border-color: #c89551;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+/* Păstrează efectul doar la hover (trecerea cu cursorul) */
+.category-card:hover {
+    background-color: #fcefdc;
+    border-color: #c89551;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Dacă un card este în hover sau activ, textul devine portocaliu */
-.category-card:hover span,
-.category-card.active span {
-  color: #c89551;
+/* Textul devine portocaliu doar la hover */
+.category-card:hover span {
+    color: #c89551;
 }
 
 /* Magia pentru a face ca restul cardurilor să devină crem simplu când unul este hover-uit */
@@ -157,15 +158,15 @@
 }
 
 .category-icon img {
-  width: 24px;         /* Redus de la 40px la 24px pentru a fi mai bine proporționat cu textul */
-  height: 24px;
+  width: 50px;         /* Redus de la 40px la 24px pentru a fi mai bine proporționat cu textul */
+  height: 50px;
   object-fit: contain;
 }
 
 .category-card span {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
   transition: color 0.2s ease;
 }
 .categories-header {
@@ -178,7 +179,7 @@
 .categories-title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #2b231d;
+  color:#3F2C20;
   margin: 0;
 }
 
@@ -228,9 +229,9 @@
   font-family: 'Libertinus Sans';
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
   margin: 0 0 7px 0;
-  margin-left: 0px;
+  margin-left: -15px;
 }
 
 .carousel-legend {
@@ -295,23 +296,20 @@
 
 /* Secțiunea Pasi Simpli */
 .steps-section {
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 40px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-   /* Schimbat din center în flex-start ca să alinieze totul în stânga */
-
+  padding: 40px 20px; /* Setează o distanță curată și egală față de marginile ecranului */
+  max-width: 1280px;
+  margin: 0 auto;  
+  width: 100%;  /* Centrează întreaga secțiune pe pagină */
 }
 
 .steps-title {
   font-family: 'Libertinus Sans';
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2b231d;
-  text-align: left !important;  /* Forțează alinierea textului la stânga */
-  margin-left: 105px;
+  color: #3F2C20;
+ text-align: left;
+margin-left: -10px;
+padding-left: 0;  /* Forțează alinierea textului la stânga */
  margin-bottom: 4px;
  margin-top: 4px;
 }
@@ -320,54 +318,56 @@
   color: #7a6f65;
   margin-left: 40px;
   text-align: left !important;  /* Forțează alinierea subtitlului la stânga */
-  margin-left: 105px;
   margin-bottom: 4px;
+  text-align: left;
+  margin-left: -10px;
+  padding-left: 0;
 }
 
-/* Grid-ul cu cele 4 carduri */
+
+/* 2. Gridul: asigurăm alinierea perfectă a cardurilor cu titlul și subtitlul */
 .steps-grid {
-  display: flex;
-  justify-content: center; /* Centrează cardurile în pagină */
-  gap: 20px;               /* Distanța perfectă între carduri */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   width: 100%;
-  max-width: 1200px;       /* Oprește cardurile să se întindă la infinit pe ecranele mari */
-  margin: 30px auto;
-  align-items: flex-start;
+  margin-top: 30px; /* Distanță frumoasă între subtitlu și carduri */
+  margin-left: -10px;
+ 
 }
 
+/* 3. Cardurile: păstrăm înălțimi egale și curate */
 .step-card {
- background-color: #ffffff;
-  border: 1px solid #e6ded3;          /* Marginea fină și elegantă */
-  border-radius: 16px;                /* Colțuri rotunjite frumos */
-  padding: 32px 24px;                 /* Spațiu generos în interiorul cardului */
-  flex: 1;                            /* Toate cardurile împart spațiul în mod egal */
-  min-width: 0;                       /* Previne deformarea textului din interior */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03); /* O umbră discretă care scoate cardul în evidență */
-  transition: transform 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #e8e2d5;
+  border-radius: 12px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
 }
-
-/* Bulina cu numărul pasului (creată din CSS) */
+/* Bulina cu numărul (1, 2, 3, 4) */
 .step-badge {
-  width: 36px;
-  height: 36px;
-  background-color: #c89551;
-  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  background-color: #d4a373;
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 16px;
- 
-  
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 
 .step-card-title {
   font-family: 'Libertinus Sans' ;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
   margin: 0 0 10px 0;
 }
 
@@ -380,19 +380,20 @@
 
 /* Banta maro închis cu butonul portocaliu */
 .steps-banner {
-  background-color: #2b231d !important; /* Maroul închis original */
+  background-color: #3F2C20 !important; /* Maroul închis original */
   border-radius: 16px;
-  padding: 32px 40px;
+  padding: 40px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;                   /* Aceeași lățime maximă ca și cardurile */
+  max-width: 1280px;                /* Aceeași lățime maximă ca și cardurile */
   box-sizing: border-box;
   margin: 0 auto;
   margin-top: 30px;
   align-items: flex-start;
   margin-bottom: 40px;
+  margin-left: -10px;
 
 }
 
