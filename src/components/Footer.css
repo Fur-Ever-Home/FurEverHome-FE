@@ -38,7 +38,7 @@
   font-family: 'Libertinus Sans', sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
-  color: #2b231d;
+  color:#3F2C20;
   letter-spacing: 0.5px;
 }
 
@@ -82,7 +82,7 @@
 
 .footer-link.font-bold {
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
 }
 
 .footer-link:hover {

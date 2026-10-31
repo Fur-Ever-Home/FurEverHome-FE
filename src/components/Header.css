@@ -20,7 +20,7 @@
 }
 
 .logo-dark {
-  color: #2b231d;
+  color:#3F2C20;
 }
 
 .logo-gold {
@@ -35,7 +35,7 @@
 
 .nav-item {
   text-decoration: none;
-  color: #2b231d;
+  color:#3F2C20;
   font-weight: 600;
   padding: 8px 18px;
   border-radius: 20px;
@@ -44,7 +44,7 @@
 
 /* Această clasă face butonul maro când pagina este activă */
 .nav-item.active {
-  background-color: #382c24;
+  background-color: #3F2C20;
   color: #ffffff !important;
 }
 
@@ -65,9 +65,9 @@
 }
 
 .btn-auth.active {
-  background-color: #382c24;
+  background-color:#3F2C20;
   color: #ffffff;
-  border-color: #382c24;
+  border-color: #3F2C20;
 }
 
 .lang-toggle {
@@ -83,10 +83,10 @@
   font-weight: bold;
   cursor: pointer;
   border-radius: 12px;
-  color: #2b231d;
+  color: #3F2C20;
 }
 
 .lang-btn.active {
-  background-color: #382c24;
+  background-color: #3F2C20;
   color: #ffffff;
 }
