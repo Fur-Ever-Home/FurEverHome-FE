@@ -16,7 +16,7 @@
 }
 
 .hero-tag {
-  font-size: 0.85rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #c89551;
   letter-spacing: 1px;
@@ -27,7 +27,7 @@
 .hero-title {
   font-size: 3rem;
   font-weight: 800;
-  color: #2b231d;
+  color:#3F2C20;
   line-height: 1.2;
   margin-bottom: 20px;
 }
@@ -35,6 +35,7 @@
 .hero-title-gold {
   color: #c89551;
   display: block;
+   font-size: 3rem;
 }
 
 .hero-description {
@@ -65,7 +66,7 @@
 
 .btn-secondary {
   background-color: transparent;
-  color: #2b231d;
+  color:#3F2C20;
   border: 1.5px solid #dcd5c7;
   padding: 12px 28px;
   border-radius: 25px;
@@ -111,7 +112,7 @@
   font-family: 'Libertinus Sans';
   font-size: 2rem;
   font-weight: 700;
-  color: #362c23;
+  color: #3F2C20;
   margin-bottom: 0 0 8px 0;
 }
 
@@ -157,15 +158,15 @@
 }
 
 .category-icon img {
-  width: 24px;         /* Redus de la 40px la 24px pentru a fi mai bine proporționat cu textul */
-  height: 24px;
+  width: 48px;         /* Redus de la 40px la 24px pentru a fi mai bine proporționat cu textul */
+  height: 40px;
   object-fit: contain;
 }
 
 .category-card span {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #2b231d;
+  color:#3F2C20;
   transition: color 0.2s ease;
 }
 .categories-header {
@@ -176,15 +177,15 @@
 }
 
 .categories-title {
-  font-size: 2.5rem;
+  font-size: 2.9rem;
   font-weight: 800;
-  color: #2b231d;
+  color:#3F2C20;
   margin: 0;
 }
 
 .btn-view-all {
   background-color: transparent;
-  color: #2b231d;
+  color: #3F2C20;
   border: 1.5px solid #dcd5c7;
   padding: 8px 22px;
   border-radius: 20px;
@@ -214,21 +215,19 @@
   text-align: left !important;
 }
 .carousel-section {
-  
   padding-top: 40px;      /* Distanța față de secțiunea de sus */
-  padding-bottom: 40px;
-  padding-left: 20px;     /* Redu padding-ul din stânga de la 60px/80px la 20px (sau cât are secțiunea de sus) */
-  padding-right: 20px;
+  padding-bottom: 80px;
+  padding-left: 80px;     /* Setat la 40px pentru a se alinia perfect cu Header-ul și restul paginii */
+  padding-right: 80px;    /* Setat la 40px pentru simetrie */
   width: 100%;
   box-sizing: border-box;
-
 }
 
 .carousel-title{
   font-family: 'Libertinus Sans';
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
   margin: 0 0 7px 0;
   margin-left: 0px;
 }
@@ -295,9 +294,12 @@
 
 /* Secțiunea Pasi Simpli */
 .steps-section {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 10px;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -309,11 +311,12 @@
   font-family: 'Libertinus Sans';
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
   text-align: left !important;  /* Forțează alinierea textului la stânga */
-  margin-left: 105px;
+  margin-left: 80px;
  margin-bottom: 4px;
  margin-top: 4px;
+
 }
 .steps-subtitle {
   font-size: 1.2rem;
@@ -322,6 +325,7 @@
   text-align: left !important;  /* Forțează alinierea subtitlului la stânga */
   margin-left: 105px;
   margin-bottom: 4px;
+  margin-left: 80px;
 }
 
 /* Grid-ul cu cele 4 carduri */
@@ -330,20 +334,28 @@
   justify-content: center; /* Centrează cardurile în pagină */
   gap: 20px;               /* Distanța perfectă între carduri */
   width: 100%;
-  max-width: 1200px;       /* Oprește cardurile să se întindă la infinit pe ecranele mari */
-  margin: 30px auto;
+  max-width: 1290px;       /* Oprește cardurile să se întindă la infinit pe ecranele mari */
+  margin: 10px auto;
   align-items: flex-start;
+  padding: 10px;
+  margin-left: 70px;
+
+ 
+  
 }
 
 .step-card {
  background-color: #ffffff;
   border: 1px solid #e6ded3;          /* Marginea fină și elegantă */
   border-radius: 16px;                /* Colțuri rotunjite frumos */
-  padding: 32px 24px;                 /* Spațiu generos în interiorul cardului */
+  padding: 32px 34px;                 /* Spațiu generos în interiorul cardului */
   flex: 1;                            /* Toate cardurile împart spațiul în mod egal */
   min-width: 0;                       /* Previne deformarea textului din interior */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03); /* O umbră discretă care scoate cardul în evidență */
   transition: transform 0.2s ease;
+  
+  
+ 
 }
 
 /* Bulina cu numărul pasului (creată din CSS) */
@@ -367,7 +379,7 @@
   font-family: 'Libertinus Sans' ;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2b231d;
+  color: #3F2C20;
   margin: 0 0 10px 0;
 }
 
@@ -380,19 +392,20 @@
 
 /* Banta maro închis cu butonul portocaliu */
 .steps-banner {
-  background-color: #2b231d !important; /* Maroul închis original */
+  background-color: #3F2C20 !important; /* Maroul închis original */
   border-radius: 16px;
   padding: 32px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;                   /* Aceeași lățime maximă ca și cardurile */
+  max-width: 1290px;                   /* Aceeași lățime maximă ca și cardurile */
   box-sizing: border-box;
   margin: 0 auto;
   margin-top: 30px;
   align-items: flex-start;
   margin-bottom: 40px;
+  margin-left: 80px;
 
 }
 
