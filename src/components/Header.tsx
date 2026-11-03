@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logoImage from '../assets/logo.png';
 import './Header.css';
@@ -9,6 +10,11 @@ export default function Header() {
   const { lang, changeLanguage } = useLanguage();
   const t = translations[lang];
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
+
   return (
     <header className="site-header">
       <Link to="/" className="logo-container" style={{ textDecoration: 'none' }}>
@@ -19,13 +25,13 @@ export default function Header() {
         </div>
       </Link>
 
-      <nav className="nav-menu">
-        <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>{t.navHome}</Link>
-        <Link to="/ghidul-adoptatorului" className={`nav-item ${location.pathname === '/ghidul-adoptatorului' ? 'active' : ''}`}>{t.navGuide}</Link>
-        <Link to="/catalog" className={`nav-item ${location.pathname === '/catalog' ? 'active' : ''}`}>{t.navCatalog}</Link>
-        <Link to="/adaposturi" className={`nav-item ${location.pathname === '/adaposturi' ? 'active' : ''}`}>{t.navShelters}</Link>
-        <Link to="/colaborari" className={`nav-item ${location.pathname === '/colaborari' ? 'active' : ''}`}>{t.navCollaborators}</Link>
-        <Link to="/despre-noi" className={`nav-item ${location.pathname === '/despre-noi' ? 'active' : ''}`}>{t.navAbout}</Link>
+     <nav className={`nav-menu ${isMenuOpen ? 'open' : ''}`}>
+        <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`} onClick={closeMenu}>{t.navHome}</Link>
+        <Link to="/ghidul-adoptatorului" className={`nav-item ${location.pathname === '/ghidul-adoptatorului' ? 'active' : ''}`} onClick={closeMenu}>{t.navGuide}</Link>
+        <Link to="/catalog" className={`nav-item ${location.pathname === '/catalog' ? 'active' : ''}`} onClick={closeMenu}>{t.navCatalog}</Link>
+        <Link to="/adaposturi" className={`nav-item ${location.pathname === '/adaposturi' ? 'active' : ''}`} onClick={closeMenu}>{t.navShelters}</Link>
+        <Link to="/colaborari" className={`nav-item ${location.pathname === '/colaborari' ? 'active' : ''}`} onClick={closeMenu}>{t.navCollaborators}</Link>
+        <Link to="/despre-noi" className={`nav-item ${location.pathname === '/despre-noi' ? 'active' : ''}`} onClick={closeMenu}>{t.navAbout}</Link>
       </nav>
 
       <div className="header-actions">
@@ -47,6 +53,11 @@ export default function Header() {
             EN
           </button>
         </div>
+        <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Meniu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
   );
