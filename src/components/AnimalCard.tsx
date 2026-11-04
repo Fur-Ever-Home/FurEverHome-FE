@@ -44,7 +44,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     if (!size) return '';
     const lower = size.toLowerCase().trim();
     
-    if (lower === 'medie' || lower === 'medium') return t.medium || 'Medie';git g
+    if (lower === 'medie' || lower === 'medium') return t.medium || 'Medie';
     if (lower === 'mare' || lower === 'large') return t.large || 'Mare';
     if (lower === 'mic' || lower === 'small2') return t.small2 || 'Mic';
     if (lower === 'mica' || lower === 'mică' || lower === 'small') return t.small || 'Mică';
