@@ -1,0 +1,28 @@
+import { useState } from 'react';
+
+interface FavoriteButtonProps {
+  petId?: string;
+}
+
+export const FavoriteButton = ({ petId }: FavoriteButtonProps) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Previne deschiderea paginii de detalii când apeși inima
+    setIsFavorite((prev) => !prev);
+  };
+
+  return (
+    <button
+      onClick={toggleFavorite}
+      className="p-2 rounded-full bg-white/80 shadow-md hover:scale-110 active:scale-95 transition-all"
+      aria-label="Adaugă la favorite"
+    >
+      {isFavorite ? (
+        <span className="text-red-500 text-xl">❤️</span>
+      ) : (
+        <span className="text-gray-400 text-xl">🤍</span>
+      )}
+    </button>
+  );
+};
