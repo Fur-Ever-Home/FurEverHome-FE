@@ -242,6 +242,11 @@
   align-items: center;  /* Le aliniază pe verticală la mijloc */
   gap: 6px;             /* Spațiul dintre bulina verde și text */
 }
+.legend-item img {
+  width: 50px !important;  /* Schimbă valoarea (ex: 18px, 20px, 24px) în funcție de cât de mici le dorești */
+  height: 50px !important;
+  object-fit: contain;
+}
 
 
 .carousel-wrapper {
@@ -319,7 +324,7 @@
 
 }
 .steps-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #7a6f65;
   margin-left: 40px;
   text-align: left !important;  /* Forțează alinierea subtitlului la stânga */
@@ -353,6 +358,8 @@
   min-width: 0;                       /* Previne deformarea textului din interior */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03); /* O umbră discretă care scoate cardul în evidență */
   transition: transform 0.2s ease;
+  min-width: 0;
+  min-height: 200px;
   
   
  
@@ -377,14 +384,14 @@
 
 .step-card-title {
   font-family: 'Libertinus Sans' ;
-  font-size: 1.25rem;
+  font-size: 1.70rem;
   font-weight: 700;
   color: #3F2C20;
   margin: 0 0 10px 0;
 }
 
 .step-card-text {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: #6e645a;
   line-height: 1.4;
   margin: 0;
