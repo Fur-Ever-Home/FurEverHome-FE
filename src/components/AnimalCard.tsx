@@ -39,7 +39,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     if (lower === 'femela' || lower === 'female') return t.female || 'Femelă';
     return gender;
   };
-
   // Funcție pentru traducerea taliei
   const translateSize = (size: string) => {
     if (!size) return '';
