@@ -41,7 +41,7 @@
 }
 
 .card-image-container {
-  height: 140px;
+  height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +93,7 @@
 .animal-name {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2b231d;
+  color:#3F2C20;
   margin: 0;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .btn-details {
-  background-color: #3b3028;
+  background-color: #3F2C20;
   color: white;
   border: none;
   border-radius: 20px;
@@ -121,7 +121,7 @@
 }
 
 .btn-details:hover {
-  background-color: #2b231d;
+  background-color: #3F2C20;
 
   .animal-card {
   flex: 0 0 280px !important; /* Forțează cardul să aibă lățime fixă și să nu se micșoreze/coboare */
