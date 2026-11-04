@@ -52,7 +52,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     return size;
   };
 
-  
   // Funcție pentru formatarea și traducerea vârstei
   const formatAge = (ageStr: string) => {
     if (!ageStr) return '';

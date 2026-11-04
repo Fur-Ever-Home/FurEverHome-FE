@@ -216,7 +216,7 @@
 }
 .carousel-section {
   padding-top: 40px;      /* Distanța față de secțiunea de sus */
-  padding-bottom: 25px;
+  padding-bottom: 10px;
   padding-left: 80px;     /* Setat la 40px pentru a se alinia perfect cu Header-ul și restul paginii */
   padding-right: 80px;    /* Setat la 40px pentru simetrie */
   width: 100%;
