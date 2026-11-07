@@ -11,6 +11,8 @@ import { AnimalCard } from '../components/AnimalCard';
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/Footer';
 import './Home.css';
+import FloatingBtn from '../components/floating-btn';
+
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
@@ -74,6 +76,7 @@ export default function Home() {
     <>
       <div className="home-page">
         <Header />
+         
         
         {/* Secțiunea Hero */}
         <main className="hero-section">
@@ -218,14 +221,10 @@ export default function Home() {
               {t.btnGuide}
             </Link>
           </div>
-        </section>
-
-        <Footer />
-      </div>
-
-      <button className="footer-floating-btn" aria-label={t.chatbotAria}>
-        💬
-      </button>
-    </>
+       </section>
+       </div>
+<Footer />
+       <FloatingBtn />
+       </>
   );
 }
