@@ -9,6 +9,10 @@ import Login from './pages/Login';
 
 // Imporți componentele pentru paginile legale:
 import InformatiiLegale from './components/informatii_legale';
+import PoliticaConfidentialitate from './components/politica-confidentialitate';
+import PoliticaCookies from './components/politica-cookies';
+import GDPR from './components/GDPR';
+
 
 
 export default function App() {
@@ -24,6 +28,9 @@ export default function App() {
 
       {/* Rutele noi pentru paginile legale */}
       <Route path="/informatii-legale" element={<InformatiiLegale />} />
+      <Route path="/politica-confidentialitate" element={<PoliticaConfidentialitate />} />
+      <Route path="/politica-cookies" element={<PoliticaCookies />} />
+      <Route path="/GDPR" element={<GDPR />} />
       
     </Routes>
   );

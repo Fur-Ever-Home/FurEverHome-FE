@@ -186,3 +186,63 @@
     padding: 20px;
   }
 }
+/* --- ADAPTARE SUPLIMENTARĂ PENTRU TELEFON (MOBILE RESPONSIVE) --- */
+
+@media (max-width: 768px) {
+  /* Asigurăm că orice imagine din conținut se adaptează automat la lățimea ecranului și nu iese în afară */
+  .main-content img,
+  .main-content picture,
+  .main-content video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+  }
+
+  /* Reducem dimensiunile titlurilor pe mobil pentru a nu fi prea aglomerat */
+  .main-content h1 {
+    font-size: 1.7rem;
+  }
+
+  .main-content h2 {
+    font-size: 1.2rem;
+  }
+
+  /* Reducem padding-ul general pe pagini pentru a maximiza spațiul util pe ecran mic */
+  .content-wrapper {
+    padding: 0 12px;
+    margin: 15px auto;
+  }
+
+  .main-content {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .sidebar-cuprins {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  /* Optimizăm margini pentru secțiuni și caseta de contact */
+  .main-content section {
+    margin-bottom: 20px;
+  }
+
+  .contact-card {
+    margin-top: 25px;
+    padding: 15px;
+  }
+}
+
+/* Pentru ecrane foarte înguste (telefoane mici sub 480px) */
+@media (max-width: 480px) {
+  .main-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .cuprins-list a {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}

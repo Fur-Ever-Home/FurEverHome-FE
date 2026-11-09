@@ -1,188 +1,181 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import FloatingBtn from '../components/floating-btn';
 import { AnimalCard } from '../components/AnimalCard';
+import { AnimalModal } from '../components/AnimalModal';
 import { useLanguage } from '../useLanguage';
+import { translations } from '../translations';
+import dogIcon from '../assets/dog-icon.svg';
+import './Catalog.css';
+
+interface Animal {
+  id: number;
+  name: string;
+  species: string;
+  status: string;
+  gender: string;
+  age: string;
+  size: string;
+  shelter: string;
+  vaccinated: boolean;
+  dewormed: boolean;
+  sterilized: boolean;
+  imageUrl: string;
+  breed?: string;
+  sex?: string;
+  temperament?: string;
+  color?: string;
+  location?: string;
+  locationType?: string;
+  images?: string[];
+  microchipped?: boolean;
+  petFriendly?: boolean;
+  childFriendly?: boolean;
+  noAllergies?: boolean;
+  date?: string;
+  createdAt?: string;
+}
 
 export default function Catalog() {
   const [searchParams] = useSearchParams();
-  const categorie = searchParams.get('categorie');
+  const categorieParam = searchParams.get('categorie');
 
   const { lang } = useLanguage();
+  const t = translations[lang as keyof typeof translations] || translations.ro;
 
+  const [animals, setAnimals] = useState<Animal[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
   const [sortOrder, setSortOrder] = useState('noi');
 
-  // Date bilingve complete, inclusiv pentru vârstă
-  const animaleList = [
-    { 
-      id: 1, 
-      name: 'Rex', 
-      speciesRo: 'Câine',
-      speciesEn: 'Dog',
-      breedRo: 'Labrador',
-      breedEn: 'Labrador',
-      ageRo: '2 ani',
-      ageEn: '2 years',
-      status: 'Disponibil', 
-      gender: 'male', 
-      size: 'large',   
-      shelterRo: 'Adăpostul București',
-      shelterEn: 'Bucharest Shelter',
-      vaccinated: true,
-      dewormed: true,
-      sterilized: true,
-      image: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400',
-      descRo: 'Rex este un căine extrem de prietenos, plin de energie și iubitor de copii.',
-      descEn: 'Rex is an extremely friendly dog, full of energy and loves children.',
-      date: '2026-11-01'
-    },
-    { 
-      id: 2, 
-      name: 'Luna', 
-      speciesRo: 'Pisică',
-      speciesEn: 'Cat',
-      breedRo: 'Europeană',
-      breedEn: 'European',
-      ageRo: '1 an',
-      ageEn: '1 year',
-      status: 'Disponibil', 
-      gender: 'female', 
-      size: 'small',   
-      shelterRo: 'Adăpostul Cluj',
-      shelterEn: 'Cluj Shelter',
-      vaccinated: true,
-      dewormed: true,
-      sterilized: false,
-      image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400',
-      descRo: 'Luna este o pisicuță liniștită, foarte blândă, căreia îi place să stea la mângâiat.',
-      descEn: 'Luna is a quiet, very gentle cat who loves to be petted.',
-      date: '2026-11-05'
-    },
-  ];
-
-  const animaleTraduse = animaleList.map(animal => ({
-    ...animal,
-    species: lang === 'en' ? animal.speciesEn : animal.speciesRo,
-    breed: lang === 'en' ? animal.breedEn : animal.breedRo,
-    age: lang === 'en' ? animal.ageEn : animal.ageRo,
-    shelter: lang === 'en' ? animal.shelterEn : animal.shelterRo,
-    description: lang === 'en' ? animal.descEn : animal.descRo,
-  }));
-
-  const animaleFiltrate = categorie 
-    ? animaleTraduse.filter(animal => animal.speciesRo.toLowerCase() === categorie.toLowerCase() || animal.speciesEn.toLowerCase() === categorie.toLowerCase() || categorie === 'altele')
-    : animaleTraduse;
-
-  const animaleSortate = [...animaleFiltrate].sort((a, b) => {
-    if (sortOrder === 'noi') {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+  useEffect(() => {
+    let url = 'http://localhost:8080/api/animals';
+    if (categorieParam) {
+      url += `?species=${encodeURIComponent(categorieParam)}`;
     }
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
+
+    setLoading(true);
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setAnimals(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Eroare la preluarea animalelor:', error);
+        setLoading(false);
+      });
+  }, [categorieParam]);
+
+  const animaleSortate = [...animals].sort((a, b) => {
+    const dateA = new Date(a.date || a.createdAt || Date.now()).getTime();
+    const dateB = new Date(b.date || b.createdAt || Date.now()).getTime();
+    if (sortOrder === 'noi') {
+      return dateB - dateA;
+    }
+    return dateA - dateB;
   });
 
   return (
-    <div style={{ backgroundColor: '#f7f4ed', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="catalog-page">
       <Header />
       
-      <div style={{ padding: '40px 80px', flex: 1 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-          <h1>{lang === 'en' ? 'Animals Catalog' : 'Catalog Animale'}</h1>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <label style={{ fontWeight: '600', color: '#2b231d' }}>
-              {lang === 'en' ? 'Sort by:' : 'Sortează după:'}
-            </label>
-            <select 
-              value={sortOrder} 
-              onChange={(e) => setSortOrder(e.target.value)}
-              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #c89551', background: '#fff', cursor: 'pointer' }}
-            >
-              <option value="noi">{lang === 'en' ? 'Newest' : 'Cele mai noi'}</option>
-              <option value="vechi">{lang === 'en' ? 'Oldest' : 'Cele mai vechi'}</option>
-            </select>
-          </div>
-        </div>
-        
-        {categorie && (
-          <div style={{
-            backgroundColor: '#fcefdc',
-            border: '1px solid #c89551',
-            padding: '15px 20px',
-            borderRadius: '12px',
-            margin: '20px 0',
-            color: '#2b231d',
-            fontWeight: '600'
-          }}>
-            {lang === 'en' ? 'Active filter: Showing only animals from category' : 'Filtru activ: Se afișează doar animale din categoria'} 
-            <span style={{ color: '#c89551', marginLeft: '5px', textTransform: 'uppercase' }}>
-              {categorie}
-            </span>.
-          </div>
-        )}
+      <div className="catalog-layout-container">
+        {/* Spațiu dedicat pentru sidebar-ul de filtre din stânga */}
+        <aside className="catalog-sidebar-filters">
+          {/* Aici va lucra colegul tău pe viitor */}
+        </aside>
 
-        <div style={{ display: 'flex', gap: '24px', marginTop: '30px', flexWrap: 'wrap' }}>
-          {animaleSortate.map((animal) => (
-            <div 
-              key={animal.id} 
-              onClick={() => setSelectedAnimal(animal)} 
-              style={{ cursor: 'pointer' }}
-            >
-              <AnimalCard animal={animal} />
+        <main className="catalog-main-content">
+          <div className="catalog-header-row">
+            <h1 className="catalog-title">
+              {lang === 'en' ? '84 friends are looking for a home' : `${animals.length} prieteni își caută o casă`}
+            </h1>
+            
+            <div className="catalog-sort-wrapper">
+              <label className="catalog-sort-label">
+                {lang === 'en' ? 'Sort by:' : 'Sortează după:'}
+              </label>
+              <select 
+                className="catalog-sort-select"
+                value={sortOrder} 
+                onChange={(e) => setSortOrder(e.target.value)}
+              >
+                <option value="noi">{lang === 'en' ? 'Newest' : 'Cele mai noi'}</option>
+                <option value="vechi">{lang === 'en' ? 'Oldest' : 'Cele mai vechi'}</option>
+              </select>
             </div>
-          ))}
-        </div>
+          </div>
+          
+          {categorieParam && (
+            <div className="catalog-filter-badge">
+              {lang === 'en' ? 'Active filter: Showing category' : 'Filtru activ: Se afișează categoria'} 
+              <span className="catalog-filter-highlight">{categorieParam}</span>.
+            </div>
+          )}
+
+          {/* GRID FIX DE 3 COLOANE PE RÂND */}
+          <div className="catalog-cards-grid">
+            {loading ? (
+              <p className="catalog-message">{t.loading || 'Se încarcă animalele...'}</p>
+            ) : animaleSortate.length === 0 ? (
+              <p className="catalog-message">
+                {lang === 'en' ? 'No animals found.' : 'Nu s-au găsit animale în baza de date.'}
+              </p>
+            ) : (
+              animaleSortate.map((animal) => {
+                const animalDataForModal = {
+                  ...animal,
+                  breed: animal.breed || "Rasă comună",
+                  sex: animal.gender || "Femelă",
+                  age: animal.age || "1 an",
+                  size: animal.size || "Medie",
+                  temperament: animal.temperament || "Jucăuş",
+                  color: animal.color || "Portocaliu",
+                  location: animal.shelter || "Centrul Casa lui Azor",
+                  locationType: "Centru",
+                  status: animal.status || "Disponibil",
+                  images: animal.images && animal.images.length > 0 
+                    ? animal.images 
+                    : [animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon],
+                  microchipped: animal.microchipped ?? true,
+                  petFriendly: animal.petFriendly ?? true,
+                  childFriendly: animal.childFriendly ?? false,
+                  noAllergies: animal.noAllergies ?? true,
+                };
+
+                return (
+                  <div 
+                    key={animal.id} 
+                    onClick={() => setSelectedAnimal(animalDataForModal)} 
+                    className="catalog-card-item"
+                  >
+                    <AnimalCard 
+                      animal={{ 
+                        ...animal, 
+                        imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
+                        image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
+                      } as any} 
+                    />
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </main>
       </div>
 
       {selectedAnimal && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 1000
-        }}>
-          <div style={{
-            backgroundColor: '#fff',
-            padding: '30px',
-            borderRadius: '16px',
-            width: '400px',
-            maxWidth: '90%',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-            position: 'relative'
-          }}>
-            <h2 style={{ marginTop: 0, color: '#3F2C20' }}>{selectedAnimal.name}</h2>
-            <p><strong>{lang === 'en' ? 'Species' : 'Specie'}:</strong> {selectedAnimal.species}</p>
-            <p><strong>{lang === 'en' ? 'Breed' : 'Rasă'}:</strong> {selectedAnimal.breed}</p>
-            <p><strong>{lang === 'en' ? 'Age' : 'Vârstă'}:</strong> {selectedAnimal.age}</p>
-            <p><strong>{lang === 'en' ? 'Gender' : 'Sex'}:</strong> {selectedAnimal.gender === 'male' ? (lang === 'en' ? 'Male' : 'Mascul') : (lang === 'en' ? 'Female' : 'Femelă')}</p>
-            <p><strong>{lang === 'en' ? 'Shelter' : 'Adăpost'}:</strong> {selectedAnimal.shelter}</p>
-            <p style={{ marginTop: '15px' }}><strong>{lang === 'en' ? 'Description' : 'Descriere'}:</strong> {selectedAnimal.description}</p>
-            
-            <button 
-              onClick={() => setSelectedAnimal(null)}
-              style={{
-                marginTop: '20px',
-                backgroundColor: '#c89551',
-                color: '#fff',
-                border: 'none',
-                padding: '10px 20px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '600',
-                width: '100%'
-              }}
-            >
-              {lang === 'en' ? 'Close' : 'Închide'}
-            </button>
-          </div>
-        </div>
+        <AnimalModal 
+          animal={selectedAnimal} 
+          onClose={() => setSelectedAnimal(null)} 
+        />
       )}
+
+      <Footer />
+      <FloatingBtn />
     </div>
   );
 }
