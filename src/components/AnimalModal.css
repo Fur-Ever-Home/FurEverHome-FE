@@ -275,3 +275,49 @@
   background-color: #352923;
   transform: scale(1.05);
 }
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 85vh; /* Oprește extinderea excesivă pe înălțime */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ascunde overflow-ul general */
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0; /* Important pentru ca flexbox să nu spargă limitele de înălțime */
+}
+
+/* Zona cu scroll pentru detalii */
+.modal-details-scrollable {
+  overflow-y: scroll !important; /* Forțează afișarea permanentă a barei de scroll */
+  flex: 1;
+  padding-right: 8px;
+  max-height: 400px; /* Setează o limită clară ca să forțeze aspectul de scroll */
+  min-height: 300px; /* Garantează că zona are spațiu vertical chiar și cu mai puțin text */
+}
+
+/* Stilizarea barei de scroll portocalii */
+.modal-details-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-details-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.modal-details-scrollable::-webkit-scrollbar-thumb {
+  background: #e67e22; /* Portocaliul dorit */
+  border-radius: 10px;
+}

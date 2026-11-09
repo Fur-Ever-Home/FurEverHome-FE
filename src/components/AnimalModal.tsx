@@ -126,90 +126,94 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
           </div>
 
           {/* COLOANA DREAPTA: Detalii animăluț */}
-          <div className="modal-details-section">
-            <h2 className="animal-name">{animal.name}</h2>
+          <div className="modal-details-section" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
             
-            <span className="status-badge available">
-              {t.statusAvailable}
-            </span>
+            {/* Zona care va avea scroll și va conține informațiile */}
+            <div className="modal-details-scrollable" style={{ overflowY: 'auto', flex: 1, paddingRight: '8px' }}>
+              <h2 className="animal-name">{animal.name}</h2>
+              
+              <span className="status-badge available">
+                {t.statusAvailable}
+              </span>
 
-            <p className="location-info">
-              <strong>{t.locationLabel}:</strong> {animal.location}
-            </p>
-            <p className="location-info">
-              <strong>{t.locationTypeLabel}:</strong> {animal.locationType}
-            </p>
+              <p className="location-info">
+                <strong>{t.locationLabel}:</strong> {animal.location}
+              </p>
+              <p className="location-info">
+                <strong>{t.locationTypeLabel}:</strong> {animal.locationType}
+              </p>
 
-            <div className="details-columns-container">
-              {/* Detalii cheie */}
-              <div className="details-group">
-                <h3>{t.keyDetails}</h3>
-                <ul>
-                  <li>
-                    <img src={pawIcon} alt="species" className="detail-icon-img" />
-                    <strong>{t.species}:</strong> {translateSpecies(animal.species)}
-                  </li>
-                  <li>
-                    <img src={pawIcon} alt="sex" className="detail-icon-img" />
-                    <strong>{t.sex}:</strong> {animal.sex?.toLowerCase().includes('masc') || animal.sex?.toLowerCase().includes('male') ? t.male : t.female}
-                  </li>
-                  <li>
-                    <img src={clockIcon} alt="age" className="detail-icon-img" />
-                    <strong>{t.age}:</strong> {animal.age}
-                  </li>
-                  <li>
-                    <img src={rulerIcon} alt="size" className="detail-icon-img" />
-                    <strong>{t.size}:</strong> {t[animal.size?.toLowerCase() as keyof typeof t] || animal.size}
-                  </li>
-                  <li>
-                    <img src={smileIcon} alt="temperament" className="detail-icon-img" />
-                    <strong>{t.temperament}:</strong> {animal.temperament}
-                  </li>
-                  <li>
-                    <img src={dropIcon} alt="color" className="detail-icon-img" />
-                    <strong>{t.color}:</strong> {translateColor(animal.color)}
-                  </li>
-                </ul>
-              </div>
+              <div className="details-columns-container">
+                {/* Detalii cheie */}
+                <div className="details-group">
+                  <h3>{t.keyDetails}</h3>
+                  <ul>
+                    <li>
+                      <img src={pawIcon} alt="species" className="detail-icon-img" />
+                      <strong>{t.species}:</strong> {translateSpecies(animal.species)}
+                    </li>
+                    <li>
+                      <img src={pawIcon} alt="sex" className="detail-icon-img" />
+                      <strong>{t.sex}:</strong> {animal.sex?.toLowerCase().includes('masc') || animal.sex?.toLowerCase().includes('male') ? t.male : t.female}
+                    </li>
+                    <li>
+                      <img src={clockIcon} alt="age" className="detail-icon-img" />
+                      <strong>{t.age}:</strong> {animal.age}
+                    </li>
+                    <li>
+                      <img src={rulerIcon} alt="size" className="detail-icon-img" />
+                      <strong>{t.size}:</strong> {t[animal.size?.toLowerCase() as keyof typeof t] || animal.size}
+                    </li>
+                    <li>
+                      <img src={smileIcon} alt="temperament" className="detail-icon-img" />
+                      <strong>{t.temperament}:</strong> {animal.temperament}
+                    </li>
+                    <li>
+                      <img src={dropIcon} alt="color" className="detail-icon-img" />
+                      <strong>{t.color}:</strong> {translateColor(animal.color)}
+                    </li>
+                  </ul>
+                </div>
 
-              {/* Sănătate & Compatibilitate */}
-              <div className="details-group">
-                <h3>{t.healthAndCompatibility}</h3>
-                <ul>
-                  <li>
-                    <img src={pillIcon} alt="vaccinated" className="detail-icon-img" />
-                    {t.vaccinated}: <span className={animal.vaccinated ? "yes" : "no"}>{animal.vaccinated ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                  <li>
-                    <img src={shieldIcon} alt="sterilized" className="detail-icon-img" />
-                    {t.sterilized}: <span className={animal.sterilized ? "yes" : "no"}>{animal.sterilized ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                  <li>
-                    <img src={deparazitatIcon} alt="dewormed" className="detail-icon-img" />
-                    {t.dewormed}: <span className={animal.dewormed ? "yes" : "no"}>{animal.dewormed ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                  <li>
-                    <img src={chipIcon} alt="microchipped" className="detail-icon-img" />
-                    {t.microchipped}: <span className={animal.microchipped ? "yes" : "no"}>{animal.microchipped ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                  <li>
-                    <img src={pawIcon} alt="petFriendly" className="detail-icon-img" />
-                    {t.petFriendly}: <span className={animal.petFriendly ? "yes" : "no"}>{animal.petFriendly ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                  <li>
-                    <img src={smileIcon} alt="childFriendly" className="detail-icon-img" />
-                    {t.childFriendly}: <span className={animal.childFriendly ? "yes" : "no"}>{animal.childFriendly ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                  <li>
-                    <img src={leafIcon} alt="noAllergies" className="detail-icon-img" />
-                    {t.noAllergies}: <span className={animal.noAllergies ? "yes" : "no"}>{animal.noAllergies ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
-                  </li>
-                </ul>
+                {/* Sănătate & Compatibilitate */}
+                <div className="details-group">
+                  <h3>{t.healthAndCompatibility}</h3>
+                  <ul>
+                    <li>
+                      <img src={pillIcon} alt="vaccinated" className="detail-icon-img" />
+                      {t.vaccinated}: <span className={animal.vaccinated ? "yes" : "no"}>{animal.vaccinated ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                    <li>
+                      <img src={shieldIcon} alt="sterilized" className="detail-icon-img" />
+                      {t.sterilized}: <span className={animal.sterilized ? "yes" : "no"}>{animal.sterilized ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                    <li>
+                      <img src={deparazitatIcon} alt="dewormed" className="detail-icon-img" />
+                      {t.dewormed}: <span className={animal.dewormed ? "yes" : "no"}>{animal.dewormed ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                    <li>
+                      <img src={chipIcon} alt="microchipped" className="detail-icon-img" />
+                      {t.microchipped}: <span className={animal.microchipped ? "yes" : "no"}>{animal.microchipped ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                    <li>
+                      <img src={pawIcon} alt="petFriendly" className="detail-icon-img" />
+                      {t.petFriendly}: <span className={animal.petFriendly ? "yes" : "no"}>{animal.petFriendly ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                    <li>
+                      <img src={smileIcon} alt="childFriendly" className="detail-icon-img" />
+                      {t.childFriendly}: <span className={animal.childFriendly ? "yes" : "no"}>{animal.childFriendly ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                    <li>
+                      <img src={leafIcon} alt="noAllergies" className="detail-icon-img" />
+                      {t.noAllergies}: <span className={animal.noAllergies ? "yes" : "no"}>{animal.noAllergies ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
-            {/* Secțiunea de butoane în partea de jos */}
-            <div className="modal-actions-container" style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: 'auto', paddingTop: '15px' }}>
+            {/* Secțiunea de butoane în partea de jos (fixă, nu se va deplasa la scroll) */}
+            <div className="modal-actions-container" style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '15px', flexShrink: 0 }}>
               <button className="btn-schedule" style={{ flex: 1 }}>
                   {t.scheduleVisit}
               </button>
