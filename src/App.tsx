@@ -7,6 +7,10 @@ import Colaborari from './pages/Colaborari';
 import DespreNoi from './pages/DespreNoi';
 import Login from './pages/Login';
 
+// Imporți componentele pentru paginile legale:
+import InformatiiLegale from './components/informatii_legale';
+
+
 export default function App() {
   return (
     <Routes>
@@ -17,6 +21,10 @@ export default function App() {
       <Route path="/colaborari" element={<Colaborari />} />
       <Route path="/despre-noi" element={<DespreNoi />} />
       <Route path="/login" element={<Login />} />
+
+      {/* Rutele noi pentru paginile legale */}
+      <Route path="/informatii-legale" element={<InformatiiLegale />} />
+      
     </Routes>
   );
 }

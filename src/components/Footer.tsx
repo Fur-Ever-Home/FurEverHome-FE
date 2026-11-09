@@ -26,7 +26,9 @@ export default function Footer() {
 
         {/* Partea dreaptă: Linkuri legale */}
         <div className="footer-links-column">
-          <span className="footer-link font-bold">{t.footerLegalTitle}</span>
+          <Link to="/informatii-legale" className="footer-link font-bold" onClick={() => window.scrollTo(0, 0)}>
+  {t.footerLegalTitle}
+</Link>
           <Link to="/politica-confidentialitate" className="footer-link">{t.footerPrivacy}</Link>
           <Link to="/politica-cookies" className="footer-link">{t.footerCookies}</Link>
           <Link to="/gdpr" className="footer-link">{t.footerGdpr}</Link>
