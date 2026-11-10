@@ -9,6 +9,7 @@ import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
 import dogIcon from '../assets/dog-icon.svg';
 import './Catalog.css';
+import FilterSidebar from '../components/FilterSidebar';
 
 interface Animal {
   id: number;

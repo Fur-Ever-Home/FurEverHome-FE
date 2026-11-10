@@ -131,3 +131,27 @@
     grid-template-columns: 1fr;
   }
 }
+/* Containerul principal al paginii de catalog */
+.catalog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Conținutul cu carduri se extind pe spațiul rămas */
+.catalog-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Pe ecrane mari (Desktop), le punem alăturate: Filtre stânga | Carduri dreapta */
+@media (min-width: 769px) {
+  .catalog-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
