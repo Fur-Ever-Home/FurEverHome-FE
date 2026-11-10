@@ -9,7 +9,7 @@ import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
 import dogIcon from '../assets/dog-icon.svg';
 import './Catalog.css';
-import FilterSidebar from '../components/FilterSideBar';
+import FilterSidebar from '../components/FilterSidebar';
 
 interface Animal {
   id: number;
@@ -84,8 +84,10 @@ export default function Catalog() {
       <Header />
       
       <div className="catalog-layout-container">
-        {/* Componenta de filtrare din stânga */}
-        <FilterSidebar />
+        {/* Spațiu dedicat pentru sidebar-ul de filtre din stânga */}
+        <aside className="catalog-sidebar-filters">
+          {/* Aici va lucra colegul tău pe viitor */}
+        </aside>
 
         <main className="catalog-main-content">
           <div className="catalog-header-row">
