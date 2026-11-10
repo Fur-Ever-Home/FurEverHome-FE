@@ -1,3 +1,4 @@
+import { mockAnimals as animalsMock } from '../data/animalsMock';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import imagine from '../assets/sectiune1.2.png';
@@ -72,7 +73,16 @@ export default function Home() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Eroare la preluarea animalelor:', error);
+        console.error('Eroare la preluarea animalelor (folosim date mock):', error);
+        
+        // Filtrare locală pe datele mock pentru câini/pisici/altele
+        let filtered = animalsMock as any[];
+        if (selectedSpecies) {
+          filtered = filtered.filter(
+            (item) => item.species?.toLowerCase() === selectedSpecies.toLowerCase()
+          );
+        }
+        setAnimals(filtered);
         setLoading(false);
       });
   }, [selectedSpecies]);
@@ -93,8 +103,8 @@ export default function Home() {
         <Header />
          
         {/* Secțiunea Hero */}
-        <main className="hero-section">
-          <div className="hero-content">
+        <main className="hero-section flex flex-col-reverse md:flex-row items-center justify-between p-4 md:p-12 gap-8">
+          <div className="hero-content w-full md:w-1/2 text-center md:text-left">
             <span className="hero-tag">{t.heroTag}</span>
             
             <h1 className="hero-title">
@@ -104,13 +114,13 @@ export default function Home() {
             
             <p className="hero-description">{t.heroDesc}</p>
             
-            <div className="hero-buttons">
+            <div className="hero-content w-full md:w-1/2 text-center md:text-left">
               <Link to="/catalog" className="btn-primary">{t.btnViewAnimals}</Link>
               <Link to="/ghidul-adoptatorului" className="btn-secondary">{t.btnHowToAdopt}</Link>
             </div>
           </div>
 
-          <div className="hero-image-container">
+          <div className="hero-image-container w-full md:w-1/2 flex justify-center">
             <img src={imagine} alt="Oameni cu animale adoptate" className="hero-image" />
           </div>
         </main>
@@ -121,7 +131,7 @@ export default function Home() {
             <h2 className="categories-title">{t.categoriesTitle}</h2>
           </div>
 
-          <div className="categories-cards">
+          <div className="categories-cards flex flex-wrap justify-center gap-4 p-2">
             <div 
               className={`category-card ${selectedSpecies === 'Caine' ? 'active' : ''}`}
               onClick={() => setSelectedSpecies(selectedSpecies === 'Caine' ? '' : 'Caine')}
@@ -159,7 +169,7 @@ export default function Home() {
 
         {/* Secțiunea Carousel */}
         <section className="carousel-section">
-          <div className="carousel-header">
+          <div className="carousel-header flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
             <div className="carousel-header-left">
               <h2 className="carousel-title">{t.carouselTitle}</h2>
               <div className="carousel-legend">
@@ -172,7 +182,7 @@ export default function Home() {
             <Link to="/catalog" className="btn-view-all">{t.btnViewAll}</Link>
           </div>
 
-          <div className="carousel-wrapper" style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '15px' }}>
+          <div className="carousel-wrapper flex items-center w-full gap-2 md:gap-4 overflow-x-auto px-2">
             <button className="carousel-arrow left" onClick={() => handleScroll('left')}>&larr;</button>
 
             <div className="carousel-cards-track" ref={carouselRef}>
@@ -225,7 +235,7 @@ export default function Home() {
           <h2 className="steps-title">{t.stepsTitle}</h2>
           <p className="steps-subtitle">{t.stepsSubtitle}</p>
 
-          <div className="steps-grid">
+          <div className="steps-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
             <div className="step-card">
               <div className="step-badge">1</div>
               <h3 className="step-card-title">{t.step1Title}</h3>
@@ -251,7 +261,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="steps-banner">
+          <div className="steps-banner flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-4 p-6 rounded-2xl">
             <h3 className="steps-banner-text">
               {t.bannerText} <span className="highlight-gold">{t.bannerHighlight}</span>
             </h3>
