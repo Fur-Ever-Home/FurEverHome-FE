@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
@@ -26,14 +27,17 @@ export const FavoriteAuthModal: React.FC<FavoriteAuthModalProps> = ({
   // Calculăm corect acordul gramatical pentru RO (masculin/feminin)
   const isFemale = gender && (gender.toLowerCase().includes('fem') || gender.toLowerCase() === 'f');
   const template = isFemale ? t.favModalTitleFemale : t.favModalTitleMale;
-  const message = template ? template.replace('{name}', animalName) : `Pentru a adăuga pe ${animalName} la favorite trebuie să fii logat`;
+  const message = template
+    ? template.replace('{name}', animalName)
+    : `Pentru a adăuga pe ${animalName} la favorite trebuie să fii logat`;
 
   const handleLoginRedirect = () => {
     onClose();
-    navigate('/login'); // Redirecționează către pagina ta de autentificare (ex: /login sau /autentificare)
+    navigate('/login');
   };
 
-  return (
+  // createPortal atașează modalul direct pe document.body
+  return createPortal(
     <div className="fav-auth-overlay" onClick={onClose}>
       <div className="fav-auth-modal" onClick={(e) => e.stopPropagation()}>
         <button type="button" className="fav-auth-close" onClick={onClose} aria-label="Închide">
@@ -49,7 +53,8 @@ export const FavoriteAuthModal: React.FC<FavoriteAuthModalProps> = ({
           {t.favModalLoginBtn}
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

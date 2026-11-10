@@ -2,15 +2,6 @@ import React, { useState } from 'react';
 import FavoriteAuthModal from './FavoriteAuthModal';
 import './FavoriteBtn.css';
 
-// ❌ VECHI:
-// interface Animal {
-//   id: string | number;
-//   name: string;
-//   gender?: string;
-//   sex?: string;
-// }
-
-// ✅ NOU:
 interface Animal {
   id?: string | number;
   name: string;
@@ -20,55 +11,44 @@ interface Animal {
 
 interface FavoriteBtnProps {
   animal: Animal;
-  isLoggedIn: boolean; // Transmis din App, AuthContext sau localStorage
+  isLoggedIn: boolean;
 }
 
 export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ animal, isLoggedIn }) => {
-  // Starea pentru afișarea pop-up-ului de autentificare
   const [showAuthModal, setShowAuthModal] = useState(false);
-
-  // Starea locală a butonului (true = adăugat la favorite, false = neadăugat)
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteClick = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Oprește deschiderea altor modaluri (ex: fișa animalului)
+    e.stopPropagation(); // Oprește deschiderea modalului cu fișa animalului
 
     if (!isLoggedIn) {
-      // =========================================================================
-      // ❌ CAZUL 1: UTILIZATOR NEAUTENTIFICAT (isLoggedIn === false)
-      // =========================================================================
-      // Deschidem pop-up-ul FavoriteAuthModal care îl redirecționează la /login
+      // Cazul 1: Utilizator neautentificat -> deschidem pop-up-ul
       setShowAuthModal(true);
       return;
     }
 
-    // =========================================================================
-    // ✅ CAZUL 2: UTILIZATOR AUTENTIFICAT (isLoggedIn === true)
-    // =========================================================================
-    // 1. Schimbăm starea vizuală a inimioarei (plină / goală)
+    // Cazul 2: Utilizator autentificat -> schimbăm starea și apelăm backend-ul
     const nextFavoriteState = !isFavorite;
     setIsFavorite(nextFavoriteState);
 
-    // 2. Sincronizăm cu backend-ul / localStorage
     try {
-      await fetch(`http://localhost:8080/api/favorites/${animal.id}`, {
-        method: nextFavoriteState ? 'POST' : 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      console.log(`${animal.name} a fost ${nextFavoriteState ? 'adăugat la' : 'scos de la'} favorite.`);
+      if (animal.id) {
+        await fetch(`http://localhost:8080/api/favorites/${animal.id}`, {
+          method: nextFavoriteState ? 'POST' : 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+      }
     } catch (error) {
       console.error('Eroare la actualizarea favoritului:', error);
-      // Revenim la starea anterioară în caz de eroare de rețea
-      setIsFavorite(!nextFavoriteState);
+      setIsFavorite(!nextFavoriteState); // Revenire în caz de eroare
     }
   };
 
   return (
     <>
-      {/* Butonul Inimioară */}
       <button
         type="button"
         className={`fav-card-btn ${isFavorite ? 'is-active' : ''}`}
@@ -87,7 +67,6 @@ export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ animal, isLoggedIn }) 
         </svg>
       </button>
 
-      {/* Pop-up-ul afișat automat doar când showAuthModal devine true */}
       <FavoriteAuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}

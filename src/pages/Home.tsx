@@ -114,7 +114,8 @@ export default function Home() {
             
             <p className="hero-description">{t.heroDesc}</p>
             
-            <div className="hero-content w-full md:w-1/2 text-center md:text-left">
+            {/* Clasă nouă dedicată pentru gruparea și distanțarea butoanelor */}
+            <div className="hero-buttons">
               <Link to="/catalog" className="btn-primary">{t.btnViewAnimals}</Link>
               <Link to="/ghidul-adoptatorului" className="btn-secondary">{t.btnHowToAdopt}</Link>
             </div>
