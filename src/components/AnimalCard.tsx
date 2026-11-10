@@ -2,6 +2,7 @@ import React from 'react';
 import './AnimalCard.css';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
+import FavoriteBtn from './FavoriteBtn';
 
 // Interfața actualizată pentru a se potrivi cu backend-ul Java
 interface Animal {
@@ -76,7 +77,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     <div className="animal-card">
       <div className="card-top">
         <span className="status-badge">{translateStatus(animal.status)}</span>
-        <button className="favorite-btn" aria-label={t.favoriteAria || "Adaugă la favorite"}>♡</button>
+        <FavoriteBtn petId={animal.id?.toString()} />
       </div>
 
       <div className="card-image-container">
