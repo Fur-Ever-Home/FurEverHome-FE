@@ -1,101 +1,167 @@
-export const translations = {
+export interface TranslationKeys {
+  // Chei existente din chat/FAQ (păstrate)
+  chatTitle?: string;
+  chatStatus?: string;
+  welcomeMsg?: string;
+  faqTitle?: string;
+  faq1?: string;
+  faq2?: string;
+  faq3?: string;
+  faq4?: string;
+  faq5?: string;
+  chatPlaceholder?: string;
+
+  // Navigație & Antet
+  home?: string;
+  adoptionGuide?: string;
+  availableAnimals?: string;
+  shelters?: string;
+  collaborations?: string;
+  aboutUs?: string;
+  login?: string;
+
+  // Catalog & Filtrare
+  filterBy?: string;
+  adoptionType?: string;
+  physical?: string;
+  distance?: string;
+  distanceNoticeTitle?: string;
+  distanceNoticeDesc?: string;
+  distanceBannerTitle?: string;
+  distanceBannerDesc?: string;
+  
+  basicInfo?: string;
+  type?: string;
+  speciesDog?: string;
+  speciesCat?: string;
+  speciesRabbit?: string;
+  speciesParrot?: string;
+  speciesTurtle?: string;
+  speciesOther?: string;
+
+  sex?: string;
+  male?: string;
+  female?: string;
+
+  size?: string;
+  small?: string;
+  small2?: string;
+  medium?: string;
+  large?: string;
+
+  animalDetails?: string;
+  age?: string;
+  yearOld?: string;
+  yearsOld?: string;
+  agePuppy?: string;
+  ageYoung?: string;
+  ageAdult?: string;
+  ageSenior?: string;
+
+  temperament?: string;
+  playful?: string;
+  calm?: string;
+  energetic?: string;
+  shy?: string;
+
+  healthState?: string;
+  healthy?: string;
+  needsCare?: string;
+
+  color?: string;
+  colorBlack?: string;
+  colorWhite?: string;
+  colorBrown?: string;
+  colorOrange?: string;
+  colorGrey?: string;
+  colorGolden?: string;
+  colorBicolor?: string;
+  colorTricolor?: string;
+
+  locationLabel?: string;
+  locationTypeLabel?: string;
+  county?: string;
+  shelter?: string;
+  center?: string;
+  foster?: string;
+
+  compatibilityHealth?: string;
+  petFriendly?: string;
+  childFriendly?: string;
+  noAllergies?: string;
+  microchipped?: string;
+  vaccinated?: string;
+  sterilized?: string;
+  dewormed?: string;
+
+  // Butoane Filtre & Sortare
+  applyFilters?: string;
+  resetFilters?: string;
+  clearAll?: string;
+  sortBy?: string;
+  newest?: string;
+  oldest?: string;
+
+  // Titluri Catalog
+  friendsLookingForHome?: string;
+  friendsWaitingSponsor?: string;
+  noAnimalsFound?: string;
+  loading?: string;
+
+  // Card & Modal Animale
+  statusAvailable?: string;
+  btnViewDetails?: string;
+  btnDonate?: string;
+  fundingCovered?: string;
+  senior?: string;
+  keyDetails?: string;
+  healthAndCompatibility?: string;
+  scheduleVisit?: string;
+  shareProfile?: string;
+  yes?: string;
+  no?: string;
+
+  // Legendă Home
+  legendVaccinated?: string;
+  legendDewormed?: string;
+  legendSterilized?: string;
+}
+
+export const translations: Record<'ro' | 'en', TranslationKeys> = {
   ro: {
-    // --- Asistent & Chat ---
-    chatTitle: "Asistent FureverHome",
-    chatStatus: "● Online • te ajut cu adopția",
-    welcomeMsg: "Cu ce te pot ajuta?",
+    // FAQ & Chat (păstrate)
+    chatTitle: "Asistent FurEverHome",
+    chatStatus: "Online",
+    welcomeMsg: "Bună! Cu ce te pot ajuta astăzi?",
     faqTitle: "Întrebări frecvente",
-    faq1: "Cum adopt un animal?",
-    faq2: "Ce documente îmi trebuie?",
-    faq3: "Cum programez o vizită?",
-    faq4: "Cât costă adopția?",
-    faq5: "Unde găsesc adăposturile?",
+    faq1: "Cum pot adopta un animal?",
+    faq2: "Care sunt condițiile de adopție?",
+    faq3: "Cum pot dona pentru adăpost?",
+    faq4: "Unde este situat adăpostul?",
+    faq5: "Pot fi voluntar?",
     chatPlaceholder: "Scrie un mesaj...",
-    chatbotAria: "Asistență",
 
-    // --- Navigare & Pagina Principală ---
-    navHome: "Acasă",
-    navGuide: "Ghidul adoptatorului",
-    navCatalog: "Animale disponibile",
-    navShelters: "Adăposturi",
-    navCollaborators: "Colaborări",
-    navAbout: "Despre noi",
-    navLogin: "Autentificare",
+    // Navigație & Antet
+    home: "Acasă",
+    adoptionGuide: "Ghidul adoptatorului",
+    availableAnimals: "Animale disponibile",
+    shelters: "Adăposturi",
+    collaborations: "Colaborări",
+    aboutUs: "Despre noi",
+    login: "Autentificare",
 
-    heroTag: "ADOPȚII DE ANIMALE ÎN IAȘI",
-    heroTitle: "Găsește-ți prietenul pe viață.",
-    heroTitleGold: "Oferă-i un cămin cald.",
-    heroDesc: "Fiecare suflet merită o șansă. Explorează animalele disponibile pentru adopție în zona ta și fă un bine care îți va schimba viața.",
-    btnViewAnimals: "Vezi animalele",
-    btnHowToAdopt: "Cum adopt?",
-
-    categoriesTitle: "Pe cine cauți?",
-    catDogs: "Câini",
-    catCats: "Pisici",
-    catOther: "Alte animale",
-
-    carouselTitle: "Își caută familia acum",
-    legendVaccinated: "Vaccinat",
-    legendDewormed: "Deparazitat",
-    legendSterilized: "Sterilizat",
-    btnViewAll: "Vezi toate",
-    loading: "Se încarcă...",
-
-    stepsTitle: "Adopția, în 4 pași simpli",
-    stepsSubtitle: "Fără drumuri inutile și fără mesaje rămase fără răspuns.",
-    step1Title: "Găsește-ți prietenul",
-    step1Text: "Folosește filtrele și salvează-ți favoritele.",
-    step2Title: "Programează o vizită",
-    step2Text: "Alegi ziua și ora direct din pagina animalului. Adăpostul îți confirmă.",
-    step3Title: "Cunoașteți-vă",
-    step3Text: "Mergi la adăpost, petreci timp cu animalul și pui toate întrebările.",
-    step4Title: "Mergeți acasă",
-    step4Text: "Semnezi contractul de adopție și primești sfaturi pentru primele zile.",
-
-    bannerText: "Nu știi cum să adopți?",
-    bannerHighlight: "Intră aici",
-    btnGuide: "Ghidul adoptatorului →",
-
-    // --- Footer ---
-    footerDesc: "Platforma de adopții de animale din Iași.",
-    footerLegalTitle: "Informații legale",
-    footerPrivacy: "Politica de confidențialitate",
-    footerCookies: "Politica de cookies",
-    footerGdpr: "GDPR – drepturile tale",
-    footerCopyright: "© 2026 FureverHome. Toate drepturile rezervate. Textele, logo-ul și designul site-ului nu pot fi copiate fără acordul nostru.",
-
-    // --- Modal Profil Animal & Detalii ---
-    btnViewDetails: "Vezi detalii",
-    favoriteAria: "Adaugă la favorite",
-    statusAvailable: "Disponibil",
-    statusReserved: "Rezervat",
-    statusAdopted: "Adoptat",
-    locationLabel: "Locație",
-    locationTypeLabel: "Tip locație",
-    scheduleVisit: "Programează o vizită",
-    keyDetails: "Detalii cheie",
-    healthAndCompatibility: "Sănătate & Compatibilitate",
-
-    // Atribute animal
-    species: "Specie",
-    breed: "Rasă",
-    sex: "Sex",
-    age: "Vârstă",
-    size: "Talie",
-    temperament: "Temperament",
-    color: "Culoare",
-
-    male: "Mascul",
-    female: "Femelă",
-    small: "Mică",
-    small2: "Mică",
-    medium: "Medie",
-    large: "Mare",
-    yearsOld: "ani",
-    yearOld: "an",
-    months: "luni",
-
-    // Specii traduse
+    // Catalog & Filtrare
+    filterBy: "Filtrează după",
+    adoptionType: "TIP ADOPȚIE",
+    physical: "Fizică",
+    distance: "La distanță",
+    distanceNoticeTitle: "Doar adopție la distanță",
+    distanceNoticeDesc: "Se afișează doar seniorii și animalele care au nevoie de tratament sau cazare permanentă și nu mai pot fi date spre adopție.",
+    distanceBannerTitle: "Adopția la distanță",
+    distanceBannerDesc: "Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic. Ai nevoie de cont pentru a continua.",
+    
+    basicInfo: "INFO DE BAZĂ",
+    type: "Tip",
     speciesDog: "Câine",
     speciesCat: "Pisică",
     speciesRabbit: "Iepure",
@@ -103,214 +169,220 @@ export const translations = {
     speciesTurtle: "Broască țestoasă",
     speciesOther: "Altele",
 
-    // Culori blană
+    sex: "Sex",
+    male: "Mascul",
+    female: "Femelă",
+
+    size: "Talie",
+    small: "Mică",
+    small2: "Mic",
+    medium: "Medie",
+    large: "Mare",
+
+    animalDetails: "DETALII ANIMAL",
+    age: "Vârstă",
+    yearOld: "an",
+    yearsOld: "ani",
+    agePuppy: "Pui (< 1 an)",
+    ageYoung: "Tânăr (1 - 3 ani)",
+    ageAdult: "Adult (3 - 7 ani)",
+    ageSenior: "Senior (> 7 ani)",
+
+    temperament: "Temperament",
+    playful: "Jucăuș",
+    calm: "Calm",
+    energetic: "Energic",
+    shy: "Timid",
+
+    healthState: "Stare de sănătate",
+    healthy: "Sănătos",
+    needsCare: "Necesită îngrijiri",
+
+    color: "Culoare",
     colorBlack: "Negru",
     colorWhite: "Alb",
     colorBrown: "Maro",
-    colorGolden: "Auriu",
-    colorOrange: "Portocaliu (Roșcat)",
+    colorOrange: "Portocaliu / Roșcat",
     colorGrey: "Gri",
+    colorGolden: "Auriu",
+    colorBicolor: "Bicolor / Tricolor",
     colorTricolor: "Tricolor",
-    colorBicolor: "Bicolor",
 
-    // Sănătate & Status
-    vaccinated: "Vaccinat",
-    sterilized: "Sterilizat",
-    dewormed: "Deparazitat",
-    microchipped: "Microcipat",
+    locationLabel: "Locație",
+    locationTypeLabel: "Tip locație",
+    county: "Județ",
+    shelter: "Centru / Adăpost",
+    center: "Centru",
+    foster: "În Foster",
+
+    compatibilityHealth: "COMPATIBILITATE & SĂNĂTATE",
     petFriendly: "Pet friendly",
     childFriendly: "Child friendly",
     noAllergies: "Fără alergii",
+    microchipped: "Microcipat",
+    vaccinated: "Vaccinat",
+    sterilized: "Sterilizat",
+    dewormed: "Deparazitat",
+
+    // Butoane Filtre & Sortare
+    applyFilters: "Aplică filtre",
+    resetFilters: "Resetează filtrele",
+    clearAll: "Șterge tot",
+    sortBy: "Sortează după:",
+    newest: "Cele mai noi",
+    oldest: "Cele mai vechi",
+
+    // Titluri Catalog
+    friendsLookingForHome: "prieteni își caută o casă",
+    friendsWaitingSponsor: "prieteni așteaptă un sponsor",
+    noAnimalsFound: "Nu s-au găsit animale conform filtrelor selectate.",
+    loading: "Se încarcă animalele...",
+
+    // Card & Modal Animale
+    statusAvailable: "Disponibil",
+    btnViewDetails: "Vezi detalii",
+    btnDonate: "Donează",
+    fundingCovered: "din necesarul lunar acoperit",
+    senior: "Senior",
+    keyDetails: "Detalii cheie",
+    healthAndCompatibility: "Sănătate & Compatibilitate",
+    scheduleVisit: "Programează o vizită",
+    shareProfile: "Distribuie profilul",
     yes: "Da",
     no: "Nu",
-    playful: "Jucăuș",
-    medium3: "Medie",
-    small3: "Mică",
-    large3: "Mare",
-    small4: "Mic",
 
-    // --- Filtre & Căutare ---
-    filterTitle: "Filtrează după",
-    filterSpecies: "Specie",
-    filterDogs: "Câini",
-    filterCats: "Pisici",
-    filterOther: "Alte animale",
-    filterAge: "Vârstă",
-    filterPuppy: "Pui (0-1 ani)",
-    filterYoung: "Tânăr (1-3 ani)",
-    filterAdult: "Adult (3-8 ani)",
-    filterSenior: "Senior (8+ ani)",
-    filterSize: "Talie",
-    filterSmall: "Mică",
-    filterMedium: "Medie",
-    filterLarge: "Mare",
-    filterGender: "Sex",
-    filterFemale: "Femelă",
-    filterMale: "Masculin",
-    filterMedicalStatus: "Stare medicală",
-    filterVaccinated: "Vaccinat",
-    filterDewormed: "Deparazitat",
-    filterSterilized: "Sterilizat",
-    resetFilters: "Resetează filtrele",
-    favModalTitleMale: "Pentru a-l adăuga la favorite pe {name} trebuie să fii logat",
-    favModalTitleFemale: "Pentru a o adăuga la favorite pe {name} trebuie să fii logat",
-    favModalLoginBtn: "Autentifică-te",
+    // Legendă Home
+    legendVaccinated: "Vaccinat",
+    legendDewormed: "Deparazitat",
+    legendSterilized: "Sterilizat",
   },
+
   en: {
-    // --- Assistant & Chat ---
-    chatTitle: "FureverHome Assistant",
-    chatStatus: "● Online • helping you adopt",
-    welcomeMsg: "How can I help you?",
-    faqTitle: "Frequently asked questions",
-    faq1: "How do I adopt a pet?",
-    faq2: "What documents do I need?",
-    faq3: "How do I schedule a visit?",
-    faq4: "How much does adoption cost?",
-    faq5: "Where can I find the shelters?",
+    // FAQ & Chat (păstrate)
+    chatTitle: "FurEverHome Assistant",
+    chatStatus: "Online",
+    welcomeMsg: "Hello! How can I help you today?",
+    faqTitle: "Frequently Asked Questions",
+    faq1: "How can I adopt an animal?",
+    faq2: "What are the adoption requirements?",
+    faq3: "How can I donate to the shelter?",
+    faq4: "Where is the shelter located?",
+    faq5: "Can I be a volunteer?",
     chatPlaceholder: "Type a message...",
-    chatbotAria: "Assistance",
 
-    // --- Navigation & Home Page ---
-    navHome: "Home",
-    navGuide: "Adopter's guide",
-    navCatalog: "Available animals",
-    navShelters: "Shelters",
-    navCollaborators: "Collaborators",
-    navAbout: "About us",
-    navLogin: "Login",
+    // Navigation & Header
+    home: "Home",
+    adoptionGuide: "Adoption Guide",
+    availableAnimals: "Available Animals",
+    shelters: "Shelters",
+    collaborations: "Collaborations",
+    aboutUs: "About Us",
+    login: "Log In",
 
-    heroTag: "ANIMAL ADOPTIONS IN IAȘI",
-    heroTitle: "Find your lifelong friend.",
-    heroTitleGold: "Give them a warm home.",
-    heroDesc: "Every soul deserves a chance. Explore available animals for adoption in your area and do a good deed that will change your life.",
-    btnViewAnimals: "View animals",
-    btnHowToAdopt: "How to adopt?",
-
-    categoriesTitle: "Who are you looking for?",
-    catDogs: "Dogs",
-    catCats: "Cats",
-    catOther: "Other animals",
-
-    carouselTitle: "Looking for a family now",
-    legendVaccinated: "Vaccinated",
-    legendDewormed: "Dewormed",
-    legendSterilized: "Sterilized",
-    btnViewAll: "View all",
-    loading: "Loading...",
-
-    stepsTitle: "Adoption in 4 simple steps",
-    stepsSubtitle: "No unnecessary trips and no unanswered messages.",
-    step1Title: "Find your friend",
-    step1Text: "Use filters and save your favorites.",
-    step2Title: "Schedule a visit",
-    step2Text: "Choose the day and time directly from the animal's page. The shelter confirms.",
-    step3Title: "Get to know each other",
-    step3Text: "Go to the shelter, spend time with the animal, and ask all your questions.",
-    step4Title: "Go home",
-    step4Text: "Sign the adoption contract and get tips for the first few days.",
-
-    bannerText: "Don't know how to adopt?",
-    bannerHighlight: "Click here",
-    btnGuide: "Adopter's guide →",
-
-    // --- Footer ---
-    footerDesc: "The animal adoption platform in Iași.",
-    footerLegalTitle: "Legal information",
-    footerPrivacy: "Privacy policy",
-    footerCookies: "Cookie policy",
-    footerGdpr: "GDPR – your rights",
-    footerCopyright: "© 2026 FureverHome. All rights reserved. Texts, logo and website design cannot be copied without our consent.",
-
-    // --- Animal Profile Modal & Details ---
-    btnViewDetails: "View details",
-    favoriteAria: "Add to favorites",
-    statusAvailable: "Available",
-    statusReserved: "Reserved",
-    statusAdopted: "Adopted",
-    locationLabel: "Location",
-    locationTypeLabel: "Location type",
-    scheduleVisit: "Schedule a visit",
-    keyDetails: "Key details",
-    healthAndCompatibility: "Health & Compatibility",
-
-    // Animal attributes
-    species: "Species",
-    breed: "Breed",
-    sex: "Sex",
-    age: "Age",
-    size: "Size",
-    temperament: "Temperament",
-    color: "Color",
-
-    male: "Male",
-    female: "Female",
-    small: "Small",
-    small2: "Small",
-    medium: "Medium",
-    large: "Large",
-    yearsOld: "years old",
-    yearOld: "year old",
-    months: "months",
-
-    // Translated species
+    // Catalog & Filters
+    filterBy: "Filter by",
+    adoptionType: "ADOPTION TYPE",
+    physical: "Physical",
+    distance: "At a distance",
+    distanceNoticeTitle: "Distance adoption only",
+    distanceNoticeDesc: "Only seniors and animals requiring continuous treatment or permanent shelter that cannot be physically adopted are displayed.",
+    distanceBannerTitle: "Distance Adoption",
+    distanceBannerDesc: "Support the care, treatment, and housing of an animal that cannot be physically adopted. You need an account to continue.",
+    
+    basicInfo: "BASIC INFO",
+    type: "Type",
     speciesDog: "Dog",
     speciesCat: "Cat",
     speciesRabbit: "Rabbit",
     speciesParrot: "Parrot",
     speciesTurtle: "Turtle",
-    speciesOther: "Other",
+    speciesOther: "Others",
 
-    // Fur colors
+    sex: "Sex",
+    male: "Male",
+    female: "Female",
+
+    size: "Size",
+    small: "Small",
+    small2: "Small",
+    medium: "Medium",
+    large: "Large",
+
+    animalDetails: "ANIMAL DETAILS",
+    age: "Age",
+    yearOld: "year old",
+    yearsOld: "years old",
+    agePuppy: "Puppy (< 1 yr)",
+    ageYoung: "Young (1 - 3 yrs)",
+    ageAdult: "Adult (3 - 7 yrs)",
+    ageSenior: "Senior (> 7 yrs)",
+
+    temperament: "Temperament",
+    playful: "Playful",
+    calm: "Calm",
+    energetic: "Energetic",
+    shy: "Shy",
+
+    healthState: "Health condition",
+    healthy: "Healthy",
+    needsCare: "Needs care",
+
+    color: "Color",
     colorBlack: "Black",
     colorWhite: "White",
     colorBrown: "Brown",
-    colorGolden: "Golden",
-    colorOrange: "Orange (Ginger)",
+    colorOrange: "Orange / Red",
     colorGrey: "Grey",
+    colorGolden: "Golden",
+    colorBicolor: "Bicolor / Tricolor",
     colorTricolor: "Tricolor",
-    colorBicolor: "Bicolor",
 
-    // Health & Status
-    vaccinated: "Vaccinated",
-    sterilized: "Sterilized",
-    dewormed: "Dewormed",
-    microchipped: "Microchipped",
+    locationLabel: "Location",
+    locationTypeLabel: "Location type",
+    county: "County",
+    shelter: "Center / Shelter",
+    center: "Center",
+    foster: "In Foster",
+
+    compatibilityHealth: "COMPATIBILITY & HEALTH",
     petFriendly: "Pet friendly",
     childFriendly: "Child friendly",
     noAllergies: "No allergies",
+    microchipped: "Microchipped",
+    vaccinated: "Vaccinated",
+    sterilized: "Sterilized",
+    dewormed: "Dewormed",
+
+    // Filter Buttons & Sorting
+    applyFilters: "Apply filters",
+    resetFilters: "Reset filters",
+    clearAll: "Clear all",
+    sortBy: "Sort by:",
+    newest: "Newest",
+    oldest: "Oldest",
+
+    // Catalog Titles
+    friendsLookingForHome: "friends looking for a home",
+    friendsWaitingSponsor: "friends waiting for a sponsor",
+    noAnimalsFound: "No animals found matching the selected filters.",
+    loading: "Loading animals...",
+
+    // Animal Card & Modal
+    statusAvailable: "Available",
+    btnViewDetails: "View details",
+    btnDonate: "Donate",
+    fundingCovered: "of monthly need covered",
+    senior: "Senior",
+    keyDetails: "Key details",
+    healthAndCompatibility: "Health & Compatibility",
+    scheduleVisit: "Schedule a visit",
+    shareProfile: "Share profile",
     yes: "Yes",
     no: "No",
-    playful: "Playful",
-    medium3: "Medium",
-    small3: "Small",
-    large3: "Large",
-    small4: "Small",
 
-    // --- Filtre & Căutare ---
-    filterTitle: "Filter by",
-    filterSpecies: "Species",
-    filterDogs: "Dogs",
-    filterCats: "Cats",
-    filterOther: "Other animals",
-    filterAge: "Age",
-    filterPuppy: "Puppy (0-1 yrs)",
-    filterYoung: "Young (1-3 yrs)",
-    filterAdult: "Adult (3-8 yrs)",
-    filterSenior: "Senior (8+ yrs)",
-    filterSize: "Size",
-    filterSmall: "Small",
-    filterMedium: "Medium",
-    filterLarge: "Large",
-    filterGender: "Gender",
-    filterFemale: "Female",
-    filterMale: "Male",
-    filterMedicalStatus: "Medical status",
-    filterVaccinated: "Vaccinated",
-    filterDewormed: "Dewormed",
-    filterSterilized: "Sterilized",
-    resetFilters: "Reset filters",
-    favModalTitleMale: "To add {name} to favorites you need to be logged in",
-    favModalTitleFemale: "To add {name} to favorites you need to be logged in",
-    favModalLoginBtn: "Log in",
+    // Home Legend
+    legendVaccinated: "Vaccinated",
+    legendDewormed: "Dewormed",
+    legendSterilized: "Sterilized",
   }
 };

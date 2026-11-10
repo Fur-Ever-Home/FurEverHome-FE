@@ -14,6 +14,9 @@ import Footer from '../components/Footer';
 import './Home.css';
 import FloatingBtn from '../components/floating-btn';
 import { AnimalModal } from "../components/AnimalModal";
+import pawIcon from '../assets/paw.png';
+import pillIcon from '../assets/pill.png';
+import shieldIcon from '../assets/shield.png';
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';

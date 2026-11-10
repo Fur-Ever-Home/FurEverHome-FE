@@ -325,50 +325,51 @@ html, body {
   margin-left: 0px;
 }
 
-/* Stiluri de bază pentru legenda pe desktop */
+/* Stilizare și mărire accentuată pentru legenda din Home */
 .carousel-legend {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   flex-wrap: wrap;
+  margin: 16px 0;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  color: #555;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3f2c20;
 }
 
-.legend-item img {
-  width: 18px;
-  height: 18px;
+/* Iconițele mărite la 36px */
+.legend-item img,
+.legend-item .icon-badge {
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem; /* Mărește și simbolul din interior (dacă e icon-badge) */
+  border-radius: 50%;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
-/* Ajustare dedicată exclusiv pentru mobil (< 640px) */
+/* Adaptare pentru mobil (< 640px) */
 @media screen and (max-width: 640px) {
   .carousel-legend {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px 12px;       /* Distanță redusă între elemente */
-    margin-top: 4px;
-    margin-bottom: 8px;
+    gap: 12px 16px;
   }
 
   .legend-item {
-    font-size: 0.75rem;   /* Font mai mic pe mobil */
-    gap: 4px;
-    white-space: nowrap; /* Împiedică ruperea cuvintelor pe rânduri separate */
+    font-size: 0.9rem;
+    gap: 8px;
   }
 
-  .legend-item img {
-    width: 14px;         /* Iconițe adaptate la fontul mai mic */
-    height: 14px;
+  .legend-item img,
+  .legend-item .icon-badge {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
   }
 }
 

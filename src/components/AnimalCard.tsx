@@ -30,7 +30,7 @@ interface AnimalCardProps {
 
 export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode = false }) => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = translations[lang as keyof typeof translations] || translations.ro;
 
   const isLoggedIn = !!localStorage.getItem('token');
   const imgSrc = animal.imageUrl || animal.image; 
@@ -49,12 +49,9 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
   const translateSize = (size: string) => {
     if (!size) return '';
     const lower = size.toLowerCase().trim();
-    
-    if (lower === 'medie' || lower === 'medium') return t.medium || 'Medie';
-    if (lower === 'mare' || lower === 'large') return t.large || 'Mare';
-    if (lower === 'mic' || lower === 'small2') return t.small2 || 'Mic';
-    if (lower === 'mica' || lower === 'mică' || lower === 'small') return t.small || 'Mică';
-    
+    if (lower.includes('medie') || lower.includes('medium')) return `${t.size || 'talie'} ${t.medium?.toLowerCase() || 'medie'}`;
+    if (lower.includes('mare') || lower.includes('large')) return `${t.size || 'talie'} ${t.large?.toLowerCase() || 'mare'}`;
+    if (lower.includes('mic')) return `${t.size || 'talie'} ${t.small?.toLowerCase() || 'mică'}`;
     return size;
   };
 
@@ -80,7 +77,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
     <div className={`animal-card ${isDistance ? 'card-distance-mode' : ''}`}>
       <div className="card-top">
         {isDistance ? (
-          <span className="status-badge senior-badge">Senior</span>
+          <span className="status-badge senior-badge">{t.senior || 'Senior'}</span>
         ) : (
           <span className="status-badge">{translateStatus(animal.status)}</span>
         )}
@@ -123,10 +120,10 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
                   style={{ width: `${Math.min(fundingPercent, 100)}%` }} 
                 />
               </div>
-              <span className="funding-text">{fundingPercent}% din necesarul lunar acoperit</span>
+              <span className="funding-text">{fundingPercent}% {t.fundingCovered || 'din necesarul lunar acoperit'}</span>
             </div>
             <button type="button" className="btn-donate">
-              <span className="heart-icon">🤎</span> Donează
+              <span className="heart-icon">🤎</span> {t.btnDonate || 'Donează'}
             </button>
           </div>
         ) : (

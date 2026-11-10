@@ -199,18 +199,16 @@ export default function Catalog() {
             </div>
           </div>
 
-          {/* BANNER ADOPȚIE LA DISTANȚĂ */}
-          {isDistanceMode && (
-            <div className="distance-banner-card">
-              <div className="distance-banner-icon">🤎</div>
-              <div className="distance-banner-text">
-                <h3>Adopția la distanță</h3>
-                <p>
-                  Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic. Ai nevoie de cont pentru a continua.
-                </p>
-              </div>
-            </div>
-          )}
+          {/* BANNER ADOPȚIE LA DISTANȚĂ TRADUS */}
+{isDistanceMode && (
+  <div className="distance-banner-card">
+    <div className="distance-banner-icon">🤎</div>
+    <div className="distance-banner-text">
+      <h3>{t.distanceBannerTitle || 'Adopția la distanță'}</h3>
+      <p>{t.distanceBannerDesc || 'Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic.'}</p>
+    </div>
+  </div>
+)}
           
           {filters.species && !isDistanceMode && (
             <div className="catalog-filter-badge">
