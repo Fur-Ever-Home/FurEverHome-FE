@@ -94,7 +94,18 @@ html, body {
 
 .hero-buttons {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  justify-content: flex-start; /* Le aliniază la stânga */
+  gap: 16px;                  /* Distanța dintre butoane */
+  margin-top: 24px;           /* Spațiu față de textul de deasupra */
+}
+
+/* Ajustare pe mobil pentru centrare pe ecrane mici */
+@media screen and (max-width: 640px) {
+  .hero-buttons {
+    justify-content: center;
+    gap: 12px;
+  }
 }
 
 .btn-primary {
