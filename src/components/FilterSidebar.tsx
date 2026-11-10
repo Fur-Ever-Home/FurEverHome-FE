@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
-import './FilterSidebar.css';
+import "./FilterSideBar.css";
 
 interface FilterSidebarProps {
   onFilterChange?: (filters: any) => void;
