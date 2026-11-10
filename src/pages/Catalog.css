@@ -5,7 +5,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Libertinus Sans';
+  font-family: 'Libertinus Sans', sans-serif;
 }
 
 .catalog-layout-container {
@@ -16,26 +16,86 @@
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  gap: 50px; /* Spațiul exact dintre viitorul sidebar și carduri */
+  gap: 40px; /* Spațiul dintre sidebar-ul de filtre și grila de carduri */
 }
 
-/* 
-  REZERVĂM LOCUL PENTRU BARA DIN STÂNGA:
-  Chiar dacă colegul tău nu a făcut-o încă, punem un 'width' fix 
-  și 'display: block' ca să forțăm cardurile să stea doar în dreapta!
-*/
-.catalog-sidebar-filters {
-  width: 270px; /* Lățimea exactă pe care o va ocupa sidebar-ul din Figma */
-  flex-shrink: 0;
-  display: block; /* Ține locul ocupat ca să împingă cardurile în dreapta */
-}
-
-/* Zona din dreapta cu cardurile */
+/* Zona principală de conținut din dreapta */
 .catalog-main-content {
   flex: 1;
   min-width: 0;
 }
 
+/* BANNER PENTRU ADOPȚIA LA DISTANȚĂ */
+.distance-banner-card {
+  background-color: #ffffff;
+  border: 1px solid #e2d8c9;
+  border-radius: 18px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.distance-banner-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: #c89551;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.distance-banner-text h3 {
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #3F2C20;
+  margin: 0 0 4px 0;
+}
+
+.distance-banner-text p {
+  font-size: 0.88rem;
+  color: #666666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 📱 BARA PENTRU BUTONUL DE FILTRE PE MOBIL */
+.catalog-mobile-filter-bar {
+  display: none; /* Ascuns pe Desktop */
+  margin-bottom: 20px;
+}
+
+.btn-open-mobile-filters {
+  width: 100%;
+  background-color: #3f2c20;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(63, 44, 32, 0.15);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-open-mobile-filters:hover {
+  background-color: #2b1d14;
+  transform: translateY(-1px);
+}
+
+/* HEADER CATALOG (Titlu + Sortare) */
 .catalog-header-row {
   display: flex;
   justify-content: space-between;
@@ -50,6 +110,7 @@
   font-size: 1.9rem;
   font-weight: 700;
   margin: 0;
+  font-family: Georgia, serif;
 }
 
 .catalog-sort-wrapper {
@@ -66,19 +127,28 @@
 
 .catalog-sort-select {
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #c89551;
-  background: #fff;
+  background: #ffffff;
   cursor: pointer;
-  color: #333;
+  color: #333333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
+.catalog-sort-select:focus {
+  border-color: #3F2C20;
+}
+
+/* BADGE FILTRU ACTIV */
 .catalog-filter-badge {
   background-color: #fcefdc;
   border: 1px solid #c89551;
   padding: 12px 18px;
   border-radius: 12px;
-  margin: 15px 0;
+  margin: 15px 0 20px 0;
   color: #2b231d;
   font-weight: 600;
   font-size: 0.95rem;
@@ -90,7 +160,7 @@
   text-transform: uppercase;
 }
 
-/* GRID FIX DE 3 COLOANE - așezat perfect în dreapta */
+/* GRILĂ DE CARDURI (3 coloane pe Desktop) */
 .catalog-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -100,7 +170,7 @@
 
 .catalog-card-item {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .catalog-card-item:hover {
@@ -108,50 +178,110 @@
 }
 
 .catalog-message {
-  color: #666;
+  color: #666666;
   font-size: 1.1rem;
   grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
 }
 
-/* Responsivitate pentru ecrane mai mici */
-@media (max-width: 1024px) {
-  .catalog-sidebar-filters {
-    display: none; /* Pe tablete/telefoane ascundem spațiul ca să aibă loc cardurile */
-  }
+/* SLIDER MOBIL CU SĂGEȚI (Ascuns pe Desktop) */
+.mobile-carousel-wrapper {
+  display: none;
+}
+
+/* ==========================================================================
+   📱 ADAPTARE RESPONSIVE
+   ========================================================================== */
+
+/* Tablete și ecrane medii (< 1024px) */
+@media screen and (max-width: 1024px) {
   .catalog-layout-container {
-    padding: 20px;
+    padding: 24px 20px;
+    flex-direction: column;
+    gap: 16px;
   }
-  .catalog-cards-grid {
+
+  .catalog-mobile-filter-bar {
+    display: block;
+  }
+
+  .desktop-only-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .catalog-title {
+    font-size: 1.6rem;
   }
 }
 
-@media (max-width: 650px) {
-  .catalog-cards-grid {
-    grid-template-columns: 1fr;
+/* Telefoane mobile (< 768px) - Activare Slider Orizontal cu Săgeți */
+@media screen and (max-width: 768px) {
+  .catalog-layout-container {
+    padding: 16px;
   }
-}
-/* Containerul principal al paginii de catalog */
-.catalog-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  box-sizing: border-box;
-}
 
-/* Conținutul cu carduri se extind pe spațiul rămas */
-.catalog-content {
-  flex: 1;
-  width: 100%;
-}
-
-/* Pe ecrane mari (Desktop), le punem alăturate: Filtre stânga | Carduri dreapta */
-@media (min-width: 769px) {
-  .catalog-container {
-    flex-direction: row;
+  .catalog-header-row {
+    flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+  }
+
+  .desktop-only-grid {
+    display: none; /* Ascundem grila verticală pe mobil */
+  }
+
+  .mobile-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .mobile-cards-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 8px 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .mobile-cards-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-card-slide {
+    flex: 0 0 auto;
+  }
+
+  .mobile-arrow-btn {
+    background: #ffffff;
+    border: 1px solid #dcd6cd;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #3f2c20;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    z-index: 5;
+    flex-shrink: 0;
+  }
+
+  .mobile-arrow-btn:active {
+    background-color: #f0eae1;
+  }
+
+  .catalog-title {
+    font-size: 1.4rem;
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,8 +8,8 @@ import { AnimalModal } from '../components/AnimalModal';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
 import dogIcon from '../assets/dog-icon.svg';
+import FilterSidebar, { FilterState } from '../components/FilterSidebar';
 import './Catalog.css';
-import FilterSidebar from '../components/FilterSidebar';
 
 interface Animal {
   id: number;
@@ -37,11 +37,36 @@ interface Animal {
   noAllergies?: boolean;
   date?: string;
   createdAt?: string;
+  isDistanceAdoption?: boolean;
+  needType?: string;
+  fundingPercent?: number;
 }
+
+const initialFilterState: FilterState = {
+  adoptionType: '',
+  species: '',
+  gender: '',
+  size: '',
+  ageGroup: '',
+  temperament: '',
+  healthState: '',
+  color: '',
+  county: '',
+  shelter: '',
+  locationType: '',
+  petFriendly: false,
+  childFriendly: false,
+  noAllergies: false,
+  microchipped: false,
+  vaccinated: false,
+  sterilized: false,
+  dewormed: false,
+};
 
 export default function Catalog() {
   const [searchParams] = useSearchParams();
   const categorieParam = searchParams.get('categorie');
+  const tipParam = searchParams.get('tip');
 
   const { lang } = useLanguage();
   const t = translations[lang as keyof typeof translations] || translations.ro;
@@ -51,13 +76,39 @@ export default function Catalog() {
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
   const [sortOrder, setSortOrder] = useState('noi');
 
-  useEffect(() => {
-    let url = 'http://localhost:8080/api/animals';
-    if (categorieParam) {
-      url += `?species=${encodeURIComponent(categorieParam)}`;
-    }
+  const [filters, setFilters] = useState<FilterState>({
+    ...initialFilterState,
+    adoptionType: tipParam === 'la_distanta' ? 'la_distanta' : '',
+  });
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
+  // Ref pentru slider-ul orizontal pe mobil
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (categorieParam) {
+      setFilters((prev) => ({ ...prev, species: categorieParam }));
+    }
+  }, [categorieParam]);
+
+  const isDistanceMode = filters.adoptionType === 'la_distanta';
+
+  const fetchAnimals = () => {
     setLoading(true);
+
+    const queryParams = new URLSearchParams();
+    if (filters.adoptionType) queryParams.append('adoptionType', filters.adoptionType);
+    if (filters.species) queryParams.append('species', filters.species);
+    if (filters.gender) queryParams.append('gender', filters.gender);
+    if (filters.size) queryParams.append('size', filters.size);
+    if (filters.shelter) queryParams.append('shelter', filters.shelter);
+    if (filters.vaccinated) queryParams.append('vaccinated', 'true');
+    if (filters.sterilized) queryParams.append('sterilized', 'true');
+    if (filters.dewormed) queryParams.append('dewormed', 'true');
+
+    const queryString = queryParams.toString();
+    const url = `http://localhost:8080/api/animals${queryString ? `?${queryString}` : ''}`;
+
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -68,7 +119,16 @@ export default function Catalog() {
         console.error('Eroare la preluarea animalelor:', error);
         setLoading(false);
       });
-  }, [categorieParam]);
+  };
+
+  useEffect(() => {
+    fetchAnimals();
+  }, [categorieParam, filters.adoptionType]);
+
+  const handleResetFilters = () => {
+    setFilters(initialFilterState);
+    fetchAnimals();
+  };
 
   const animaleSortate = [...animals].sort((a, b) => {
     const dateA = new Date(a.date || a.createdAt || Date.now()).getTime();
@@ -79,20 +139,49 @@ export default function Catalog() {
     return dateA - dateB;
   });
 
+  const handleMobileScroll = (direction: 'left' | 'right') => {
+    if (mobileTrackRef.current) {
+      const scrollAmount = 296; // Lățimea cardului (280px) + gap-ul (16px)
+      mobileTrackRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <div className="catalog-page">
       <Header />
       
       <div className="catalog-layout-container">
-        {/* Spațiu dedicat pentru sidebar-ul de filtre din stânga */}
-        <aside className="catalog-sidebar-filters">
-          {/* Aici va lucra colegul tău pe viitor */}
-        </aside>
+        
+        <FilterSidebar
+          filters={filters}
+          onFilterChange={setFilters}
+          onApply={fetchAnimals}
+          onReset={handleResetFilters}
+          totalResults={animaleSortate.length}
+          isOpenMobile={isMobileFilterOpen}
+          onCloseMobile={() => setIsMobileFilterOpen(false)}
+        />
 
         <main className="catalog-main-content">
+          
+          <div className="catalog-mobile-filter-bar">
+            <button 
+              type="button" 
+              className="btn-open-mobile-filters"
+              onClick={() => setIsMobileFilterOpen(true)}
+            >
+              ⚙️ {lang === 'en' ? 'Filters' : 'Filtrează'} ({animaleSortate.length})
+            </button>
+          </div>
+
           <div className="catalog-header-row">
             <h1 className="catalog-title">
-              {lang === 'en' ? '84 friends are looking for a home' : `${animals.length} prieteni își caută o casă`}
+              {isDistanceMode
+                ? (lang === 'en' ? `${animaleSortate.length} friends waiting for a sponsor` : `${animaleSortate.length} prieteni așteaptă un sponsor`)
+                : (lang === 'en' ? `${animaleSortate.length} friends are looking for a home` : `${animaleSortate.length} prieteni își caută o casă`)}
             </h1>
             
             <div className="catalog-sort-wrapper">
@@ -109,34 +198,47 @@ export default function Catalog() {
               </select>
             </div>
           </div>
+
+          {/* BANNER ADOPȚIE LA DISTANȚĂ */}
+          {isDistanceMode && (
+            <div className="distance-banner-card">
+              <div className="distance-banner-icon">🤎</div>
+              <div className="distance-banner-text">
+                <h3>Adopția la distanță</h3>
+                <p>
+                  Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic. Ai nevoie de cont pentru a continua.
+                </p>
+              </div>
+            </div>
+          )}
           
-          {categorieParam && (
+          {filters.species && !isDistanceMode && (
             <div className="catalog-filter-badge">
-              {lang === 'en' ? 'Active filter: Showing category' : 'Filtru activ: Se afișează categoria'} 
-              <span className="catalog-filter-highlight">{categorieParam}</span>.
+              {lang === 'en' ? 'Active filter: Showing category' : 'Filtru activ: Se afișează categoria'}{' '}
+              <span className="catalog-filter-highlight">{filters.species}</span>.
             </div>
           )}
 
-          {/* GRID FIX DE 3 COLOANE PE RÂND */}
-          <div className="catalog-cards-grid">
+          {/* RENDER DESKTOP (GRID DE COLOANE) */}
+          <div className="catalog-cards-grid desktop-only-grid">
             {loading ? (
               <p className="catalog-message">{t.loading || 'Se încarcă animalele...'}</p>
             ) : animaleSortate.length === 0 ? (
               <p className="catalog-message">
-                {lang === 'en' ? 'No animals found.' : 'Nu s-au găsit animale în baza de date.'}
+                {lang === 'en' ? 'No animals found.' : 'Nu s-au găsit animale conform filtrelor selectate.'}
               </p>
             ) : (
               animaleSortate.map((animal) => {
                 const animalDataForModal = {
                   ...animal,
                   breed: animal.breed || "Rasă comună",
-                  sex: animal.gender || "Femelă",
+                  sex: animal.gender || animal.sex || "Femelă",
                   age: animal.age || "1 an",
                   size: animal.size || "Medie",
-                  temperament: animal.temperament || "Jucăuş",
+                  temperament: animal.temperament || "Jucăuș",
                   color: animal.color || "Portocaliu",
-                  location: animal.shelter || "Centrul Casa lui Azor",
-                  locationType: "Centru",
+                  location: animal.shelter || animal.location || "Centrul Casa lui Azor",
+                  locationType: animal.locationType || "Centru",
                   status: animal.status || "Disponibil",
                   images: animal.images && animal.images.length > 0 
                     ? animal.images 
@@ -158,13 +260,77 @@ export default function Catalog() {
                         ...animal, 
                         imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
                         image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
-                      } as any} 
+                      } as any}
+                      isDistanceMode={isDistanceMode}
                     />
                   </div>
                 );
               })
             )}
           </div>
+
+          {/* RENDER MOBIL (SLIDER ORIZONTAL CU SĂGEȚI STÂNGA / DREAPTA) */}
+          <div className="mobile-carousel-wrapper">
+            <button 
+              type="button" 
+              className="mobile-arrow-btn left" 
+              onClick={() => handleMobileScroll('left')}
+              aria-label="Anterior"
+            >
+              ‹
+            </button>
+
+            <div className="mobile-cards-track" ref={mobileTrackRef}>
+              {animaleSortate.map((animal) => {
+                const animalDataForModal = {
+                  ...animal,
+                  breed: animal.breed || "Rasă comună",
+                  sex: animal.gender || animal.sex || "Femelă",
+                  age: animal.age || "1 an",
+                  size: animal.size || "Medie",
+                  temperament: animal.temperament || "Jucăuș",
+                  color: animal.color || "Portocaliu",
+                  location: animal.shelter || animal.location || "Centrul Casa lui Azor",
+                  locationType: animal.locationType || "Centru",
+                  status: animal.status || "Disponibil",
+                  images: animal.images && animal.images.length > 0 
+                    ? animal.images 
+                    : [animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon],
+                  microchipped: animal.microchipped ?? true,
+                  petFriendly: animal.petFriendly ?? true,
+                  childFriendly: animal.childFriendly ?? false,
+                  noAllergies: animal.noAllergies ?? true,
+                };
+
+                return (
+                  <div 
+                    key={animal.id} 
+                    onClick={() => setSelectedAnimal(animalDataForModal)} 
+                    className="mobile-card-slide"
+                  >
+                    <AnimalCard 
+                      animal={{ 
+                        ...animal, 
+                        imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
+                        image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
+                      } as any}
+                      isDistanceMode={isDistanceMode}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
+            <button 
+              type="button" 
+              className="mobile-arrow-btn right" 
+              onClick={() => handleMobileScroll('right')}
+              aria-label="Următor"
+            >
+              ›
+            </button>
+          </div>
+
         </main>
       </div>
 

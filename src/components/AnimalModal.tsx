@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import { useLanguage } from "../useLanguage";
 import { translations } from "../translations";
+import FavoriteBtn from "./FavoriteBtn";
 import "./AnimalModal.css";
 
 // Importuri pentru iconițele din folderul assets
@@ -14,30 +16,33 @@ import pillIcon from "../assets/pill.png";
 import rulerIcon from "../assets/ruler.png";
 import shieldIcon from "../assets/shield.png";
 import smileIcon from "../assets/smile.png";
-import sterlizatIcon from "../assets/syringe.png";
 
 interface AnimalModalProps {
   animal: {
-    id: number;
+    id?: number | string;
     name: string;
     species: string;
-    breed: string;
-    sex: string;
+    breed?: string;
+    sex?: string;
+    gender?: string;
     age: string | number;
     size: string;
-    temperament: string;
-    color: string;
-    location: string;
-    locationType: string;
-    status: string;
-    images: string[];
-    vaccinated: boolean;
-    sterilized: boolean;
-    dewormed: boolean;
-    microchipped: boolean;
-    petFriendly: boolean;
-    childFriendly: boolean;
-    noAllergies: boolean;
+    temperament?: string;
+    color?: string;
+    location?: string;
+    shelter?: string;
+    locationType?: string;
+    status?: string;
+    images?: string[];
+    imageUrl?: string;
+    image?: string;
+    vaccinated?: boolean;
+    sterilized?: boolean;
+    dewormed?: boolean;
+    microchipped?: boolean;
+    petFriendly?: boolean;
+    childFriendly?: boolean;
+    noAllergies?: boolean;
   };
   onClose: () => void;
 }
@@ -48,44 +53,73 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % animal.images.length);
+  if (!animal) return null;
+
+  const isLoggedIn = !!localStorage.getItem("token");
+
+  // Preluăm lista de imagini (cu fallback la imageUrl/image dacă arrays lipsește)
+  const imagesList: string[] =
+    animal.images && animal.images.length > 0
+      ? animal.images
+      : [animal.imageUrl || animal.image || ""];
+
+  const handleNextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % imagesList.length);
   };
 
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + animal.images.length) % animal.images.length);
+  const handlePrevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + imagesList.length) % imagesList.length);
   };
 
   // Funcție ajutătoare pentru traducerea speciei venite din baza de date
   const translateSpecies = (species: string) => {
-    if (!species) return t.speciesOther;
+    if (!species) return t.speciesOther || "Altele";
     const lower = species.toLowerCase();
-    if (lower.includes("pis") || lower.includes("cat")) return t.speciesCat;
-    if (lower.includes("cain") || lower.includes("dog") || lower.includes("câin")) return t.speciesDog;
-    if (lower.includes("iepur") || lower.includes("rabbit")) return t.speciesRabbit;
-    if (lower.includes("papag") || lower.includes("parrot")) return t.speciesParrot;
-    if (lower.includes("broasc") || lower.includes("turtle")) return t.speciesTurtle;
+    if (lower.includes("pis") || lower.includes("cat")) return t.speciesCat || "Pisică";
+    if (lower.includes("cain") || lower.includes("dog") || lower.includes("câin")) return t.speciesDog || "Câine";
+    if (lower.includes("iepur") || lower.includes("rabbit")) return t.speciesRabbit || "Iepure";
+    if (lower.includes("papag") || lower.includes("parrot")) return t.speciesParrot || "Papagal";
+    if (lower.includes("broasc") || lower.includes("turtle")) return t.speciesTurtle || "Broască țestoasă";
     return species;
   };
 
   // Funcție ajutătoare pentru traducerea culorii
   const translateColor = (color: string) => {
-    if (!color) return t.colorBicolor;
+    if (!color) return t.colorBicolor || "Bicolor";
     const lower = color.toLowerCase();
-    if (lower.includes("negru") || lower.includes("black")) return t.colorBlack;
-    if (lower.includes("alb") || lower.includes("white")) return t.colorWhite;
-    if (lower.includes("maro") || lower.includes("brown")) return t.colorBrown;
-    if (lower.includes("portocal") || lower.includes("roscat") || lower.includes("orange")) return t.colorOrange;
-    if (lower.includes("gri") || lower.includes("grey") || lower.includes("gray")) return t.colorGrey;
-    if (lower.includes("auriu") || lower.includes("golden")) return t.colorGolden;
-    if (lower.includes("tricolor")) return t.colorTricolor;
+    if (lower.includes("negru") || lower.includes("black")) return t.colorBlack || "Negru";
+    if (lower.includes("alb") || lower.includes("white")) return t.colorWhite || "Alb";
+    if (lower.includes("maro") || lower.includes("brown")) return t.colorBrown || "Maro";
+    if (lower.includes("portocal") || lower.includes("roscat") || lower.includes("orange")) return t.colorOrange || "Portocaliu";
+    if (lower.includes("gri") || lower.includes("grey") || lower.includes("gray")) return t.colorGrey || "Gri";
+    if (lower.includes("auriu") || lower.includes("golden")) return t.colorGolden || "Auriu";
+    if (lower.includes("tricolor")) return t.colorTricolor || "Tricolor";
     return color;
   };
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close-btn" onClick={onClose}>
+        
+        {/* Buton X pentru MOBIL (Stânga sus) */}
+        <button 
+          type="button"
+          className="modal-close-btn mobile-only-left-close" 
+          onClick={onClose}
+          aria-label="Închide"
+        >
+          ✕
+        </button>
+
+        {/* Buton X pentru DESKTOP (Dreapta sus) */}
+        <button 
+          type="button"
+          className="modal-close-btn desktop-only-close" 
+          onClick={onClose}
+          aria-label="Închide"
+        >
           ✕
         </button>
 
@@ -93,16 +127,26 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
           {/* COLOANA STÂNGA: Galeria foto */}
           <div className="modal-gallery-section">
             <div className="main-image-container">
-              <button className="gallery-arrow left" onClick={handlePrevImage}>‹</button>
+              {/* Inimioara de Favorite integrată peste poză */}
+              <div className="gallery-favorite-wrapper">
+                <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
+              </div>
+
+              {imagesList.length > 1 && (
+                <>
+                  <button type="button" className="gallery-arrow left" onClick={handlePrevImage}>‹</button>
+                  <button type="button" className="gallery-arrow right" onClick={handleNextImage}>›</button>
+                </>
+              )}
+
               <img 
-                src={animal.images[currentImageIndex] || animal.images[0]} 
+                src={imagesList[currentImageIndex]} 
                 alt={animal.name} 
                 className="modal-main-img"
               />
-              <button className="gallery-arrow right" onClick={handleNextImage}>›</button>
               
               <div className="image-dots">
-                {animal.images.map((_, idx) => (
+                {imagesList.map((_, idx) => (
                   <span 
                     key={idx} 
                     className={`dot ${idx === currentImageIndex ? "active" : ""}`}
@@ -113,7 +157,7 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
             </div>
 
             <div className="thumbnails-row">
-              {animal.images.map((img, idx) => (
+              {imagesList.map((img, idx) => (
                 <img 
                   key={idx}
                   src={img}
@@ -126,105 +170,106 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
           </div>
 
           {/* COLOANA DREAPTA: Detalii animăluț */}
-          <div className="modal-details-section" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+          <div className="modal-details-section">
             
-            {/* Zona care va avea scroll și va conține informațiile */}
-            <div className="modal-details-scrollable" style={{ overflowY: 'auto', flex: 1, paddingRight: '8px' }}>
+            {/* Zona cu scroll pentru informații */}
+            <div className="modal-details-scrollable">
               <h2 className="animal-name">{animal.name}</h2>
               
               <span className="status-badge available">
-                {t.statusAvailable}
+                {animal.status || t.statusAvailable || "Disponibil"}
               </span>
 
               <p className="location-info">
-                <strong>{t.locationLabel}:</strong> {animal.location}
+                <strong>{t.locationLabel || "Locație"}:</strong> {animal.location || animal.shelter || "Adăpostul Lăbuțe din Copou"}
               </p>
               <p className="location-info">
-                <strong>{t.locationTypeLabel}:</strong> {animal.locationType}
+                <strong>{t.locationTypeLabel || "Tip locație"}:</strong> {animal.locationType || "Centru"}
               </p>
 
               <div className="details-columns-container">
                 {/* Detalii cheie */}
                 <div className="details-group">
-                  <h3>{t.keyDetails}</h3>
+                  <h3>{t.keyDetails || "Detalii cheie"}</h3>
                   <ul>
                     <li>
                       <img src={pawIcon} alt="species" className="detail-icon-img" />
-                      <strong>{t.species}:</strong> {translateSpecies(animal.species)}
+                      <strong>{t.species || "Specie"}:</strong> {translateSpecies(animal.species)}
                     </li>
                     <li>
                       <img src={pawIcon} alt="sex" className="detail-icon-img" />
-                      <strong>{t.sex}:</strong> {animal.sex?.toLowerCase().includes('masc') || animal.sex?.toLowerCase().includes('male') ? t.male : t.female}
+                      <strong>{t.sex || "Sex"}:</strong> {(animal.sex || animal.gender || '')?.toLowerCase().includes('masc') || (animal.sex || animal.gender || '')?.toLowerCase().includes('male') ? (t.male || "Mascul") : (t.female || "Femelă")}
                     </li>
                     <li>
                       <img src={clockIcon} alt="age" className="detail-icon-img" />
-                      <strong>{t.age}:</strong> {animal.age}
+                      <strong>{t.age || "Vârstă"}:</strong> {animal.age}
                     </li>
                     <li>
                       <img src={rulerIcon} alt="size" className="detail-icon-img" />
-                      <strong>{t.size}:</strong> {t[animal.size?.toLowerCase() as keyof typeof t] || animal.size}
+                      <strong>{t.size || "Talie"}:</strong> {t[animal.size?.toLowerCase() as keyof typeof t] || animal.size}
                     </li>
                     <li>
                       <img src={smileIcon} alt="temperament" className="detail-icon-img" />
-                      <strong>{t.temperament}:</strong> {animal.temperament}
+                      <strong>{t.temperament || "Temperament"}:</strong> {animal.temperament || "Jucăuș"}
                     </li>
                     <li>
                       <img src={dropIcon} alt="color" className="detail-icon-img" />
-                      <strong>{t.color}:</strong> {translateColor(animal.color)}
+                      <strong>{t.color || "Culoare"}:</strong> {translateColor(animal.color || '')}
                     </li>
                   </ul>
                 </div>
 
                 {/* Sănătate & Compatibilitate */}
                 <div className="details-group">
-                  <h3>{t.healthAndCompatibility}</h3>
+                  <h3>{t.healthAndCompatibility || "Sănătate & Compatibilitate"}</h3>
                   <ul>
                     <li>
                       <img src={pillIcon} alt="vaccinated" className="detail-icon-img" />
-                      {t.vaccinated}: <span className={animal.vaccinated ? "yes" : "no"}>{animal.vaccinated ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.vaccinated || "Vaccinat"}: <span className={animal.vaccinated !== false ? "yes" : "no"}>{animal.vaccinated !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                     <li>
                       <img src={shieldIcon} alt="sterilized" className="detail-icon-img" />
-                      {t.sterilized}: <span className={animal.sterilized ? "yes" : "no"}>{animal.sterilized ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.sterilized || "Sterilizat"}: <span className={animal.sterilized !== false ? "yes" : "no"}>{animal.sterilized !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                     <li>
                       <img src={deparazitatIcon} alt="dewormed" className="detail-icon-img" />
-                      {t.dewormed}: <span className={animal.dewormed ? "yes" : "no"}>{animal.dewormed ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.dewormed || "Deparazitat"}: <span className={animal.dewormed !== false ? "yes" : "no"}>{animal.dewormed !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                     <li>
                       <img src={chipIcon} alt="microchipped" className="detail-icon-img" />
-                      {t.microchipped}: <span className={animal.microchipped ? "yes" : "no"}>{animal.microchipped ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.microchipped || "Microcipat"}: <span className={animal.microchipped !== false ? "yes" : "no"}>{animal.microchipped !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                     <li>
                       <img src={pawIcon} alt="petFriendly" className="detail-icon-img" />
-                      {t.petFriendly}: <span className={animal.petFriendly ? "yes" : "no"}>{animal.petFriendly ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.petFriendly || "Pet friendly"}: <span className={animal.petFriendly !== false ? "yes" : "no"}>{animal.petFriendly !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                     <li>
                       <img src={smileIcon} alt="childFriendly" className="detail-icon-img" />
-                      {t.childFriendly}: <span className={animal.childFriendly ? "yes" : "no"}>{animal.childFriendly ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.childFriendly || "Child friendly"}: <span className={animal.childFriendly !== false ? "yes" : "no"}>{animal.childFriendly !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                     <li>
                       <img src={leafIcon} alt="noAllergies" className="detail-icon-img" />
-                      {t.noAllergies}: <span className={animal.noAllergies ? "yes" : "no"}>{animal.noAllergies ? `✓ ${t.yes}` : `✕ ${t.no}`}</span>
+                      {t.noAllergies || "Fără alergii"}: <span className={animal.noAllergies !== false ? "yes" : "no"}>{animal.noAllergies !== false ? `✓ ${t.yes || "Da"}` : `✕ ${t.no || "Nu"}`}</span>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* Secțiunea de butoane în partea de jos (fixă, nu se va deplasa la scroll) */}
-            <div className="modal-actions-container" style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '15px', flexShrink: 0 }}>
-              <button className="btn-schedule" style={{ flex: 1 }}>
-                  {t.scheduleVisit}
+            {/* Secțiunea de butoane (fixă jos) */}
+            <div className="modal-actions-container">
+              <button type="button" className="btn-schedule">
+                {t.scheduleVisit || "Programează o vizită"}
               </button>
               
               <button 
+                type="button"
                 className="btn-share" 
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
                       title: animal.name,
-                      text: `Vezi-l pe ${animal.name} pe FureverHome!`,
+                      text: `Vezi-l pe ${animal.name} pe FurEverHome!`,
                       url: window.location.href,
                     }).catch(() => {});
                   } else {
@@ -244,6 +289,9 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
+
+export default AnimalModal;

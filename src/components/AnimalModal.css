@@ -1,70 +1,99 @@
+/* Fundal blurat (Overlay) */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.55);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9998;
   padding: 20px;
+  backdrop-filter: blur(4px);
 }
 
+/* Cardul Modal - Desktop */
 .modal-content {
-  background-color: #f7f4ed; 
+  background: #ffffff;
   border-radius: 20px;
-  width: 900px;
-  max-width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-width: 900px;
+  width: 90%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  padding: 30px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  padding: 24px;
 }
 
+/* Structura pe 2 coloane pe Desktop */
+.modal-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}
+
+/* --- BUTOANE ÎNCHIDERE (X) --- */
 .modal-close-btn {
   position: absolute;
   top: 20px;
-  right: 20px;
-  background:  #f7f4ed;
+  background: #f4f0eb;
   border: none;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1rem;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  color: #3f2c20;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  z-index: 10;
+  transition: background 0.2s, transform 0.1s;
 }
 
 .modal-close-btn:hover {
   background: #e2d4c7;
+  transform: scale(1.05);
 }
 
-.modal-body-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 30px;
+.desktop-only-close {
+  right: 20px;
+  display: flex;
 }
 
-/* Galerie foto stânga */
+.mobile-only-left-close {
+  display: none; /* Ascuns pe desktop */
+}
+
+/* --- GALERIE FOTO STÂNGA --- */
 .modal-gallery-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
 .main-image-container {
   position: relative;
   width: 100%;
   height: 320px;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  background: #eee;
+  background: #f6f4f0;
+}
+
+/* Inima de favorite plasată în colțul din dreapta sus al imaginii */
+.gallery-favorite-wrapper {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
 }
 
 .modal-main-img {
@@ -77,33 +106,37 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   border: none;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
   font-size: 1.2rem;
+  color: #3f2c20;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-arrow.left { left: 10px; }
 .gallery-arrow.right { right: 10px; }
 
 .gallery-arrow:hover {
-  background: #f7f4ed;
+  background: #ffffff;
 }
 
 .image-dots {
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 6px;
+  z-index: 2;
 }
 
 .dot {
@@ -115,8 +148,9 @@
 }
 
 .dot.active {
-  background: #f7f4ed;
-  transform: scale(1.2);
+  background: #ffffff;
+  width: 18px;
+  border-radius: 4px;
 }
 
 .thumbnails-row {
@@ -128,7 +162,7 @@
   width: 70px;
   height: 60px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   opacity: 0.6;
   border: 2px solid transparent;
@@ -137,57 +171,85 @@
 
 .thumb.selected, .thumb:hover {
   opacity: 1;
-  border-color: #5a4e42;
+  border-color: #dda255;
 }
 
-/* Secțiune detalii dreapta */
+/* --- SECȚIUNE DETALII DREAPTA --- */
 .modal-details-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Zona cu scroll pentru informații */
+.modal-details-scrollable {
+  overflow-y: scroll !important;
+  flex: 1;
+  padding-right: 10px;
+  max-height: 400px;
+  min-height: 280px;
+}
+
+/* Bara de scroll portocalie */
+.modal-details-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-details-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.modal-details-scrollable::-webkit-scrollbar-thumb {
+  background: #e67e22; /* Portocaliul specificat */
+  border-radius: 10px;
 }
 
 .animal-name {
-  font-size: 2rem;
-  font-weight: bold;
-  color:#3F2C20;
-  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #3f2c20;
+  margin: 0 0 6px 0;
 }
 
 .status-badge {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 4px 14px;
+  border-radius: 14px;
   font-size: 0.85rem;
   font-weight: 600;
   width: fit-content;
+  margin-bottom: 8px;
 }
 
 .status-badge.available {
   background-color: #3b7a57;
-  color: #f7f4ed;
+  color: #ffffff;
 }
 
 .location-info {
-  margin: 0;
+  margin: 2px 0;
   font-size: 0.95rem;
-  color: #555;
+  color: #555555;
 }
 
 .details-columns-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin-top: 10px;
-  border-top: 1px solid  #f7f4ed;
-  border-bottom: 1px solid  #f7f4ed;
-  padding: 15px 0;
+  margin-top: 14px;
+  border-top: 1px solid #f0eae1;
+  border-bottom: 1px solid #f0eae1;
+  padding: 16px 0;
 }
 
 .details-group h3 {
-  font-size: 1rem;
-  color: #3F2C20;
-  margin-bottom: 8px;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  color: #3f2c20;
+  margin: 0 0 10px 0;
 }
 
 .details-group ul {
@@ -197,17 +259,21 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #4a403a;
 }
 
 .details-group ul li {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 }
 
-/* Stil pentru iconițele preluate din folderul assets */
+.details-group:first-child ul li {
+  justify-content: flex-start;
+  gap: 6px;
+}
+
 .detail-icon-img {
   width: 16px;
   height: 16px;
@@ -217,48 +283,54 @@
 
 .details-group .yes {
   background-color: #2e7d32;
-  color:  #f7f4ed;
+  color: #ffffff;
   padding: 2px 8px;
   border-radius: 10px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-left: auto;
 }
 
 .details-group .no {
   background-color: #c62828;
-  color:  #f7f4ed;
+  color: #ffffff;
   padding: 2px 8px;
   border-radius: 10px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-left: auto;
 }
 
-.modal-actions {
-  margin-top: auto;
-  padding-top: 10px;
+/* Rândul cu butoane fixat jos */
+.modal-actions-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+  flex-shrink: 0;
 }
 
 .btn-schedule {
-  width: 100%;
-  background-color: #4a3b32;
-  color:  #f7f4ed;
+  flex: 1;
+  background-color: #3f2c20;
+  color: #ffffff;
   border: none;
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 28px;
+  padding: 14px 20px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.1s;
 }
 
 .btn-schedule:hover {
-  background-color: #3F2C20;
+  background-color: #2b1d14;
+  transform: translateY(-1px);
 }
+
 .btn-share {
-  background-color:#3F2C20;
-  color:  #f7f4ed;
+  background-color: #3f2c20;
+  color: #ffffff;
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -272,52 +344,85 @@
 }
 
 .btn-share:hover {
-  background-color: #352923;
+  background-color: #2b1d14;
   transform: scale(1.05);
 }
-.modal-content {
-  background: #fff;
-  border-radius: 16px;
-  max-width: 900px;
-  width: 90%;
-  max-height: 85vh; /* Oprește extinderea excesivă pe înălțime */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Ascunde overflow-ul general */
-  position: relative;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
 
-.modal-body-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 24px;
-  overflow: hidden;
-  flex: 1;
-  min-height: 0; /* Important pentru ca flexbox să nu spargă limitele de înălțime */
-}
+/* ==========================================================================
+   📱 OPTIMIZARE ADAPTIVĂ PENTRU MOBIL (< 768px)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  .modal-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
 
-/* Zona cu scroll pentru detalii */
-.modal-details-scrollable {
-  overflow-y: scroll !important; /* Forțează afișarea permanentă a barei de scroll */
-  flex: 1;
-  padding-right: 8px;
-  max-height: 400px; /* Setează o limită clară ca să forțeze aspectul de scroll */
-  min-height: 300px; /* Garantează că zona are spațiu vertical chiar și cu mai puțin text */
-}
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 94vh;
+    border-radius: 24px 24px 0 0;
+    padding: 48px 16px 20px 16px;
+    background-color: #faf8f5; /* Fundal crem soft ca în mockup */
+    overflow-y: auto;
+  }
 
-/* Stilizarea barei de scroll portocalii */
-.modal-details-scrollable::-webkit-scrollbar {
-  width: 6px;
-}
+  /* Comută X-ul în Stânga Sus */
+  .desktop-only-close {
+    display: none;
+  }
 
-.modal-details-scrollable::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
+  .mobile-only-left-close {
+    display: flex;
+    top: 14px;
+    left: 16px;
+    right: auto;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
 
-.modal-details-scrollable::-webkit-scrollbar-thumb {
-  background: #e67e22; /* Portocaliul dorit */
-  border-radius: 10px;
+  .modal-body-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    overflow: visible;
+  }
+
+  .main-image-container {
+    height: 250px;
+  }
+
+  .modal-details-scrollable {
+    max-height: none;
+    min-height: auto;
+    overflow-y: visible !important;
+    padding-right: 0;
+  }
+
+  /* Blocurile de detalii devenite carduri albe separate */
+  .details-columns-container {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    border: none;
+    padding: 0;
+    margin-top: 12px;
+  }
+
+  .details-group {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .details-group:first-child ul li {
+    justify-content: space-between;
+  }
+
+  .modal-actions-container {
+    position: sticky;
+    bottom: 0;
+    background: #faf8f5;
+    padding-top: 10px;
+    z-index: 10;
+  }
 }
