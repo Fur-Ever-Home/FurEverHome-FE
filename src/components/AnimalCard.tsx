@@ -29,6 +29,9 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
   const { lang } = useLanguage();
   const t = translations[lang];
 
+  // 1. Verificăm starea de autentificare din localStorage
+  const isLoggedIn = !!localStorage.getItem('token');
+
   // Verificăm imaginea venită din backend
   const imgSrc = animal.imageUrl || animal.image; 
 
@@ -40,6 +43,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     if (lower === 'femela' || lower === 'female') return t.female || 'Femelă';
     return gender;
   };
+
   // Funcție pentru traducerea taliei
   const translateSize = (size: string) => {
     if (!size) return '';
@@ -77,7 +81,9 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     <div className="animal-card">
       <div className="card-top">
         <span className="status-badge">{translateStatus(animal.status)}</span>
-        <FavoriteBtn petId={animal.id?.toString()} />
+        
+        {/* 2. Aici trimitem proprietățile animal și isLoggedIn către FavoriteBtn */}
+        <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
       </div>
 
       <div className="card-image-container">
@@ -110,3 +116,5 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     </div>
   );
 };
+
+export default AnimalCard;

@@ -152,6 +152,9 @@ export const translations = {
     filterDewormed: "Deparazitat",
     filterSterilized: "Sterilizat",
     resetFilters: "Resetează filtrele",
+    favModalTitleMale: "Pentru a-l adăuga la favorite pe {name} trebuie să fii logat",
+    favModalTitleFemale: "Pentru a o adăuga la favorite pe {name} trebuie să fii logat",
+    favModalLoginBtn: "Autentifică-te",
   },
   en: {
     // --- Assistant & Chat ---
@@ -306,5 +309,8 @@ export const translations = {
     filterDewormed: "Dewormed",
     filterSterilized: "Sterilized",
     resetFilters: "Reset filters",
+    favModalTitleMale: "To add {name} to favorites you need to be logged in",
+    favModalTitleFemale: "To add {name} to favorites you need to be logged in",
+    favModalLoginBtn: "Log in",
   }
 };
