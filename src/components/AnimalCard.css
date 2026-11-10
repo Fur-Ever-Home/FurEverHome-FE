@@ -35,6 +35,10 @@
   font-weight: 500;
 }
 
+.status-badge.senior-badge {
+  background-color: #c89551;
+}
+
 .favorite-btn {
   position: relative;
   z-index: 40 !important;
@@ -124,7 +128,74 @@
 }
 
 .btn-details:hover {
-background-color: #2b1f16;
+  background-color: #2b1f16;
+}
+
+/* Stiluri specifice pentru Adopția la Distanță */
+.distance-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.need-type-pill {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #e8e2d8;
+  color: #3F2C20;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.funding-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.funding-bar-track {
+  width: 100%;
+  height: 6px;
+  background-color: #e0d8cd;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.funding-bar-fill {
+  height: 100%;
+  background-color: #587b56;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.funding-text {
+  font-size: 0.73rem;
+  color: #7a6f65;
+}
+
+.btn-donate {
+  width: 100%;
+  background-color: #c89551;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-donate:hover {
+  background-color: #b38240;
+  transform: translateY(-1px);
 }
 
 /* ADAPTARE PENTRU TELEFON / ECRANE MICI */

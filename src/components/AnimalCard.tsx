@@ -4,9 +4,8 @@ import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
 import FavoriteBtn from './FavoriteBtn';
 
-// Interfața actualizată pentru a se potrivi cu backend-ul Java
 interface Animal {
-  id?: number;
+  id?: number | string;
   name: string;
   species: string;
   status: string;
@@ -19,23 +18,26 @@ interface Animal {
   sterilized: boolean;
   imageUrl?: string;
   image?: string;
+  isDistanceAdoption?: boolean;
+  needType?: string;
+  fundingPercent?: number;
 }
 
 interface AnimalCardProps {
   animal: Animal;
+  isDistanceMode?: boolean;
 }
 
-export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
+export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode = false }) => {
   const { lang } = useLanguage();
   const t = translations[lang];
 
-  // 1. Verificăm starea de autentificare din localStorage
   const isLoggedIn = !!localStorage.getItem('token');
-
-  // Verificăm imaginea venită din backend
   const imgSrc = animal.imageUrl || animal.image; 
+  const isDistance = isDistanceMode || animal.isDistanceAdoption;
+  const fundingPercent = animal.fundingPercent ?? 72;
+  const needType = animal.needType || 'Cazare permanentă';
 
-  // Funcție pentru traducerea genului
   const translateGender = (gender: string) => {
     if (!gender) return '';
     const lower = gender.toLowerCase().trim();
@@ -44,7 +46,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     return gender;
   };
 
-  // Funcție pentru traducerea taliei
   const translateSize = (size: string) => {
     if (!size) return '';
     const lower = size.toLowerCase().trim();
@@ -57,7 +58,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     return size;
   };
 
-  // Funcție pentru formatarea și traducerea vârstei
   const formatAge = (ageStr: string) => {
     if (!ageStr) return '';
     const numbers = ageStr.replace(/\D/g, ''); 
@@ -69,7 +69,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
     return ageStr;
   };
 
-  // Funcție pentru traducerea stării (ex: Disponibil)
   const translateStatus = (status: string) => {
     if (!status) return '';
     const lower = status.toLowerCase().trim();
@@ -78,11 +77,14 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
   };
 
   return (
-    <div className="animal-card">
+    <div className={`animal-card ${isDistance ? 'card-distance-mode' : ''}`}>
       <div className="card-top">
-        <span className="status-badge">{translateStatus(animal.status)}</span>
+        {isDistance ? (
+          <span className="status-badge senior-badge">Senior</span>
+        ) : (
+          <span className="status-badge">{translateStatus(animal.status)}</span>
+        )}
         
-        {/* 2. Aici trimitem proprietățile animal și isLoggedIn către FavoriteBtn */}
         <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
       </div>
 
@@ -94,11 +96,13 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         )}
       </div>
 
-      <div className="medical-icons-row">
-        <span className={`icon-badge ${animal.vaccinated ? 'active' : ''}`} title={t.legendVaccinated}>💉</span>
-        <span className={`icon-badge ${animal.dewormed ? 'active' : ''}`} title={t.legendDewormed}>💊</span>
-        <span className={`icon-badge ${animal.sterilized ? 'active' : ''}`} title={t.legendSterilized}>⚥</span>
-      </div>
+      {!isDistance && (
+        <div className="medical-icons-row">
+          <span className={`icon-badge ${animal.vaccinated ? 'active' : ''}`} title={t.legendVaccinated}>💉</span>
+          <span className={`icon-badge ${animal.dewormed ? 'active' : ''}`} title={t.legendDewormed}>💊</span>
+          <span className={`icon-badge ${animal.sterilized ? 'active' : ''}`} title={t.legendSterilized}>⚥</span>
+        </div>
+      )}
 
       <div className="card-content">
         <h3 className="animal-name">{animal.name}</h3>
@@ -108,10 +112,28 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         </p>
         
         <p className="animal-shelter">{animal.shelter}</p>
-        
-        <button className="btn-details">
-          {t.btnViewDetails || "Vezi detalii"}
-        </button>
+
+        {isDistance ? (
+          <div className="distance-card-body">
+            <span className="need-type-pill">{needType}</span>
+            <div className="funding-bar-container">
+              <div className="funding-bar-track">
+                <div 
+                  className="funding-bar-fill" 
+                  style={{ width: `${Math.min(fundingPercent, 100)}%` }} 
+                />
+              </div>
+              <span className="funding-text">{fundingPercent}% din necesarul lunar acoperit</span>
+            </div>
+            <button type="button" className="btn-donate">
+              <span className="heart-icon">🤎</span> Donează
+            </button>
+          </div>
+        ) : (
+          <button type="button" className="btn-details">
+            {t.btnViewDetails || "Vezi detalii"}
+          </button>
+        )}
       </div>
     </div>
   );

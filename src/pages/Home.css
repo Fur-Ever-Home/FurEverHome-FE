@@ -180,18 +180,14 @@ html, body {
 }
 
 .category-card {
-  flex: 1;
-  background-color: #ffffff;
-  border: 1.5px solid #e5dfd3;
-  border-radius: 20px;
-  padding: 25px 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  gap: 10px;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Când treci cu cursorul sau când cardul este activ, devine portocaliu/crem cald */
@@ -215,9 +211,18 @@ html, body {
   border-color: #ebe5d8;
 }
 
+/* Iconița principală (containerul imaginii) */
+.category-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .category-icon img {
-  width: 48px;         /* Redus de la 40px la 24px pentru a fi mai bine proporționat cu textul */
-  height: 40px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -227,6 +232,36 @@ html, body {
   color:#3F2C20;
   transition: color 0.2s ease;
 }
+/* Textul de sub iconiță */
+.category-card span {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #3f2c20;
+}
+/* Adaptare dedicată pentru ecran mobil (< 640px) */
+@media screen and (max-width: 640px) {
+  .categories-cards {
+    gap: 10px;
+  }
+
+  .category-card {
+    padding: 14px 14px;
+    flex: 1; /* Permite cardurilor să se distribuie egal pe mobil */
+    min-width: 95px;
+  }
+
+  /* Imaginea rămâne vizibil dominantă față de text */
+  .category-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Scrisul este mărit ușor, dar rămâne mai mic decât iconița */
+  .category-card span {
+    font-size: 0.95rem;
+  }
+}
+
 .categories-header {
   display: flex;
   justify-content: space-between;
@@ -290,22 +325,52 @@ html, body {
   margin-left: 0px;
 }
 
+/* Stiluri de bază pentru legenda pe desktop */
 .carousel-legend {
   display: flex;
-  gap: 20px;          /* Spațiul dintre elemente (Vaccinat, Deparazitat, Sterilizat) */
-  margin-top: 10px;   /* Spațiu între titlu și rândul cu iconițe */
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
+
 .legend-item {
-  display: flex;        /* Pune imaginea și textul pe același rând */
-  align-items: center;  /* Le aliniază pe verticală la mijloc */
-  gap: 6px;             /* Spațiul dintre bulina verde și text */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #555;
 }
+
 .legend-item img {
-  width: 50px !important;  /* Schimbă valoarea (ex: 18px, 20px, 24px) în funcție de cât de mici le dorești */
-  height: 50px !important;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
+/* Ajustare dedicată exclusiv pentru mobil (< 640px) */
+@media screen and (max-width: 640px) {
+  .carousel-legend {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px 12px;       /* Distanță redusă între elemente */
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+
+  .legend-item {
+    font-size: 0.75rem;   /* Font mai mic pe mobil */
+    gap: 4px;
+    white-space: nowrap; /* Împiedică ruperea cuvintelor pe rânduri separate */
+  }
+
+  .legend-item img {
+    width: 14px;         /* Iconițe adaptate la fontul mai mic */
+    height: 14px;
+  }
+}
 
 .carousel-wrapper {
   display: flex !important;
