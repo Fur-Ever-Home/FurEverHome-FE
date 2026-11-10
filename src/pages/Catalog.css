@@ -1,0 +1,133 @@
+/* Catalog.css */
+
+.catalog-page {
+  background-color: #faf8f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Libertinus Sans';
+}
+
+.catalog-layout-container {
+  padding: 45px 60px;
+  flex: 1;
+  max-width: 1450px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  gap: 50px; /* Spațiul exact dintre viitorul sidebar și carduri */
+}
+
+/* 
+  REZERVĂM LOCUL PENTRU BARA DIN STÂNGA:
+  Chiar dacă colegul tău nu a făcut-o încă, punem un 'width' fix 
+  și 'display: block' ca să forțăm cardurile să stea doar în dreapta!
+*/
+.catalog-sidebar-filters {
+  width: 270px; /* Lățimea exactă pe care o va ocupa sidebar-ul din Figma */
+  flex-shrink: 0;
+  display: block; /* Ține locul ocupat ca să împingă cardurile în dreapta */
+}
+
+/* Zona din dreapta cu cardurile */
+.catalog-main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.catalog-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.catalog-title {
+  color: #3F2C20;
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.catalog-sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.catalog-sort-label {
+  font-weight: 600;
+  color: #2b231d;
+  font-size: 0.95rem;
+}
+
+.catalog-sort-select {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #c89551;
+  background: #fff;
+  cursor: pointer;
+  color: #333;
+}
+
+.catalog-filter-badge {
+  background-color: #fcefdc;
+  border: 1px solid #c89551;
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin: 15px 0;
+  color: #2b231d;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.catalog-filter-highlight {
+  color: #c89551;
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+
+/* GRID FIX DE 3 COLOANE - așezat perfect în dreapta */
+.catalog-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.catalog-card-item {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.catalog-card-item:hover {
+  transform: translateY(-4px);
+}
+
+.catalog-message {
+  color: #666;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+}
+
+/* Responsivitate pentru ecrane mai mici */
+@media (max-width: 1024px) {
+  .catalog-sidebar-filters {
+    display: none; /* Pe tablete/telefoane ascundem spațiul ca să aibă loc cardurile */
+  }
+  .catalog-layout-container {
+    padding: 20px;
+  }
+  .catalog-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .catalog-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

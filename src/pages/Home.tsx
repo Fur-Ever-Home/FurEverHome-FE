@@ -13,6 +13,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/Footer';
 import './Home.css';
 import FloatingBtn from '../components/floating-btn';
+import { AnimalModal } from "../components/AnimalModal";
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
@@ -31,17 +32,32 @@ interface Animal {
   dewormed: boolean;
   sterilized: boolean;
   imageUrl: string;
+  breed?: string;
+  sex?: string;
+  temperament?: string;
+  color?: string;
+  location?: string;
+  locationType?: string;
+  images?: string[];
+  microchipped?: boolean;
+  petFriendly?: boolean;
+  childFriendly?: boolean;
+  noAllergies?: boolean;
 }
 
 export default function Home() {
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
+  
+  // CORECTAT: Starea pentru modal mutat corect în interiorul componentei Home
+  const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
+
   const carouselRef = useRef<HTMLDivElement>(null);
 
   // Preluăm limba curentă (ro sau en)
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = translations[lang as keyof typeof translations] || translations.ro;
 
   useEffect(() => {
     let url = 'http://localhost:8080/api/animals';
@@ -86,7 +102,6 @@ export default function Home() {
       <div className="home-page">
         <Header />
          
-        
         {/* Secțiunea Hero */}
         <main className="hero-section flex flex-col-reverse md:flex-row items-center justify-between p-4 md:p-12 gap-8">
           <div className="hero-content w-full md:w-1/2 text-center md:text-left">
@@ -174,16 +189,40 @@ export default function Home() {
               {loading ? (
                 <p>{t.loading}</p>
               ) : (
-                animals.map((animal) => (
-                  <AnimalCard 
-                    key={animal.id} 
-                    animal={{ 
-                      ...animal, 
-                      imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
-                      image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
-                    } as any} 
-                  />
-                ))
+                animals.map((animal) => {
+                  // Pregătim datele pentru modal (completând cu valori fallback dacă lipsesc din backend)
+                  const animalDataForModal = {
+                    ...animal,
+                    breed: animal.breed || "Rasă comună",
+                    sex: animal.gender || "Femelă",
+                    age: animal.age || "1 an",
+                    size: animal.size || "Medie",
+                    temperament: animal.temperament || "Jucăuş",
+                    color: animal.color || "Portocaliu",
+                    location: animal.shelter || "Centrul Casa lui Azor",
+                    locationType: "Centru",
+                    status: animal.status || "Disponibil",
+                    images: animal.images && animal.images.length > 0 
+                      ? animal.images 
+                      : [animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon],
+                    microchipped: animal.microchipped ?? true,
+                    petFriendly: animal.petFriendly ?? true,
+                    childFriendly: animal.childFriendly ?? false,
+                    noAllergies: animal.noAllergies ?? true,
+                  };
+
+                  return (
+                    <div key={animal.id} onClick={() => setSelectedAnimal(animalDataForModal)} style={{ cursor: 'pointer' }}>
+                      <AnimalCard 
+                        animal={{ 
+                          ...animal, 
+                          imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
+                          image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
+                        } as any} 
+                      />
+                    </div>
+                  );
+                })
               )}
             </div>
 
@@ -232,8 +271,17 @@ export default function Home() {
           </div>
        </section>
        </div>
-<Footer />
+
+       {/* Randarea modalului atunci când un animal este selectat */}
+       {selectedAnimal && (
+         <AnimalModal 
+           animal={selectedAnimal} 
+           onClose={() => setSelectedAnimal(null)} 
+         />
+       )}
+
+       <Footer />
        <FloatingBtn />
-       </>
+    </>
   );
 }
