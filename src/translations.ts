@@ -1,154 +1,50 @@
 export interface TranslationKeys {
-  // Chei existente din chat/FAQ (păstrate)
-  chatTitle?: string;
-  chatStatus?: string;
-  welcomeMsg?: string;
-  faqTitle?: string;
-  faq1?: string;
-  faq2?: string;
-  faq3?: string;
-  faq4?: string;
-  faq5?: string;
-  chatPlaceholder?: string;
-
-  // Navigație & Antet
-  home?: string;
-  adoptionGuide?: string;
-  availableAnimals?: string;
-  shelters?: string;
-  collaborations?: string;
-  aboutUs?: string;
-  login?: string;
-
-  // Catalog & Filtrare
-  filterBy?: string;
-  adoptionType?: string;
-  physical?: string;
-  distance?: string;
-  distanceNoticeTitle?: string;
-  distanceNoticeDesc?: string;
-  distanceBannerTitle?: string;
-  distanceBannerDesc?: string;
-  
-  basicInfo?: string;
-  type?: string;
-  speciesDog?: string;
-  speciesCat?: string;
-  speciesRabbit?: string;
-  speciesParrot?: string;
-  speciesTurtle?: string;
-  speciesOther?: string;
-
-  sex?: string;
-  male?: string;
-  female?: string;
-
-  size?: string;
-  small?: string;
-  small2?: string;
-  medium?: string;
-  large?: string;
-
-  animalDetails?: string;
-  age?: string;
-  yearOld?: string;
-  yearsOld?: string;
-  agePuppy?: string;
-  ageYoung?: string;
-  ageAdult?: string;
-  ageSenior?: string;
-
-  temperament?: string;
-  playful?: string;
-  calm?: string;
-  energetic?: string;
-  shy?: string;
-
-  healthState?: string;
-  healthy?: string;
-  needsCare?: string;
-
-  color?: string;
-  colorBlack?: string;
-  colorWhite?: string;
-  colorBrown?: string;
-  colorOrange?: string;
-  colorGrey?: string;
-  colorGolden?: string;
-  colorBicolor?: string;
-  colorTricolor?: string;
-
-  locationLabel?: string;
-  locationTypeLabel?: string;
-  county?: string;
-  shelter?: string;
-  center?: string;
-  foster?: string;
-
-  compatibilityHealth?: string;
-  petFriendly?: string;
-  childFriendly?: string;
-  noAllergies?: string;
-  microchipped?: string;
-  vaccinated?: string;
-  sterilized?: string;
-  dewormed?: string;
-
-  // Butoane Filtre & Sortare
-  applyFilters?: string;
-  resetFilters?: string;
-  clearAll?: string;
-  sortBy?: string;
-  newest?: string;
-  oldest?: string;
-
-  // Titluri Catalog
-  friendsLookingForHome?: string;
-  friendsWaitingSponsor?: string;
-  noAnimalsFound?: string;
-  loading?: string;
-
-  // Card & Modal Animale
-  statusAvailable?: string;
-  btnViewDetails?: string;
-  btnDonate?: string;
-  fundingCovered?: string;
-  senior?: string;
-  keyDetails?: string;
-  healthAndCompatibility?: string;
-  scheduleVisit?: string;
-  shareProfile?: string;
-  yes?: string;
-  no?: string;
-
-  // Legendă Home
-  legendVaccinated?: string;
-  legendDewormed?: string;
-  legendSterilized?: string;
+  [key: string]: string | undefined;
 }
 
 export const translations: Record<'ro' | 'en', TranslationKeys> = {
   ro: {
-    // FAQ & Chat (păstrate)
-    chatTitle: "Asistent FurEverHome",
-    chatStatus: "Online",
-    welcomeMsg: "Bună! Cu ce te pot ajuta astăzi?",
-    faqTitle: "Întrebări frecvente",
-    faq1: "Cum pot adopta un animal?",
-    faq2: "Care sunt condițiile de adopție?",
-    faq3: "Cum pot dona pentru adăpost?",
-    faq4: "Unde este situat adăpostul?",
-    faq5: "Pot fi voluntar?",
-    chatPlaceholder: "Scrie un mesaj...",
-
     // Navigație & Antet
     home: "Acasă",
+    navHome: "Acasă",
     adoptionGuide: "Ghidul adoptatorului",
+    navGuide: "Ghidul adoptatorului",
     availableAnimals: "Animale disponibile",
+    navCatalog: "Animale disponibile",
     shelters: "Adăposturi",
+    navShelters: "Adăposturi",
     collaborations: "Colaborări",
+    navCollaborations: "Colaborări",
     aboutUs: "Despre noi",
+    navAbout: "Despre noi",
     login: "Autentificare",
+    navLogin: "Autentificare",
+
+    // Home / Pagina principală
+    heroTag: "Găsește-ți cel mai bun prieten",
+    heroTitle: "Dă-le o șansă la o viață mai bună",
+    heroTitleGold: "acasă",
+    heroDesc: "Platforma care conectează iubitorii de animale cu adăposturile din România. Adoptă responsabil sau sprijină de la distanță.",
+    btnAnimals: "Vezi animalele",
+    btnHowToAdopt: "Cum adopt",
+    categoriesTitle: "Categorii populare",
+    catDogs: "Câini",
+    catCats: "Pisici",
+    catOther: "Altele",
+    btnViewAll: "Vezi toate",
+    stepsTitle: "Cum funcționează adopția",
+    stepsSubtitle: "Pașii simpli pentru a aduce un prieten acasă",
+    step1Title: "1. Răsfoiește catalogul",
+    step1Text: "Explorează animalele disponibile în adăposturi și filtrează după preferințele tale.",
+    step2Title: "2. Programează o vizită",
+    step2Text: "Ia legătura cu adăpostul pentru a cunoaște animalul dorit.",
+    step3Title: "3. Completează cererea",
+    step3Text: "Parcurge pașii simpli de verificare și interviu pentru adopție responsabilă.",
+    step4Title: "4. Bun venit acasă!",
+    step4Text: "Bucură-te de noul membru al familiei tale și oferă-i dragoste.",
+    bannerText: "Implică-te în comunitate",
+    bannerHighlight: "Fii eroul unui animal",
+    btnGuide: "Citește ghidul",
 
     // Catalog & Filtrare
     filterBy: "Filtrează după",
@@ -224,7 +120,6 @@ export const translations: Record<'ro' | 'en', TranslationKeys> = {
     sterilized: "Sterilizat",
     dewormed: "Deparazitat",
 
-    // Butoane Filtre & Sortare
     applyFilters: "Aplică filtre",
     resetFilters: "Resetează filtrele",
     clearAll: "Șterge tot",
@@ -232,13 +127,12 @@ export const translations: Record<'ro' | 'en', TranslationKeys> = {
     newest: "Cele mai noi",
     oldest: "Cele mai vechi",
 
-    // Titluri Catalog
     friendsLookingForHome: "prieteni își caută o casă",
     friendsWaitingSponsor: "prieteni așteaptă un sponsor",
     noAnimalsFound: "Nu s-au găsit animale conform filtrelor selectate.",
     loading: "Se încarcă animalele...",
 
-    // Card & Modal Animale
+    // Card, Modal & Favorite Modal
     statusAvailable: "Disponibil",
     btnViewDetails: "Vezi detalii",
     btnDonate: "Donează",
@@ -250,34 +144,78 @@ export const translations: Record<'ro' | 'en', TranslationKeys> = {
     shareProfile: "Distribuie profilul",
     yes: "Da",
     no: "Nu",
+    favModalTitleFemale: "Adaugă la favorite",
+    favModalTitleMale: "Adaugă la favorite",
+    favModalloginBtn: "Autentificare",
+
+    // Footer
+    footerDesc: "Platformă dedicată adopției responsabile și protecției animalelor.",
+    footerLegalTitle: "Informații legale",
+    footerPrivacy: "Politica de confidențialitate",
+    footerCookies: "Politica de cookies",
+    footerGdpr: "GDPR",
+    footerCopyright: "© 2026 FurEverHome. Toate drepturile rezervate.",
 
     // Legendă Home
     legendVaccinated: "Vaccinat",
     legendDewormed: "Deparazitat",
     legendSterilized: "Sterilizat",
+
+    // Chat / Asistent
+    chatTitle: "Asistent FurEverHome",
+    chatStatus: "Online",
+    welcomeMsg: "Bună! Cu ce te pot ajuta astăzi?",
+    faqTitle: "Întrebări frecvente",
+    faq1: "Cum pot adopta un animal?",
+    faq2: "Care sunt condițiile de adopție?",
+    faq3: "Cum pot dona pentru adăpost?",
+    faq4: "Unde este situat adăpostul?",
+    faq5: "Pot fi voluntar?",
+    chatPlaceholder: "Scrie un mesaj...",
   },
 
   en: {
-    // FAQ & Chat (păstrate)
-    chatTitle: "FurEverHome Assistant",
-    chatStatus: "Online",
-    welcomeMsg: "Hello! How can I help you today?",
-    faqTitle: "Frequently Asked Questions",
-    faq1: "How can I adopt an animal?",
-    faq2: "What are the adoption requirements?",
-    faq3: "How can I donate to the shelter?",
-    faq4: "Where is the shelter located?",
-    faq5: "Can I be a volunteer?",
-    chatPlaceholder: "Type a message...",
-
     // Navigation & Header
     home: "Home",
+    navHome: "Home",
     adoptionGuide: "Adoption Guide",
+    navGuide: "Adoption Guide",
     availableAnimals: "Available Animals",
+    navCatalog: "Available Animals",
     shelters: "Shelters",
+    navShelters: "Shelters",
     collaborations: "Collaborations",
+    navCollaborations: "Collaborations",
     aboutUs: "About Us",
+    navAbout: "About Us",
     login: "Log In",
+    navLogin: "Log In",
+
+    // Home
+    heroTag: "Find your best friend",
+    heroTitle: "Give them a chance to a better",
+    heroTitleGold: "home",
+    heroDesc: "The platform connecting animal lovers with shelters in Romania. Adopt responsibly or support remotely.",
+    btnAnimals: "View animals",
+    btnHowToAdopt: "How to adopt",
+    categoriesTitle: "Popular categories",
+    catDogs: "Dogs",
+    catCats: "Cats",
+    catOther: "Others",
+    btnViewAll: "View all",
+    stepsTitle: "How adoption works",
+    stepsSubtitle: "Simple steps to bring a friend home",
+    step1Title: "1. Browse catalog",
+    step1Text: "Explore available shelter animals and filter by your preferences.",
+    step2Title: "2. Schedule a visit",
+    step2Text: "Contact the shelter to meet your desired animal.",
+    step3Title: "3. Complete request",
+    step3Text: "Go through simple verification and interview steps for responsible adoption.",
+    step4Title: "4. Welcome home!",
+    step4Text: "Enjoy your new family member and shower them with love.",
+    bannerText: "Get involved in the community",
+    bannerHighlight: "Be an animal's hero",
+    btnGuide: "Read guide",
 
     // Catalog & Filters
     filterBy: "Filter by",
@@ -353,7 +291,6 @@ export const translations: Record<'ro' | 'en', TranslationKeys> = {
     sterilized: "Sterilized",
     dewormed: "Dewormed",
 
-    // Filter Buttons & Sorting
     applyFilters: "Apply filters",
     resetFilters: "Reset filters",
     clearAll: "Clear all",
@@ -361,13 +298,12 @@ export const translations: Record<'ro' | 'en', TranslationKeys> = {
     newest: "Newest",
     oldest: "Oldest",
 
-    // Catalog Titles
     friendsLookingForHome: "friends looking for a home",
     friendsWaitingSponsor: "friends waiting for a sponsor",
     noAnimalsFound: "No animals found matching the selected filters.",
     loading: "Loading animals...",
 
-    // Animal Card & Modal
+    // Animal Card, Modal & Favorite Modal
     statusAvailable: "Available",
     btnViewDetails: "View details",
     btnDonate: "Donate",
@@ -379,10 +315,33 @@ export const translations: Record<'ro' | 'en', TranslationKeys> = {
     shareProfile: "Share profile",
     yes: "Yes",
     no: "No",
+    favModalTitleFemale: "Add to favorites",
+    favModalTitleMale: "Add to favorites",
+    favModalloginBtn: "Log In",
+
+    // Footer
+    footerDesc: "Platform dedicated to responsible adoption and animal protection.",
+    footerLegalTitle: "Legal Information",
+    footerPrivacy: "Privacy Policy",
+    footerCookies: "Cookies Policy",
+    footerGdpr: "GDPR",
+    footerCopyright: "© 2026 FurEverHome. All rights reserved.",
 
     // Home Legend
     legendVaccinated: "Vaccinated",
     legendDewormed: "Dewormed",
     legendSterilized: "Sterilized",
+
+    // Chat / Assistant
+    chatTitle: "FurEverHome Assistant",
+    chatStatus: "Online",
+    welcomeMsg: "Hello! How can I help you today?",
+    faqTitle: "Frequently Asked Questions",
+    faq1: "How can I adopt an animal?",
+    faq2: "What are the adoption requirements?",
+    faq3: "How can I donate to the shelter?",
+    faq4: "Where is the shelter located?",
+    faq5: "Can I be a volunteer?",
+    chatPlaceholder: "Type a message...",
   }
 };

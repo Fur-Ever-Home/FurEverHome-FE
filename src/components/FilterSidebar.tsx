@@ -5,10 +5,10 @@ import { translations } from '../translations';
 import './FilterSidebar.css';
 
 export interface FilterState {
-  adoptionType: string; // 'fizica' | 'la_distanta' | ''
-  species: string;      // 'Caine' | 'Pisica' | 'Altele' | ''
-  gender: string;       // 'Mascul' | 'Femela' | ''
-  size: string;         // 'Mica' | 'Medie' | 'Mare' | ''
+  adoptionType: string;
+  species: string;
+  gender: string;
+  size: string;
   ageGroup: string;
   temperament: string;
   healthState: string;
@@ -72,121 +72,119 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
     <div className="filter-body">
       {/* TIP ADOPȚIE */}
       <div className="filter-group">
-        <label className="filter-group-title">TIP ADOPȚIE</label>
+        <label className="filter-group-title">{t.adoptionType || 'TIP ADOPȚIE'}</label>
         <div className="pill-group">
           <button
             type="button"
             className={`filter-pill ${filters.adoptionType === 'fizica' ? 'active' : ''}`}
             onClick={() => handleToggle('adoptionType', 'fizica')}
           >
-            Fizică
+            {t.physical || 'Fizică'}
           </button>
           <button
             type="button"
             className={`filter-pill ${filters.adoptionType === 'la_distanta' ? 'active' : ''}`}
             onClick={() => handleToggle('adoptionType', 'la_distanta')}
           >
-            La distanță
+            {t.distance || 'La distanță'}
           </button>
         </div>
 
         {filters.adoptionType === 'la_distanta' && (
           <div className="distance-notice-box">
-            <strong>Doar adopție la distanță</strong>
-            <p>
-              Se afișează doar seniorii și animalele care au nevoie de tratament sau cazare permanentă și nu mai pot fi date spre adopție.
-            </p>
+            <strong>{t.distanceNoticeTitle || 'Doar adopție la distanță'}</strong>
+            <p>{t.distanceNoticeDesc || 'Se afișează doar seniorii și animalele care au nevoie de tratament sau cazare permanentă.'}</p>
           </div>
         )}
       </div>
 
       {/* INFO DE BAZĂ */}
       <div className="filter-group">
-        <label className="filter-group-title">INFO DE BAZĂ</label>
+        <label className="filter-group-title">{t.basicInfo || 'INFO DE BAZĂ'}</label>
 
-        <span className="sub-label">Tip</span>
+        <span className="sub-label">{t.type || 'Tip'}</span>
         <div className="pill-group">
           <button
             type="button"
             className={`filter-pill ${filters.species === 'Caine' ? 'active' : ''}`}
             onClick={() => handleToggle('species', 'Caine')}
           >
-            Câine
+            {t.speciesDog || 'Câine'}
           </button>
           <button
             type="button"
             className={`filter-pill ${filters.species === 'Pisica' ? 'active' : ''}`}
             onClick={() => handleToggle('species', 'Pisica')}
           >
-            Pisică
+            {t.speciesCat || 'Pisică'}
           </button>
           <button
             type="button"
             className={`filter-pill ${filters.species === 'Altele' ? 'active' : ''}`}
             onClick={() => handleToggle('species', 'Altele')}
           >
-            Altele
+            {t.speciesOther || 'Altele'}
           </button>
         </div>
 
-        <span className="sub-label">Sex</span>
+        <span className="sub-label">{t.sex || 'Sex'}</span>
         <div className="pill-group">
           <button
             type="button"
             className={`filter-pill ${filters.gender === 'Mascul' ? 'active' : ''}`}
             onClick={() => handleToggle('gender', 'Mascul')}
           >
-            Mascul
+            {t.male || 'Mascul'}
           </button>
           <button
             type="button"
             className={`filter-pill ${filters.gender === 'Femela' ? 'active' : ''}`}
             onClick={() => handleToggle('gender', 'Femela')}
           >
-            Femelă
+            {t.female || 'Femelă'}
           </button>
         </div>
 
-        <span className="sub-label">Talie</span>
+        <span className="sub-label">{t.size || 'Talie'}</span>
         <div className="pill-group">
           <button
             type="button"
             className={`filter-pill ${filters.size === 'Mica' ? 'active' : ''}`}
             onClick={() => handleToggle('size', 'Mica')}
           >
-            Mică
+            {t.small || 'Mică'}
           </button>
           <button
             type="button"
             className={`filter-pill ${filters.size === 'Medie' ? 'active' : ''}`}
             onClick={() => handleToggle('size', 'Medie')}
           >
-            Medie
+            {t.medium || 'Medie'}
           </button>
           <button
             type="button"
             className={`filter-pill ${filters.size === 'Mare' ? 'active' : ''}`}
             onClick={() => handleToggle('size', 'Mare')}
           >
-            Mare
+            {t.large || 'Mare'}
           </button>
         </div>
       </div>
 
       {/* DETALII ANIMAL */}
       <div className="filter-group">
-        <label className="filter-group-title">DETALII ANIMAL</label>
+        <label className="filter-group-title">{t.animalDetails || 'DETALII ANIMAL'}</label>
         
         <select 
           className="filter-select"
           value={filters.ageGroup}
           onChange={(e) => handleSelectChange('ageGroup', e.target.value)}
         >
-          <option value="">Vârstă (Pui, Tânăr, Adult, Senior)</option>
-          <option value="pui">Pui (&lt; 1 an)</option>
-          <option value="tanar">Tânăr (1 - 3 ani)</option>
-          <option value="adult">Adult (3 - 7 ani)</option>
-          <option value="senior">Senior (&gt; 7 ani)</option>
+          <option value="">{t.age || 'Vârstă'} (Pui, Tânăr, Adult, Senior)</option>
+          <option value="pui">{t.agePuppy || 'Pui (< 1 an)'}</option>
+          <option value="tanar">{t.ageYoung || 'Tânăr (1 - 3 ani)'}</option>
+          <option value="adult">{t.ageAdult || 'Adult (3 - 7 ani)'}</option>
+          <option value="senior">{t.ageSenior || 'Senior (> 7 ani)'}</option>
         </select>
 
         <select 
@@ -194,11 +192,11 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           value={filters.temperament}
           onChange={(e) => handleSelectChange('temperament', e.target.value)}
         >
-          <option value="">Temperament</option>
-          <option value="jucaus">Jucăuș</option>
-          <option value="calm">Calm</option>
-          <option value="energic">Energic</option>
-          <option value="timid">Timid</option>
+          <option value="">{t.temperament || 'Temperament'}</option>
+          <option value="jucaus">{t.playful || 'Jucăuș'}</option>
+          <option value="calm">{t.calm || 'Calm'}</option>
+          <option value="energic">{t.energetic || 'Energic'}</option>
+          <option value="timid">{t.shy || 'Timid'}</option>
         </select>
 
         <select 
@@ -206,9 +204,9 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           value={filters.healthState}
           onChange={(e) => handleSelectChange('healthState', e.target.value)}
         >
-          <option value="">Stare de sănătate</option>
-          <option value="sanatos">Sănătos</option>
-          <option value="necesita_ingrijiri">Necesită îngrijiri</option>
+          <option value="">{t.healthState || 'Stare de sănătate'}</option>
+          <option value="sanatos">{t.healthy || 'Sănătos'}</option>
+          <option value="necesita_ingrijiri">{t.needsCare || 'Necesită îngrijiri'}</option>
         </select>
 
         <select 
@@ -216,25 +214,25 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           value={filters.color}
           onChange={(e) => handleSelectChange('color', e.target.value)}
         >
-          <option value="">Culoare</option>
-          <option value="negru">Negru</option>
-          <option value="alb">Alb</option>
-          <option value="maro">Maro</option>
-          <option value="portocaliu">Portocaliu / Roșcat</option>
-          <option value="bicolor">Bicolor / Tricolor</option>
+          <option value="">{t.color || 'Culoare'}</option>
+          <option value="negru">{t.colorBlack || 'Negru'}</option>
+          <option value="alb">{t.colorWhite || 'Alb'}</option>
+          <option value="maro">{t.colorBrown || 'Maro'}</option>
+          <option value="portocaliu">{t.colorOrange || 'Portocaliu / Roșcat'}</option>
+          <option value="bicolor">{t.colorBicolor || 'Bicolor / Tricolor'}</option>
         </select>
       </div>
 
       {/* LOCAȚIE */}
       <div className="filter-group">
-        <label className="filter-group-title">LOCAȚIE</label>
+        <label className="filter-group-title">{t.locationLabel || 'LOCAȚIE'}</label>
 
         <select 
           className="filter-select"
           value={filters.county}
           onChange={(e) => handleSelectChange('county', e.target.value)}
         >
-          <option value="">Județ</option>
+          <option value="">{t.county || 'Județ'}</option>
           <option value="iasi">Iași</option>
           <option value="bucuresti">București</option>
           <option value="cluj">Cluj</option>
@@ -246,7 +244,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           value={filters.shelter}
           onChange={(e) => handleSelectChange('shelter', e.target.value)}
         >
-          <option value="">Centru / Adăpost</option>
+          <option value="">{t.shelter || 'Centru / Adăpost'}</option>
           <option value="casa_lui_azor">Casa lui Azor</option>
           <option value="labute_copou">Adăpostul Lăbuțe din Copou</option>
           <option value="patrupezi_iasi">Asociația Patrupezi Iași</option>
@@ -257,15 +255,15 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           value={filters.locationType}
           onChange={(e) => handleSelectChange('locationType', e.target.value)}
         >
-          <option value="">Locația animalului (Centru / Foster)</option>
-          <option value="centru">Centru / Adăpost</option>
-          <option value="foster">În Foster</option>
+          <option value="">{t.locationTypeLabel || 'Locația animalului'}</option>
+          <option value="centru">{t.center || 'Centru / Adăpost'}</option>
+          <option value="foster">{t.foster || 'În Foster'}</option>
         </select>
       </div>
 
       {/* COMPATIBILITATE & SĂNĂTATE */}
       <div className="filter-group">
-        <label className="filter-group-title">COMPATIBILITATE & SĂNĂTATE</label>
+        <label className="filter-group-title">{t.compatibilityHealth || 'COMPATIBILITATE & SĂNĂTATE'}</label>
 
         <div className="checkbox-grid">
           <label className="checkbox-label">
@@ -274,7 +272,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.petFriendly} 
               onChange={() => handleCheckboxChange('petFriendly')} 
             />
-            <span>Pet friendly</span>
+            <span>{t.petFriendly || 'Pet friendly'}</span>
           </label>
 
           <label className="checkbox-label">
@@ -283,7 +281,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.microchipped} 
               onChange={() => handleCheckboxChange('microchipped')} 
             />
-            <span>Microcipat</span>
+            <span>{t.microchipped || 'Microcipat'}</span>
           </label>
 
           <label className="checkbox-label">
@@ -292,7 +290,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.childFriendly} 
               onChange={() => handleCheckboxChange('childFriendly')} 
             />
-            <span>Child friendly</span>
+            <span>{t.childFriendly || 'Child friendly'}</span>
           </label>
 
           <label className="checkbox-label">
@@ -301,7 +299,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.vaccinated} 
               onChange={() => handleCheckboxChange('vaccinated')} 
             />
-            <span>Vaccinat</span>
+            <span>{t.vaccinated || 'Vaccinat'}</span>
           </label>
 
           <label className="checkbox-label">
@@ -310,7 +308,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.noAllergies} 
               onChange={() => handleCheckboxChange('noAllergies')} 
             />
-            <span>Fără alergii</span>
+            <span>{t.noAllergies || 'Fără alergii'}</span>
           </label>
 
           <label className="checkbox-label">
@@ -319,7 +317,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.sterilized} 
               onChange={() => handleCheckboxChange('sterilized')} 
             />
-            <span>Sterilizat</span>
+            <span>{t.sterilized || 'Sterilizat'}</span>
           </label>
 
           <label className="checkbox-label">
@@ -328,7 +326,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               checked={filters.dewormed} 
               onChange={() => handleCheckboxChange('dewormed')} 
             />
-            <span>Deparazitat</span>
+            <span>{t.dewormed || 'Deparazitat'}</span>
           </label>
         </div>
       </div>
@@ -338,14 +336,14 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   return (
     <>
       <aside className="filter-sidebar-desktop">
-        <h3 className="filter-sidebar-title">Filtrează după</h3>
+        <h3 className="filter-sidebar-title">{t.filterBy || 'Filtrează după'}</h3>
         {renderFilterContent()}
         <div className="filter-sidebar-actions">
           <button type="button" className="btn-apply-filters" onClick={onApply}>
-            Aplică filtre
+            {t.applyFilters || 'Aplică filtre'}
           </button>
           <button type="button" className="btn-reset-filters" onClick={onReset}>
-            Resetează filtrele
+            {t.resetFilters || 'Resetează filtrele'}
           </button>
         </div>
       </aside>
@@ -357,9 +355,9 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               <button type="button" className="filter-mobile-close" onClick={onCloseMobile}>
                 ✕
               </button>
-              <h3 className="filter-mobile-title">Filtrează după</h3>
+              <h3 className="filter-mobile-title">{t.filterBy || 'Filtrează după'}</h3>
               <button type="button" className="filter-mobile-clear" onClick={onReset}>
-                Șterge tot
+                {t.clearAll || 'Șterge tot'}
               </button>
             </div>
 
@@ -376,7 +374,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
                   if (onCloseMobile) onCloseMobile();
                 }}
               >
-                Aplică filtre ({totalResults} animale)
+                {t.applyFilters || 'Aplică filtre'} ({totalResults})
               </button>
             </div>
           </div>
