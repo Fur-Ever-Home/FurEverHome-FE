@@ -1,136 +1,163 @@
 .animal-card {
-  background-color: #f7f4ef;
-  border-radius: 16px;
-  padding: 16px;
-  width: 300px;
-  flex-shrink: 0;
+  background: #faf8f5;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #e8e2d9;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  border: 1px solid #ede7df;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 320px;
 }
 
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.animal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-.status-badge {
-  background-color: #587b56;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.favorite-btn {
-  background: white;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  background-color: #e9e3d8;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  color: #5a4e42;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.card-image-container {
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-/* Stilul pentru poza reală venită din baza de date */
-.animal-real-image {
+.animal-card-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 16px;
+}
+
+.status-badge-card {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background-color: #3f6844;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
   border-radius: 12px;
+  z-index: 2;
 }
 
-.placeholder-avatar {
-  font-size: 4rem;
+.card-fav-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
 }
 
-.medical-icons-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+/* Containerul iconițelor suprapuse pe card */
+.card-health-overlay {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex !important;
+  gap: 0 !important;
+  z-index: 2;
 }
 
-.icon-badge {
-  background-color: #e5dfd7;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
+/* Suprapunere strânsă peste spațiile transparente din PNG */
+.card-health-overlay .health-badge-circle,
+.card-health-overlay .legend-badge {
+  position: relative !important;
+  width: 32px !important;
+  height: 32px !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  margin-right: -10px !important; /* Apropie strâns cerculețele */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.icon-badge.active {
-  background-color: #587b56;
-  color: white;
+.card-health-overlay .health-badge-circle:last-child,
+.card-health-overlay .legend-badge:last-child {
+  margin-right: 0 !important;
+}
+
+.card-health-overlay .health-badge-circle img,
+.card-health-overlay .legend-badge img {
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Forțăm ca imaginea să rămână verde și colorată intactă (FĂRĂ transparentize/grayscale) */
+.card-health-overlay .health-badge-circle.inactive img,
+.card-health-overlay .legend-badge.inactive img {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Linia diagonală albă intensă peste iconița inactivă */
+.card-health-overlay .health-badge-circle.inactive::after,
+.card-health-overlay .legend-badge.inactive::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 20px !important; /* Lungimea liniei */
+  height: 3px !important; /* Grosimea liniei albe */
+  background-color: #ffffff !important; /* Culoare albă */
+  border-radius: 2px !important;
+  transform: translate(-50%, -50%) rotate(-45deg) !important; /* Tăietură în diagonală */
+  pointer-events: none !important;
+  z-index: 10 !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
 }
 
 .card-content {
+  padding: 16px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  flex-grow: 1;
 }
 
-.animal-name {
-  font-size: 1.25rem;
+.card-title {
+  font-size: 20px;
   font-weight: 700;
-  color:#3F2C20;
-  margin: 0;
+  color: #2b231d;
+  margin: 0 0 4px 0;
 }
 
-.animal-info {
-  font-size: 0.85rem;
-  color: #7a6f65;
-  margin: 0;
+.card-subtitle {
+  font-size: 14px;
+  color: #6e6459;
+  margin: 0 0 6px 0;
 }
 
-.animal-shelter {
-  font-size: 0.8rem;
-  color: #9c9187;
-  margin: 0 0 12px 0;
+.card-location {
+  font-size: 13px;
+  color: #8c8275;
+  margin: 0 0 16px 0;
 }
 
-.btn-details {
-  background-color: #3F2C20;
-  color: white;
+.btn-card-details {
+  width: 100%;
+  background-color: #3b2c23;
+  color: #ffffff;
   border: none;
   border-radius: 20px;
-  padding: 10px;
-  font-weight: 500;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
+  margin-top: auto;
 }
 
-.btn-details:hover {
-  background-color: #3F2C20;
-
-  .animal-card {
-  flex: 0 0 280px !important; /* Forțează cardul să aibă lățime fixă și să nu se micșoreze/coboare */
-  width: 280px !important;
-  background-color: #f7f4ef;
-  border-radius: 20px;
-  padding: 16px;
-  border: 1px solid #ede7df;
-  box-sizing: border-box;
+.btn-card-details:hover {
+  background-color: #241a14;
 }
-}
-

@@ -81,8 +81,8 @@
 }
 
 .footer-link.font-bold {
-  font-weight: 700;
-  color: #3F2C20;
+  font-weight: 400;
+  color: #5d534a;
 }
 
 .footer-link:hover {
@@ -109,4 +109,24 @@
   color: #8c8175;
   margin: 0;
 }
+/* Rearanjare footer pe mobil */
+.footer, 
+.footer-container, 
+.footer-content {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
+  padding: 1.5rem 1rem;
+}
 
+@media (min-width: 768px) {
+  .footer, 
+  .footer-container, 
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
