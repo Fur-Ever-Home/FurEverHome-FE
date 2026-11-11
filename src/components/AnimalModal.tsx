@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useLanguage } from "../useLanguage";
 import { translations } from "../translations";
@@ -17,41 +17,31 @@ import rulerIcon from "../assets/ruler.png";
 import shieldIcon from "../assets/shield.png";
 import smileIcon from "../assets/smile.png";
 
-interface AnimalModalProps {
-  animal: {
-    id?: number | string;
-    name: string;
-    species: string;
-    breed?: string;
-    sex?: string;
-    gender?: string;
-    age: string | number;
-    size: string;
-    temperament?: string;
-    color?: string;
-    location?: string;
-    shelter?: string;
-    locationType?: string;
-    status?: string;
-    images?: string[];
-    imageUrl?: string;
-    image?: string;
-    vaccinated?: boolean;
-    sterilized?: boolean;
-    dewormed?: boolean;
-    microchipped?: boolean;
-    petFriendly?: boolean;
-    childFriendly?: boolean;
-    noAllergies?: boolean;
-  };
-  onClose: () => void;
+export interface AnimalModalProps {
+  animal: any;
+  isOpen?: boolean;
+  onClose?: () => void;
+  onScheduleVisit?: (animal: any) => void;
+  isDistanceMode?: boolean;
 }
 
-export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => {
+export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, isOpen, onClose }) => {
   const { lang } = useLanguage();
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Previne scroll-ul pe fundalul paginii când modalul este deschis
+  useEffect(() => {
+    if (animal || isOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+    return () => {
+      document.body.classList.remove("modal-open");
+    };
+  }, [animal, isOpen]);
 
   if (!animal) return null;
 

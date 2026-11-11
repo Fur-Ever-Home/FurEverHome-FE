@@ -8,7 +8,7 @@ import otherIcon from '../assets/other-icon.svg';
 import vaccineIcon from '../assets/vaccinat.png';
 import dewormIcon from '../assets/deparazitat.png';
 import sterileIcon from '../assets/sterlizat.png';
-import { AnimalCard } from '../components/AnimalCard';
+import AnimalCard from '../components/AnimalCard';
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/Footer';
 import './Home.css';
@@ -53,7 +53,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
   
-  // CORECTAT: Starea pentru modal mutat corect în interiorul componentei Home
+  // Starea pentru modal 
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -117,7 +117,6 @@ export default function Home() {
             
             <p className="hero-description">{t.heroDesc}</p>
             
-            {/* Clasă nouă dedicată pentru gruparea și distanțarea butoanelor */}
             <div className="hero-buttons">
               <Link to="/catalog" className="btn-primary">{t.btnViewAnimals}</Link>
               <Link to="/ghidul-adoptatorului" className="btn-secondary">{t.btnHowToAdopt}</Link>
@@ -194,7 +193,6 @@ export default function Home() {
                 <p>{t.loading}</p>
               ) : (
                 animals.map((animal) => {
-                  // Pregătim datele pentru modal (completând cu valori fallback dacă lipsesc din backend)
                   const animalDataForModal = {
                     ...animal,
                     breed: animal.breed || "Rasă comună",
@@ -217,7 +215,7 @@ export default function Home() {
 
                   return (
                     <div key={animal.id} onClick={() => setSelectedAnimal(animalDataForModal)} style={{ cursor: 'pointer' }}>
-                      <AnimalCard 
+                      <AnimalModal 
                         animal={{ 
                           ...animal, 
                           imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
@@ -273,19 +271,20 @@ export default function Home() {
               {t.btnGuide}
             </Link>
           </div>
-       </section>
-       </div>
+        </section>
+      </div>
 
-       {/* Randarea modalului atunci când un animal este selectat */}
-       {selectedAnimal && (
-         <AnimalModal 
-           animal={selectedAnimal} 
-           onClose={() => setSelectedAnimal(null)} 
-         />
-       )}
+      {/* Randarea modalului atunci când un animal este selectat */}
+      {selectedAnimal && (
+        <AnimalModal 
+          animal={selectedAnimal} 
+          isOpen={true} 
+          onClose={() => setSelectedAnimal(null)} 
+        />
+      )}
 
-       <Footer />
-       <FloatingBtn />
+      <Footer />
+      <FloatingBtn />
     </>
   );
 }

@@ -1,4 +1,8 @@
-export const translations = {
+export interface TranslationKeys {
+  [key: string]: any;
+}
+
+export const translations: Record<string, TranslationKeys> = {
   ro: {
     // --- Asistent & Chat ---
     chatTitle: "Asistent FureverHome",
@@ -75,6 +79,7 @@ export const translations = {
     scheduleVisit: "Programează o vizită",
     keyDetails: "Detalii cheie",
     healthAndCompatibility: "Sănătate & Compatibilitate",
+    shareProfile: "Distribuie profilul",
 
     // Atribute animal
     species: "Specie",
@@ -124,12 +129,18 @@ export const translations = {
     yes: "Da",
     no: "Nu",
     playful: "Jucăuș",
+    calm: "Calm",
+    energetic: "Energic",
+    shy: "Timid",
+    healthy: "Sănătos",
+    needsCare: "Necesită îngrijiri",
     medium3: "Medie",
     small3: "Mică",
     large3: "Mare",
     small4: "Mic",
 
     // --- Filtre & Căutare ---
+    filterBy: "Filtrează după",
     filterTitle: "Filtrează după",
     filterSpecies: "Specie",
     filterDogs: "Câini",
@@ -151,11 +162,49 @@ export const translations = {
     filterVaccinated: "Vaccinat",
     filterDewormed: "Deparazitat",
     filterSterilized: "Sterilizat",
+    applyFilters: "Aplică filtre",
     resetFilters: "Resetează filtrele",
+    clearAll: "Șterge tot",
+    sortBy: "Sortează după:",
+    newest: "Cele mai noi",
+    oldest: "Cele mai vechi",
     favModalTitleMale: "Pentru a-l adăuga la favorite pe {name} trebuie să fii logat",
     favModalTitleFemale: "Pentru a o adăuga la favorite pe {name} trebuie să fii logat",
     favModalLoginBtn: "Autentifică-te",
+
+    // --- Adopție la distanță & Categorii Sidebar ---
+    adoptionType: "TIP ADOPȚIE",
+    physical: "Fizică",
+    distance: "La distanță",
+    distanceNoticeTitle: "Doar adopție la distanță",
+    distanceNoticeDesc: "Se afișează doar seniorii și animalele care au nevoie de tratament sau cazare permanentă și nu mai pot fi date spre adopție.",
+    distanceBannerTitle: "Adopția la distanță",
+    distanceBannerDesc: "Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic. Ai nevoie de cont pentru a continua.",
+    
+    basicInfo: "INFO DE BAZĂ",
+    type: "Tip",
+    animalDetails: "DETALII ANIMAL",
+    agePuppy: "Pui (< 1 an)",
+    ageYoung: "Tânăr (1 - 3 ani)",
+    ageAdult: "Adult (3 - 7 ani)",
+    ageSenior: "Senior (> 7 ani)",
+    healthState: "Stare de sănătate",
+
+    county: "Județ",
+    shelter: "Centru / Adăpost",
+    center: "Centru",
+    foster: "În Foster",
+    compatibilityHealth: "COMPATIBILITATE & SĂNĂTATE",
+
+    friendsLookingForHome: "prieteni își caută o casă",
+    friendsWaitingSponsor: "prieteni așteaptă un sponsor",
+    noAnimalsFound: "Nu s-au găsit animale conform filtrelor selectate.",
+
+    btnDonate: "Donează",
+    fundingCovered: "din necesarul lunar acoperit",
+    senior: "Senior",
   },
+
   en: {
     // --- Assistant & Chat ---
     chatTitle: "FureverHome Assistant",
@@ -232,6 +281,7 @@ export const translations = {
     scheduleVisit: "Schedule a visit",
     keyDetails: "Key details",
     healthAndCompatibility: "Health & Compatibility",
+    shareProfile: "Share profile",
 
     // Animal attributes
     species: "Species",
@@ -281,12 +331,18 @@ export const translations = {
     yes: "Yes",
     no: "No",
     playful: "Playful",
+    calm: "Calm",
+    energetic: "Energetic",
+    shy: "Shy",
+    healthy: "Healthy",
+    needsCare: "Needs care",
     medium3: "Medium",
     small3: "Small",
     large3: "Large",
     small4: "Small",
 
     // --- Filtre & Căutare ---
+    filterBy: "Filter by",
     filterTitle: "Filter by",
     filterSpecies: "Species",
     filterDogs: "Dogs",
@@ -308,9 +364,46 @@ export const translations = {
     filterVaccinated: "Vaccinated",
     filterDewormed: "Dewormed",
     filterSterilized: "Sterilized",
+    applyFilters: "Apply filters",
     resetFilters: "Reset filters",
+    clearAll: "Clear all",
+    sortBy: "Sort by:",
+    newest: "Newest",
+    oldest: "Oldest",
     favModalTitleMale: "To add {name} to favorites you need to be logged in",
     favModalTitleFemale: "To add {name} to favorites you need to be logged in",
     favModalLoginBtn: "Log in",
+
+    // --- Distance Adoption & Sidebar Categories ---
+    adoptionType: "ADOPTION TYPE",
+    physical: "Physical",
+    distance: "At a distance",
+    distanceNoticeTitle: "Distance adoption only",
+    distanceNoticeDesc: "Only seniors and animals requiring continuous treatment or permanent shelter that cannot be physically adopted are displayed.",
+    distanceBannerTitle: "Distance Adoption",
+    distanceBannerDesc: "Support the care, treatment, and housing of an animal that cannot be physically adopted. You need an account to continue.",
+    
+    basicInfo: "BASIC INFO",
+    type: "Type",
+    animalDetails: "ANIMAL DETAILS",
+    agePuppy: "Puppy (< 1 yr)",
+    ageYoung: "Young (1 - 3 yrs)",
+    ageAdult: "Adult (3 - 7 yrs)",
+    ageSenior: "Senior (> 7 yrs)",
+    healthState: "Health condition",
+
+    county: "County",
+    shelter: "Center / Shelter",
+    center: "Center",
+    foster: "In Foster",
+    compatibilityHealth: "COMPATIBILITY & HEALTH",
+
+    friendsLookingForHome: "friends looking for a home",
+    friendsWaitingSponsor: "friends waiting for a sponsor",
+    noAnimalsFound: "No animals found matching the selected filters.",
+
+    btnDonate: "Donate",
+    fundingCovered: "of monthly need covered",
+    senior: "Senior",
   }
 };
