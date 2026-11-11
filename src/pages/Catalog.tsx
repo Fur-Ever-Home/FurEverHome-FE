@@ -36,8 +36,6 @@ export default function Catalog() {
       childFriendly: true,
       noAllergies: true,
       image: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600',
-      descRo: 'Bruno este un căine extrem de prietenos, plin de energie și iubitor de copii.',
-      descEn: 'Bruno is an extremely friendly dog, full of energy and loves children.',
       date: '2026-11-01'
     },
     { 
@@ -62,8 +60,6 @@ export default function Catalog() {
       childFriendly: false,
       noAllergies: true,
       image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600',
-      descRo: 'Luna este o pisicuță liniștită, foarte blândă, căreia îi place să stea la mângâiat.',
-      descEn: 'Luna is a quiet, very gentle cat who loves to be petted.',
       date: '2026-11-05'
     },
   ];
@@ -79,7 +75,6 @@ export default function Catalog() {
     color: lang === 'en' ? animal.colorEn : animal.colorRo,
     shelter: lang === 'en' ? animal.shelterEn : animal.shelterRo,
     shelterType: lang === 'en' ? animal.shelterTypeEn : animal.shelterTypeRo,
-    description: lang === 'en' ? animal.descEn : animal.descRo,
   }));
 
   const animaleFiltrate = categorie 
