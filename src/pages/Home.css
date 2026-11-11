@@ -1002,3 +1002,31 @@ html, body {
     align-self: center;
   }
 }
+/* Intinderea categoriilor pe toata latimea ecranului/containerului de desktop */
+.categories-grid, 
+.categories-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  gap: 20px;
+}
+
+.category-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Iconitele medicale din legenda marite */
+.carousel-legend .legend-item img,
+.carousel-legend .legend-item .icon-badge {
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+}

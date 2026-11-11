@@ -247,3 +247,11 @@
     margin-top: 15px;
   }
 }
+/* Micsorarea numelui animalelor pe card */
+.animal-card .animal-name,
+.card-content h3 {
+  font-size: 1.35rem; /* Redus de la ~1.8rem sau 2rem */
+  font-weight: 700;
+  margin: 6px 0;
+  color: #2c1a0e;
+}
