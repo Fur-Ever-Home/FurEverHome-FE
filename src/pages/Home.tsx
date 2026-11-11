@@ -63,7 +63,11 @@ export default function Home() {
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   useEffect(() => {
-   let url = 'https://fureverhome-be-1.onrender.com';
+  const BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:8080' 
+  : 'https://fureverhome-be-1.onrender.com';
+
+let url = `${BASE_URL}/api/animals`;
     if (selectedSpecies) {
       url += `?species=${encodeURIComponent(selectedSpecies)}`;
     }
