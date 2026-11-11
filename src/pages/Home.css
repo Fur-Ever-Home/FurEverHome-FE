@@ -39,10 +39,28 @@ html, body {
 }
 
 .carousel-cards-track {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch;
+  width: 100% !important;
+  padding: 10px 0 !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-cards-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-cards-track > div {
+  scroll-snap-align: center !important;
+  scroll-snap-stop: always !important;
+  flex-shrink: 0 !important;
 }
 
 .home-page {
@@ -82,7 +100,7 @@ html, body {
 .hero-title-gold {
   color: #c89551;
   display: block;
-   font-size: 3rem;
+  font-size: 3rem;
 }
 
 .hero-description {
@@ -95,9 +113,9 @@ html, body {
 .hero-buttons {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Le aliniază la stânga */
-  gap: 16px;                  /* Distanța dintre butoane */
-  margin-top: 24px;           /* Spațiu față de textul de deasupra */
+  justify-content: flex-start;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 /* Ajustare pe mobil pentru centrare pe ecrane mici */
@@ -152,16 +170,16 @@ html, body {
   
   -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
   mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
 
-  .hero-image-fade {
+.hero-image-fade {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-}
 }
 
 /* Secțiunea „Pe cine cauți?” */
 .categories-section {
-  padding: 10px 80px ;
+  padding: 10px 80px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -190,7 +208,6 @@ html, body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Când treci cu cursorul sau când cardul este activ, devine portocaliu/crem cald */
 .category-card:hover,
 .category-card.active {
   background-color: #fcefdc;
@@ -199,19 +216,16 @@ html, body {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Dacă un card este în hover sau activ, textul devine portocaliu */
 .category-card:hover span,
 .category-card.active span {
   color: #c89551;
 }
 
-/* Magia pentru a face ca restul cardurilor să devină crem simplu când unul este hover-uit */
 .categories-cards:hover .category-card:not(:hover) {
   background-color: #fdfcf9;
   border-color: #ebe5d8;
 }
 
-/* Iconița principală (containerul imaginii) */
 .category-icon {
   width: 52px;
   height: 52px;
@@ -227,17 +241,12 @@ html, body {
 }
 
 .category-card span {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color:#3F2C20;
-  transition: color 0.2s ease;
-}
-/* Textul de sub iconiță */
-.category-card span {
   font-size: 1.05rem;
   font-weight: 700;
   color: #3f2c20;
+  transition: color 0.2s ease;
 }
+
 /* Adaptare dedicată pentru ecran mobil (< 640px) */
 @media screen and (max-width: 640px) {
   .categories-cards {
@@ -246,19 +255,37 @@ html, body {
 
   .category-card {
     padding: 14px 14px;
-    flex: 1; /* Permite cardurilor să se distribuie egal pe mobil */
+    flex: 1;
     min-width: 95px;
   }
 
-  /* Imaginea rămâne vizibil dominantă față de text */
   .category-icon {
     width: 44px;
     height: 44px;
   }
 
-  /* Scrisul este mărit ușor, dar rămâne mai mic decât iconița */
   .category-card span {
     font-size: 0.95rem;
+  }
+
+  /* Un singur card vizibil pe tot ecranul pe mobil cu swipe */
+  .carousel-cards-track {
+    gap: 0 !important;
+    padding: 10px 0 !important;
+  }
+
+  .carousel-cards-track > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .carousel-cards-track > div .animal-card {
+    max-width: 320px !important;
+    width: 100% !important;
   }
 }
 
@@ -286,9 +313,9 @@ html, body {
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.2s ease;
-  display: inline-block; /* Îl face să ocupe doar atât spațiu cât are textul + padding-ul */
-  width: auto;           /* Anulează orice lățime forțată la 100% */
-  height: auto;          /* Anulează orice înălțime forțată */
+  display: inline-block;
+  width: auto;
+  height: auto;
   align-self: center;
 }
 
@@ -298,8 +325,6 @@ html, body {
   background-color: #fcefdc;
 }
 
-
-
 .carousel-header {
   display: flex !important;
   justify-content: space-between !important;
@@ -307,16 +332,17 @@ html, body {
   margin-bottom: 20px !important;
   text-align: left !important;
 }
+
 .carousel-section {
-  padding-top: 40px;      /* Distanța față de secțiunea de sus */
+  padding-top: 40px;
   padding-bottom: 10px;
-  padding-left: 80px;     /* Setat la 40px pentru a se alinia perfect cu Header-ul și restul paginii */
-  padding-right: 80px;    /* Setat la 40px pentru simetrie */
+  padding-left: 80px;
+  padding-right: 80px;
   width: 100%;
   box-sizing: border-box;
 }
 
-.carousel-title{
+.carousel-title {
   font-family: 'Libertinus Sans';
   font-size: 2.5rem;
   font-weight: 700;
@@ -325,7 +351,6 @@ html, body {
   margin-left: 0px;
 }
 
-/* Stilizare și mărire accentuată pentru legenda din Home */
 .carousel-legend {
   display: flex;
   align-items: center;
@@ -343,18 +368,16 @@ html, body {
   color: #3f2c20;
 }
 
-/* Iconițele mărite la 36px */
 .legend-item img,
 .legend-item .icon-badge {
   width: 36px;
   height: 36px;
-  font-size: 1.1rem; /* Mărește și simbolul din interior (dacă e icon-badge) */
+  font-size: 1.1rem;
   border-radius: 50%;
   object-fit: contain;
   flex-shrink: 0;
 }
 
-/* Adaptare pentru mobil (< 640px) */
 @media screen and (max-width: 640px) {
   .carousel-legend {
     gap: 12px 16px;
@@ -382,22 +405,6 @@ html, body {
   position: relative;
 }
 
-.carousel-cards-track {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  gap: 20px !important;
-  overflow-x: auto !important;
-  scroll-behavior: smooth !important;
-  width: 100% !important;
-  padding: 10px 0 !important;
-  scrollbar-width: none;
-}
-
-.carousel-cards-track::-webkit-scrollbar {
-  display: none;
-}
-
 .carousel-arrow {
   background-color: #f7f4ef;
   border: 1px solid #dcd6cd;
@@ -420,8 +427,7 @@ html, body {
   border: none;
 }
 
-
-/* Secțiunea Pasi Simpli */
+/* Secțiunea Pași Simpli */
 .steps-section {
   max-width: 1560px;
   margin: 0 auto;
@@ -432,8 +438,6 @@ html, body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-   /* Schimbat din center în flex-start ca să alinieze totul în stânga */
-
 }
 
 .steps-title {
@@ -441,55 +445,44 @@ html, body {
   font-size: 2.5rem;
   font-weight: 700;
   color: #3F2C20;
-  text-align: left !important;  /* Forțează alinierea textului la stânga */
+  text-align: left !important;
   margin-left: 80px;
- margin-bottom: 4px;
- margin-top: 4px;
-
+  margin-bottom: 4px;
+  margin-top: 4px;
 }
+
 .steps-subtitle {
   font-size: 1.25rem;
   color: #7a6f65;
-  margin-left: 40px;
-  text-align: left !important;  /* Forțează alinierea subtitlului la stânga */
-  margin-left: 105px;
+  text-align: left !important;
   margin-bottom: 4px;
   margin-left: 80px;
 }
 
-/* Grid-ul cu cele 4 carduri */
 .steps-grid {
   display: flex;
-  justify-content: center; /* Centrează cardurile în pagină */
-  gap: 20px;               /* Distanța perfectă între carduri */
+  justify-content: center;
+  gap: 20px;
   width: 100%;
-  max-width: 1290px;       /* Oprește cardurile să se întindă la infinit pe ecranele mari */
+  max-width: 1290px;
   margin: 10px auto;
   align-items: flex-start;
   padding: 10px;
   margin-left: 70px;
-
- 
-  
 }
 
 .step-card {
- background-color: #ffffff;
-  border: 1px solid #e6ded3;          /* Marginea fină și elegantă */
-  border-radius: 16px;                /* Colțuri rotunjite frumos */
-  padding: 32px 34px;                 /* Spațiu generos în interiorul cardului */
-  flex: 1;                            /* Toate cardurile împart spațiul în mod egal */
-  min-width: 0;                       /* Previne deformarea textului din interior */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03); /* O umbră discretă care scoate cardul în evidență */
-  transition: transform 0.2s ease;
+  background-color: #ffffff;
+  border: 1px solid #e6ded3;
+  border-radius: 16px;
+  padding: 32px 34px;
+  flex: 1;
   min-width: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease;
   min-height: 200px;
-  
-  
- 
 }
 
-/* Bulina cu numărul pasului (creată din CSS) */
 .step-badge {
   width: 36px;
   height: 36px;
@@ -502,12 +495,10 @@ html, body {
   font-weight: bold;
   font-size: 1.1rem;
   margin-bottom: 16px;
- 
-  
 }
 
 .step-card-title {
-  font-family: 'Libertinus Sans' ;
+  font-family: 'Libertinus Sans';
   font-size: 1.70rem;
   font-weight: 700;
   color: #3F2C20;
@@ -521,23 +512,21 @@ html, body {
   margin: 0;
 }
 
-/* Banta maro închis cu butonul portocaliu */
 .steps-banner {
-  background-color: #3F2C20 !important; /* Maroul închis original */
+  background-color: #3F2C20 !important;
   border-radius: 16px;
   padding: 32px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1290px;                   /* Aceeași lățime maximă ca și cardurile */
+  max-width: 1290px;
   box-sizing: border-box;
   margin: 0 auto;
   margin-top: 30px;
   align-items: flex-start;
   margin-bottom: 40px;
   margin-left: 80px;
-
 }
 
 .steps-banner-text {
@@ -552,7 +541,6 @@ html, body {
   color: #c89551;
 }
 
-/* Butonul spre Ghidul adoptatorului */
 .btn-guide {
   background-color: #c89551;
   color: #ffffff;
@@ -573,16 +561,8 @@ html, body {
   transform: translateY(-2px);
 }
 
-/* Butonul mic portocaliu din dreapta jos */
 .footer-floating-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  
-}
-.footer-floating-btn {
- position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
@@ -607,7 +587,6 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Containerul general pentru pagina Home care o menține centrată și limitată la 1200px */
 .home-container {
   width: 100%;
   max-width: 1200px;
@@ -618,10 +597,7 @@ html, body {
   box-sizing: border-box;
 }
 
-/* ========================================== */
-/* STILURI STRICT PENTRU VERSIUNEA DE MOBIL   */
-/* ========================================== */
-
+/* STILURI STRICT PENTRU VERSIUNEA DE MOBIL */
 @media (max-width: 768px) {
   .home-page {
     background-color: #f7f4ed;
@@ -637,7 +613,6 @@ html, body {
     box-sizing: border-box;
   }
 
-  /* Secțiunea Hero pe mobil */
   .hero-section {
     display: flex;
     flex-direction: column;
@@ -723,7 +698,6 @@ html, body {
     border-radius: 20px;
   }
 
-  /* Categorii pe mobil - aliniate corect pe orizontală sau compacte conform Figma */
   .categories-section {
     padding: 20px 16px;
     width: 100%;
@@ -745,10 +719,9 @@ html, body {
     margin: 0;
   }
 
-  /* Aici modificăm: cardurile de categorii pe mobil să stea pe rând sau flexibil cum erau în design */
   .categories-cards {
     display: flex;
-    flex-direction: row; /* Pe rând, exact ca în designul din Figma */
+    flex-direction: row;
     gap: 10px;
     width: 100%;
     overflow-x: auto;
@@ -800,7 +773,6 @@ html, body {
     font-weight: 600;
   }
 
-  /* Restul secțiunilor pe mobil */
   .carousel-section {
     padding: 20px 16px;
     width: 100%;
@@ -885,8 +857,7 @@ html, body {
     font-weight: 600;
     text-decoration: none;
   }
-}
-@media (max-width: 768px) {
+
   .site-header {
     padding: 10px 16px;
     width: 100%;
@@ -949,7 +920,7 @@ html, body {
     color: #3F2C20;
   }
 }
-/* Antetul secțiunii carusel */
+
 .carousel-header {
   display: flex;
   flex-direction: column;
@@ -964,10 +935,9 @@ html, body {
   width: 100%;
 }
 
-/* Legenda cu Vaccinat / Deparazitat / Sterilizat */
 .carousel-legend {
   display: flex;
-  flex-wrap: wrap; /* Permite icoanelor să treacă pe rândul următor dacă ecranul e îngust */
+  flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 0.5rem;
 }
@@ -980,13 +950,11 @@ html, body {
   white-space: nowrap;
 }
 
-/* Butonul "Vezi toate" */
 .btn-view-all {
   align-self: flex-start;
   white-space: nowrap;
 }
 
-/* Pe ecrane de tabletă și desktop (peste 640px) le aliniem stânga - dreapta */
 @media (min-width: 640px) {
   .carousel-header {
     flex-direction: row;
@@ -1002,7 +970,7 @@ html, body {
     align-self: center;
   }
 }
-/* Intinderea categoriilor pe toata latimea ecranului/containerului de desktop */
+
 .categories-grid, 
 .categories-container {
   display: flex;
@@ -1023,7 +991,6 @@ html, body {
   padding: 20px;
 }
 
-/* Iconitele medicale din legenda marite */
 .carousel-legend .legend-item img,
 .carousel-legend .legend-item .icon-badge {
   width: 36px;
