@@ -63,7 +63,7 @@ export default function Home() {
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   useEffect(() => {
-    let url = 'http://localhost:8080/api/animals';
+   let url = 'https://fureverhome-be-1.onrender.com';
     if (selectedSpecies) {
       url += `?species=${encodeURIComponent(selectedSpecies)}`;
     }
