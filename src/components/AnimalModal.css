@@ -1,0 +1,298 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e0d8cc;
+  background: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a3e35;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #f5f0eb;
+}
+
+.modal-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .modal-body-grid {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+}
+
+/* Galeria foto stânga - ajustat pentru încadrare perfectă */
+.modal-gallery-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 100%;
+}
+
+.main-image-container {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #f5f0eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  padding: 16px;
+}
+
+/* Poziționare fixă în colțul din dreapta sus peste imagine */
+.gallery-favorite-wrapper {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  left: auto !important;
+  transform: none !important;
+  z-index: 10 !important;
+}
+
+.gallery-favorite-wrapper button {
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.thumbnails-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.thumb.selected {
+  border-color: #d4a359;
+}
+
+/* Coloana Dreapta */
+.modal-details-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  max-height: calc(90vh - 48px);
+}
+
+.modal-details-scrollable {
+  overflow-y: auto;
+  padding-right: 8px;
+  flex-grow: 1;
+}
+
+.animal-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #3b2c23;
+  margin: 0 0 8px 0;
+}
+
+.status-badge.available {
+  display: inline-block;
+  background-color: #4f7942;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.location-info {
+  font-size: 13px;
+  color: #6e6459;
+  margin: 2px 0;
+}
+
+.details-columns-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.details-group h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #3b2c23;
+  margin-bottom: 10px;
+}
+
+.details-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.details-group li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #4a3e35;
+}
+
+.detail-icon-img {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  object-fit: contain;
+}
+
+.health-label-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Badge-urile Da/Nu (stil cerculeț verde/roșu) */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.status-pill.yes {
+  background-color: #4f7942;
+}
+
+.status-pill.no {
+  background-color: #c8372d;
+}
+
+/* Containerul de acțiuni jos (Fix) */
+.modal-actions-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #f0eaef;
+  background: #ffffff;
+}
+
+.btn-schedule {
+  flex-grow: 1;
+  background-color: #3b2c23;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-schedule:hover {
+  background-color: #261c16;
+}
+
+.btn-share {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: #3b2c23;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-share:hover {
+  background-color: #261c16;
+}
+/* Ajustare UI pentru mobil (sub 768px) */
+@media (max-width: 768px) {
+  /* Mutăm butonul de favorite în stânga pe mobil ca să nu se mai bată cu butonul X */
+  .gallery-favorite-wrapper {
+    top: 12px !important;
+    left: 12px !important;
+    right: auto !important;
+  }
+}

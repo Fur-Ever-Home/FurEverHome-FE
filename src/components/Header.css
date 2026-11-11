@@ -122,7 +122,7 @@
   font-size: 1.1rem;
 }
 
-.logo-dark { color: #2b231d; }
+.logo-dark { color:#3F2C20; }
 .logo-gold { color: #c89551; }
 
 /* Acțiuni din dreapta pe mobil (limbă + hamburger) */
@@ -174,21 +174,12 @@
   display: block;
   width: 18px;
   height: 2px;
-  background-color: #2b231d;
+  background-color: #3F2C20;
   border-radius: 2px;
 }
 
 
 /* ASCUNDEM COMPLET meniul de desktop și butonul de login pe mobil */
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none !important;
-  }
-
-  .btn-auth {
-    display: none !important;
-  }
-}
 @media (max-width: 768px) {
   .nav-menu {
     display: none !important;
