@@ -105,7 +105,7 @@ export const translations: Record<string, TranslationKeys> = {
     speciesCat: "Pisică",
     speciesRabbit: "Iepure",
     speciesParrot: "Papagal",
-    speciesTurtle: "Broastră țestoasă",
+    speciesTurtle: "Broască țestoasă",
     speciesOther: "Altele",
 
     // Culori blană
@@ -134,6 +134,10 @@ export const translations: Record<string, TranslationKeys> = {
     shy: "Timid",
     healthy: "Sănătos",
     needsCare: "Necesită îngrijiri",
+    medium3: "Medie",
+    small3: "Mică",
+    large3: "Mare",
+    small4: "Mic",
 
     // --- Filtre & Căutare ---
     filterBy: "Filtrează după",
@@ -153,7 +157,7 @@ export const translations: Record<string, TranslationKeys> = {
     filterLarge: "Mare",
     filterGender: "Sex",
     filterFemale: "Femelă",
-    filterMale: "Mascul",
+    filterMale: "Masculin",
     filterMedicalStatus: "Stare medicală",
     filterVaccinated: "Vaccinat",
     filterDewormed: "Deparazitat",
@@ -168,7 +172,7 @@ export const translations: Record<string, TranslationKeys> = {
     favModalTitleFemale: "Pentru a o adăuga la favorite pe {name} trebuie să fii logat",
     favModalLoginBtn: "Autentifică-te",
 
-    // --- Adopție la distanță & Categorii Sidebar ---
+    // --- Secțiuni Noi: Adopție la distanță & Categorii Sidebar ---
     adoptionType: "TIP ADOPȚIE",
     physical: "Fizică",
     distance: "La distanță",
@@ -332,8 +336,12 @@ export const translations: Record<string, TranslationKeys> = {
     shy: "Shy",
     healthy: "Healthy",
     needsCare: "Needs care",
+    medium3: "Medium",
+    small3: "Small",
+    large3: "Large",
+    small4: "Small",
 
-    // --- Filters & Search ---
+    // --- Filtre & Căutare ---
     filterBy: "Filter by",
     filterTitle: "Filter by",
     filterSpecies: "Species",
@@ -366,7 +374,7 @@ export const translations: Record<string, TranslationKeys> = {
     favModalTitleFemale: "To add {name} to favorites you need to be logged in",
     favModalLoginBtn: "Log in",
 
-    // --- Distance Adoption & Sidebar Categories ---
+    // --- New Sections: Distance Adoption & Sidebar Categories ---
     adoptionType: "ADOPTION TYPE",
     physical: "Physical",
     distance: "At a distance",
@@ -399,5 +407,3 @@ export const translations: Record<string, TranslationKeys> = {
     senior: "Senior",
   }
 };
-
-export default translations;
