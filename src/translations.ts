@@ -20,7 +20,7 @@ export const translations: Record<string, TranslationKeys> = {
     login: "Autentificare",
     navLogin: "Autentificare",
 
-    // Home
+    // Home / Pagina principală
     heroTag: "Găsește-ți cel mai bun prieten",
     heroTitle: "Dă-le o șansă la o viață mai bună",
     heroTitleGold: "acasă",
@@ -156,10 +156,12 @@ export const translations: Record<string, TranslationKeys> = {
     footerGdpr: "GDPR",
     footerCopyright: "© 2026 FurEverHome. Toate drepturile rezervate.",
 
-    // Legendă & Chat
+    // Legendă Home
     legendVaccinated: "Vaccinat",
     legendDewormed: "Deparazitat",
     legendSterilized: "Sterilizat",
+
+    // Chat / Asistent
     chatTitle: "Asistent FurEverHome",
     chatStatus: "Online",
     welcomeMsg: "Bună! Cu ce te pot ajuta astăzi?",
@@ -301,7 +303,7 @@ export const translations: Record<string, TranslationKeys> = {
     noAnimalsFound: "No animals found matching the selected filters.",
     loading: "Loading animals...",
 
-    // Card, Modal & Favorite
+    // Animal Card, Modal & Favorite
     statusAvailable: "Available",
     btnViewDetails: "View details",
     btnDonate: "Donate",
