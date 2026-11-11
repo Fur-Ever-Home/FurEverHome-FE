@@ -14,9 +14,6 @@ import Footer from '../components/Footer';
 import './Home.css';
 import FloatingBtn from '../components/floating-btn';
 import { AnimalModal } from "../components/AnimalModal";
-import pawIcon from '../assets/paw.png';
-import pillIcon from '../assets/pill.png';
-import shieldIcon from '../assets/shield.png';
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
@@ -53,7 +50,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
   
-  // Starea pentru modal 
+  // Starea pentru modal (se deschide doar la click)
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -78,7 +75,6 @@ export default function Home() {
       .catch((error) => {
         console.error('Eroare la preluarea animalelor (folosim date mock):', error);
         
-        // Filtrare locală pe datele mock pentru câini/pisici/altele
         let filtered = animalsMock as any[];
         if (selectedSpecies) {
           filtered = filtered.filter(
@@ -215,7 +211,7 @@ export default function Home() {
 
                   return (
                     <div key={animal.id} onClick={() => setSelectedAnimal(animalDataForModal)} style={{ cursor: 'pointer' }}>
-                      <AnimalModal 
+                      <AnimalCard 
                         animal={{ 
                           ...animal, 
                           imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
@@ -274,11 +270,11 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Randarea modalului atunci când un animal este selectat */}
+      {/* Randarea unică a modalului doar când un animal este selectat */}
       {selectedAnimal && (
         <AnimalModal 
           animal={selectedAnimal} 
-          isOpen={true} 
+          isOpen={!!selectedAnimal} 
           onClose={() => setSelectedAnimal(null)} 
         />
       )}

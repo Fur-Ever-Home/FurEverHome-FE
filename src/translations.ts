@@ -105,7 +105,7 @@ export const translations: Record<string, TranslationKeys> = {
     speciesCat: "Pisică",
     speciesRabbit: "Iepure",
     speciesParrot: "Papagal",
-    speciesTurtle: "Broască țestoasă",
+    speciesTurtle: "Broastră țestoasă",
     speciesOther: "Altele",
 
     // Culori blană
@@ -153,7 +153,7 @@ export const translations: Record<string, TranslationKeys> = {
     filterLarge: "Mare",
     filterGender: "Sex",
     filterFemale: "Femelă",
-    filterMale: "Masculin",
+    filterMale: "Mascul",
     filterMedicalStatus: "Stare medicală",
     filterVaccinated: "Vaccinat",
     filterDewormed: "Deparazitat",
@@ -333,7 +333,7 @@ export const translations: Record<string, TranslationKeys> = {
     healthy: "Healthy",
     needsCare: "Needs care",
 
-    // --- Filtre & Căutare ---
+    // --- Filters & Search ---
     filterBy: "Filter by",
     filterTitle: "Filter by",
     filterSpecies: "Species",

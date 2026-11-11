@@ -253,14 +253,14 @@ export default function Catalog() {
                     onClick={() => setSelectedAnimal(animalDataForModal)} 
                     className="catalog-card-item"
                   >
-                   <AnimalModal
-  animal={{  
-    ...animal, 
-    imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
-    image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
-  } as any}
-  isDistanceMode={isDistanceMode}
-/>
+                    <AnimalCard
+                      animal={{ 
+                        ...animal, 
+                        imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
+                        image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
+                      } as any}
+                      isDistanceMode={isDistanceMode}
+                    />
                   </div>
                 );
               })
@@ -306,7 +306,7 @@ export default function Catalog() {
                     onClick={() => setSelectedAnimal(animalDataForModal)} 
                     className="mobile-card-slide"
                   >
-                    <AnimalModal 
+                    <AnimalCard 
                       animal={{ 
                         ...animal, 
                         imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
@@ -335,7 +335,7 @@ export default function Catalog() {
       {selectedAnimal && (
         <AnimalModal 
           animal={selectedAnimal} 
-          isOpen={true} 
+          isOpen={!!selectedAnimal} 
           onClose={() => setSelectedAnimal(null)} 
         />
       )}
