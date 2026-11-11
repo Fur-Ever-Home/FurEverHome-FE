@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
-import { AnimalCard } from '../components/AnimalCard';
+import AnimalCard from '../components/AnimalCard';
 import { AnimalModal } from '../components/AnimalModal';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
@@ -200,15 +200,15 @@ export default function Catalog() {
           </div>
 
           {/* BANNER ADOPȚIE LA DISTANȚĂ TRADUS */}
-{isDistanceMode && (
-  <div className="distance-banner-card">
-    <div className="distance-banner-icon">🤎</div>
-    <div className="distance-banner-text">
-      <h3>{t.distanceBannerTitle || 'Adopția la distanță'}</h3>
-      <p>{t.distanceBannerDesc || 'Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic.'}</p>
-    </div>
-  </div>
-)}
+          {isDistanceMode && (
+            <div className="distance-banner-card">
+              <div className="distance-banner-icon">🤎</div>
+              <div className="distance-banner-text">
+                <h3>{t.distanceBannerTitle || 'Adopția la distanță'}</h3>
+                <p>{t.distanceBannerDesc || 'Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic.'}</p>
+              </div>
+            </div>
+          )}
           
           {filters.species && !isDistanceMode && (
             <div className="catalog-filter-badge">
@@ -253,14 +253,14 @@ export default function Catalog() {
                     onClick={() => setSelectedAnimal(animalDataForModal)} 
                     className="catalog-card-item"
                   >
-                    <AnimalCard 
-                      animal={{ 
-                        ...animal, 
-                        imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
-                        image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
-                      } as any}
-                      isDistanceMode={isDistanceMode}
-                    />
+                   <AnimalModal
+  animal={{  
+    ...animal, 
+    imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
+    image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
+  } as any}
+  isDistanceMode={isDistanceMode}
+/>
                   </div>
                 );
               })
@@ -306,7 +306,7 @@ export default function Catalog() {
                     onClick={() => setSelectedAnimal(animalDataForModal)} 
                     className="mobile-card-slide"
                   >
-                    <AnimalCard 
+                    <AnimalModal 
                       animal={{ 
                         ...animal, 
                         imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
@@ -335,6 +335,7 @@ export default function Catalog() {
       {selectedAnimal && (
         <AnimalModal 
           animal={selectedAnimal} 
+          isOpen={true} 
           onClose={() => setSelectedAnimal(null)} 
         />
       )}

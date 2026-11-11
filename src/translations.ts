@@ -134,10 +134,6 @@ export const translations: Record<string, TranslationKeys> = {
     shy: "Timid",
     healthy: "Sănătos",
     needsCare: "Necesită îngrijiri",
-    medium3: "Medie",
-    small3: "Mică",
-    large3: "Mare",
-    small4: "Mic",
 
     // --- Filtre & Căutare ---
     filterBy: "Filtrează după",
@@ -172,7 +168,7 @@ export const translations: Record<string, TranslationKeys> = {
     favModalTitleFemale: "Pentru a o adăuga la favorite pe {name} trebuie să fii logat",
     favModalLoginBtn: "Autentifică-te",
 
-    // --- Secțiuni Noi: Adopție la distanță & Categorii Sidebar ---
+    // --- Adopție la distanță & Categorii Sidebar ---
     adoptionType: "TIP ADOPȚIE",
     physical: "Fizică",
     distance: "La distanță",
@@ -336,10 +332,6 @@ export const translations: Record<string, TranslationKeys> = {
     shy: "Shy",
     healthy: "Healthy",
     needsCare: "Needs care",
-    medium3: "Medium",
-    small3: "Small",
-    large3: "Large",
-    small4: "Small",
 
     // --- Filtre & Căutare ---
     filterBy: "Filter by",
@@ -374,7 +366,7 @@ export const translations: Record<string, TranslationKeys> = {
     favModalTitleFemale: "To add {name} to favorites you need to be logged in",
     favModalLoginBtn: "Log in",
 
-    // --- New Sections: Distance Adoption & Sidebar Categories ---
+    // --- Distance Adoption & Sidebar Categories ---
     adoptionType: "ADOPTION TYPE",
     physical: "Physical",
     distance: "At a distance",
@@ -407,3 +399,5 @@ export const translations: Record<string, TranslationKeys> = {
     senior: "Senior",
   }
 };
+
+export default translations;

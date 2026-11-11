@@ -426,3 +426,33 @@
     z-index: 10;
   }
 }
+/* Previne scroll-ul pe fundal cand modalul e deschis */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* Fixare scroll direct pe pop-up pentru mobil */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.modal-container,
+.animal-modal-content {
+  background: #fff;
+  border-radius: 20px;
+  max-height: 90vh; /* Nu depaseste ecranul */
+  overflow-y: auto; /* Scroll direct in interiorul pop-up-ului */
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 800px;
+}
