@@ -6,6 +6,7 @@ import Adaposturi from './pages/Adaposturi';
 import Colaborari from './pages/Colaborari';
 import DespreNoi from './pages/DespreNoi';
 import Login from './pages/Login';
+import AnimalProfile from './pages/AnimalProfile'; // 1. Importă pagina de profil pentru mobil
 
 // Imporți componentele pentru paginile legale:
 import InformatiiLegale from './components/informatii_legale';
@@ -25,6 +26,7 @@ export default function App() {
       <Route path="/colaborari" element={<Colaborari />} />
       <Route path="/despre-noi" element={<DespreNoi />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/animal/:id" element={<AnimalProfile />} /> {/* 2. Adaugă ruta dedicată */}
 
       {/* Rutele noi pentru paginile legale */}
       <Route path="/informatii-legale" element={<InformatiiLegale />} />
