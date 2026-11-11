@@ -8,12 +8,15 @@ import otherIcon from '../assets/other-icon.svg';
 import vaccineIcon from '../assets/vaccinat.png';
 import dewormIcon from '../assets/deparazitat.png';
 import sterileIcon from '../assets/sterlizat.png';
-import AnimalCard from '../components/AnimalCard';
+import { AnimalCard } from '../components/AnimalCard';
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/Footer';
 import './Home.css';
 import FloatingBtn from '../components/floating-btn';
 import { AnimalModal } from "../components/AnimalModal";
+import pawIcon from '../assets/paw.png';
+import pillIcon from '../assets/pill.png';
+import shieldIcon from '../assets/shield.png';
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
@@ -50,7 +53,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
   
-  // Starea pentru modal (se deschide doar la click)
+  // CORECTAT: Starea pentru modal mutat corect în interiorul componentei Home
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -75,6 +78,7 @@ export default function Home() {
       .catch((error) => {
         console.error('Eroare la preluarea animalelor (folosim date mock):', error);
         
+        // Filtrare locală pe datele mock pentru câini/pisici/altele
         let filtered = animalsMock as any[];
         if (selectedSpecies) {
           filtered = filtered.filter(
@@ -113,6 +117,7 @@ export default function Home() {
             
             <p className="hero-description">{t.heroDesc}</p>
             
+            {/* Clasă nouă dedicată pentru gruparea și distanțarea butoanelor */}
             <div className="hero-buttons">
               <Link to="/catalog" className="btn-primary">{t.btnViewAnimals}</Link>
               <Link to="/ghidul-adoptatorului" className="btn-secondary">{t.btnHowToAdopt}</Link>
@@ -189,6 +194,7 @@ export default function Home() {
                 <p>{t.loading}</p>
               ) : (
                 animals.map((animal) => {
+                  // Pregătim datele pentru modal (completând cu valori fallback dacă lipsesc din backend)
                   const animalDataForModal = {
                     ...animal,
                     breed: animal.breed || "Rasă comună",
@@ -267,20 +273,19 @@ export default function Home() {
               {t.btnGuide}
             </Link>
           </div>
-        </section>
-      </div>
+       </section>
+       </div>
 
-      {/* Randarea unică a modalului doar când un animal este selectat */}
-      {selectedAnimal && (
-        <AnimalModal 
-          animal={selectedAnimal} 
-          isOpen={!!selectedAnimal} 
-          onClose={() => setSelectedAnimal(null)} 
-        />
-      )}
+       {/* Randarea modalului atunci când un animal este selectat */}
+       {selectedAnimal && (
+         <AnimalModal 
+           animal={selectedAnimal} 
+           onClose={() => setSelectedAnimal(null)} 
+         />
+       )}
 
-      <Footer />
-      <FloatingBtn />
+       <Footer />
+       <FloatingBtn />
     </>
   );
 }
