@@ -513,8 +513,7 @@ export default function Catalog() {
 
       {selectedAnimal && (
         <AnimalModal 
-          animal={selectedAnimal} 
-          isOpen={!!selectedAnimal} 
+          animal={selectedAnimal}
           onClose={() => setSelectedAnimal(null)} 
         />
       )}
