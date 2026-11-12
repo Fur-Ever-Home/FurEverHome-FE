@@ -1,4 +1,4 @@
- {
+{
   "name": "adoptii-frontend",
   "private": true,
   "version": "0.0.0",
@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.1.0"
+    "react-router-dom": "^7.1.0",
+    "serve": "^14.2.7"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

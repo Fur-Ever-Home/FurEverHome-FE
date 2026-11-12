@@ -107,6 +107,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
           <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
         </div>
 
+        {/* Iconițele de pe card - identice cu cele din legendă */}
         {!isDistanceMode && (
           <div className="card-health-overlay">
             <span className={`legend-badge ${animal.vaccinated !== false ? 'active' : 'inactive'}`} title={t.vaccinated || 'Vaccinat'}>
@@ -153,7 +154,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
                 />
               </div>
               <span className="progress-text">
-                {animal.fundingPercent || 45}% {t.fundingCovered || (lang === 'en' ? 'of monthly need covered' : 'din necesarul lunar acoperit')}
+                {animal.fundingPercent || 45}% {t.fundingCovered || 'din necesarul lunar acoperit'}
               </span>
             </div>
           </>
@@ -177,7 +178,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
               {lang === 'en' ? 'Donate' : 'Donează'}
             </>
           ) : (
-            t.btnViewDetails || (lang === 'en' ? 'View details' : 'Vezi detalii')
+            t.btnViewDetails || 'Vezi detalii'
           )}
         </button>
       </div>
