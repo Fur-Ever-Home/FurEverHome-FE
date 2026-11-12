@@ -1,15 +1,30 @@
 .site-footer {
   background-color: #f7f3ed;
-  padding: 50px 80px 30px 80px;
+  padding: 30px 80px;
   width: 100%;
   box-sizing: border-box;
   border-top: 1px solid #e8e2d8;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ține totul centrat pe mijlocul ecranului */
+}
+
+.footer-content,
+.footer-bottom,
+.footer-divider {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto !important;
+  padding-left: 10px !important; 
+  padding-right: 32px;
+  box-sizing: border-box;
 }
 
 .footer-content {
   display: flex;
-  justify-content: flex-start; /* Le grupăm spre stânga */
-  gap: 200px; /* Controlează distanța exactă dintre logo și linkurile legale */
+  flex-direction: row; /* Pe rând pentru desktop */
+  justify-content: flex-start !important;
+  gap: 250px !important; /* Am reparat ;; de aici */
   align-items: flex-start;
   margin-bottom: 30px;
 }
@@ -38,7 +53,7 @@
   font-family: 'Libertinus Sans', sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
-  color:#3F2C20;
+  color: #3F2C20;
   letter-spacing: 0.5px;
 }
 
@@ -68,7 +83,7 @@
 .footer-links-column {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   align-items: flex-start;
   text-align: left;
 }
@@ -94,7 +109,8 @@
   width: 100%;
   height: 1px;
   background-color: #e5ddd0;
-  margin-bottom: 25px;
+  margin-top: 25px !important;    /* Spațiu între linkuri (GDPR) și linie */
+  margin-bottom: 20px !important;
 }
 
 /* Partea inferioară */
@@ -109,24 +125,44 @@
   color: #8c8175;
   margin: 0;
 }
-/* Rearanjare footer pe mobil */
-.footer, 
-.footer-container, 
-.footer-content {
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  box-sizing: border-box;
-  padding: 1.5rem 1rem;
-}
 
-@media (min-width: 768px) {
+/* Rearanjare footer DOAR pe mobil (sub 767px) */
+@media screen and (max-width: 767px) {
   .footer, 
-  .footer-container, 
-  .footer-content {
-    flex-direction: row;
-    justify-content: space-between;
+  .footer-container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+    padding: 1.5rem 1rem;
+  }
+
+  .site-footer {
+    padding: 20px 16px !important;
+    align-items: flex-start !important;
+  }
+
+  .site-footer .footer-content,
+  .site-footer .footer-bottom,
+  .site-footer .footer-divider {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+  }
+
+  .site-footer .footer-content {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .site-footer .footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
   }
 }

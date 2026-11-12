@@ -4,6 +4,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
 import AnimalCard from '../components/AnimalCard';
+import { useSearchParams } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import FloatingBtn from '../components/floating-btn';
+import { AnimalCard } from '../components/AnimalCard';
 import { AnimalModal } from '../components/AnimalModal';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
@@ -121,6 +126,11 @@ export default function Catalog() {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    fetchAnimals();
+  }, [categorieParam, filters.adoptionType]);
+
 
   useEffect(() => {
     fetchAnimals();
@@ -294,6 +304,15 @@ export default function Catalog() {
               </div>
             </div>
           )}
+{isDistanceMode && (
+  <div className="distance-banner-card">
+    <div className="distance-banner-icon">🤎</div>
+    <div className="distance-banner-text">
+      <h3>{t.distanceBannerTitle || 'Adopția la distanță'}</h3>
+      <p>{t.distanceBannerDesc || 'Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic.'}</p>
+    </div>
+  </div>
+)}
           
           {filters.species && !isDistanceMode && (
             <div className="catalog-filter-badge">
@@ -339,6 +358,10 @@ export default function Catalog() {
                     className="catalog-card-item"
                   >
                     <AnimalCard
+                    onClick={() => setSelectedAnimal(animalDataForModal)} 
+                    className="catalog-card-item"
+                  >
+                    <AnimalCard 
                       animal={{ 
                         ...animal, 
                         imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
@@ -389,6 +412,7 @@ export default function Catalog() {
                   <div 
                     key={animal.id} 
                     onClick={() => handleCardClick(animal.id, animalDataForModal)} 
+                    onClick={() => setSelectedAnimal(animalDataForModal)} 
                     className="mobile-card-slide"
                   >
                     <AnimalCard 
@@ -403,6 +427,17 @@ export default function Catalog() {
                 );
               })}
             </div>
+
+            <button 
+              type="button" 
+              className="mobile-arrow-btn right" 
+              onClick={() => handleMobileScroll('right')}
+              aria-label="Următor"
+            >
+              ›
+            </button>
+          </div>
+
 
             <button 
               type="button" 
