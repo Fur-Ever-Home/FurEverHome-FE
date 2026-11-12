@@ -7,6 +7,7 @@ import { AnimalCard } from '../components/AnimalCard';
 import { AnimalModal } from '../components/AnimalModal';
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
+import { API_BASE_URL } from '../config';
 import dogIcon from '../assets/dog-icon.svg';
 import FilterSidebar, { FilterState } from '../components/FilterSidebar';
 import './Catalog.css';
@@ -99,7 +100,7 @@ export default function Catalog() {
     if (filters.dewormed) queryParams.append('dewormed', 'true');
 
     const queryString = queryParams.toString();
-    const url = `http://localhost:8080/api/animals${queryString ? `?${queryString}` : ''}`;
+    const url = `${API_BASE_URL}/api/animals${queryString ? `?${queryString}` : ''}`;
 
     fetch(url)
       .then((response) => response.json())
@@ -194,7 +195,7 @@ export default function Catalog() {
           box-sizing: border-box !important;
           overflow: hidden !important;
         }
-        .catalog-card-item img, .mobile-card-slide img {
+        .catalog-card-item .animal-card-img, .mobile-card-slide .animal-card-img {
           width: 100% !important;
           height: 250px !important;
           max-width: none !important;
@@ -204,6 +205,15 @@ export default function Catalog() {
           margin: 0 auto !important;
           padding: 0 !important;
           border-radius: 0 !important;
+        }
+        .catalog-card-item .card-health-overlay img, .mobile-card-slide .card-health-overlay img {
+          width: 32px !important;
+          height: 32px !important;
+          max-width: 32px !important;
+          max-height: 32px !important;
+          object-fit: contain !important;
+          border-radius: 50% !important;
+          display: block !important;
         }
 
         .modal-info-scroll, .animal-modal-details {

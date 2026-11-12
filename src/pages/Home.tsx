@@ -21,6 +21,7 @@ import shieldIcon from '../assets/shield.png';
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
+import { API_BASE_URL } from '../config';
 
 interface Animal {
   id: number;
@@ -63,11 +64,7 @@ export default function Home() {
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   useEffect(() => {
-  const BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:8080' 
-  : 'https://fureverhome-be-1.onrender.com';
-
-let url = `${BASE_URL}/api/animals`;
+    let url = `${API_BASE_URL}/api/animals`;
     if (selectedSpecies) {
       url += `?species=${encodeURIComponent(selectedSpecies)}`;
     }
@@ -96,7 +93,7 @@ let url = `${BASE_URL}/api/animals`;
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      const scrollAmount = 320;
+      const scrollAmount = 280;
       carouselRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
@@ -220,7 +217,12 @@ let url = `${BASE_URL}/api/animals`;
                   };
 
                   return (
-                    <div key={animal.id} onClick={() => setSelectedAnimal(animalDataForModal)} style={{ cursor: 'pointer' }}>
+                    <div 
+                      key={animal.id} 
+                      className="carousel-card-item"
+                      onClick={() => setSelectedAnimal(animalDataForModal)} 
+                      style={{ cursor: 'pointer' }}
+                    >
                       <AnimalCard 
                         animal={{ 
                           ...animal, 

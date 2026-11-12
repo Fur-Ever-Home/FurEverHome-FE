@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FavoriteAuthModal from './FavoriteAuthModal';
+import { API_BASE_URL } from '../config';
 import './FavoriteBtn.css';
 
 interface Animal {
@@ -33,7 +34,7 @@ export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ animal, isLoggedIn }) 
 
     try {
       if (animal.id) {
-        await fetch(`http://localhost:8080/api/favorites/${animal.id}`, {
+        await fetch(`${API_BASE_URL}/api/favorites/${animal.id}`, {
           method: nextFavoriteState ? 'POST' : 'DELETE',
           headers: {
             'Content-Type': 'application/json',

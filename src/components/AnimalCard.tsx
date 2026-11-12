@@ -106,24 +106,24 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
         <div className="card-fav-btn">
           <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
         </div>
+      </div>
 
-        {/* Iconițele de pe card - identice cu cele din legendă */}
+      <div className="card-content">
+        {/* Iconițele de sănătate poziționate sub imagine, ca în design */}
         {!isDistanceMode && (
-          <div className="card-health-overlay">
-            <span className={`legend-badge ${animal.vaccinated !== false ? 'active' : 'inactive'}`} title={t.vaccinated || 'Vaccinat'}>
+          <div className="card-health-badges">
+            <span className={`health-badge-circle ${animal.vaccinated !== false ? 'active' : 'inactive'}`} title={t.vaccinated || 'Vaccinat'}>
               <img src={vaccineIcon} alt={t.vaccinated || 'Vaccinat'} />
             </span>
-            <span className={`legend-badge ${animal.dewormed !== false ? 'active' : 'inactive'}`} title={t.dewormed || 'Deparazitat'}>
+            <span className={`health-badge-circle ${animal.dewormed !== false ? 'active' : 'inactive'}`} title={t.dewormed || 'Deparazitat'}>
               <img src={dewormIcon} alt={t.dewormed || 'Deparazitat'} />
             </span>
-            <span className={`legend-badge ${animal.sterilized !== false ? 'active' : 'inactive'}`} title={t.sterilized || 'Sterilizat'}>
+            <span className={`health-badge-circle ${animal.sterilized !== false ? 'active' : 'inactive'}`} title={t.sterilized || 'Sterilizat'}>
               <img src={sterileIcon} alt={t.sterilized || 'Sterilizat'} />
             </span>
           </div>
         )}
-      </div>
 
-      <div className="card-content">
         <h3 className="card-title">{animal.name}</h3>
         <p className="card-subtitle">
           {translateGender(genderValue)} · {translateAge(animal.age)} · {translateSize(animal.size)}
