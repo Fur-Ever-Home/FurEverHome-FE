@@ -26,6 +26,7 @@ export interface AnimalCardProps {
     imageUrl?: string;
     image?: string;
     fundingPercent?: number;
+    needType?: string; 
   };
   isDistanceMode?: boolean;
 }
@@ -77,7 +78,12 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
   return (
     <div className={`animal-card ${isDistanceMode ? 'distance-card-style' : ''}`}>
       <div className="card-image-wrapper">
-        <span className="status-badge-card">{translateStatus(animal.status)}</span>
+        <span 
+          className="status-badge-card"
+          style={isDistanceMode ? { backgroundColor: '#A66E38', color: '#FFFDF8' } : undefined}
+        >
+          {isDistanceMode ? (animal.status || 'Senior') : translateStatus(animal.status)}
+        </span>
         
         <img src={imageSrc} alt={animal.name} className="animal-card-img" />
 
@@ -110,11 +116,27 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
 
         {isDistanceMode && (
           <div className="distance-progress-container">
+            {/* <-- ÎNCEPUT COMPLETARE: Etichetă nevoie --> */}
+            <div style={{ marginBottom: '8px' }}>
+              <span style={{
+                display: 'inline-block',
+                backgroundColor: '#EFE6D8',
+                color: '#5C4E43',
+                fontSize: '11px',
+                fontWeight: 600,
+                padding: '4px 10px',
+                borderRadius: '12px'
+              }}>
+                {animal.needType || (lang === 'en' ? 'Permanent care' : 'Cazare permanentă')}
+              </span>
+            </div>
+            {/* <-- SFÂRȘIT COMPLETARE --> */}
+
             <div className="progress-bar-bg">
-              <div 
+           
                 className="progress-bar-fill" 
                 style={{ width: `${animal.fundingPercent || 45}%` }}
-              />
+              /
             </div>
             <span className="progress-text">
               {animal.fundingPercent || 45}% {t.fundingCovered || 'din necesarul lunar acoperit'}
@@ -123,6 +145,10 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
         )}
 
         <button type="button" className="btn-card-details">
+          style={isDistanceMode ? { backgroundColor: '#A66E38', color: '#FFFDF8' } : undefined}
+          {isDistanceMode 
+            ? `🤍 ${lang === 'en' ? 'Donate' : 'Donează'}` 
+            : (t.btnViewDetails || 'Vezi detalii')}
           {t.btnViewDetails || 'Vezi detalii'}
         </button>
       </div>

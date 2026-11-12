@@ -206,6 +206,33 @@ export default function Catalog() {
         }
         .modal-info-scroll::-webkit-scrollbar-thumb:hover, .animal-modal-details::-webkit-scrollbar-thumb:hover {
           background-color: #3F2C20 !important;
+       .custom-mobile-header {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .custom-mobile-header {
+            display: block;
+            margin-bottom: 16px;
+          }
+          /* Ascundem bara veche de mobil și antetul de desktop pe telefon */
+          .catalog-mobile-filter-bar,
+          .catalog-header-row {
+            display: none !important;
+          }
+          /* Transformăm slider-ul orizontal în listă verticală ca în Figma */
+          .mobile-arrow-btn {
+            display: none !important;
+          }
+          .mobile-cards-track {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+            overflow: visible !important;
+          }
+          .mobile-card-slide {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
         }
       `}</style>
 
