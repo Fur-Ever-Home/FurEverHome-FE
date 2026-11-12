@@ -26,7 +26,7 @@ export interface AnimalCardProps {
     imageUrl?: string;
     image?: string;
     fundingPercent?: number;
-    needType?: string; 
+    needType?: string;
   };
   isDistanceMode?: boolean;
 }
@@ -57,6 +57,12 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
   };
 
   const translateStatus = (st?: string) => {
+    if (isDistanceMode) {
+      if (!st || st.toLowerCase().includes('disponibil') || st.toLowerCase().includes('available')) {
+        return 'Senior';
+      }
+      return st;
+    }
     if (!st) return t.statusAvailable || 'Disponibil';
     const lower = st.toLowerCase().trim();
     if (lower.includes('disponibil') || lower.includes('available')) return t.statusAvailable || 'Disponibil';
@@ -75,6 +81,16 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
       .replace(/an\b/g, t.yearOld || 'year old');
   };
 
+  const translateNeedType = (need?: string) => {
+    if (!need) return lang === 'en' ? 'Permanent care' : 'Cazare permanentă';
+    if (lang === 'ro') return need;
+    const lower = need.toLowerCase();
+    if (lower.includes('cazare')) return 'Permanent care';
+    if (lower.includes('tratament continuu')) return 'Continuous treatment';
+    if (lower.includes('tratament')) return 'Treatment & care';
+    return need;
+  };
+
   return (
     <div className={`animal-card ${isDistanceMode ? 'distance-card-style' : ''}`}>
       <div className="card-image-wrapper">
@@ -82,7 +98,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
           className="status-badge-card"
           style={isDistanceMode ? { backgroundColor: '#A66E38', color: '#FFFDF8' } : undefined}
         >
-          {isDistanceMode ? (animal.status || 'Senior') : translateStatus(animal.status)}
+          {translateStatus(animal.status)}
         </span>
         
         <img src={imageSrc} alt={animal.name} className="animal-card-img" />
@@ -91,7 +107,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
           <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
         </div>
 
-        {/* Iconițele de pe card - identice cu cele din legendă */}
         {!isDistanceMode && (
           <div className="card-health-overlay">
             <span className={`legend-badge ${animal.vaccinated !== false ? 'active' : 'inactive'}`} title={t.vaccinated || 'Vaccinat'}>
@@ -115,9 +130,8 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
         <p className="card-location">{animal.shelter || animal.location || 'Casa lui Azor'}</p>
 
         {isDistanceMode && (
-          <div className="distance-progress-container">
-            {/* <-- ÎNCEPUT COMPLETARE: Etichetă nevoie --> */}
-            <div style={{ marginBottom: '8px' }}>
+          <>
+            <div style={{ marginTop: '6px', marginBottom: '8px' }}>
               <span style={{
                 display: 'inline-block',
                 backgroundColor: '#EFE6D8',
@@ -127,29 +141,44 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
                 padding: '4px 10px',
                 borderRadius: '12px'
               }}>
-                {animal.needType || (lang === 'en' ? 'Permanent care' : 'Cazare permanentă')}
+                {translateNeedType(animal.needType)}
               </span>
             </div>
-            {/* <-- SFÂRȘIT COMPLETARE --> */}
 
-            <div className="progress-bar-bg">
-           
-                className="progress-bar-fill" 
-                style={{ width: `${animal.fundingPercent || 45}%` }}
-              /
+            <div className="distance-progress-container">
+              <div className="progress-bar-bg">
+                <div 
+                  className="progress-bar-fill" 
+                  style={{ width: `${animal.fundingPercent || 45}%` }}
+                />
+              </div>
+              <span className="progress-text">
+                {animal.fundingPercent || 45}% {t.fundingCovered || (lang === 'en' ? 'of monthly need covered' : 'din necesarul lunar acoperit')}
+              </span>
             </div>
-            <span className="progress-text">
-              {animal.fundingPercent || 45}% {t.fundingCovered || 'din necesarul lunar acoperit'}
-            </span>
-          </div>
+          </>
         )}
 
-        <button type="button" className="btn-card-details">
-          style={isDistanceMode ? { backgroundColor: '#A66E38', color: '#FFFDF8' } : undefined}
-          {isDistanceMode 
-            ? `🤍 ${lang === 'en' ? 'Donate' : 'Donează'}` 
-            : (t.btnViewDetails || 'Vezi detalii')}
-          {t.btnViewDetails || 'Vezi detalii'}
+        <button 
+          type="button" 
+          className="btn-card-details"
+          style={isDistanceMode ? { 
+            backgroundColor: '#A66E38', 
+            color: '#FFFDF8',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px'
+          } : undefined}
+        >
+          {isDistanceMode ? (
+            <>
+              <span style={{ fontSize: '14px', lineHeight: 1 }}>🤍</span>
+              {lang === 'en' ? 'Donate' : 'Donează'}
+            </>
+          ) : (
+            t.btnViewDetails || (lang === 'en' ? 'View details' : 'Vezi detalii')
+          )}
         </button>
       </div>
     </div>

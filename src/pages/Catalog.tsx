@@ -83,7 +83,6 @@ export default function Catalog() {
   });
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // Ref pentru slider-ul orizontal pe mobil
   const mobileTrackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -142,7 +141,7 @@ export default function Catalog() {
 
   const handleMobileScroll = (direction: 'left' | 'right') => {
     if (mobileTrackRef.current) {
-      const scrollAmount = 296; // Lățimea cardului (280px) + gap-ul (16px)
+      const scrollAmount = 296;
       mobileTrackRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
@@ -150,7 +149,6 @@ export default function Catalog() {
     }
   };
 
-  // Navigare diferențiată Mobil vs Desktop
   const handleCardClick = (animalId: number, animalDataForModal: any) => {
     if (window.innerWidth <= 768) {
       navigate(`/animal/${animalId}`);
@@ -162,7 +160,33 @@ export default function Catalog() {
   return (
     <div className="catalog-page">
       <style>{`
-        /* FORȚEAZĂ CENTRAREA POZELOR ÎN CARDURI (Desktop + Mobil) */
+        .custom-mobile-header {
+          display: none !important;
+        }
+
+        @media (max-width: 768px) {
+          .custom-mobile-header {
+            display: block !important;
+          }
+          .catalog-mobile-filter-bar,
+          .catalog-header-row {
+            display: none !important;
+          }
+          .mobile-arrow-btn {
+            display: none !important;
+          }
+          .mobile-cards-track {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+            overflow: visible !important;
+          }
+          .mobile-card-slide {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+        }
+
         .catalog-card-item > div, .mobile-card-slide > div {
           width: 100% !important;
           max-width: 100% !important;
@@ -182,8 +206,6 @@ export default function Catalog() {
           border-radius: 0 !important;
         }
 
-        /* SCROLLBAR OBLIGATORIU PENTRU INFORMAȚIILE DIN MODAL */
-        /* Clasa poate fi aplicată direct în AnimalModal.tsx pe div-ul din dreapta */
         .modal-info-scroll, .animal-modal-details {
           max-height: 380px !important;
           overflow-y: scroll !important;
@@ -206,33 +228,6 @@ export default function Catalog() {
         }
         .modal-info-scroll::-webkit-scrollbar-thumb:hover, .animal-modal-details::-webkit-scrollbar-thumb:hover {
           background-color: #3F2C20 !important;
-       .custom-mobile-header {
-          display: none;
-        }
-        @media (max-width: 768px) {
-          .custom-mobile-header {
-            display: block;
-            margin-bottom: 16px;
-          }
-          /* Ascundem bara veche de mobil și antetul de desktop pe telefon */
-          .catalog-mobile-filter-bar,
-          .catalog-header-row {
-            display: none !important;
-          }
-          /* Transformăm slider-ul orizontal în listă verticală ca în Figma */
-          .mobile-arrow-btn {
-            display: none !important;
-          }
-          .mobile-cards-track {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 20px !important;
-            overflow: visible !important;
-          }
-          .mobile-card-slide {
-            width: 100% !important;
-            max-width: 100% !important;
-          }
         }
       `}</style>
 
@@ -252,6 +247,110 @@ export default function Catalog() {
 
         <main className="catalog-main-content">
           
+          <div className="custom-mobile-header">
+            <h1 style={{ fontSize: '26px', lineHeight: '1.15', color: '#3F2C20', margin: '0 0 4px 0', fontFamily: 'serif', fontWeight: 'bold' }}>
+              {isDistanceMode 
+                ? (lang === 'en' ? 'Support a friend' : 'Sprijină un prieten')
+                : (lang === 'en' ? 'Find your future friend.' : 'Găsește-ți viitorul prieten.')}
+            </h1>
+            <h2 style={{ fontSize: '22px', lineHeight: '1.2', color: '#C68642', margin: '0 0 6px 0', fontFamily: 'serif', fontWeight: 'bold' }}>
+              {isDistanceMode
+                ? (lang === 'en' ? 'from a distance.' : 'de la distanță.')
+                : (lang === 'en' ? 'Offer a warm home.' : 'Oferă-i un cămin cald.')}
+            </h2>
+            <p style={{ fontSize: '12px', color: '#5c4e43', margin: '0 0 14px 0' }}>
+              {isDistanceMode
+                ? (lang === 'en' ? 'Seniors and animals with special needs.' : 'Seniori și animale cu nevoi speciale.')
+                : (lang === 'en' ? 'Every soul deserves a chance.' : 'Fiecare suflet merită o șansă.')}
+            </p>
+
+            <p style={{ fontSize: '11px', fontWeight: '700', color: '#6b5b4f', margin: '0 0 6px 0' }}>
+              {lang === 'en' ? 'Adoption type' : 'Tip adopție'}
+            </p>
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
+              <button 
+                type="button"
+                onClick={() => setFilters((prev) => ({ ...prev, adoptionType: '' }))}
+                style={{ 
+                  padding: '6px 16px', borderRadius: '20px', cursor: 'pointer', fontSize: '12px', fontWeight: '600',
+                  border: !isDistanceMode ? '1px solid #3F2C20' : '1px solid #8c7b6c', 
+                  backgroundColor: !isDistanceMode ? '#3F2C20' : 'transparent', 
+                  color: !isDistanceMode ? '#FFFDF8' : '#3F2C20' 
+                }}
+              >
+                {lang === 'en' ? 'Physical' : 'Fizică'}
+              </button>
+              <button 
+                type="button"
+                onClick={() => setFilters((prev) => ({ ...prev, adoptionType: 'la_distanta' }))}
+                style={{ 
+                  padding: '6px 16px', borderRadius: '20px', cursor: 'pointer', fontSize: '12px', fontWeight: '600',
+                  border: isDistanceMode ? '1px solid #3F2C20' : '1px solid #8c7b6c', 
+                  backgroundColor: isDistanceMode ? '#3F2C20' : 'transparent', 
+                  color: isDistanceMode ? '#FFFDF8' : '#3F2C20' 
+                }}
+              >
+                {lang === 'en' ? 'Remote' : 'La distanță'}
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+              <button 
+                type="button"
+                onClick={() => setIsMobileFilterOpen(true)}
+                style={{ 
+                  display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '20px', 
+                  border: 'none', backgroundColor: '#3F2C20', color: '#FFFDF8', fontSize: '12px', fontWeight: '600', cursor: 'pointer' 
+                }}
+              >
+                {lang === 'en' ? 'Filter' : 'Filtrează'} <span>⚙️</span>
+              </button>
+
+              <select 
+                value={sortOrder} 
+                onChange={(e) => setSortOrder(e.target.value)}
+                style={{ 
+                  padding: '7px 14px', borderRadius: '20px', border: '1px solid #DFCEB8', 
+                  backgroundColor: '#FFFDF8', color: '#3F2C20', fontSize: '12px', fontWeight: '500', cursor: 'pointer'
+                }}
+              >
+                <option value="noi">{lang === 'en' ? 'Sort' : 'Sortează'}</option>
+                <option value="vechi">{lang === 'en' ? 'Oldest' : 'Cele mai vechi'}</option>
+              </select>
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px', marginBottom: '12px' }}>
+              {[
+                { val: 'caine', labelRo: 'Câini', labelEn: 'Dogs' },
+                { val: 'pisica', labelRo: 'Pisici', labelEn: 'Cats' },
+                { val: 'altele', labelRo: 'Alte animale', labelEn: 'Other animals' }
+              ].map((cat) => {
+                const isActive = filters.species.toLowerCase() === cat.val;
+                return (
+                  <button
+                    key={cat.val}
+                    type="button"
+                    onClick={() => setFilters((prev) => ({ ...prev, species: isActive ? '' : cat.val }))}
+                    style={{
+                      padding: '5px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: '600', cursor: 'pointer', whiteSpace: 'nowrap',
+                      border: isActive ? '1px solid #3F2C20' : '1px solid #8c7b6c',
+                      backgroundColor: isActive ? '#3F2C20' : 'transparent',
+                      color: isActive ? '#FFFDF8' : '#3F2C20'
+                    }}
+                  >
+                    {lang === 'en' ? cat.labelEn : cat.labelRo}
+                  </button>
+                );
+              })}
+            </div>
+
+            <p style={{ fontWeight: '700', color: '#3F2C20', fontSize: '14px', margin: '0 0 12px 0' }}>
+              {isDistanceMode
+                ? (lang === 'en' ? `${animaleSortate.length} friends waiting for a sponsor` : `${animaleSortate.length} prieteni așteaptă un sponsor`)
+                : (lang === 'en' ? `${animaleSortate.length} friends are looking for a home` : `${animaleSortate.length} prieteni își caută o casă`)}
+            </p>
+          </div>
+
           <div className="catalog-mobile-filter-bar">
             <button 
               type="button" 
@@ -284,7 +383,6 @@ export default function Catalog() {
             </div>
           </div>
 
-          {/* BANNER ADOPȚIE LA DISTANȚĂ TRADUS */}
           {isDistanceMode && (
             <div className="distance-banner-card">
               <div className="distance-banner-icon">🤎</div>
@@ -302,7 +400,6 @@ export default function Catalog() {
             </div>
           )}
 
-          {/* RENDER DESKTOP (GRID DE COLOANE) */}
           <div className="catalog-cards-grid desktop-only-grid">
             {loading ? (
               <p className="catalog-message">{t.loading || 'Se încarcă animalele...'}</p>
@@ -352,7 +449,6 @@ export default function Catalog() {
             )}
           </div>
 
-          {/* RENDER MOBIL (SLIDER ORIZONTAL CU SĂGEȚI STÂNGA / DREAPTA) */}
           <div className="mobile-carousel-wrapper">
             <button 
               type="button" 
