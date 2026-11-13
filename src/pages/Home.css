@@ -324,11 +324,14 @@ html, body {
   flex-shrink: 0 !important;
 }
 
-/* 4. Dacă te refereai și la pozele animalelor din carduri să fie mai mari și mai apropiate: */
-.carousel-section .animal-card img,
-.carousel-section [class*="card"] img:not(.legend-item img) {
-  height: 250px !important; /* Mărește pozele cățeilor/pisicilor pe verticală */
+/* 4. Pozele animalelor din carusel */
+.carousel-section .animal-card .animal-card-img,
+.carousel-section .animal-card .animal-real-image,
+.carousel-section [class*="card"] .animal-card-img {
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover !important;
+  border-radius: 14px !important;
 }
 
 
@@ -633,6 +636,22 @@ html, body {
   justify-content: space-between !important;
   width: 100% !important;
   position: relative;
+}
+
+.carousel-card-item {
+  flex: 0 0 260px;
+  min-width: 260px;
+  max-width: 260px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .carousel-card-item {
+    flex: 0 0 230px;
+    min-width: 230px;
+    max-width: 230px;
+  }
 }
 
 .carousel-cards-track {

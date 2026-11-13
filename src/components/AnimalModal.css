@@ -207,25 +207,29 @@
 
 .animal-name {
   font-family: Georgia, serif;
-  font-size: 2.2rem;
+  font-size: 2.6rem !important;
   font-weight: 700;
   color: #3f2c20;
   margin: 0 0 6px 0;
 }
 
-.status-badge {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 14px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  width: fit-content;
-  margin-bottom: 8px;
+.modal-details-scrollable .status-badge {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  display: inline-block !important;
+  padding: 5px 16px !important;
+  border-radius: 999px !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+  width: fit-content !important;
+  margin-top: 4px !important;
+  margin-bottom: 14px !important;
 }
 
-.status-badge.available {
-  background-color: #3b7a57;
-  color: #ffffff;
+.modal-details-scrollable .status-badge.available {
+  background-color: #5b8c5a !important;
+  color: #ffffff !important;
 }
 
 .location-info {

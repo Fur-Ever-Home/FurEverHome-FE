@@ -4,6 +4,7 @@ import { useLanguage } from "../useLanguage";
 import { translations } from "../translations";
 import FavoriteBtn from "./FavoriteBtn";
 import "./AnimalModal.css";
+import AuthRequiredModal from "./AuthRequiredModal";
 
 // Importuri pentru iconițele din folderul assets
 import chipIcon from "../assets/chip.png";
@@ -46,17 +47,21 @@ interface AnimalModalProps {
     noAllergies?: boolean;
   };
   onClose: () => void;
+  isDistanceMode?: boolean;
 }
 
-export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => {
+export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDistanceMode }) => {
   const { lang } = useLanguage();
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMessage, setAuthMessage] = useState("");
 
   if (!animal) return null;
 
   const isLoggedIn = !!localStorage.getItem("token");
+
 
   // Preluăm lista de imagini (cu fallback la imageUrl/image dacă arrays lipsește)
   const imagesList: string[] =
@@ -98,6 +103,25 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
     if (lower.includes("auriu") || lower.includes("golden")) return t.colorGolden || "Auriu";
     if (lower.includes("tricolor")) return t.colorTricolor || "Tricolor";
     return color;
+  };
+
+  // <-- ADAUGĂ ACESTE DOUĂ FUNCȚII
+  const handleDonatieClick = () => {
+    if (!isLoggedIn) {
+      setAuthMessage(`Dacă vrei să donezi pentru ${animal.name} trebuie să fii logat`);
+      setIsAuthModalOpen(true);
+      return;
+    }
+    // Aici pui ce se întâmplă dacă e logat (ex. navigare spre donație)
+  };
+
+  const handleProgrameazaVizitaClick = () => {
+    if (!isLoggedIn) {
+      setAuthMessage(`Pentru a programa o vizită alături de ${animal.name} trebuie să fii logat`);
+      setIsAuthModalOpen(true);
+      return;
+    }
+    // Aici pui ce se întâmplă dacă e logat (ex. deschizi calendarul)
   };
 
   return createPortal(
@@ -176,10 +200,13 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
             {/* Zona cu scroll pentru informații */}
             <div className="modal-details-scrollable">
               <h2 className="animal-name">{animal.name}</h2>
+
               
-              <span className="status-badge available">
-                {animal.status || t.statusAvailable || "Disponibil"}
-              </span>
+              {!isDistanceMode && (
+                <span className="status-badge available">
+                  {animal.status || t.statusAvailable || "Disponibil"}
+                </span>
+              )}
 
               <p className="location-info">
                 <strong>{t.locationLabel || "Locație"}:</strong> {animal.location || animal.shelter || "Adăpostul Lăbuțe din Copou"}
@@ -268,28 +295,53 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
                   La adăpost, {animal.name} s-a dovedit a fi extrem de ascultător și recunoscător pentru fiecare gest de afecțiune. Are toate controalele medicale la zi și este pregătit să plece spre noua lui casă.
                 </p>
 
-                <div style={{ backgroundColor: "#f7f3ed", padding: "12px 14px", borderRadius: "10px", fontSize: "0.88rem", color: "#5d534a" }}>
-                  <strong style={{ color: "#3F2C20", display: "block", marginBottom: "4px" }}>
-                    🐾 Procesul de adopție:
-                  </strong>
-                  Adopția este gratuită și presupune o scurtă vizită de cunoaștere la centru, urmată de semnarea contractului de adopție.
-                </div>
+                {!isDistanceMode && (
+  <div style={{ backgroundColor: "#f7f3ed", padding: "12px 14px", borderRadius: "10px", fontSize: "0.88rem", color: "#5d534a" }}>
+    <strong style={{ color: "#3F2C20", display: "block", marginBottom: "4px" }}>
+      🐾 Procesul de adopție:
+    </strong>
+    Adopția este gratuită și presupune o scurtă vizită de cunoaștere la centru, urmată de semnarea contractului de adopție.
+  </div>
+)}
               </div>
             </div>
 
             
 
             {/* Secțiunea de butoane (fixă jos) */}
+            {/* Secțiunea de butoane (fixă jos) */}
             <div className="modal-actions-container">
 
-              
-              <button type="button" className="btn-schedule">
-                {t.scheduleVisit || "Programează o vizită"}
-              </button>
+              {isDistanceMode ? (
+                <button
+                  type="button"
+                  className="btn-schedule"
+                  onClick={handleDonatieClick}
+                  style={{
+                    backgroundColor: "#A66E38",
+                    color: "#FFFDF8",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "6px",
+                  }}
+                >
+                  <span style={{ fontSize: "14px", lineHeight: 1 }}>🤍</span>
+                  {lang === "en" ? "Donate" : "Donează"}
+                </button>
+              ) : (
+                <button 
+                  type="button" 
+                  className="btn-schedule"
+                  onClick={handleProgrameazaVizitaClick}
+                >
+                  {t.scheduleVisit || "Programează o vizită"}
+                </button>
+              )}
               
               <button 
                 type="button"
-                className="btn-share" 
+                className="btn-share"
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
@@ -302,6 +354,9 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
                     alert("Link-ul a fost copiat în clipboard!");
                   }
                 }}
+                
+
+
                 title="Distribuie profilul"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -314,6 +369,12 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose }) => 
           </div>
         </div>
       </div>
+
+      <AuthRequiredModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        message={authMessage} 
+      />
     </div>,
     document.body
   );
