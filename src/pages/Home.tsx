@@ -101,6 +101,18 @@ export default function Home() {
       });
     }
   };
+const handleCardClick = (animalId: number, animalDataForModal: any) => {
+    if (window.innerWidth <= 768) {
+      // ADAUGĂM state-ul care spune de unde venim
+      navigate(`/animal/${animalId}`, { 
+        state: { animal: animalDataForModal, from: 'home' } 
+      });
+    } else {
+      setSelectedAnimal(animalDataForModal);
+    }
+  };
+
+
 
   return (
     <>
@@ -217,11 +229,12 @@ export default function Home() {
                     noAllergies: animal.noAllergies ?? true,
                   };
 
-                  return (
+                 return (
                     <div 
                       key={animal.id} 
                       className="carousel-card-item"
-                      onClick={() => navigate(`/animal/${animal.id}`)}
+                      // <-- ÎNLOCUIM onClick-ul VECHI CU ASTA -->
+                      onClick={() => handleCardClick(animal.id, animalDataForModal)} 
                       style={{ cursor: 'pointer' }}
                     >
                       <AnimalCard 
@@ -282,7 +295,12 @@ export default function Home() {
           </div>
        </section>
        </div>
-
+        {selectedAnimal && (
+        <AnimalModal 
+          animal={selectedAnimal} 
+          onClose={() => setSelectedAnimal(null)} 
+        />
+      )}
       
 
        <Footer />
