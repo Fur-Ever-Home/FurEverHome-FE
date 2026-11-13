@@ -4,9 +4,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
 import heroImage from '../assets/hero-image.png';
+import { useLanguage } from '../useLanguage';
+import { despreNoiTranslations } from '../despreNoiTranslations';
 import './DespreNoi.css';
 
 export default function DespreNoi() {
+  const { lang } = useLanguage();
+  const t = despreNoiTranslations[lang] || despreNoiTranslations.ro;
+
   const [formData, setFormData] = useState({
     nume: '',
     email: '',
@@ -19,7 +24,7 @@ export default function DespreNoi() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.gdpr) {
-      alert('Te rugăm să bifezi acordul de confidențialitate.');
+      alert(t.formGdprAlert);
       return;
     }
     setSubmitted(true);
@@ -40,41 +45,38 @@ export default function DespreNoi() {
         {/* ================= BREADCRUMBS ================= */}
         <nav className="dn-breadcrumbs" aria-label="Breadcrumb">
           <Link to="/" className="dn-breadcrumb-link">
-            Acasă
+            {t.breadcrumbHome}
           </Link>
           <span className="dn-breadcrumb-separator">&gt;</span>
-          <span className="dn-breadcrumb-current">Despre noi</span>
+          <span className="dn-breadcrumb-current">{t.breadcrumbAbout}</span>
         </nav>
 
         {/* ================= HERO SECTION ================= */}
         <section className="dn-hero-section">
           <div className="dn-hero-grid">
             <div className="dn-hero-content">
-              <span className="dn-section-tag">DESPRE NOI</span>
+              <span className="dn-section-tag">{t.heroTag}</span>
               <h1 className="dn-hero-title">
-                Fiecare animal merită un cămin.
+                {t.heroTitleLine1}{' '}
                 <span className="dn-hero-title-highlight">
-                  Noi scurtăm drumul până la el.
+                  {t.heroTitleLine2}
                 </span>
               </h1>
-              <p className="dn-hero-description">
-                FurEverHome adună într-un singur loc animalele din adăposturile din
-                Iași, ca adopția să fie simplă, transparentă și programată online.
-              </p>
+              <p className="dn-hero-description">{t.heroDesc}</p>
               <div className="dn-hero-buttons">
                 <button
                   type="button"
                   className="dn-btn-primary"
                   onClick={() => scrollToSection('misiune-section')}
                 >
-                  Misiunea platformei
+                  {t.btnMission}
                 </button>
                 <button
                   type="button"
                   className="dn-btn-secondary"
                   onClick={() => scrollToSection('contact-section')}
                 >
-                  Contact
+                  {t.btnContact}
                 </button>
               </div>
             </div>
@@ -82,7 +84,7 @@ export default function DespreNoi() {
             <div className="dn-hero-image-wrapper">
               <img
                 src={heroImage}
-                alt="Două tinere zâmbind cu un câine și o pisică"
+                alt={t.heroImageAlt}
                 className="dn-hero-image"
               />
             </div>
@@ -92,14 +94,9 @@ export default function DespreNoi() {
         {/* ================= MISIUNEA PLATFORMEI ================= */}
         <section id="misiune-section" className="dn-mission-section">
           <div className="dn-mission-header">
-            <span className="dn-section-tag">MISIUNEA PLATFORMEI</span>
-            <h2 className="dn-section-title">
-              Mai puține anunțuri pierdute, mai multe animale acasă
-            </h2>
-            <p className="dn-section-subtitle">
-              Azi, un animal din adăpost ajunge la tine prin zeci de postări pe
-              Facebook sau OLX. Noi le punem pe toate într-un singur loc.
-            </p>
+            <span className="dn-section-tag">{t.missionTag}</span>
+            <h2 className="dn-section-title">{t.missionTitle}</h2>
+            <p className="dn-section-subtitle">{t.missionDesc}</p>
           </div>
 
           <div className="dn-quote-card">
@@ -107,12 +104,8 @@ export default function DespreNoi() {
               “
             </div>
             <div className="dn-quote-content">
-              <div className="dn-quote-tag">MISIUNEA NOASTRĂ</div>
-              <p className="dn-quote-text">
-                Vrem ca oricine se gândește să adopte să găsească toate animalele
-                disponibile într-un singur loc și să programeze o vizită în câteva
-                minute.
-              </p>
+              <div className="dn-quote-tag">{t.quoteTag}</div>
+              <p className="dn-quote-text">{t.quoteText}</p>
             </div>
           </div>
         </section>
@@ -140,11 +133,8 @@ export default function DespreNoi() {
                   <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
               </div>
-              <h3 className="dn-pillar-title">Transparență</h3>
-              <p className="dn-pillar-text">
-                Fiecare profil spune tot: vârsta, sănătatea, temperamentul și cu cine
-                se înțelege animalul.
-              </p>
+              <h3 className="dn-pillar-title">{t.pillar1Title}</h3>
+              <p className="dn-pillar-text">{t.pillar1Text}</p>
             </div>
 
             {/* Card 2: Simplitate */}
@@ -165,11 +155,8 @@ export default function DespreNoi() {
                   <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>
               </div>
-              <h3 className="dn-pillar-title">Simplitate</h3>
-              <p className="dn-pillar-text">
-                Programezi vizita online, direct din profilul animalului. Fără
-                telefoane la care nu răspunde nimeni.
-              </p>
+              <h3 className="dn-pillar-title">{t.pillar2Title}</h3>
+              <p className="dn-pillar-text">{t.pillar2Text}</p>
             </div>
 
             {/* Card 3: Colaborare */}
@@ -188,10 +175,8 @@ export default function DespreNoi() {
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
               </div>
-              <h3 className="dn-pillar-title">Colaborare</h3>
-              <p className="dn-pillar-text">
-                Lucrăm împreună cu adăposturile și voluntarii, nu în locul lor.
-              </p>
+              <h3 className="dn-pillar-title">{t.pillar3Title}</h3>
+              <p className="dn-pillar-text">{t.pillar3Text}</p>
             </div>
           </div>
         </section>
@@ -217,24 +202,24 @@ export default function DespreNoi() {
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                   </svg>
                 </div>
-                <h3 className="dn-role-title">Pentru adoptatori</h3>
+                <h3 className="dn-role-title">{t.adoptersTitle}</h3>
               </div>
               <ul className="dn-role-list">
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Cauți și filtrezi animalele din toate adăposturile</span>
+                  <span>{t.adoptersPoint1}</span>
                 </li>
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Programezi vizite online și le vezi în Rezervările mele</span>
+                  <span>{t.adoptersPoint2}</span>
                 </li>
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Salvezi la favorite animalele care îți plac</span>
+                  <span>{t.adoptersPoint3}</span>
                 </li>
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Ai un ghid care te ajută pas cu pas</span>
+                  <span>{t.adoptersPoint4}</span>
                 </li>
               </ul>
             </div>
@@ -263,28 +248,28 @@ export default function DespreNoi() {
                     <line x1="14" y1="14" x2="16" y2="14"></line>
                   </svg>
                 </div>
-                <h3 className="dn-role-title">Pentru adăposturi</h3>
+                <h3 className="dn-role-title">{t.sheltersTitle}</h3>
               </div>
               <ul className="dn-role-list">
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Publici profiluri complete pentru fiecare animal</span>
+                  <span>{t.sheltersPoint1}</span>
                 </li>
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Primești și gestionezi programările din Panoul centrului</span>
+                  <span>{t.sheltersPoint2}</span>
                 </li>
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Primești sprijin lunar prin adopția la distanță</span>
+                  <span>{t.sheltersPoint3}</span>
                 </li>
                 <li className="dn-role-list-item">
                   <span className="dn-role-bullet">•</span>
-                  <span>Ajungi la oameni care chiar vor să adopte</span>
+                  <span>{t.sheltersPoint4}</span>
                 </li>
               </ul>
               <Link to="/colaborari" className="dn-role-btn">
-                <span>Vrei să colaborăm?</span>
+                <span>{t.btnCollab}</span>
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -296,12 +281,9 @@ export default function DespreNoi() {
           <div className="dn-contact-grid">
             {/* Coloana stângă: Informații de contact */}
             <div className="dn-contact-info-col">
-              <span className="dn-section-tag">CONTACT</span>
-              <h2 className="dn-contact-title">Scrie-ne</h2>
-              <p className="dn-contact-desc">
-                Ai o întrebare, o idee sau vrei să ne semnalezi o problemă? Îți
-                răspundem cât de repede putem.
-              </p>
+              <span className="dn-section-tag">{t.contactTag}</span>
+              <h2 className="dn-contact-title">{t.contactTitle}</h2>
+              <p className="dn-contact-desc">{t.contactDesc}</p>
 
               <div className="dn-contact-details">
                 {/* Email */}
@@ -322,7 +304,7 @@ export default function DespreNoi() {
                     </svg>
                   </div>
                   <div className="dn-contact-row-content">
-                    <span className="dn-contact-row-label">Email</span>
+                    <span className="dn-contact-row-label">{t.labelEmail}</span>
                     <a
                       href="mailto:contact@fureverhome.ro"
                       className="dn-contact-row-value"
@@ -350,8 +332,8 @@ export default function DespreNoi() {
                     </svg>
                   </div>
                   <div className="dn-contact-row-content">
-                    <span className="dn-contact-row-label">Oraș</span>
-                    <span className="dn-contact-row-value">Iași, România</span>
+                    <span className="dn-contact-row-label">{t.labelCity}</span>
+                    <span className="dn-contact-row-value">{t.valueCity}</span>
                   </div>
                 </div>
 
@@ -373,9 +355,9 @@ export default function DespreNoi() {
                     </svg>
                   </div>
                   <div className="dn-contact-row-content">
-                    <span className="dn-contact-row-label">Timp de răspuns</span>
+                    <span className="dn-contact-row-label">{t.labelResponseTime}</span>
                     <span className="dn-contact-row-value">
-                      De obicei, în 1–2 zile lucrătoare
+                      {t.valueResponseTime}
                     </span>
                   </div>
                 </div>
@@ -383,36 +365,30 @@ export default function DespreNoi() {
 
               {/* Caseta Adăpost din Iași */}
               <div className="dn-shelter-box">
-                <h4 className="dn-shelter-box-title">Ești un adăpost din Iași?</h4>
-                <p className="dn-shelter-box-text">
-                  Hai să-ți publicăm animalele pe platformă. Alege „Sunt un adăpost”
-                  la subiect și te contactăm noi.
-                </p>
+                <h4 className="dn-shelter-box-title">{t.shelterBoxTitle}</h4>
+                <p className="dn-shelter-box-text">{t.shelterBoxText}</p>
               </div>
             </div>
 
             {/* Coloana dreaptă: Formular */}
             <div className="dn-form-card">
-              <h3 className="dn-form-title">Trimite-ne un mesaj</h3>
+              <h3 className="dn-form-title">{t.formTitle}</h3>
 
               {submitted ? (
-                <div className="dn-form-success">
-                  Mulțumim pentru mesaj! Am recepționat solicitarea ta și îți vom
-                  răspunde în cel mai scurt timp.
-                </div>
+                <div className="dn-form-success">{t.formSuccess}</div>
               ) : (
                 <form className="dn-form" onSubmit={handleSubmit}>
                   <div className="dn-form-row">
                     <div className="dn-form-group">
                       <label className="dn-form-label" htmlFor="dn-nume">
-                        Nume
+                        {t.formNameLabel}
                       </label>
                       <input
                         id="dn-nume"
                         type="text"
                         required
                         className="dn-form-input"
-                        placeholder="Numele tău"
+                        placeholder={t.formNamePlaceholder}
                         value={formData.nume}
                         onChange={(e) =>
                           setFormData({ ...formData, nume: e.target.value })
@@ -421,14 +397,14 @@ export default function DespreNoi() {
                     </div>
                     <div className="dn-form-group">
                       <label className="dn-form-label" htmlFor="dn-email">
-                        Email
+                        {t.formEmailLabel}
                       </label>
                       <input
                         id="dn-email"
                         type="email"
                         required
                         className="dn-form-input"
-                        placeholder="nume@exemplu.ro"
+                        placeholder={t.formEmailPlaceholder}
                         value={formData.email}
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
@@ -439,7 +415,7 @@ export default function DespreNoi() {
 
                   <div className="dn-form-group">
                     <label className="dn-form-label" htmlFor="dn-subiect">
-                      Subiect
+                      {t.formSubjectLabel}
                     </label>
                     <select
                       id="dn-subiect"
@@ -451,25 +427,24 @@ export default function DespreNoi() {
                       }
                     >
                       <option value="" disabled>
-                        Alege un subiect (Adopție, Sunt un adăpost, Colaborare,
-                        Altceva)
+                        {t.formSubjectPlaceholder}
                       </option>
-                      <option value="adoptie">Adopție</option>
-                      <option value="adapost">Sunt un adăpost</option>
-                      <option value="colaborare">Colaborare</option>
-                      <option value="altceva">Altceva</option>
+                      <option value="adoptie">{t.formSubjectOption1}</option>
+                      <option value="adapost">{t.formSubjectOption2}</option>
+                      <option value="colaborare">{t.formSubjectOption3}</option>
+                      <option value="altceva">{t.formSubjectOption4}</option>
                     </select>
                   </div>
 
                   <div className="dn-form-group">
                     <label className="dn-form-label" htmlFor="dn-mesaj">
-                      Mesaj
+                      {t.formMessageLabel}
                     </label>
                     <textarea
                       id="dn-mesaj"
                       required
                       className="dn-form-textarea"
-                      placeholder="Scrie-ne cu ce te putem ajuta..."
+                      placeholder={t.formMessagePlaceholder}
                       value={formData.mesaj}
                       onChange={(e) =>
                         setFormData({ ...formData, mesaj: e.target.value })
@@ -489,17 +464,16 @@ export default function DespreNoi() {
                       }
                     />
                     <label className="dn-checkbox-label" htmlFor="dn-gdpr">
-                      Sunt de acord ca datele mele să fie folosite doar pentru a-mi
-                      răspunde. Detalii în{' '}
+                      {t.formGdprAgree}{' '}
                       <Link to="/politica-confidentialitate">
-                        Politica de confidențialitate
+                        {t.formGdprLink}
                       </Link>
                       .
                     </label>
                   </div>
 
                   <button type="submit" className="dn-form-submit-btn">
-                    Trimite mesajul
+                    {t.formSubmitBtn}
                   </button>
                 </form>
               )}
@@ -511,11 +485,11 @@ export default function DespreNoi() {
         <section className="dn-cta-section">
           <div className="dn-cta-banner">
             <h3 className="dn-cta-text">
-              Nu poți adopta acum?{' '}
-              <span className="dn-cta-highlight">Poți ajuta altfel.</span>
+              {t.ctaTextPart1}{' '}
+              <span className="dn-cta-highlight">{t.ctaTextHighlight}</span>
             </h3>
             <Link to="/colaborari" className="dn-cta-btn">
-              <span>Cum poți ajuta</span>
+              <span>{t.ctaBtn}</span>
               <span aria-hidden="true">→</span>
             </Link>
           </div>
