@@ -497,9 +497,11 @@
 }
 
 .colab-form-title {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.45rem;
+  font-family: 'Libertinus Sans', Georgia, -apple-system, sans-serif;
+  font-size: 26px;
   font-weight: 700;
+  line-height: 120%;
+  letter-spacing: 0%;
   color: #2e1e14;
   margin: 0 0 6px 0;
 }
