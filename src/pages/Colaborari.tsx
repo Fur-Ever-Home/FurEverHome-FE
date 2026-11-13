@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
+import { API_BASE_URL } from '../config';
 import { useLanguage } from '../useLanguage';
 import { colaborariTranslations } from '../colaborariTranslations';
 import './Colaborari.css';
@@ -16,6 +17,38 @@ export default function Colaborari() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Statistici: Valori implicite din Figma cu suport pentru preluare din backend când devine disponibil
+  const [stats, setStats] = useState({
+    partners: t.statPartnersNum,
+    sponsors: t.statSponsorsNum,
+    volunteers: t.statVolunteersNum,
+  });
+
+  useEffect(() => {
+    setStats({
+      partners: t.statPartnersNum,
+      sponsors: t.statSponsorsNum,
+      volunteers: t.statVolunteersNum,
+    });
+  }, [t]);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/colaborari/stats`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          setStats({
+            partners: String(data.partners ?? data.parteneri ?? t.statPartnersNum),
+            sponsors: String(data.sponsors ?? data.sponsori ?? t.statSponsorsNum),
+            volunteers: String(data.volunteers ?? data.voluntari ?? t.statVolunteersNum),
+          });
+        }
+      })
+      .catch(() => {
+        // Backend endpoint-ul nu este încă creat; se păstrează cifrele din Figma ca fallback
+      });
+  }, [t]);
 
   // Formular Voluntar
   const [volData, setVolData] = useState({
@@ -159,17 +192,17 @@ export default function Colaborari() {
 
           <div className="colab-stats-card">
             <div className="colab-stat-row">
-              <span className="colab-stat-number">{t.statPartnersNum}</span>
+              <span className="colab-stat-number">{stats.partners}</span>
               <span className="colab-stat-label">{t.statPartnersLabel}</span>
             </div>
             <div className="colab-stat-divider"></div>
             <div className="colab-stat-row">
-              <span className="colab-stat-number">{t.statSponsorsNum}</span>
+              <span className="colab-stat-number">{stats.sponsors}</span>
               <span className="colab-stat-label">{t.statSponsorsLabel}</span>
             </div>
             <div className="colab-stat-divider"></div>
             <div className="colab-stat-row">
-              <span className="colab-stat-number">{t.statVolunteersNum}</span>
+              <span className="colab-stat-number">{stats.volunteers}</span>
               <span className="colab-stat-label">{t.statVolunteersLabel}</span>
             </div>
           </div>
