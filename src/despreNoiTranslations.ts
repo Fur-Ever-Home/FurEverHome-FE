@@ -33,6 +33,7 @@ export interface DespreNoiTranslationKeys {
   adoptersPoint2: string;
   adoptersPoint3: string;
   adoptersPoint4: string;
+  btnAdopt: string;
 
   sheltersTitle: string;
   sheltersPoint1: string;
@@ -115,6 +116,7 @@ export const despreNoiTranslations: Record<'ro' | 'en', DespreNoiTranslationKeys
     adoptersPoint2: "Programezi vizite online și le vezi în Rezervările mele",
     adoptersPoint3: "Salvezi la favorite animalele care îți plac",
     adoptersPoint4: "Ai un ghid care te ajută pas cu pas",
+    btnAdopt: "Vezi animalele disponibile",
 
     sheltersTitle: "Pentru adăposturi",
     sheltersPoint1: "Publici profiluri complete pentru fiecare animal",
@@ -196,6 +198,7 @@ export const despreNoiTranslations: Record<'ro' | 'en', DespreNoiTranslationKeys
     adoptersPoint2: "Schedule visits online and view them in My Reservations",
     adoptersPoint3: "Save the animals you love to favorites",
     adoptersPoint4: "A step-by-step guide to help you along the way",
+    btnAdopt: "See available animals",
 
     sheltersTitle: "For shelters",
     sheltersPoint1: "Publish complete profiles for each animal",

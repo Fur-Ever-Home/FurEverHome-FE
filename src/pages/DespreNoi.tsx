@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,6 +11,11 @@ import './DespreNoi.css';
 export default function DespreNoi() {
   const { lang } = useLanguage();
   const t = despreNoiTranslations[lang] || despreNoiTranslations.ro;
+
+  // Derulare automată la începutul paginii când este deschisă
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [formData, setFormData] = useState({
     nume: '',
@@ -44,7 +49,11 @@ export default function DespreNoi() {
       <main className="dn-container">
         {/* ================= BREADCRUMBS ================= */}
         <nav className="dn-breadcrumbs" aria-label="Breadcrumb">
-          <Link to="/" className="dn-breadcrumb-link">
+          <Link
+            to="/"
+            className="dn-breadcrumb-link"
+            onClick={() => window.scrollTo(0, 0)}
+          >
             {t.breadcrumbHome}
           </Link>
           <span className="dn-breadcrumb-separator">&gt;</span>
@@ -222,6 +231,14 @@ export default function DespreNoi() {
                   <span>{t.adoptersPoint4}</span>
                 </li>
               </ul>
+              <Link
+                to="/catalog"
+                className="dn-role-btn"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                <span>{t.btnAdopt}</span>
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
 
             {/* Card Adăposturi */}
@@ -268,7 +285,11 @@ export default function DespreNoi() {
                   <span>{t.sheltersPoint4}</span>
                 </li>
               </ul>
-              <Link to="/colaborari" className="dn-role-btn">
+              <Link
+                to="/colaborari"
+                className="dn-role-btn"
+                onClick={() => window.scrollTo(0, 0)}
+              >
                 <span>{t.btnCollab}</span>
                 <span aria-hidden="true">→</span>
               </Link>
@@ -355,7 +376,9 @@ export default function DespreNoi() {
                     </svg>
                   </div>
                   <div className="dn-contact-row-content">
-                    <span className="dn-contact-row-label">{t.labelResponseTime}</span>
+                    <span className="dn-contact-row-label">
+                      {t.labelResponseTime}
+                    </span>
                     <span className="dn-contact-row-value">
                       {t.valueResponseTime}
                     </span>
@@ -367,6 +390,34 @@ export default function DespreNoi() {
               <div className="dn-shelter-box">
                 <h4 className="dn-shelter-box-title">{t.shelterBoxTitle}</h4>
                 <p className="dn-shelter-box-text">{t.shelterBoxText}</p>
+                <div style={{ marginTop: '12px' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((prev) => ({ ...prev, subiect: 'adapost' }));
+                      const selectEl = document.getElementById('dn-subiect');
+                      if (selectEl) {
+                        selectEl.focus();
+                        selectEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }
+                    }}
+                    style={{
+                      backgroundColor: '#c89551',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '999px',
+                      padding: '7px 18px',
+                      fontSize: '0.82rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'background-color 0.2s ease',
+                    }}
+                  >
+                    {lang === 'en'
+                      ? 'Select "I am a shelter"'
+                      : 'Alege „Sunt un adăpost”'}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -465,7 +516,10 @@ export default function DespreNoi() {
                     />
                     <label className="dn-checkbox-label" htmlFor="dn-gdpr">
                       {t.formGdprAgree}{' '}
-                      <Link to="/politica-confidentialitate">
+                      <Link
+                        to="/politica-confidentialitate"
+                        onClick={() => window.scrollTo(0, 0)}
+                      >
                         {t.formGdprLink}
                       </Link>
                       .
@@ -488,7 +542,11 @@ export default function DespreNoi() {
               {t.ctaTextPart1}{' '}
               <span className="dn-cta-highlight">{t.ctaTextHighlight}</span>
             </h3>
-            <Link to="/colaborari" className="dn-cta-btn">
+            <Link
+              to="/catalog?tip=la_distanta"
+              className="dn-cta-btn"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               <span>{t.ctaBtn}</span>
               <span aria-hidden="true">→</span>
             </Link>
