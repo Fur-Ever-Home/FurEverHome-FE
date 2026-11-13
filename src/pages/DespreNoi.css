@@ -465,12 +465,23 @@ html, body {
 }
 
 .dn-role-card {
-  background-color: #fbf9f4;
-  border: 1px solid #ebe4d8;
   border-radius: 20px;
   padding: 32px 36px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Card 1: Pentru adoptatori - ton nisipiu cald */
+.dn-role-card-adopters {
+  background-color: #efe8dc;
+  border: 1px solid #e5ddcf;
+}
+
+/* Card 2: Pentru adăposturi - ton cald piersică/caisă */
+.dn-role-card-shelters {
+  background-color: #f8ede0;
+  border: 1px solid #f0e1d0;
 }
 
 .dn-role-header {
@@ -481,10 +492,12 @@ html, body {
 }
 
 .dn-role-icon-box {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
   border-radius: 12px;
-  background-color: #f2ece0;
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(63, 44, 32, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -493,6 +506,7 @@ html, body {
 }
 
 .dn-role-title {
+  font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.28rem;
   font-weight: 700;
   color: #2e1e14;
@@ -542,10 +556,30 @@ html, body {
   cursor: pointer;
 }
 
-.dn-role-btn:hover {
-  background-color: #f5efe6;
-  border-color: #b5a695;
-  transform: translateX(2px);
+/* Buton dedicat Card 2 (Pentru adăposturi) */
+.dn-role-shelters-btn {
+  background-color: #f3e5d4 !important;
+  border: 1.5px solid #decbaa !important;
+  color: #3f2c20 !important;
+  padding: 12px 24px !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.dn-role-shelters-btn:hover {
+  background-color: #ecdcbe !important;
+  border-color: #cfbda8 !important;
+  transform: translateY(-1px) !important;
 }
 
 /* ==========================================================================

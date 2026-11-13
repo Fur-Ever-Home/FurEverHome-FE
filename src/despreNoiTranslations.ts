@@ -33,7 +33,6 @@ export interface DespreNoiTranslationKeys {
   adoptersPoint2: string;
   adoptersPoint3: string;
   adoptersPoint4: string;
-  btnAdopt: string;
 
   sheltersTitle: string;
   sheltersPoint1: string;
@@ -116,14 +115,13 @@ export const despreNoiTranslations: Record<'ro' | 'en', DespreNoiTranslationKeys
     adoptersPoint2: "Programezi vizite online și le vezi în Rezervările mele",
     adoptersPoint3: "Salvezi la favorite animalele care îți plac",
     adoptersPoint4: "Ai un ghid care te ajută pas cu pas",
-    btnAdopt: "Vezi animalele disponibile",
 
     sheltersTitle: "Pentru adăposturi",
-    sheltersPoint1: "Publici profiluri complete pentru fiecare animal",
-    sheltersPoint2: "Primești și gestionezi programările din Panoul centrului",
-    sheltersPoint3: "Primești sprijin lunar prin adopția la distanță",
-    sheltersPoint4: "Ajungi la oameni care chiar vor să adopte",
-    btnCollab: "Vrei să colaborăm?",
+    sheltersPoint1: "Publică profiluri complete pentru fiecare animal",
+    sheltersPoint2: "Primesc și gestionează programările din Panoul centrului",
+    sheltersPoint3: "Primesc sprijin lunar prin adopția la distanță",
+    sheltersPoint4: "Ajung la oameni care chiar vor să adopte",
+    btnCollab: "Vrei să colaborăm? →",
 
     // Contact
     contactTag: "CONTACT",
@@ -160,7 +158,7 @@ export const despreNoiTranslations: Record<'ro' | 'en', DespreNoiTranslationKeys
     // Bottom CTA
     ctaTextPart1: "Nu poți adopta acum? ",
     ctaTextHighlight: "Poți ajuta altfel.",
-    ctaBtn: "Cum poți ajuta",
+    ctaBtn: "Cum poți ajuta →",
   },
 
   en: {
@@ -198,14 +196,13 @@ export const despreNoiTranslations: Record<'ro' | 'en', DespreNoiTranslationKeys
     adoptersPoint2: "Schedule visits online and view them in My Reservations",
     adoptersPoint3: "Save the animals you love to favorites",
     adoptersPoint4: "A step-by-step guide to help you along the way",
-    btnAdopt: "See available animals",
 
     sheltersTitle: "For shelters",
     sheltersPoint1: "Publish complete profiles for each animal",
     sheltersPoint2: "Receive and manage appointments from the shelter dashboard",
     sheltersPoint3: "Receive monthly support through distance adoption",
     sheltersPoint4: "Reach people who genuinely want to adopt",
-    btnCollab: "Want to collaborate?",
+    btnCollab: "Want to collaborate? →",
 
     // Contact
     contactTag: "CONTACT",
@@ -242,6 +239,6 @@ export const despreNoiTranslations: Record<'ro' | 'en', DespreNoiTranslationKeys
     // Bottom CTA
     ctaTextPart1: "Can't adopt right now? ",
     ctaTextHighlight: "You can help in other ways.",
-    ctaBtn: "How you can help",
+    ctaBtn: "How you can help →",
   }
 };

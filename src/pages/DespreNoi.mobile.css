@@ -325,8 +325,18 @@
   }
 
   .despre-noi-page .dn-role-card {
-    padding: 22px 18px;
+    padding: 24px 20px;
     border-radius: 18px;
+  }
+
+  .despre-noi-page .dn-role-card-adopters {
+    background-color: #efe8dc !important;
+    border: 1px solid #e5ddcf !important;
+  }
+
+  .despre-noi-page .dn-role-card-shelters {
+    background-color: #f8ede0 !important;
+    border: 1px solid #f0e1d0 !important;
   }
 
   .despre-noi-page .dn-role-header {
@@ -335,19 +345,22 @@
   }
 
   .despre-noi-page .dn-role-icon-box {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    border-radius: 10px;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    border-radius: 12px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(63, 44, 32, 0.05) !important;
   }
 
   .despre-noi-page .dn-role-title {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
+    font-family: Georgia, 'Times New Roman', serif;
   }
 
   .despre-noi-page .dn-role-list {
     gap: 10px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   .despre-noi-page .dn-role-list-item {
@@ -355,9 +368,16 @@
     gap: 8px;
   }
 
-  .despre-noi-page .dn-role-btn {
-    padding: 8px 18px;
-    font-size: 0.85rem;
+  .despre-noi-page .dn-role-shelters-btn {
+    padding: 12px 20px !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+    background-color: #f3e5d4 !important;
+    border: 1.5px solid #decbaa !important;
+    border-radius: 999px !important;
+    color: #3f2c20 !important;
+    text-align: center !important;
+    justify-content: center !important;
   }
 
   /* ==========================================================================

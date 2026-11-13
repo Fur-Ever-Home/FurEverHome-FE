@@ -209,8 +209,8 @@ export default function DespreNoi() {
         {/* ================= PENTRU ADOPTATORI & ADĂPOSTURI ================= */}
         <section className="dn-roles-section">
           <div className="dn-roles-grid">
-            {/* Card Adoptatori */}
-            <div className="dn-role-card">
+            {/* Card 1: Pentru adoptatori (fără buton, ton nisipiu, iconiță lăbuță pe fundal alb) */}
+            <div className="dn-role-card dn-role-card-adopters">
               <div className="dn-role-header">
                 <div className="dn-role-icon-box" aria-hidden="true">
                   <svg
@@ -218,13 +218,16 @@ export default function DespreNoi() {
                     height="22"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="currentColor"
+                    stroke="#B57A42"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    <path d="M12 13c-1.8 0-3.5 1.2-3.5 3 0 1.5 1.5 3 3.5 3s3.5-1.5 3.5-3c0-1.8-1.7-3-3.5-3z"></path>
+                    <circle cx="7" cy="10" r="1.8" fill="#B57A42"></circle>
+                    <circle cx="10" cy="6.5" r="1.8" fill="#B57A42"></circle>
+                    <circle cx="14" cy="6.5" r="1.8" fill="#B57A42"></circle>
+                    <circle cx="17" cy="10" r="1.8" fill="#B57A42"></circle>
                   </svg>
                 </div>
                 <h3 className="dn-role-title">{t.adoptersTitle}</h3>
@@ -247,18 +250,10 @@ export default function DespreNoi() {
                   <span>{t.adoptersPoint4}</span>
                 </li>
               </ul>
-              <Link
-                to="/catalog"
-                className="dn-role-btn"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <span>{t.btnAdopt}</span>
-                <span aria-hidden="true">→</span>
-              </Link>
             </div>
 
-            {/* Card Adăposturi */}
-            <div className="dn-role-card">
+            {/* Card 2: Pentru adăposturi (cu buton, ton cald caisă/piersică, iconiță căsuță pe fundal alb) */}
+            <div className="dn-role-card dn-role-card-shelters">
               <div className="dn-role-header">
                 <div className="dn-role-icon-box" aria-hidden="true">
                   <svg
@@ -266,19 +261,13 @@ export default function DespreNoi() {
                     height="22"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="currentColor"
+                    stroke="#B57A42"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                    <path d="M9 22v-4h6v4"></path>
-                    <line x1="8" y1="6" x2="10" y2="6"></line>
-                    <line x1="14" y1="6" x2="16" y2="6"></line>
-                    <line x1="8" y1="10" x2="10" y2="10"></line>
-                    <line x1="14" y1="10" x2="16" y2="10"></line>
-                    <line x1="8" y1="14" x2="10" y2="14"></line>
-                    <line x1="14" y1="14" x2="16" y2="14"></line>
+                    <path d="M3 10.5L12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20v-9.5z"></path>
+                    <path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"></path>
                   </svg>
                 </div>
                 <h3 className="dn-role-title">{t.sheltersTitle}</h3>
@@ -303,11 +292,10 @@ export default function DespreNoi() {
               </ul>
               <Link
                 to="/colaborari"
-                className="dn-role-btn"
+                className="dn-role-btn dn-role-shelters-btn"
                 onClick={() => window.scrollTo(0, 0)}
               >
                 <span>{t.btnCollab}</span>
-                <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
