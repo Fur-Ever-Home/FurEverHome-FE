@@ -36,7 +36,11 @@
 .nav-item {
   text-decoration: none;
   color:#3F2C20;
-  font-weight: 600;
+  font-family: 'Libertinus Sans', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 120%;
+  letter-spacing: 0%;
   padding: 8px 18px;
   border-radius: 20px;
   transition: all 0.2s ease;
