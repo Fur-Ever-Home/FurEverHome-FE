@@ -180,7 +180,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           value={filters.ageGroup}
           onChange={(e) => handleSelectChange('ageGroup', e.target.value)}
         >
-          <option value="">{t.age || 'Vârstă'} (Pui, Tânăr, Adult, Senior)</option>
+          <option value="">{t.age || 'Vârstă'}</option>
           <option value="pui">{t.agePuppy || 'Pui (< 1 an)'}</option>
           <option value="tanar">{t.ageYoung || 'Tânăr (1 - 3 ani)'}</option>
           <option value="adult">{t.ageAdult || 'Adult (3 - 7 ani)'}</option>

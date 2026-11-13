@@ -57,12 +57,6 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
   };
 
   const translateStatus = (st?: string) => {
-    if (isDistanceMode) {
-      if (!st || st.toLowerCase().includes('disponibil') || st.toLowerCase().includes('available')) {
-        return 'Senior';
-      }
-      return st;
-    }
     if (!st) return t.statusAvailable || 'Disponibil';
     const lower = st.toLowerCase().trim();
     if (lower.includes('disponibil') || lower.includes('available')) return t.statusAvailable || 'Disponibil';
@@ -94,37 +88,44 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
   return (
     <div className={`animal-card ${isDistanceMode ? 'distance-card-style' : ''}`}>
       <div className="card-image-wrapper">
-        <span 
-          className="status-badge-card"
-          style={isDistanceMode ? { backgroundColor: '#A66E38', color: '#FFFDF8' } : undefined}
-        >
-          {translateStatus(animal.status)}
-        </span>
+        {!isDistanceMode && (
+  <span 
+    className="status-badge-card"
+    style={isDistanceMode ? { backgroundColor: '#A66E38', color: '#FFFDF8' } : undefined}
+  >
+    {translateStatus(animal.status)}
+  </span>
+)}
         
         <img src={imageSrc} alt={animal.name} className="animal-card-img" />
 
         <div className="card-fav-btn">
           <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
         </div>
+      </div>
 
-        {/* Iconițele de pe card - identice cu cele din legendă */}
+      <div className="card-content">
+        {/* Iconițele de sănătate poziționate sub imagine, ca în design */}
         {!isDistanceMode && (
-          <div className="card-health-overlay">
-            <span className={`legend-badge ${animal.vaccinated !== false ? 'active' : 'inactive'}`} title={t.vaccinated || 'Vaccinat'}>
+          <div className="card-health-badges">
+            <span className={`health-badge-circle ${animal.vaccinated !== false ? 'active' : 'inactive'}`} title={t.vaccinated || 'Vaccinat'}>
               <img src={vaccineIcon} alt={t.vaccinated || 'Vaccinat'} />
             </span>
-            <span className={`legend-badge ${animal.dewormed !== false ? 'active' : 'inactive'}`} title={t.dewormed || 'Deparazitat'}>
+            <span className={`health-badge-circle ${animal.dewormed !== false ? 'active' : 'inactive'}`} title={t.dewormed || 'Deparazitat'}>
               <img src={dewormIcon} alt={t.dewormed || 'Deparazitat'} />
             </span>
-            <span className={`legend-badge ${animal.sterilized !== false ? 'active' : 'inactive'}`} title={t.sterilized || 'Sterilizat'}>
+            <span className={`health-badge-circle ${animal.sterilized !== false ? 'active' : 'inactive'}`} title={t.sterilized || 'Sterilizat'}>
               <img src={sterileIcon} alt={t.sterilized || 'Sterilizat'} />
             </span>
           </div>
         )}
-      </div>
 
-      <div className="card-content">
-        <h3 className="card-title">{animal.name}</h3>
+        <h3 
+  className="card-title" 
+  style={isDistanceMode ? { marginTop: '16px' } : undefined}
+>
+  {animal.name}
+</h3>
         <p className="card-subtitle">
           {translateGender(genderValue)} · {translateAge(animal.age)} · {translateSize(animal.size)}
         </p>
@@ -174,8 +175,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
         >
           {isDistanceMode ? (
             <>
-              <span style={{ fontSize: '14px', lineHeight: 1 }}>🤍</span>
-              {lang === 'en' ? 'Donate' : 'Donează'}
+              {lang === 'en' ? 'View details' : 'Vezi detalii'}
             </>
           ) : (
             t.btnViewDetails || 'Vezi detalii'

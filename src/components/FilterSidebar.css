@@ -1,6 +1,6 @@
 /* Containerul Desktop */
 .filter-sidebar-desktop {
-  background-color: #f7f4ed;
+  background-color: #EFECE4;
   border-radius: 20px;
   padding: 24px 20px;
   width: 300px;
@@ -27,7 +27,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: #776e65;
+  color: #6e6760; /* ??? */
   margin-bottom: 10px;
   text-transform: uppercase;
 }
@@ -47,8 +47,8 @@
 }
 
 .filter-pill {
-  background: #ffffff;
-  border: 1px solid #dcd6cd;
+  background: #EFECE4;
+  border: 1px solid #423024;
   border-radius: 20px;
   padding: 6px 16px;
   font-size: 0.85rem;
@@ -94,19 +94,23 @@
 /* Select-uri dropdown */
 .filter-select {
   width: 100%;
-  background: #ffffff;
-  border: 1px solid #dcd6cd;
-  border-radius: 20px;
-  padding: 10px 14px;
-  font-size: 0.88rem;
+  background-color: #ffffff; /* Sau #ffffff dacă le vrei albe pe interior */
+  border: 1px solid #3f2c20;
+  border-radius: 999px;
+  padding: 12px 38px 12px 18px; /* 38px în dreapta lasă spațiu pentru săgețică */
+  font-size: 0.9rem;
+  font-weight: 400;
   color: #3f2c20;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   outline: none;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%3C%233F2C20' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%233F2C20' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 14px center;
+  background-position: right 18px center;
+  background-size: 12px 8px;
 }
 
 /* Grilă de Checkbox-uri */

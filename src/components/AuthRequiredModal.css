@@ -1,0 +1,64 @@
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* Trebuie să fie peste modalul cu animalul */
+}
+
+.auth-modal-content {
+  background-color: #fdfaf5;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+
+.auth-modal-close:hover {
+  color: #3F2C20;
+}
+
+.auth-modal-message {
+  color: #3F2C20;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+.auth-modal-btn {
+  background-color: #3F2C20;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity 0.2s ease;
+}
+
+.auth-modal-btn:hover {
+  opacity: 0.9;
+}

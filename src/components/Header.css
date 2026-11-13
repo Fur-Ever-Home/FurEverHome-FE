@@ -207,16 +207,17 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     border-bottom: 1px solid #e5dfd3;
     z-index: 1000;
-    gap: 12px;
+    gap: 14px;
     box-sizing: border-box;
   }
 
   .nav-menu.open .nav-item {
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 16px 20px !important;
     border-bottom: 1px solid #ede7df;
     width: 100%;
     text-align: left;
     color: #3F2C20;
+    box-sizing: border-box;
   }
 }

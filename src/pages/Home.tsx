@@ -1,5 +1,4 @@
 import { mockAnimals as animalsMock } from '../data/animalsMock';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import imagine from '../assets/sectiune1.2.png';
 import dogIcon from '../assets/dog-icon.svg';
@@ -17,10 +16,12 @@ import { AnimalModal } from "../components/AnimalModal";
 import pawIcon from '../assets/paw.png';
 import pillIcon from '../assets/pill.png';
 import shieldIcon from '../assets/shield.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
 import { translations } from '../translations';
+import { API_BASE_URL } from '../config';
 
 interface Animal {
   id: number;
@@ -49,6 +50,7 @@ interface Animal {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
@@ -63,11 +65,7 @@ export default function Home() {
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   useEffect(() => {
-  const BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:8080' 
-  : 'https://fureverhome-be-1.onrender.com';
-
-let url = `${BASE_URL}/api/animals`;
+    let url = `${API_BASE_URL}/api/animals`;
     if (selectedSpecies) {
       url += `?species=${encodeURIComponent(selectedSpecies)}`;
     }
@@ -96,7 +94,7 @@ let url = `${BASE_URL}/api/animals`;
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      const scrollAmount = 320;
+      const scrollAmount = 250;
       carouselRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
@@ -220,7 +218,12 @@ let url = `${BASE_URL}/api/animals`;
                   };
 
                   return (
-                    <div key={animal.id} onClick={() => setSelectedAnimal(animalDataForModal)} style={{ cursor: 'pointer' }}>
+                    <div 
+                      key={animal.id} 
+                      className="carousel-card-item"
+                      onClick={() => navigate(`/animal/${animal.id}`)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <AnimalCard 
                         animal={{ 
                           ...animal, 
@@ -280,13 +283,7 @@ let url = `${BASE_URL}/api/animals`;
        </section>
        </div>
 
-       {/* Randarea modalului atunci când un animal este selectat */}
-       {selectedAnimal && (
-         <AnimalModal 
-           animal={selectedAnimal} 
-           onClose={() => setSelectedAnimal(null)} 
-         />
-       )}
+      
 
        <Footer />
        <FloatingBtn />

@@ -1,74 +1,180 @@
 .animal-card {
   position: relative;
-  background-color: #f7f4ef;
-  border-radius: 20px;
-  padding: 16px;
-  width: 280px;
-  flex: 0 0 280px;
+  background-color: #FFFEF7;
+  border-radius: 18px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  border: 1px solid #ede7df;
+  box-shadow: 0 4px 14px rgba(63, 44, 32, 0.05);
+  border: 1px solid #ebe5dc;
   box-sizing: border-box;
-  overflow: hidden;
+  width: 100%;
+  padding: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Antetul cardului este poziționat absolut peste imagine */
+.animal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(63, 44, 32, 0.1);
+}
+
+.animal-card.distance-card-style,
+.animal-card.card-distance-mode {
+  border-color: #dfd5c6;
+}
+
+/* Antetul cardului poziționat absolut peste imagine */
 .card-top {
   position: absolute;
-  top: 24px;
-  left: 24px;
-  right: 24px;
+  top: 10px;
+  left: 10px;
+  right: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 30;
+  z-index: 10;
   pointer-events: auto;
 }
 
-.status-badge {
+.status-badge,
+.status-badge-card {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   background-color: #587b56;
-  color: white;
+  color: #ffffff;
   padding: 4px 12px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .status-badge.senior-badge {
   background-color: #c89551;
 }
 
+.card-fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
 .favorite-btn {
   position: relative;
-  z-index: 40 !important;
+  z-index: 10 !important;
   pointer-events: auto !important;
   cursor: pointer !important;
 }
 
+/* Container imagine */
+.card-image-wrapper,
 .card-image-container {
   position: relative;
-  z-index: 1;
-  height: 250px;
+  width: 100%;
+  height: 220px;
+  background-color: #f5efe6;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  border-radius: 14px;
   overflow: hidden;
-  border-radius: 12px;
+  flex-shrink: 0;
 }
 
+.animal-card-img,
 .animal-real-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  object-position: center;
+  display: block;
+  border-radius: 14px;
 }
 
 .placeholder-avatar {
   font-size: 4rem;
 }
 
+/* Iconițele de sănătate situate sub imagine */
+.card-health-badges,
+.card-health-overlay {
+  position: static;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 10px !important;
+  margin-bottom: 8px !important;
+  z-index: 5;
+}
+
+.card-health-badges .health-badge-circle,
+.card-health-badges .legend-badge,
+.card-health-overlay .health-badge-circle,
+.card-health-overlay .legend-badge {
+  position: relative !important;
+  width: 24px !important;
+  height: 24px !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  margin-right: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.card-health-badges .health-badge-circle:last-child,
+.card-health-badges .legend-badge:last-child,
+.card-health-overlay .health-badge-circle:last-child,
+.card-health-overlay .legend-badge:last-child {
+  margin-right: 0 !important;
+}
+
+.card-health-badges .health-badge-circle img,
+.card-health-badges .legend-badge img,
+.card-health-overlay .health-badge-circle img,
+.card-health-overlay .legend-badge img {
+  width: 35px !important;
+  height: 35px !important;
+  max-width: 35px !important;
+  max-height: 35px !important;
+  object-fit: contain !important;
+  display: block !important;
+  border-radius: 70% !important;
+}
+
+.card-health-badges .health-badge-circle.inactive img,
+.card-health-badges .legend-badge.inactive img,
+.card-health-overlay .health-badge-circle.inactive img,
+.card-health-overlay .legend-badge.inactive img {
+  opacity: 0.75 !important;
+  filter: grayscale(50%) !important;
+}
+
+.card-health-badges .health-badge-circle.inactive::after,
+.card-health-badges .legend-badge.inactive::after,
+.card-health-overlay .health-badge-circle.inactive::after,
+.card-health-overlay .legend-badge.inactive::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 16px !important;
+  height: 2.5px !important;
+  background-color: #ffffff !important;
+  border-radius: 2px !important;
+  transform: translate(-50%, -50%) rotate(-45deg) !important;
+  pointer-events: none !important;
+  z-index: 12 !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Rând iconițe medicale backward-compatible */
 .medical-icons-row {
   display: flex;
   gap: 8px;
@@ -91,49 +197,64 @@
   color: white;
 }
 
+/* Conținut card */
 .card-content {
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  flex-grow: 1;
+  background-color: transparent;
 }
 
+.card-title,
 .animal-name {
-  font-family: 'Libertinus Sans', 'Georgia', serif !important; 
-  font-size: 1.5rem !important; /* Folosim !important ca să forțăm mărimea */
+  font-family: 'Libertinus Sans', 'Georgia', serif !important;
+  font-size: 1.35rem !important;
   font-weight: 700 !important;
   color: #3F2C20;
-  margin: 0 0 2px 0;
+  margin: 0px 0 4px 0;
   line-height: 1.2;
 }
 
+.card-subtitle,
 .animal-info {
   font-size: 0.85rem;
   color: #7a6f65;
-  margin: 0;
+  margin: 0 0 4px 0;
 }
 
+.card-location,
 .animal-shelter {
   font-size: 0.8rem;
   color: #9c9187;
   margin: 0 0 12px 0;
 }
 
+/* Buton detalii card */
+.btn-card-details,
 .btn-details {
+  width: 100%;
   background-color: #3F2C20;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 20px;
-  padding: 10px;
-  font-weight: 500;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: auto;
+  box-sizing: border-box;
+  text-align: center;
 }
 
+.btn-card-details:hover,
 .btn-details:hover {
   background-color: #2b1f16;
+  transform: translateY(-1px);
 }
 
-/* Stiluri specifice pentru Adopția la Distanță */
+/* Adopție la distanță */
 .distance-card-body {
   display: flex;
   flex-direction: column;
@@ -152,12 +273,15 @@
   border-radius: 10px;
 }
 
+.distance-progress-container,
 .funding-bar-container {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-bottom: 12px;
 }
 
+.progress-bar-bg,
 .funding-bar-track {
   width: 100%;
   height: 6px;
@@ -166,6 +290,7 @@
   overflow: hidden;
 }
 
+.progress-bar-fill,
 .funding-bar-fill {
   height: 100%;
   background-color: #587b56;
@@ -173,8 +298,9 @@
   transition: width 0.3s ease;
 }
 
+.progress-text,
 .funding-text {
-  font-size: 0.73rem;
+  font-size: 0.75rem;
   color: #7a6f65;
 }
 
@@ -198,58 +324,4 @@
 .btn-donate:hover {
   background-color: #b38240;
   transform: translateY(-1px);
-}
-
-
-
-
-
-/* ADAPTARE PENTRU TELEFON / ECRANE MICI */
-@media screen and (max-width: 768px) {
-  .modal-backdrop {
-    padding: 10px;
-    align-items: flex-end;
-  }
-
-  .modal-content {
-    width: 100%;
-    max-height: 92vh;
-    padding: 20px 15px;
-    border-radius: 20px 20px 0 0;
-  }
-
-  .modal-body-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .details-columns-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    border-top: none;
-    border-bottom: none;
-    padding: 0;
-  }
-
-  .details-group {
-    background-color: #f7f4ef;
-    border: 1px solid #f7f4ef;
-    border-radius: 16px;
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  }
-
-  .main-image-container {
-    height: 260px;
-  }
-
-  .modal-actions-container {
-    position: sticky;
-    bottom: 0;
-    background: #f7f4ef;
-    padding-bottom: 10px;
-    margin-top: 15px;
-  }
 }
