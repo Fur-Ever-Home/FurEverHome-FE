@@ -7,6 +7,7 @@ import heroImage from '../assets/hero-image.png';
 import { useLanguage } from '../useLanguage';
 import { despreNoiTranslations } from '../despreNoiTranslations';
 import './DespreNoi.css';
+import './DespreNoi.mobile.css';
 
 export default function DespreNoi() {
   const { lang } = useLanguage();
@@ -39,6 +40,15 @@ export default function DespreNoi() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleSelectShelter = () => {
+    setFormData((prev) => ({ ...prev, subiect: 'adapost' }));
+    const selectEl = document.getElementById('dn-subiect');
+    if (selectEl) {
+      selectEl.focus();
+      selectEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
@@ -142,8 +152,10 @@ export default function DespreNoi() {
                   <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
               </div>
-              <h3 className="dn-pillar-title">{t.pillar1Title}</h3>
-              <p className="dn-pillar-text">{t.pillar1Text}</p>
+              <div className="dn-pillar-content">
+                <h3 className="dn-pillar-title">{t.pillar1Title}</h3>
+                <p className="dn-pillar-text">{t.pillar1Text}</p>
+              </div>
             </div>
 
             {/* Card 2: Simplitate */}
@@ -164,8 +176,10 @@ export default function DespreNoi() {
                   <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>
               </div>
-              <h3 className="dn-pillar-title">{t.pillar2Title}</h3>
-              <p className="dn-pillar-text">{t.pillar2Text}</p>
+              <div className="dn-pillar-content">
+                <h3 className="dn-pillar-title">{t.pillar2Title}</h3>
+                <p className="dn-pillar-text">{t.pillar2Text}</p>
+              </div>
             </div>
 
             {/* Card 3: Colaborare */}
@@ -184,8 +198,10 @@ export default function DespreNoi() {
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
               </div>
-              <h3 className="dn-pillar-title">{t.pillar3Title}</h3>
-              <p className="dn-pillar-text">{t.pillar3Text}</p>
+              <div className="dn-pillar-content">
+                <h3 className="dn-pillar-title">{t.pillar3Title}</h3>
+                <p className="dn-pillar-text">{t.pillar3Text}</p>
+              </div>
             </div>
           </div>
         </section>
@@ -386,21 +402,14 @@ export default function DespreNoi() {
                 </div>
               </div>
 
-              {/* Caseta Adăpost din Iași */}
-              <div className="dn-shelter-box">
+              {/* Caseta Adăpost din Iași (Versiunea Desktop: afișată aici) */}
+              <div className="dn-shelter-box dn-shelter-box-desktop">
                 <h4 className="dn-shelter-box-title">{t.shelterBoxTitle}</h4>
                 <p className="dn-shelter-box-text">{t.shelterBoxText}</p>
                 <div style={{ marginTop: '12px' }}>
                   <button
                     type="button"
-                    onClick={() => {
-                      setFormData((prev) => ({ ...prev, subiect: 'adapost' }));
-                      const selectEl = document.getElementById('dn-subiect');
-                      if (selectEl) {
-                        selectEl.focus();
-                        selectEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      }
-                    }}
+                    onClick={handleSelectShelter}
                     style={{
                       backgroundColor: '#c89551',
                       color: '#ffffff',
@@ -531,6 +540,33 @@ export default function DespreNoi() {
                   </button>
                 </form>
               )}
+            </div>
+
+            {/* Caseta Adăpost din Iași (Versiunea Mobil: plasată dedesubtul formularului conform Figma) */}
+            <div className="dn-shelter-box dn-shelter-box-mobile">
+              <h4 className="dn-shelter-box-title">{t.shelterBoxTitle}</h4>
+              <p className="dn-shelter-box-text">{t.shelterBoxText}</p>
+              <div style={{ marginTop: '12px' }}>
+                <button
+                  type="button"
+                  onClick={handleSelectShelter}
+                  style={{
+                    backgroundColor: '#c89551',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '999px',
+                    padding: '7px 18px',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'background-color 0.2s ease',
+                  }}
+                >
+                  {lang === 'en'
+                    ? 'Select "I am a shelter"'
+                    : 'Alege „Sunt un adăpost”'}
+                </button>
+              </div>
             </div>
           </div>
         </section>
