@@ -3,6 +3,39 @@
    Toate clasele sunt prefixate sau scoped sub .despre-noi-page
    ========================================================================== */
 
+/* Reset global pentru pagină: elimină orice margine nedorită și bare de scroll orizontale */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #f8f5ee !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: #c89551 #f8f5ee;
+}
+
+/* ==========================================================================
+   SCROLL BAR PERSONALIZAT (AURIU / CARAMEL - CONFORM MACHETEI FIGMA)
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f5ee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c89551;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b57a42;
+}
+
+/* ==========================================================================
+   CONTAINER PAGINĂ
+   ========================================================================== */
 .despre-noi-page {
   background-color: #f8f5ee;
   min-height: 100vh;
@@ -10,6 +43,8 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .despre-noi-page *,
@@ -18,7 +53,132 @@
   box-sizing: border-box;
 }
 
-/* Container principal centrat */
+/* ==========================================================================
+   ANTET (HEADER) PERSONALIZAT PENTRU DESPRE NOI - EXACT CA ÎN MACHETĂ
+   ========================================================================== */
+.despre-noi-page .site-header {
+  background-color: #f8f5ee !important;
+  border-bottom: 1px solid #ebe4d8 !important;
+  padding: 14px 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+.despre-noi-page .logo-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+}
+
+.despre-noi-page .logo-container img {
+  height: 38px !important;
+}
+
+.despre-noi-page .logo-text {
+  font-weight: 800 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.5px !important;
+}
+
+.despre-noi-page .logo-dark {
+  color: #3f2c20 !important;
+}
+
+.despre-noi-page .logo-gold {
+  color: #c89551 !important;
+}
+
+.despre-noi-page .nav-menu {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.despre-noi-page .nav-item {
+  text-decoration: none !important;
+  color: #3f2c20 !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+  transition: all 0.2s ease !important;
+  background-color: transparent !important;
+}
+
+.despre-noi-page .nav-item:hover {
+  color: #b57a42 !important;
+}
+
+.despre-noi-page .nav-item.active {
+  background-color: #3f2c20 !important;
+  color: #ffffff !important;
+  padding: 7px 18px !important;
+}
+
+.despre-noi-page .header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.despre-noi-page .btn-auth {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  color: #c89551 !important;
+  border: 1.5px solid #c89551 !important;
+  background-color: transparent !important;
+  padding: 6px 20px !important;
+  border-radius: 999px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.despre-noi-page .btn-auth:hover {
+  background-color: #f2ece0 !important;
+  border-color: #b57a42 !important;
+}
+
+.despre-noi-page .lang-toggle {
+  display: flex !important;
+  background-color: #ede6da !important;
+  border-radius: 999px !important;
+  padding: 2px !important;
+}
+
+.despre-noi-page .lang-btn {
+  background: transparent !important;
+  border: none !important;
+  padding: 3px 9px !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  border-radius: 999px !important;
+  color: #7a6f65 !important;
+  transition: all 0.2s ease !important;
+}
+
+.despre-noi-page .lang-btn.active {
+  background-color: #3f2c20 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.despre-noi-page .mobile-menu-btn {
+  display: none !important;
+}
+
+/* ==========================================================================
+   CONTAINER PRINCIPAL CENTRAT
+   ========================================================================== */
 .dn-container {
   max-width: 1140px;
   margin: 0 auto;
@@ -691,6 +851,10 @@
    RESPONSIVITATE DESKTOP / TABLETĂ / MOBIL
    ========================================================================== */
 @media (max-width: 992px) {
+  .despre-noi-page .site-header {
+    padding: 12px 24px !important;
+  }
+
   .dn-hero-grid {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -728,6 +892,35 @@
 
   .dn-cta-btn {
     align-self: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .despre-noi-page .site-header {
+    padding: 12px 16px !important;
+  }
+  .despre-noi-page .nav-menu {
+    display: none !important;
+  }
+  .despre-noi-page .btn-auth {
+    display: none !important;
+  }
+  .despre-noi-page .mobile-menu-btn {
+    display: flex !important;
+  }
+  .despre-noi-page .nav-menu.open {
+    display: flex !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #f8f5ee !important;
+    flex-direction: column !important;
+    padding: 20px 16px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid #e5dfd3 !important;
+    z-index: 1000 !important;
+    gap: 14px !important;
   }
 }
 
