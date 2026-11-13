@@ -150,8 +150,9 @@ export default function Catalog() {
 
   const handleCardClick = (animalId: number, animalDataForModal: any) => {
     if (window.innerWidth <= 768) {
+      // ADAUGĂM state-ul care spune de unde venim
       navigate(`/animal/${animalId}${isDistanceMode ? '?tip=la_distanta' : ''}`, {
-        state: { animal: animalDataForModal, isDistanceMode }
+        state: { animal: animalDataForModal, isDistanceMode, from: 'catalog' }
       });
     } else {
       setSelectedAnimal(animalDataForModal);

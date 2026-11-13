@@ -66,6 +66,25 @@ export default function AnimalProfile() {
   const stateAnimal = location.state?.animal;
   const [fetchedAnimal, setFetchedAnimal] = useState<any | null>(null);
 
+// Citim de unde a venit utilizatorul (din state-ul trimis prin navigate)
+  const fromPage = location.state?.from;
+
+  // Setăm textul butonului în funcție de pagina de proveniență
+  const textInapoiRo = fromPage === 'home' ? 'Înapoi Acasă' : 'Înapoi la animale';
+  const textInapoiEn = fromPage === 'home' ? 'Back to Home' : 'Back to animals';
+
+  // Funcția care decide unde ne întoarcem
+  const handleGoBack = () => {
+    if (fromPage === 'home') {
+      navigate('/');
+    } else {
+      navigate(isDistanceMode ? '/catalog?tip=la_distanta' : '/catalog');
+    }
+  };
+
+
+
+
   useEffect(() => {
     if (!stateAnimal && id) {
       fetch(`${API_BASE_URL}/api/animals`)
@@ -150,10 +169,10 @@ const handleDonatieClick = () => {
         
         {/* Buton Înapoi */}
         <button 
-          onClick={() => navigate(isDistanceMode ? '/catalog?tip=la_distanta' : '/catalog')} 
+          onClick={handleGoBack} 
           style={{ background: 'none', border: 'none', color: '#3F2C20', fontWeight: 'bold', cursor: 'pointer', marginBottom: '15px', fontSize: '15px', padding: 0 }}
         >
-          ← {lang === 'en' ? 'Back to animals' : 'Înapoi la animale'}
+          ← {lang === 'en' ? textInapoiEn : textInapoiRo}
         </button>
 
         {/* Galerie Foto Principală */}
