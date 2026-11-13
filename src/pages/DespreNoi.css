@@ -472,16 +472,16 @@ html, body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Card 1: Pentru adoptatori - ton nisipiu cald */
+/* Card 1: Pentru adoptatori - cod exact Figma */
 .dn-role-card-adopters {
-  background-color: #efe8dc;
-  border: 1px solid #e5ddcf;
+  background-color: #EFE8DA;
+  border: 1px solid #e2dac9;
 }
 
-/* Card 2: Pentru adăposturi - ton cald piersică/caisă */
+/* Card 2: Pentru adăposturi - cod exact Figma */
 .dn-role-card-shelters {
-  background-color: #f8ede0;
-  border: 1px solid #f0e1d0;
+  background-color: #F6E8D6;
+  border: 1px solid #ead8c3;
 }
 
 .dn-role-header {
