@@ -1,0 +1,331 @@
+/* ==========================================================================
+   COLABORARI - STILURI DEDICATE PENTRU MOBIL (FIȘIER SEPARAT)
+   Toate regulile sunt scoped sub .colaborari-page și aplicate pe ecran mobil
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Reset container mobil */
+  .colaborari-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .colaborari-page .colaborari-container {
+    padding: 16px 16px 60px 16px;
+    max-width: 100%;
+  }
+
+  /* ==========================================================================
+     ANTET (HEADER) PE MOBIL (CONFORM MACHETEI FIGMA)
+     ========================================================================== */
+  .colaborari-page .site-header {
+    padding: 12px 16px !important;
+    background-color: #f8f5ee !important;
+    border-bottom: 1px solid #ebe4d8 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .colaborari-page .logo-container {
+    gap: 8px !important;
+  }
+
+  .colaborari-page .logo-container img {
+    height: 32px !important;
+  }
+
+  .colaborari-page .logo-text {
+    font-size: 1.05rem !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .colaborari-page .header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  /* Butonul de login e ascuns pe mobil */
+  .colaborari-page .btn-auth {
+    display: none !important;
+  }
+
+  /* Comutatorul de limbă RO | EN pe mobil */
+  .colaborari-page .lang-toggle {
+    display: flex !important;
+    background-color: #ede6da !important;
+    border-radius: 999px !important;
+    padding: 2px !important;
+  }
+
+  .colaborari-page .lang-btn {
+    padding: 4px 8px !important;
+    font-size: 0.72rem !important;
+    border-radius: 999px !important;
+  }
+
+  .colaborari-page .lang-btn.active {
+    background-color: #3f2c20 !important;
+    color: #ffffff !important;
+  }
+
+  /* Buton hamburger pe mobil */
+  .colaborari-page .mobile-menu-btn {
+    display: flex !important;
+    background-color: #faf7f2 !important;
+    border: 1px solid #e2d9cd !important;
+    border-radius: 10px !important;
+    width: 38px !important;
+    height: 38px !important;
+    cursor: pointer !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    transition: background-color 0.2s ease !important;
+  }
+
+  .colaborari-page .mobile-menu-btn span {
+    display: block !important;
+    width: 18px !important;
+    height: 2px !important;
+    background-color: #3f2c20 !important;
+    border-radius: 2px !important;
+  }
+
+  /* Meniu dropdown când este deschis pe mobil */
+  .colaborari-page .nav-menu {
+    display: none !important;
+  }
+
+  .colaborari-page .nav-menu.open {
+    display: flex !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #f8f5ee !important;
+    flex-direction: column !important;
+    padding: 16px 20px !important;
+    box-shadow: 0 12px 30px rgba(63, 44, 32, 0.12) !important;
+    border-bottom: 1px solid #ebe4d8 !important;
+    z-index: 999 !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .colaborari-page .nav-menu.open .nav-item {
+    padding: 12px 16px !important;
+    font-size: 0.95rem !important;
+    border-radius: 12px !important;
+    color: #3f2c20 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .colaborari-page .nav-menu.open .nav-item.active {
+    background-color: #3f2c20 !important;
+    color: #ffffff !important;
+  }
+
+  /* ==========================================================================
+     BREADCRUMBS PE MOBIL
+     ========================================================================== */
+  .colaborari-page .colab-breadcrumbs {
+    margin-bottom: 20px;
+    font-size: 0.78rem;
+  }
+
+  /* ==========================================================================
+     HERO SECTION PE MOBIL (CONFORM IMAGINE 2 FIGMA)
+     ========================================================================== */
+  .colaborari-page .colab-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 48px;
+  }
+
+  .colaborari-page .colab-hero-tag {
+    font-size: 0.72rem;
+    margin-bottom: 8px;
+  }
+
+  .colaborari-page .colab-hero-title {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .colaborari-page .colab-hero-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .colaborari-page .colab-hero-cta-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .colaborari-page .colab-btn-primary,
+  .colaborari-page .colab-btn-secondary {
+    flex: 1;
+    padding: 11px 16px;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* ==========================================================================
+     HERO STATS CARD PE MOBIL
+     ========================================================================== */
+  .colaborari-page .colab-stats-card {
+    padding: 24px 20px;
+    gap: 16px;
+    border-radius: 16px;
+  }
+
+  .colaborari-page .colab-stat-row {
+    gap: 18px;
+  }
+
+  .colaborari-page .colab-stat-number {
+    font-size: 2.1rem;
+    min-width: 75px;
+  }
+
+  .colaborari-page .colab-stat-label {
+    font-size: 0.88rem;
+  }
+
+  /* ==========================================================================
+     PARTENERII NOSTRI PE MOBIL
+     ========================================================================== */
+  .colaborari-page .colab-section {
+    margin-bottom: 48px;
+  }
+
+  .colaborari-page .colab-section-title {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  .colaborari-page .colab-section-desc {
+    font-size: 0.88rem;
+    margin-bottom: 22px;
+  }
+
+  .colaborari-page .colab-partners-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .colaborari-page .colab-partner-card {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  /* ==========================================================================
+     SPONSORII NOSTRI PE MOBIL (CONFORM IMAGINE 3 FIGMA)
+     ========================================================================== */
+  .colaborari-page .colab-sponsors-group-title {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .colaborari-page .colab-sponsors-main-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .colaborari-page .colab-sponsors-regular-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .colaborari-page .colab-sponsor-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .colaborari-page .colab-sponsor-logo-box.main {
+    height: 85px;
+  }
+
+  .colaborari-page .colab-sponsor-logo-box.regular {
+    height: 70px;
+  }
+
+  .colaborari-page .colab-sponsor-name {
+    font-size: 0.92rem;
+  }
+
+  /* ==========================================================================
+     IMPLICA-TE (FORMULARE PE MOBIL - CONFORM IMAGINI 3 SI 4 FIGMA)
+     ========================================================================== */
+  .colaborari-page .colab-forms-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .colaborari-page .colab-form-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+
+  .colaborari-page .colab-form-title {
+    font-size: 1.35rem;
+  }
+
+  .colaborari-page .colab-form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .colaborari-page .colab-form-row-2col .colab-form-group {
+    margin-bottom: 14px;
+  }
+
+  /* Butoanele de suma 2x2 pe mobil */
+  .colaborari-page .colab-chips-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .colaborari-page .colab-chip {
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+
+  /* ==========================================================================
+     BANNER FINAL PE MOBIL (CONFORM IMAGINE 4 FIGMA)
+     ========================================================================== */
+  .colaborari-page .colab-bottom-banner {
+    margin-top: 48px;
+    padding: 28px 20px;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    gap: 20px;
+    border-radius: 18px;
+  }
+
+  .colaborari-page .colab-banner-title {
+    font-size: 1.4rem;
+  }
+
+  .colaborari-page .colab-btn-banner {
+    width: 100%;
+    text-align: center;
+    padding: 13px 20px;
+  }
+}
