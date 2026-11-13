@@ -1,3 +1,5 @@
+@import url('https://fonts.bunny.net/css?family=libertinus-sans:400,600,700');
+
 /* ==========================================================================
    DESPRE NOI - STILURI DEDICATE (IZOLATE PENTRU A EVITA CONFLICTELE)
    Toate clasele sunt prefixate sau scoped sub .despre-noi-page
@@ -40,7 +42,7 @@ html, body {
   background-color: #f8f5ee;
   min-height: 100vh;
   color: #2e1e14;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Libertinus Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -242,7 +244,7 @@ html, body {
 }
 
 .dn-hero-title {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libertinus Sans', Georgia, sans-serif;
   font-size: 2.7rem;
   font-weight: 700;
   line-height: 1.18;
@@ -340,7 +342,7 @@ html, body {
 }
 
 .dn-section-title {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libertinus Sans', Georgia, sans-serif;
   font-size: 2.1rem;
   font-weight: 700;
   color: #2e1e14;
@@ -368,7 +370,7 @@ html, body {
 }
 
 .dn-quote-icon {
-  font-family: Georgia, serif;
+  font-family: 'Libertinus Sans', Georgia, serif;
   font-size: 4rem;
   line-height: 0.8;
   color: #c89551;
@@ -390,7 +392,7 @@ html, body {
 }
 
 .dn-quote-text {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libertinus Sans', Georgia, sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: #ffffff;
@@ -506,7 +508,7 @@ html, body {
 }
 
 .dn-role-title {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libertinus Sans', Georgia, sans-serif;
   font-size: 1.28rem;
   font-weight: 700;
   color: #2e1e14;
@@ -602,7 +604,7 @@ html, body {
 }
 
 .dn-contact-title {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libertinus Sans', Georgia, sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
   color: #2e1e14;
@@ -848,7 +850,7 @@ html, body {
 }
 
 .dn-cta-text {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libertinus Sans', Georgia, sans-serif;
   font-size: 1.45rem;
   font-weight: 700;
   color: #ffffff;
