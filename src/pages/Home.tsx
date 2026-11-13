@@ -1,5 +1,4 @@
 import { mockAnimals as animalsMock } from '../data/animalsMock';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import imagine from '../assets/sectiune1.2.png';
 import dogIcon from '../assets/dog-icon.svg';
@@ -17,6 +16,7 @@ import { AnimalModal } from "../components/AnimalModal";
 import pawIcon from '../assets/paw.png';
 import pillIcon from '../assets/pill.png';
 import shieldIcon from '../assets/shield.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Importăm hook-ul de limbă și dicționarul creat de noi
 import { useLanguage } from '../useLanguage';
@@ -50,6 +50,7 @@ interface Animal {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
@@ -220,7 +221,7 @@ export default function Home() {
                     <div 
                       key={animal.id} 
                       className="carousel-card-item"
-                      onClick={() => setSelectedAnimal(animalDataForModal)} 
+                      onClick={() => navigate(`/animal/${animal.id}`)}
                       style={{ cursor: 'pointer' }}
                     >
                       <AnimalCard 
@@ -282,13 +283,7 @@ export default function Home() {
        </section>
        </div>
 
-       {/* Randarea modalului atunci când un animal este selectat */}
-       {selectedAnimal && (
-         <AnimalModal 
-           animal={selectedAnimal} 
-           onClose={() => setSelectedAnimal(null)} 
-         />
-       )}
+      
 
        <Footer />
        <FloatingBtn />
