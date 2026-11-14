@@ -1,3 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #f8f5ee;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .site-header {
   display: flex;
   align-items: center;
@@ -210,6 +223,9 @@
     top: 100%;
     left: 0;
     width: 100%;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background-color: #f7f4ed;
     flex-direction: column;
     padding: 20px 16px;
