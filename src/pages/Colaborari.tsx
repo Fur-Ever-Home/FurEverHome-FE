@@ -73,6 +73,18 @@ export default function Colaborari() {
   });
   const [donSubmitted, setDonSubmitted] = useState(false);
 
+  // Calcul dinamic procente donație (95% adăposturi, 3% comision platformă, 2% procesator plăți)
+  const currentTotalAmount =
+    selectedAmount === 'custom'
+      ? parseFloat(customAmount) > 0
+        ? parseFloat(customAmount)
+        : 0
+      : selectedAmount;
+
+  const shelterVal = (currentTotalAmount * 0.95).toFixed(2);
+  const platformVal = (currentTotalAmount * 0.03).toFixed(2);
+  const feeVal = (currentTotalAmount * 0.02).toFixed(2);
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -489,14 +501,43 @@ export default function Colaborari() {
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12.01" y2="8"></line>
                       </svg>
-                      <span>{t.donTransparencyTitle}</span>
+                      <span>
+                        {t.donTransparencyTitle}{' '}
+                        {currentTotalAmount > 0 && <strong className="colab-transparency-total">({currentTotalAmount} RON)</strong>}
+                      </span>
                     </div>
                     <div className="colab-transparency-pills">
-                      <span className="colab-transparency-pill shelter">{t.donTransparencyShelters}</span>
-                      <span className="colab-transparency-pill platform">{t.donTransparencyPlatform}</span>
-                      <span className="colab-transparency-pill fee">{t.donTransparencyFees}</span>
+                      <div className="colab-transparency-pill shelter">
+                        <span className="colab-pill-pct">95%</span>
+                        <span className="colab-pill-label">{t.donTransparencyShelters}:</span>
+                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${shelterVal} RON` : '95%'}</span>
+                      </div>
+                      <div className="colab-transparency-pill platform">
+                        <span className="colab-pill-pct">3%</span>
+                        <span className="colab-pill-label">{t.donTransparencyPlatform}:</span>
+                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${platformVal} RON` : '3%'}</span>
+                      </div>
+                      <div className="colab-transparency-pill fee">
+                        <span className="colab-pill-pct">2%</span>
+                        <span className="colab-pill-label">{t.donTransparencyFees}:</span>
+                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${feeVal} RON` : '2%'}</span>
+                      </div>
                     </div>
-                    <p className="colab-transparency-desc">{t.donTransparencyDesc}</p>
+                    <p className="colab-transparency-desc">
+                      {currentTotalAmount > 0 ? (
+                        lang === 'ro' ? (
+                          <>
+                            Din suma de <strong>{currentTotalAmount} RON</strong>: <strong>{shelterVal} RON</strong> (95%) ajung direct la adăposturi pentru hrana și îngrijirea animalelor, <strong>{platformVal} RON</strong> (3%) susțin mentenanța platformei, iar <strong>{feeVal} RON</strong> (2%) acoperă comisionul procesatorului de plăți.
+                          </>
+                        ) : (
+                          <>
+                            From your donation of <strong>{currentTotalAmount} RON</strong>: <strong>{shelterVal} RON</strong> (95%) goes directly to shelters for animal care and food, <strong>{platformVal} RON</strong> (3%) supports platform maintenance, and <strong>{feeVal} RON</strong> (2%) covers the payment processor fee.
+                          </>
+                        )
+                      ) : (
+                        t.donTransparencyDesc
+                      )}
+                    </p>
                   </div>
 
                   <div className="colab-form-row-2col">

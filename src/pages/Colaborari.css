@@ -699,6 +699,10 @@
   flex-shrink: 0;
 }
 
+.colab-transparency-total {
+  color: #ba8648;
+}
+
 .colab-transparency-pills {
   display: flex;
   gap: 6px;
@@ -708,11 +712,12 @@
 
 .colab-transparency-pill {
   font-size: 0.74rem;
-  font-weight: 700;
-  padding: 3px 9px;
+  font-weight: 600;
+  padding: 4px 10px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
+  gap: 5px;
 }
 
 .colab-transparency-pill.shelter {
@@ -728,6 +733,23 @@
 .colab-transparency-pill.fee {
   background-color: #f0e9dc;
   color: #8c7e73;
+}
+
+.colab-pill-pct {
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  font-size: 0.72rem;
+}
+
+.colab-pill-label {
+  opacity: 0.9;
+}
+
+.colab-pill-amount {
+  font-weight: 700;
+  margin-left: 2px;
 }
 
 .colab-transparency-desc {
