@@ -572,7 +572,6 @@ export default function DespreNoi() {
               onClick={() => window.scrollTo(0, 0)}
             >
               <span>{t.ctaBtn}</span>
-              <span aria-hidden="true">→</span>
             </Link>
           </div>
         </section>
