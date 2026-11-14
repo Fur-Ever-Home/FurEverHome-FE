@@ -76,6 +76,8 @@ export interface ColaborariTranslationKeys {
   placeholderEmail: string;
   labelHelpWith: string;
   chooseActivity: string;
+  activityVolunteer: string;
+  activitySponsor: string;
   activityPromotion: string;
   activityShelterCare: string;
   activityTransport: string;
@@ -200,6 +202,8 @@ export const colaborariTranslations: {
     placeholderEmail: "nume@exemplu.ro",
     labelHelpWith: "Cu ce ai vrea să ajuți?",
     chooseActivity: "Alege o activitate",
+    activityVolunteer: "Vreau să fiu voluntar",
+    activitySponsor: "Vreau să devin sponsor",
     activityPromotion: "Promovare și foto/video",
     activityShelterCare: "Îngrijire animale în adăpost",
     activityTransport: "Transport și logistică",
@@ -319,6 +323,8 @@ export const colaborariTranslations: {
     placeholderEmail: "name@example.com",
     labelHelpWith: "How would you like to help?",
     chooseActivity: "Choose an activity",
+    activityVolunteer: "I want to be a volunteer",
+    activitySponsor: "I want to become a sponsor",
     activityPromotion: "Promotion & photo/video",
     activityShelterCare: "Animal care at the shelter",
     activityTransport: "Transport & logistics",

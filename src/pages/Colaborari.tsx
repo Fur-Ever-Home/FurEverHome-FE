@@ -176,7 +176,10 @@ export default function Colaborari() {
               <button
                 type="button"
                 className="colab-btn-primary"
-                onClick={() => scrollToSection('formular-voluntar')}
+                onClick={() => {
+                  setVolData((prev) => ({ ...prev, activitate: prev.activitate || 'voluntar' }));
+                  scrollToSection('formular-voluntar');
+                }}
               >
                 {t.btnVolunteer}
               </button>
@@ -334,6 +337,8 @@ export default function Colaborari() {
                       <option value="" disabled>
                         {t.chooseActivity}
                       </option>
+                      <option value="voluntar">{t.activityVolunteer}</option>
+                      <option value="sponsor">{t.activitySponsor}</option>
                       <option value="promovare">{t.activityPromotion}</option>
                       <option value="ingrijire">{t.activityShelterCare}</option>
                       <option value="transport">{t.activityTransport}</option>
@@ -553,6 +558,7 @@ export default function Colaborari() {
             type="button"
             className="colab-btn-banner"
             onClick={() => {
+              setVolData((prev) => ({ ...prev, activitate: prev.activitate || 'sponsor' }));
               scrollToSection('formular-voluntar');
               const input = document.getElementById('vol-nume');
               if (input) input.focus();
