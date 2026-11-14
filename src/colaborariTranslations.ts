@@ -110,6 +110,7 @@ export interface ColaborariTranslationKeys {
   donTransparencyShelters: string;
   donTransparencyPlatform: string;
   donTransparencyFees: string;
+  donTransparencyNetopiaFormula: string;
   donTransparencyDesc: string;
   donLabelShelter: string;
   donShelterAny: string;
@@ -239,9 +240,10 @@ export const colaborariTranslations: {
     donRecurringCheckbox: "Donație lunară recurentă",
     donTransparencyTitle: "Unde ajunge suma donată:",
     donTransparencyShelters: "Adăposturi",
-    donTransparencyPlatform: "Platformă",
-    donTransparencyFees: "Procesator plăți",
-    donTransparencyDesc: "95% din sumă merge direct către hrană și îngrijire în adăposturi, 3% susține mentenanța platformei, iar 2% acoperă comisionul procesatorului de plăți securizate.",
+    donTransparencyPlatform: "Comision platformă",
+    donTransparencyFees: "Netopia Payments",
+    donTransparencyNetopiaFormula: "1.19% + 0.3 lei",
+    donTransparencyDesc: "Cea mai mare parte din sumă (~95%) ajunge direct la adăposturi pentru hrana și îngrijirea animalelor, 3% susține mentenanța platformei, iar tariful Netopia este de 1.19% + 0.3 lei per tranzacție.",
     donLabelShelter: "Adăpost sprijinit",
     donShelterAny: "Oricare adăpost partener",
     donSecurityNote: "Plata este procesată securizat. Vei primi confirmarea pe email.",
@@ -365,9 +367,10 @@ export const colaborariTranslations: {
     donRecurringCheckbox: "Monthly recurring donation",
     donTransparencyTitle: "Where your donation goes:",
     donTransparencyShelters: "Shelters",
-    donTransparencyPlatform: "Platform",
-    donTransparencyFees: "Payment fees",
-    donTransparencyDesc: "95% of your donation goes directly towards food and medical care in shelters, 3% supports platform maintenance, and 2% covers secure payment processing fees.",
+    donTransparencyPlatform: "Platform fee",
+    donTransparencyFees: "Netopia Payments",
+    donTransparencyNetopiaFormula: "1.19% + 0.3 RON",
+    donTransparencyDesc: "The vast majority (~95%) goes directly to shelters for animal care and food, 3% supports platform maintenance, and Netopia transaction fee is 1.19% + 0.3 RON per transaction.",
     donLabelShelter: "Supported shelter",
     donShelterAny: "Any partner shelter",
     donSecurityNote: "Payment is securely processed. You will receive email confirmation.",

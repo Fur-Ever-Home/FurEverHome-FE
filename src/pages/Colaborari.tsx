@@ -73,7 +73,10 @@ export default function Colaborari() {
   });
   const [donSubmitted, setDonSubmitted] = useState(false);
 
-  // Calcul dinamic procente donație (95% adăposturi, 3% comision platformă, 2% procesator plăți)
+  // Calcul dinamic donație conform tarifelor exacte:
+  // - Netopia Payments: 1.19% + 0.30 RON per tranzacție
+  // - Comision platformă: 3%
+  // - Adăposturi: Restul sumei donate (aprox. 95%)
   const currentTotalAmount =
     selectedAmount === 'custom'
       ? parseFloat(customAmount) > 0
@@ -81,9 +84,27 @@ export default function Colaborari() {
         : 0
       : selectedAmount;
 
-  const shelterVal = (currentTotalAmount * 0.95).toFixed(2);
-  const platformVal = (currentTotalAmount * 0.03).toFixed(2);
-  const feeVal = (currentTotalAmount * 0.02).toFixed(2);
+  const netopiaFee =
+    currentTotalAmount > 0
+      ? Math.round((currentTotalAmount * 0.0119 + 0.3) * 100) / 100
+      : 0;
+  const platformFee =
+    currentTotalAmount > 0
+      ? Math.round(currentTotalAmount * 0.03 * 100) / 100
+      : 0;
+  const shelterAmount =
+    currentTotalAmount > 0
+      ? Math.max(0, Math.round((currentTotalAmount - netopiaFee - platformFee) * 100) / 100)
+      : 0;
+
+  const shelterPct =
+    currentTotalAmount > 0
+      ? ((shelterAmount / currentTotalAmount) * 100).toFixed(1)
+      : '95.2';
+
+  const shelterVal = shelterAmount.toFixed(2);
+  const platformVal = platformFee.toFixed(2);
+  const feeVal = netopiaFee.toFixed(2);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -508,30 +529,30 @@ export default function Colaborari() {
                     </div>
                     <div className="colab-transparency-pills">
                       <div className="colab-transparency-pill shelter">
-                        <span className="colab-pill-pct">95%</span>
+                        <span className="colab-pill-pct">{currentTotalAmount > 0 ? `${shelterPct}%` : '~95%'}</span>
                         <span className="colab-pill-label">{t.donTransparencyShelters}:</span>
-                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${shelterVal} RON` : '95%'}</span>
+                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${shelterVal} RON` : ''}</span>
                       </div>
                       <div className="colab-transparency-pill platform">
                         <span className="colab-pill-pct">3%</span>
                         <span className="colab-pill-label">{t.donTransparencyPlatform}:</span>
-                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${platformVal} RON` : '3%'}</span>
+                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${platformVal} RON` : ''}</span>
                       </div>
                       <div className="colab-transparency-pill fee">
-                        <span className="colab-pill-pct">2%</span>
-                        <span className="colab-pill-label">{t.donTransparencyFees}:</span>
-                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${feeVal} RON` : '2%'}</span>
+                        <span className="colab-pill-pct">{t.donTransparencyNetopiaFormula}</span>
+                        <span className="colab-pill-label">Netopia:</span>
+                        <span className="colab-pill-amount">{currentTotalAmount > 0 ? `${feeVal} RON` : ''}</span>
                       </div>
                     </div>
                     <p className="colab-transparency-desc">
                       {currentTotalAmount > 0 ? (
                         lang === 'ro' ? (
                           <>
-                            Din suma de <strong>{currentTotalAmount} RON</strong>: <strong>{shelterVal} RON</strong> (95%) ajung direct la adăposturi pentru hrana și îngrijirea animalelor, <strong>{platformVal} RON</strong> (3%) susțin mentenanța platformei, iar <strong>{feeVal} RON</strong> (2%) acoperă comisionul procesatorului de plăți.
+                            Din suma de <strong>{currentTotalAmount} RON</strong>: <strong>{shelterVal} RON</strong> ({shelterPct}%) ajung direct la adăposturi pentru hrana și îngrijirea animalelor, <strong>{platformVal} RON</strong> (3%) susțin mentenanța platformei, iar <strong>{feeVal} RON</strong> acoperă tariful Netopia Payments (1.19% + 0.3 lei/tranzacție).
                           </>
                         ) : (
                           <>
-                            From your donation of <strong>{currentTotalAmount} RON</strong>: <strong>{shelterVal} RON</strong> (95%) goes directly to shelters for animal care and food, <strong>{platformVal} RON</strong> (3%) supports platform maintenance, and <strong>{feeVal} RON</strong> (2%) covers the payment processor fee.
+                            From your donation of <strong>{currentTotalAmount} RON</strong>: <strong>{shelterVal} RON</strong> ({shelterPct}%) goes directly to shelters for animal care and food, <strong>{platformVal} RON</strong> (3%) supports platform operations, and <strong>{feeVal} RON</strong> covers the Netopia Payments fee (1.19% + 0.3 RON/transaction).
                           </>
                         )
                       ) : (
