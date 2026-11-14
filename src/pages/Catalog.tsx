@@ -86,7 +86,7 @@ export default function Catalog() {
 
   const mobileTrackRef = useRef<HTMLDivElement>(null);
 
-  const fetchAnimals = () => {
+  {/*const fetchAnimals = () => {
     setLoading(true);
 
     const queryParams = new URLSearchParams();
@@ -112,6 +112,39 @@ export default function Catalog() {
         console.error('Eroare la preluarea animalelor:', error);
         setLoading(false);
       });
+  };*/}
+  const fetchAnimals = () => {
+    setLoading(true);
+
+    const queryParams = new URLSearchParams();
+    if (filters.adoptionType) queryParams.append('adoptionType', filters.adoptionType);
+    if (filters.species) queryParams.append('species', filters.species);
+    if (filters.gender) queryParams.append('gender', filters.gender);
+    if (filters.size) queryParams.append('size', filters.size);
+    if (filters.ageGroup) queryParams.append('ageGroup', filters.ageGroup);
+    if (filters.temperament) queryParams.append('temperament', filters.temperament);
+    if (filters.color) queryParams.append('color', filters.color);
+    if (filters.shelter) queryParams.append('shelter', filters.shelter);
+    if (filters.locationType) queryParams.append('locationType', filters.locationType);
+    if (filters.petFriendly) queryParams.append('petFriendly', 'true');
+    if (filters.childFriendly) queryParams.append('childFriendly', 'true');
+    if (filters.vaccinated) queryParams.append('vaccinated', 'true');
+    if (filters.sterilized) queryParams.append('sterilized', 'true');
+    if (filters.dewormed) queryParams.append('dewormed', 'true');
+
+    const queryString = queryParams.toString();
+    const url = `${API_BASE_URL}/api/animals${queryString ? `?${queryString}` : ''}`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setAnimals(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Eroare la preluarea animalelor:', error);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -120,14 +153,32 @@ export default function Catalog() {
     }
   }, [categorieParam]);
 
+  {/*useEffect(() => {
+    fetchAnimals();
+  }, [categorieParam, filters.adoptionType]);*/}
   useEffect(() => {
     fetchAnimals();
-  }, [categorieParam, filters.adoptionType]);
+  }, [categorieParam, filters]);
+
+  {/*const handleResetFilters = () => {
+    setFilters(initialFilterState);
+    fetchAnimals();
+  };*/
 
   const handleResetFilters = () => {
     setFilters(initialFilterState);
-    fetchAnimals();
-  };
+    setLoading(true);
+    fetch(`${API_BASE_URL}/api/animals`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAnimals(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Eroare la resetarea animalelor:', error);
+        setLoading(false);
+      });
+  }; 
 
   const animaleSortate = [...animals].sort((a, b) => {
     const dateA = new Date(a.date || a.createdAt || Date.now()).getTime();
@@ -452,7 +503,8 @@ export default function Catalog() {
                         imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
                         image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
                       } as any}
-                      isDistanceMode={isDistanceMode}
+                      /*isDistanceMode={isDistanceMode}*/
+                      isDistanceMode={isDistanceMode || (animal as any).adoptionType === 'distanta'}
                     />
                   </div>
                 );
@@ -504,7 +556,8 @@ export default function Catalog() {
                         imageUrl: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon,
                         image: animal.imageUrl && animal.imageUrl.trim() !== "" ? animal.imageUrl : dogIcon
                       } as any}
-                      isDistanceMode={isDistanceMode}
+                      /*isDistanceMode={isDistanceMode}*/
+                      isDistanceMode={isDistanceMode || (animal as any).adoptionType === 'distanta'} 
                     />
                   </div>
                 );
@@ -536,4 +589,4 @@ export default function Catalog() {
       <FloatingBtn />
     </div>
   );
-}
+} }
