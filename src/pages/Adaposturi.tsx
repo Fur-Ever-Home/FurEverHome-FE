@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
 import { API_BASE_URL } from '../config';
-import searchIconImg from '../assets/iconiță căutare.png';
+import searchIconImg from '../assets/iconita_cautare.png';
 import { useLanguage } from '../useLanguage';
 import { shelterTranslations } from '../shelterTranslations';
 import './Adaposturi.css';
