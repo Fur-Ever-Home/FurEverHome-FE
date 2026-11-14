@@ -567,7 +567,7 @@ export default function DespreNoi() {
               <span className="dn-cta-highlight">{t.ctaTextHighlight}</span>
             </h3>
             <Link
-              to="/catalog?tip=la_distanta"
+              to="/colaborari"
               className="dn-cta-btn"
               onClick={() => window.scrollTo(0, 0)}
             >
