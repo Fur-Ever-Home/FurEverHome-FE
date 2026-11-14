@@ -472,7 +472,7 @@ export default function Colaborari() {
                     </div>
                   )}
 
-                  <label className="colab-checkbox-group" style={{ margin: '12px 0 16px 0' }}>
+                  <label className="colab-checkbox-group" style={{ margin: '12px 0 12px 0' }}>
                     <input
                       type="checkbox"
                       className="colab-checkbox"
@@ -481,6 +481,23 @@ export default function Colaborari() {
                     />
                     <span className="colab-checkbox-text">{t.donRecurringCheckbox}</span>
                   </label>
+
+                  <div className="colab-transparency-box">
+                    <div className="colab-transparency-header">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="colab-transparency-icon">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      </svg>
+                      <span>{t.donTransparencyTitle}</span>
+                    </div>
+                    <div className="colab-transparency-pills">
+                      <span className="colab-transparency-pill shelter">{t.donTransparencyShelters}</span>
+                      <span className="colab-transparency-pill platform">{t.donTransparencyPlatform}</span>
+                      <span className="colab-transparency-pill fee">{t.donTransparencyFees}</span>
+                    </div>
+                    <p className="colab-transparency-desc">{t.donTransparencyDesc}</p>
+                  </div>
 
                   <div className="colab-form-row-2col">
                     <div className="colab-form-group">

@@ -675,6 +675,68 @@
   gap: 6px;
 }
 
+/* Transparență donații */
+.colab-transparency-box {
+  background-color: #faf6f0;
+  border: 1px solid #eadecf;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 4px 0 16px 0;
+}
+
+.colab-transparency-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #3f2c20;
+  margin-bottom: 8px;
+}
+
+.colab-transparency-icon {
+  color: #ba8648;
+  flex-shrink: 0;
+}
+
+.colab-transparency-pills {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.colab-transparency-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.colab-transparency-pill.shelter {
+  background-color: #efe4d3;
+  color: #7a4f21;
+}
+
+.colab-transparency-pill.platform {
+  background-color: #f0e9dc;
+  color: #5c4e43;
+}
+
+.colab-transparency-pill.fee {
+  background-color: #f0e9dc;
+  color: #8c7e73;
+}
+
+.colab-transparency-desc {
+  font-size: 0.77rem;
+  color: #695b50;
+  line-height: 1.45;
+  margin: 0;
+}
+
 .colab-btn-submit-don {
   background-color: #3f2c20;
   color: #ffffff;

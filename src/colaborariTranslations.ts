@@ -106,6 +106,11 @@ export interface ColaborariTranslationKeys {
   donChipCustom: string;
   donCustomAmountPlaceholder: string;
   donRecurringCheckbox: string;
+  donTransparencyTitle: string;
+  donTransparencyShelters: string;
+  donTransparencyPlatform: string;
+  donTransparencyFees: string;
+  donTransparencyDesc: string;
   donLabelShelter: string;
   donShelterAny: string;
   donSecurityNote: string;
@@ -232,6 +237,11 @@ export const colaborariTranslations: {
     donChipCustom: "Altă sumă",
     donCustomAmountPlaceholder: "Introdu suma în RON",
     donRecurringCheckbox: "Donație lunară recurentă",
+    donTransparencyTitle: "Transparență donații:",
+    donTransparencyShelters: "93% Adăposturi",
+    donTransparencyPlatform: "5% Platformă",
+    donTransparencyFees: "2% Procesator plăți",
+    donTransparencyDesc: "93% din fiecare sumă merge direct către hrană și tratamente în adăposturi, 5% susține mentenanța platformei, iar 2% acoperă comisioanele bancare de procesare securizată.",
     donLabelShelter: "Adăpost sprijinit",
     donShelterAny: "Oricare adăpost partener",
     donSecurityNote: "Plata este procesată securizat. Vei primi confirmarea pe email.",
@@ -353,6 +363,11 @@ export const colaborariTranslations: {
     donChipCustom: "Other amount",
     donCustomAmountPlaceholder: "Enter amount in RON",
     donRecurringCheckbox: "Monthly recurring donation",
+    donTransparencyTitle: "Donation transparency:",
+    donTransparencyShelters: "93% Shelters",
+    donTransparencyPlatform: "5% Platform",
+    donTransparencyFees: "2% Payment fees",
+    donTransparencyDesc: "93% of each donation goes directly toward animal food and veterinary care at partner shelters, 5% sustains platform operations, and 2% covers secure payment processing fees.",
     donLabelShelter: "Supported shelter",
     donShelterAny: "Any partner shelter",
     donSecurityNote: "Payment is securely processed. You will receive email confirmation.",
