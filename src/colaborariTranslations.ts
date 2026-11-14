@@ -132,7 +132,7 @@ export const colaborariTranslations: {
     heroTitleLine1: "Împreună schimbăm",
     heroTitleLine2: "viețile lor.",
     heroDesc: "Parteneri, sponsori și voluntari care fac posibilă munca adăposturilor din Iași. Alătură-te comunității FurEverHome și contribuie la fiecare adopție.",
-    btnVolunteer: "Devino voluntar",
+    btnVolunteer: "Alătură-te echipei!",
     btnDonate: "Donează acum",
 
     // Hero Stats
@@ -190,7 +190,7 @@ export const colaborariTranslations: {
     getInvolvedDesc: "Alege cum vrei să ajuți: oferă-ți timpul ca voluntar sau susține adăposturile printr-o donație.",
 
     // Volunteer form
-    volFormTitle: "Devino voluntar",
+    volFormTitle: "Alătură-te echipei!",
     volFormDesc: "Completează datele și te contactăm în cel mai scurt timp.",
     labelFullName: "Nume complet",
     placeholderFullName: "Ex: Maria Popescu",
@@ -237,7 +237,7 @@ export const colaborariTranslations: {
 
     // Bottom Banner
     bannerTitlePrefix: "Vrei să devii ",
-    bannerTitleHighlight: "partener sau sponsor",
+    bannerTitleHighlight: "voluntar, partener sau sponsor",
     bannerTitleSuffix: "?",
     btnContactUs: "Contactează-ne",
   },
@@ -251,7 +251,7 @@ export const colaborariTranslations: {
     heroTitleLine1: "Together we change",
     heroTitleLine2: "their lives.",
     heroDesc: "Partners, sponsors, and volunteers who make the work of Iași shelters possible. Join the FurEverHome community and contribute to every adoption.",
-    btnVolunteer: "Become a volunteer",
+    btnVolunteer: "Join the team!",
     btnDonate: "Donate now",
 
     // Hero Stats
@@ -309,7 +309,7 @@ export const colaborariTranslations: {
     getInvolvedDesc: "Choose how you'd like to help: volunteer your time or support shelters with a donation.",
 
     // Volunteer form
-    volFormTitle: "Become a volunteer",
+    volFormTitle: "Join the team!",
     volFormDesc: "Fill in your details and we will reach out as soon as possible.",
     labelFullName: "Full name",
     placeholderFullName: "E.g. Maria Popescu",
@@ -356,7 +356,7 @@ export const colaborariTranslations: {
 
     // Bottom Banner
     bannerTitlePrefix: "Want to become a ",
-    bannerTitleHighlight: "partner or sponsor",
+    bannerTitleHighlight: "volunteer, partner or sponsor",
     bannerTitleSuffix: "?",
     btnContactUs: "Contact us",
   },
