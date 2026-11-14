@@ -224,9 +224,10 @@
     width: 100%;
     max-width: 100%;
     height: auto;
-    aspect-ratio: 640 / 440;
+    aspect-ratio: 16 / 9;
     border-radius: 18px;
     object-fit: cover;
+    box-shadow: 0 4px 14px rgba(63, 44, 32, 0.08);
   }
 
   /* ==========================================================================

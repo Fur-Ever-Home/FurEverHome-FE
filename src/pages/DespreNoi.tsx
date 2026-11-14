@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
-import heroVector from '../assets/hero-vector.svg';
+import heroImage from '../assets/hero-adopted-pets.jpg';
 import { useLanguage } from '../useLanguage';
 import { despreNoiTranslations } from '../despreNoiTranslations';
 import './DespreNoi.css';
@@ -102,7 +102,7 @@ export default function DespreNoi() {
 
             <div className="dn-hero-image-wrapper">
               <img
-                src={heroVector}
+                src={heroImage}
                 alt={t.heroImageAlt}
                 className="dn-hero-image"
               />
