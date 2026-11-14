@@ -1,0 +1,707 @@
+/* Containerul principal al paginii */
+.adaposturi-page {
+  background-color: #f7f4ed; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Secțiunea de sus (Antet și Filtre) */
+.adaposturi-hero-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.adaposturi-header-text {
+  margin-bottom: 25px;
+}
+
+.adaposturi-header-text h1 {
+  font-size: 2.4rem;
+  color: #3F2C20;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.adaposturi-filters-container {
+  background-color: #ffffff;
+  border: 1px solid #e6dec5;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.adaposturi-filters-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.adaposturi-search-wrapper {
+  flex: 1 1 300px;
+  position: relative;
+}
+
+.adaposturi-search-wrapper input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border-radius: 24px;
+  border: 1px solid #d9d0b8;
+  background-color: #faf8f2;
+  font-size: 1rem;
+  outline: none;
+  font-family: 'Libertinus Sans';
+  box-sizing: border-box;
+}
+
+.adaposturi-search-wrapper img {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.adaposturi-select {
+  padding: 12px 40px 12px 16px;
+  border-radius: 24px;
+  border: 1px solid #d9d0b8;
+  background-color: #ffffff;
+  font-size: 1rem;
+  color: #3F2C20;
+  cursor: pointer;
+  min-width: 150px;
+  outline: none;
+  font-family: 'Libertinus Sans';
+}
+
+.adaposturi-reset-btn {
+  background: none;
+  border: none;
+  color: #B97A35;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.05rem;
+  padding: 8px 12px;
+  font-family: 'Libertinus Sans';
+}
+
+.adaposturi-reset-btn:hover {
+  text-decoration: underline;
+}
+
+.adaposturi-filters-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f0ead6;
+  padding-top: 16px;
+  gap: 10px;
+}
+
+.animal-type-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 1rem;
+  color: #3F2C20;
+  font-weight: 600;
+  font-family: 'Libertinus Sans';
+}
+
+.filter-pill {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #d9d0b8;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background-color: #faf8f2;
+  color: #3F2C20;
+  transition: all 0.2s ease;
+  font-family: 'Libertinus Sans';
+}
+
+.filter-pill.active {
+  background-color: #3F2C20;
+  color: #ffffff;
+  border-color: #3F2C20;
+}
+
+.adaposturi-counter {
+  font-size: 0.95rem;
+  color: #5d534a;
+  font-weight: 500;
+  font-family: 'Libertinus Sans';
+}
+
+/* ==========================================
+   LAYOUT PRINCIPAL PE DOUĂ COLOANE
+   ================================          */
+.adaposturi-main-layout {
+  max-width: 1200px;
+  margin: 30px auto 50px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Harta schematică (Stânga - 58%) */
+.schematic-map-container {
+  position: relative;
+  flex: 0 0 58%;
+  height: 560px;
+  background-color: #f0eadc;
+  border-radius: 16px;
+  border: 1px solid #e6dec5;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+
+.map-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(90deg, transparent 49%, #eae3d2 50%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, #eae3d2 50%, transparent 51%);
+  background-size: 250px 250px;
+}
+
+.map-zone {
+  position: absolute;
+  background-color: #d1dcce;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  color: #72826e;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+}
+
+.zone-copou { top: 60px; left: 80px; width: 180px; height: 90px; border-radius: 40px; }
+.zone-pacurari { bottom: 80px; left: 60px; width: 160px; height: 80px; }
+.zone-centru { top: 80px; right: 180px; width: 170px; height: 80px; }
+.zone-tatarasi { bottom: 90px; right: 120px; width: 170px; height: 90px; border-radius: 40px; }
+
+.map-river {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background-color: #c8dede;
+  transform: rotate(-3deg);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  padding-left: 300px;
+  font-size: 0.75rem;
+  color: #557575;
+  font-weight: 500;
+}
+
+.map-pin {
+  position: absolute;
+  background-color: #B97A35;
+  color: #ffffff;
+  border: 2.5px solid #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.map-pin span {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.map-pin:hover {
+  background-color: #c2792c;
+  transform: scale(1.15);
+  z-index: 10;
+}
+
+.pin-24 { top: 90px; left: 190px; }
+.pin-9  { top: 140px; right: 320px; }
+.pin-12 { top: 320px; left: 140px; }
+.pin-31 { bottom: 130px; left: 210px; }
+.pin-17 { top: 270px; right: 410px; }
+
+.map-footer-text {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 0.75rem;
+  color: #8c8275;
+}
+
+.map-zoom-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d9d0b8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+  z-index: 5;
+}
+
+.map-zoom-controls button {
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #3F2C20;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.map-zoom-controls button:first-child {
+  border-bottom: 1px solid #f0ead6;
+}
+
+.map-zoom-controls button:hover {
+  background: #faf8f2;
+}
+
+/* ==========================================
+   CONTAINER CARDURI & EFECT FLIP 3D
+   ================================          */
+.shelters-cards-sidebar {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 560px;
+  overflow-y: auto;
+  padding-right: 5px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+/* Containerul care ține cardul și setează perspectiva 3D */
+.shelter-card-container {
+  perspective: 1000px;
+  width: 100%;
+}
+
+.shelter-card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.shelter-card-container.flipped .shelter-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Stiluri comune pentru fețele cardului */
+.shelter-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 330px; 
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e6dec5;
+  border-radius: 16px;
+  padding: 22px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+  box-sizing: border-box;
+}
+
+/* Fața cardului devine statică în flux pentru a dicta înălțimea corectă */
+.shelter-card-front {
+  position: relative;
+  gap: 30px;
+}
+
+/* Spatele cardului rotit la 180 grade */
+.shelter-card-back {
+  transform: rotateY(180deg);
+  justify-content: space-between; 
+  padding-bottom: 18px;
+}
+
+.shelter-card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.shelter-card-header-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.shelter-avatar {
+  width: 46px;
+  height: 46px;
+  background-color: #B97A35;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(180, 120, 53, 0.3);
+}
+
+.shelter-titles h3 {
+  font-size: 1.1rem;
+  color: #3F2C20;
+  margin: 0 0 4px 0;
+  font-weight: 700;
+}
+
+.shelter-subtitle {
+  font-size: 0.85rem;
+  color: #8c8275;
+}
+
+.shelter-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-top: 1px solid #f2ede4;
+  border-bottom: 1px solid #f2ede4;
+  padding-bottom: 8px;
+}
+
+.info-row {
+  display: flex;
+  gap: 15px;
+}
+
+.info-label {
+  color: #8c8275;
+  min-width: 65px;
+  font-weight: 500;
+}
+
+.info-val {
+  color: #3F2C20;
+  font-weight: 500;
+}
+
+.shelter-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.shelter-green-badge {
+  background-color: #587c54;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.shelter-animals-list {
+  font-size: 0.85rem;
+  color: #665c52;
+}
+
+/* Secțiunea rețele sociale de pe spatele cardului */
+.social-contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.social-contact-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3F2C20;
+  padding-bottom: 7px;
+}
+
+.social-buttons-row {
+  display: flex;
+  gap: 8px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 5px 12px 5px 6px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Cercul alb din stânga fiecărui buton */
+.soc-icon {
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Culorile specifice fiecărui buton și ale textului din cercul alb */
+.whatsapp-btn {
+  background-color: #20c966;
+}
+.whatsapp-btn .soc-icon {
+  color: #20c966;
+}
+
+.instagram-btn {
+  background-color: #d92698;
+}
+.instagram-btn .soc-icon {
+  color: #d92698;
+  font-size: 0.72rem;
+}
+
+.facebook-btn {
+  background-color: #1877f2;
+}
+.facebook-btn .soc-icon {
+  color: #1877f2;
+  font-size: 0.95rem;
+}
+.soc-icon {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Butoane de acțiune */
+.shelter-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.btn-vezi-animale {
+  flex: 1;
+  background-color: #B97A35;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: 'Libertinus Sans', sans-serif;
+}
+
+.btn-vezi-animale:hover {
+  background-color: #a36b2f;
+}
+
+.btn-detalii, .btn-inapoi {
+  background-color: transparent;
+  color: #3F2C20;
+  border: 1px solid #d9d0b8;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s, border-color 0.2s;
+  font-family: 'Libertinus Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.btn-detalii:hover, .btn-inapoi:hover {
+  background-color: #faf8f2;
+  border-color: #B97A35;
+}
+
+.info-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #3F2C20;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+}
+
+/* ==========================================
+   ADAPTARE PENTRU TELEFOANE (RESPONSIVE)
+   ========================================== */
+@media screen and (max-width: 900px) {
+  .adaposturi-hero-section {
+    padding: 25px 15px 10px 15px;
+  }
+
+  .adaposturi-header-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .adaposturi-filters-container {
+    padding: 16px;
+  }
+
+  .adaposturi-filters-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  .adaposturi-search-wrapper {
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .adaposturi-select,
+  .adaposturi-reset-btn {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Transformăm secțiunea de jos într-un carusel orizontal */
+  .adaposturi-filters-bottom {
+    display: flex;
+    flex-direction: row;          /* Punem elementele pe un singur rând */
+    flex-wrap: nowrap;            /* Împiedicăm trecerea pe rând nou */
+    overflow-x: auto;             /* Permitem scroll-ul orizontal (carusel) */
+    white-space: nowrap;          /* Menținem textul pe o singură linie */
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 8px;          /* Spațiu mic pentru bara de scroll */
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Scroll fin pe iOS */
+  }
+
+  /* Ascundem bara de scroll pentru un aspect mai curat (opțional) */
+  .adaposturi-filters-bottom::-webkit-scrollbar {
+    display: none;
+  }
+  .adaposturi-filters-bottom {
+    scrollbar-width: none;
+  }
+
+  /* Asigurăm că butoanele/elementele din interior nu se micșorează și își păstrează forma */
+  .adaposturi-filters-bottom > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  /* Layout principal pe coloană */
+  .adaposturi-main-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    margin: 15px auto 40px auto;
+    padding: 0 15px;
+  }
+
+  /* Fix pentru harta turtită: flex: none permite respectarea înălțimii */
+  .schematic-map-container {
+    flex: none;
+    width: 100%;
+    height: 340px;
+  }
+
+  /* Repoziționăm zonele și pin-urile ca să încapă pe ecranul îngust al telefonului */
+  .zone-copou { top: 30px; left: 20px; width: 120px; height: 60px; font-size: 0.7rem; }
+  .zone-centru { top: 45px; right: 55px; width: 120px; height: 60px; font-size: 0.7rem; }
+  .zone-pacurari { bottom: 45px; left: 20px; width: 120px; height: 60px; font-size: 0.7rem; }
+  .zone-tatarasi { bottom: 45px; right: 25px; width: 120px; height: 60px; font-size: 0.7rem; }
+  
+  .map-river {
+    padding-left: 120px;
+    height: 26px;
+  }
+
+  .pin-24 { top: 45px; left: 95px; }
+  .pin-9  { top: 85px; right: 115px; }
+  .pin-12 { top: 175px; left: 55px; }
+  .pin-31 { bottom: 75px; left: 105px; }
+  .pin-17 { top: 155px; right: 95px; }
+
+  /* Containerul de carduri */
+  .shelters-cards-sidebar {
+    flex: none;
+    width: 100%;
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+    gap: 16px;
+  }
+
+  /* Ajustăm butoanele social media de pe spate să nu se înghesuie pe telefoane foarte înguste */
+  .social-buttons-row {
+    flex-wrap: wrap;
+  }
+}
