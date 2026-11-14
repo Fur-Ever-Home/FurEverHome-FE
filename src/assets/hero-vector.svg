@@ -1,0 +1,278 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDFBF7" />
+      <stop offset="100%" stop-color="#F2E9DC" />
+    </linearGradient>
+
+    <!-- Warm Sun Glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFEED6" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#FAF5EE" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Golden Accent Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D49B55" />
+      <stop offset="100%" stop-color="#BA8648" />
+    </linearGradient>
+
+    <!-- Dog Fur Gradient -->
+    <linearGradient id="dogFur" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D99B52" />
+      <stop offset="100%" stop-color="#AF7332" />
+    </linearGradient>
+
+    <!-- Cat Fur Gradient -->
+    <linearGradient id="catFur" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#847164" />
+      <stop offset="100%" stop-color="#5A483D" />
+    </linearGradient>
+
+    <!-- Soft Drop Shadow for Elements -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3F2C20" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- ================= BACKGROUND BASE ================= -->
+  <rect width="640" height="440" rx="28" fill="url(#bgGradient)" />
+  <rect width="638" height="438" x="1" y="1" rx="27" fill="none" stroke="#EAE0D2" stroke-width="2" />
+
+  <!-- Soft Decorative Sun & Atmosphere -->
+  <circle cx="510" cy="110" r="140" fill="url(#sunGlow)" />
+  <circle cx="100" cy="90" r="90" fill="url(#sunGlow)" opacity="0.6" />
+
+  <!-- Gentle Background Hills / Shelter Garden Silhouette -->
+  <path d="M-20 440 Q 140 310, 320 360 T 660 330 L 660 440 Z" fill="#EAE0D0" opacity="0.45" />
+  <path d="M-20 440 Q 200 340, 420 380 T 660 370 L 660 440 Z" fill="#E2D4C0" opacity="0.5" />
+
+  <!-- Shelter Building Minimal Silhouette in Distance -->
+  <g opacity="0.25" fill="#C2B29F">
+    <path d="M480 320 L520 280 L560 320 Z" />
+    <rect x="490" y="320" width="60" height="45" rx="3" />
+    <rect x="510" y="335" width="20" height="30" rx="2" fill="#FAF5EE" />
+  </g>
+
+  <!-- Potted Plant on Ground (Right) -->
+  <g transform="translate(540, 305)" filter="url(#softShadow)">
+    <ellipse cx="25" cy="85" rx="20" ry="6" fill="#3F2C20" opacity="0.1" />
+    <path d="M12 55 L38 55 L34 85 L16 85 Z" fill="#C99052" />
+    <ellipse cx="25" cy="55" rx="13" ry="4" fill="#A8743B" />
+    <!-- Leaves -->
+    <path d="M25 55 Q 10 25, 2 20 Q 15 35, 25 55 Z" fill="#758A58" />
+    <path d="M25 55 Q 25 15, 30 10 Q 32 30, 25 55 Z" fill="#889E6B" />
+    <path d="M25 55 Q 40 25, 48 22 Q 35 38, 25 55 Z" fill="#6A7D4E" />
+  </g>
+
+  <!-- Potted Plant on Ground (Left) -->
+  <g transform="translate(45, 320)" filter="url(#softShadow)">
+    <ellipse cx="20" cy="70" rx="16" ry="5" fill="#3F2C20" opacity="0.1" />
+    <path d="M10 45 L30 45 L27 70 L13 70 Z" fill="#BA8648" />
+    <path d="M20 45 Q 8 20, 2 15 Q 12 30, 20 45 Z" fill="#7E945F" />
+    <path d="M20 45 Q 32 20, 38 18 Q 28 32, 20 45 Z" fill="#6B804E" />
+  </g>
+
+  <!-- ================= WOODEN ADOPTION BENCH ================= -->
+  <g filter="url(#softShadow)">
+    <!-- Shadow under bench -->
+    <ellipse cx="320" cy="405" rx="240" ry="14" fill="#3F2C20" opacity="0.15" />
+    <!-- Bench Legs -->
+    <rect x="140" y="325" width="14" height="75" rx="4" fill="#4A3427" />
+    <rect x="486" y="325" width="14" height="75" rx="4" fill="#4A3427" />
+    <rect x="220" y="335" width="12" height="65" rx="3" fill="#3A271C" />
+    <rect x="410" y="335" width="12" height="65" rx="3" fill="#3A271C" />
+    <!-- Bench Seat Planks -->
+    <rect x="110" y="312" width="420" height="15" rx="6" fill="#C28B47" />
+    <rect x="115" y="327" width="410" height="12" rx="4" fill="#A87438" />
+  </g>
+
+  <!-- ================= PERSON 1: VOLUNTEER (LEFT) ================= -->
+  <g transform="translate(145, 125)">
+    <!-- Hair back -->
+    <path d="M55 45 C 30 45, 20 80, 22 130 C 26 145, 40 145, 45 130 C 48 85, 60 70, 75 70 Z" fill="#543729" />
+    
+    <!-- Torso / Yellow-Cream Jacket -->
+    <path d="M38 145 C 45 110, 105 110, 112 145 L 125 240 C 120 250, 40 250, 30 240 Z" fill="#E6AF65" />
+    <!-- Collar / inner shirt -->
+    <path d="M65 118 L 75 145 L 85 118 Z" fill="#FFFFFF" />
+
+    <!-- Head & Neck -->
+    <rect x="68" y="98" width="14" height="24" rx="6" fill="#F4C7A5" />
+    <ellipse cx="75" cy="78" rx="24" ry="28" fill="#FBD6B8" />
+
+    <!-- Hair Front & Bangs -->
+    <path d="M52 75 C 50 48, 98 46, 98 75 C 92 64, 82 60, 75 62 C 65 62, 56 66, 52 75 Z" fill="#694634" />
+    <path d="M52 75 C 56 95, 52 120, 48 135 C 44 135, 42 120, 46 90 Z" fill="#694634" />
+
+    <!-- Face Details (Happy closed-eyes smile) -->
+    <path d="M64 78 Q 68 83, 72 78" stroke="#694634" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M78 78 Q 82 83, 86 78" stroke="#694634" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M71 88 Q 75 94, 80 88" stroke="#B85C43" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <!-- Blush -->
+    <ellipse cx="62" cy="84" rx="4" ry="2.5" fill="#F19985" opacity="0.6" />
+    <ellipse cx="88" cy="84" rx="4" ry="2.5" fill="#F19985" opacity="0.6" />
+
+    <!-- Arm reaching down to pet the dog -->
+    <path d="M105 140 C 125 165, 145 195, 155 230 C 158 240, 142 245, 138 235 C 130 210, 115 180, 95 160 Z" fill="#E6AF65" />
+    <!-- Hand gently caressing dog -->
+    <circle cx="152" cy="235" r="9" fill="#FBD6B8" />
+
+    <!-- Legs / Pants -->
+    <path d="M42 240 L 45 320 L 75 320 L 75 240 Z" fill="#4A5643" />
+    <path d="M80 240 L 80 320 L 110 320 L 105 240 Z" fill="#3D4737" />
+  </g>
+
+  <!-- ================= HAPPY SHELTER DOG (CENTER) ================= -->
+  <g transform="translate(265, 195)" filter="url(#softShadow)">
+    <!-- Dog Tail (Wagging) -->
+    <path d="M125 155 C 150 145, 165 110, 155 95 C 148 88, 140 100, 138 115 C 132 135, 115 148, 110 152 Z" fill="url(#dogFur)">
+      <animateTransform attributeName="transform" type="rotate" values="0 115 150; 12 115 150; -6 115 150; 0 115 150" dur="1.2s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Dog Body (Sitting Sturdy) -->
+    <path d="M35 150 C 35 105, 95 95, 120 135 C 130 150, 132 195, 125 210 C 120 215, 25 215, 35 150 Z" fill="url(#dogFur)" />
+    <!-- Dog Chest White Patch -->
+    <path d="M36 145 C 42 125, 68 120, 72 145 C 75 165, 65 190, 50 195 C 38 190, 34 165, 36 145 Z" fill="#FFF8EE" />
+
+    <!-- Dog Front Legs -->
+    <rect x="38" y="155" width="18" height="55" rx="8" fill="url(#dogFur)" />
+    <rect x="62" y="155" width="18" height="55" rx="8" fill="#A86F30" />
+    <!-- Dog Paws -->
+    <ellipse cx="47" cy="208" rx="12" ry="7" fill="#FFF8EE" />
+    <ellipse cx="71" cy="208" rx="12" ry="7" fill="#FFF8EE" />
+
+    <!-- Dog Neck Collar with Gold Tag -->
+    <path d="M22 108 Q 50 120, 76 106" stroke="#C44335" stroke-width="9" stroke-linecap="round" fill="none" />
+    <circle cx="49" cy="120" r="7" fill="#F2B84B" stroke="#9E6D1F" stroke-width="1.5" />
+
+    <!-- Dog Head -->
+    <ellipse cx="48" cy="72" rx="36" ry="34" fill="url(#dogFur)" />
+    <!-- Dog Snout / Muzzle -->
+    <ellipse cx="48" cy="85" rx="20" ry="16" fill="#FFF8EE" />
+    <!-- Nose -->
+    <path d="M42 75 Q 48 72, 54 75 Q 48 83, 42 75 Z" fill="#2E1E14" />
+    <!-- Happy Smile with Tongue -->
+    <path d="M48 82 L 48 88 M 41 87 Q 48 93, 55 87" stroke="#2E1E14" stroke-width="2" stroke-linecap="round" fill="none" />
+    <!-- Pink Tongue -->
+    <path d="M45 88 C 45 98, 51 98, 51 88 Z" fill="#F47F8A" />
+
+    <!-- Eyes (Joyful arches) -->
+    <path d="M32 64 Q 38 58, 44 64" stroke="#2E1E14" stroke-width="3" stroke-linecap="round" fill="none" />
+    <path d="M52 64 Q 58 58, 64 64" stroke="#2E1E14" stroke-width="3" stroke-linecap="round" fill="none" />
+    <!-- Eyebrows -->
+    <ellipse cx="38" cy="54" rx="4" ry="2" fill="#8A5722" />
+    <ellipse cx="58" cy="54" rx="4" ry="2" fill="#8A5722" />
+
+    <!-- Dog Floppy Ears -->
+    <!-- Left Ear -->
+    <path d="M18 55 C 5 65, 0 100, 14 112 C 22 118, 28 105, 26 85 Z" fill="#8A5722" />
+    <!-- Right Ear (Curled) -->
+    <path d="M78 55 C 92 65, 96 100, 82 112 C 74 118, 68 105, 70 85 Z" fill="#8A5722" />
+  </g>
+
+  <!-- ================= PERSON 2: ADOPTER (RIGHT) ================= -->
+  <g transform="translate(380, 130)">
+    <!-- Hair back (Long Wavy Brown Hair) -->
+    <path d="M50 45 C 85 45, 110 80, 108 150 C 105 170, 85 170, 80 150 C 78 110, 65 70, 50 70 Z" fill="#422C20" />
+
+    <!-- Torso / Warm Cream-Brown Cardigan -->
+    <path d="M25 140 C 35 110, 95 110, 105 140 L 115 235 C 110 245, 30 245, 20 235 Z" fill="#996F52" />
+    <!-- Inner White Top -->
+    <path d="M52 115 L 65 140 L 78 115 Z" fill="#FAF5EE" />
+
+    <!-- Head & Neck -->
+    <rect x="58" y="96" width="14" height="22" rx="5" fill="#F4C7A5" />
+    <ellipse cx="65" cy="76" rx="23" ry="27" fill="#FBD6B8" />
+
+    <!-- Hair Front / Style -->
+    <path d="M43 72 C 45 45, 88 45, 88 72 C 82 62, 74 58, 65 60 C 56 60, 48 64, 43 72 Z" fill="#523829" />
+    <path d="M85 70 C 92 90, 95 125, 90 145 C 86 145, 84 125, 80 95 Z" fill="#523829" />
+
+    <!-- Face Details -->
+    <path d="M54 75 Q 58 80, 62 75" stroke="#422C20" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M68 75 Q 72 80, 76 75" stroke="#422C20" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M61 85 Q 65 91, 70 85" stroke="#B85C43" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <!-- Blush -->
+    <ellipse cx="52" cy="81" rx="4" ry="2.5" fill="#F19985" opacity="0.6" />
+    <ellipse cx="78" cy="81" rx="4" ry="2.5" fill="#F19985" opacity="0.6" />
+
+    <!-- Arm Holding / Petting the Cat -->
+    <path d="M30 145 C 15 170, 8 200, 10 230 C 12 238, 28 238, 30 228 C 32 205, 42 178, 55 155 Z" fill="#996F52" />
+    <circle cx="16" cy="230" r="9" fill="#FBD6B8" />
+
+    <!-- Pants -->
+    <path d="M30 235 L 35 315 L 65 315 L 65 235 Z" fill="#4F5D73" />
+    <path d="M70 235 L 70 315 L 100 315 L 95 235 Z" fill="#414D5E" />
+  </g>
+
+  <!-- ================= PLAYFUL CAT (RIGHT, SITTING BESIDE) ================= -->
+  <g transform="translate(470, 245)" filter="url(#softShadow)">
+    <!-- Cat Tail (Curled Elegantly) -->
+    <path d="M60 85 C 80 85, 95 65, 85 45 C 78 35, 70 42, 74 52 C 78 62, 68 72, 55 75 Z" fill="url(#catFur)" />
+
+    <!-- Cat Body -->
+    <ellipse cx="38" cy="72" rx="24" ry="28" fill="url(#catFur)" />
+    <!-- Cat Chest Fluff -->
+    <ellipse cx="32" cy="70" rx="12" ry="16" fill="#F4ECE1" />
+
+    <!-- Cat Front Paws -->
+    <rect x="22" y="75" width="10" height="28" rx="5" fill="url(#catFur)" />
+    <rect x="36" y="75" width="10" height="28" rx="5" fill="#4A3B32" />
+    <ellipse cx="27" cy="102" rx="6" ry="4" fill="#F4ECE1" />
+    <ellipse cx="41" cy="102" rx="6" ry="4" fill="#F4ECE1" />
+
+    <!-- Cat Head -->
+    <circle cx="34" cy="40" r="20" fill="url(#catFur)" />
+
+    <!-- Cat Ears -->
+    <polygon points="18,34 14,14 30,26" fill="url(#catFur)" />
+    <polygon points="20,32 17,18 28,26" fill="#F4A6AC" />
+    <polygon points="38,26 54,14 50,34" fill="url(#catFur)" />
+    <polygon points="40,26 51,18 48,32" fill="#F4A6AC" />
+
+    <!-- Cat Face (Content Happy Eyes) -->
+    <path d="M24 38 Q 28 42, 32 38" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" />
+    <path d="M36 38 Q 40 42, 44 38" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" />
+    <!-- Pink Nose & Mouth -->
+    <polygon points="32,44 36,44 34,47" fill="#F4A6AC" />
+    <path d="M34 47 Q 31 51, 28 48 M 34 47 Q 37 51, 40 48" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" fill="none" />
+    <!-- Whiskers -->
+    <line x1="20" y1="44" x2="6" y2="42" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8" />
+    <line x1="20" y1="47" x2="8" y2="49" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8" />
+    <line x1="48" y1="44" x2="62" y2="42" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8" />
+    <line x1="48" y1="47" x2="60" y2="49" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8" />
+  </g>
+
+  <!-- ================= ACCENTS: FLOATING HEARTS & PAW PRINTS ================= -->
+  <!-- Floating Warm Heart (Center Top) -->
+  <g transform="translate(315, 110)">
+    <path d="M12 4 C 8 -2, 0 0, 0 6 C 0 12, 12 20, 12 20 C 12 20, 24 12, 24 6 C 24 0, 16 -2, 12 4 Z" fill="#BA8648" opacity="0.85">
+      <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0" dur="2.5s" repeatCount="indefinite" />
+    </path>
+  </g>
+  <g transform="translate(250, 140) scale(0.65)">
+    <path d="M12 4 C 8 -2, 0 0, 0 6 C 0 12, 12 20, 12 20 C 12 20, 24 12, 24 6 C 24 0, 16 -2, 12 4 Z" fill="#D49B55" opacity="0.6" />
+  </g>
+  <g transform="translate(390, 135) scale(0.7)">
+    <path d="M12 4 C 8 -2, 0 0, 0 6 C 0 12, 12 20, 12 20 C 12 20, 24 12, 24 6 C 24 0, 16 -2, 12 4 Z" fill="#C89551" opacity="0.7" />
+  </g>
+
+  <!-- Floating Sparkles / Stars -->
+  <g transform="translate(190, 80)" fill="#BA8648" opacity="0.7">
+    <path d="M6 0 L7.5 4.5 L12 6 L7.5 7.5 L6 12 L4.5 7.5 L0 6 L4.5 4.5 Z" />
+  </g>
+  <g transform="translate(450, 75)" fill="#D49B55" opacity="0.7">
+    <path d="M5 0 L6.2 3.8 L10 5 L6.2 6.2 L5 10 L3.8 6.2 L0 5 L3.8 3.8 Z" />
+  </g>
+
+  <!-- Small Subtle Paw Print Accent in Bottom Corner -->
+  <g transform="translate(565, 385)" fill="#BA8648" opacity="0.25">
+    <ellipse cx="14" cy="16" rx="6" ry="5" />
+    <circle cx="5" cy="8" r="3" />
+    <circle cx="12" cy="4" r="3" />
+    <circle cx="19" cy="5" r="3" />
+    <circle cx="24" cy="10" r="2.8" />
+  </g>
+</svg>
