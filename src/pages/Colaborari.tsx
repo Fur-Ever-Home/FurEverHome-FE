@@ -13,8 +13,16 @@ export default function Colaborari() {
   const { lang } = useLanguage();
   const t = colaborariTranslations[lang] || colaborariTranslations.ro;
 
-  // Derulare la începutul paginii când este deschisă
+  // Derulare la începutul paginii când este deschisă (sau derulare la secțiune dacă există hash)
   useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+        return;
+      }
+    }
     window.scrollTo(0, 0);
   }, []);
 
