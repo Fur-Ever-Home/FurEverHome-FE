@@ -301,17 +301,166 @@
     margin-bottom: 14px;
   }
 
-  /* Butoanele de suma 2x2 pe mobil */
+  /* Câmpuri de formular optimizate pe mobil */
+  .colaborari-page .colab-input,
+  .colaborari-page .colab-select,
+  .colaborari-page .colab-textarea {
+    font-size: 16px !important; /* Previne auto-zoom pe iOS Safari și browsere mobile */
+    padding: 11px 14px;
+    border-radius: 12px;
+  }
+
+  /* Butoanele de sumă 2x2 pe mobil */
   .colaborari-page .colab-chips-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    margin-bottom: 12px;
   }
 
   .colaborari-page .colab-chip {
     text-align: center;
-    padding: 10px 14px;
+    padding: 11px 14px;
     font-size: 0.88rem;
+  }
+
+  .colaborari-page .colab-custom-amount-input {
+    margin-bottom: 14px;
+  }
+
+  /* Checkbox recurență pe mobil */
+  .colaborari-page .colab-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 12px 0 14px 0 !important;
+    cursor: pointer;
+  }
+
+  .colaborari-page .colab-checkbox {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px;
+    min-height: 18px;
+    margin-top: 2px;
+    accent-color: #ba8648;
+    flex-shrink: 0;
+  }
+
+  .colaborari-page .colab-checkbox-text {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: #5c4e43;
+  }
+
+  /* Transparență donații pe mobil (calcul dinamic) */
+  .colaborari-page .colab-transparency-box {
+    background-color: #faf6f0;
+    border: 1px solid #eadecf;
+    border-radius: 14px;
+    padding: 14px 14px;
+    margin: 6px 0 16px 0;
+  }
+
+  .colaborari-page .colab-transparency-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3f2c20;
+    margin-bottom: 10px;
+    line-height: 1.35;
+    flex-wrap: wrap;
+  }
+
+  .colaborari-page .colab-transparency-icon {
+    color: #ba8648;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .colaborari-page .colab-transparency-total {
+    color: #ba8648;
+    font-weight: 700;
+  }
+
+  .colaborari-page .colab-transparency-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+
+  .colaborari-page .colab-transparency-pill {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-size: 0.78rem;
+    box-sizing: border-box;
+  }
+
+  .colaborari-page .colab-transparency-pill.shelter {
+    background-color: #efe4d3;
+    color: #7a4f21;
+  }
+
+  .colaborari-page .colab-transparency-pill.platform {
+    background-color: #f0e9dc;
+    color: #5c4e43;
+  }
+
+  .colaborari-page .colab-transparency-pill.fee {
+    background-color: #f0e9dc;
+    color: #8c7e73;
+  }
+
+  .colaborari-page .colab-pill-pct {
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.07);
+    font-size: 0.74rem;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .colaborari-page .colab-pill-label {
+    font-weight: 600;
+    opacity: 0.95;
+    flex: 1;
+  }
+
+  .colaborari-page .colab-pill-amount {
+    font-weight: 700;
+    margin-left: auto;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    padding-left: 8px;
+  }
+
+  .colaborari-page .colab-transparency-desc {
+    font-size: 0.78rem;
+    color: #695b50;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .colaborari-page .colab-security-note {
+    font-size: 0.76rem;
+    line-height: 1.45;
+    margin: 6px 0 16px 0;
+  }
+
+  .colaborari-page .colab-btn-submit-vol,
+  .colaborari-page .colab-btn-submit-don {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 0.95rem;
+    border-radius: 9999px;
   }
 
   /* ==========================================================================
@@ -323,17 +472,37 @@
     flex-direction: column;
     align-items: stretch;
     text-align: left;
-    gap: 20px;
+    gap: 18px;
     border-radius: 18px;
   }
 
   .colaborari-page .colab-banner-title {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
+    line-height: 1.3;
   }
 
   .colaborari-page .colab-btn-banner {
     width: 100%;
     text-align: center;
     padding: 13px 20px;
+  }
+}
+
+/* ==========================================================================
+   ECRANE FOARTE MICI (SUB 380px)
+   ========================================================================== */
+@media (max-width: 380px) {
+  .colaborari-page .colab-hero-cta-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .colaborari-page .colab-btn-primary,
+  .colaborari-page .colab-btn-secondary {
+    width: 100%;
+  }
+
+  .colaborari-page .colab-banner-title {
+    font-size: 1.22rem;
   }
 }

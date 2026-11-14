@@ -525,3 +525,20 @@
     height: 46px !important;
   }
 }
+
+/* ==========================================================================
+   ECRANE FOARTE MICI (SUB 380px)
+   ========================================================================== */
+@media (max-width: 380px) {
+  .despre-noi-page .dn-hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .despre-noi-page .dn-btn-primary,
+  .despre-noi-page .dn-btn-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
