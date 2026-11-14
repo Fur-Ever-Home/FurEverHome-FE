@@ -36,7 +36,11 @@
 .nav-item {
   text-decoration: none;
   color:#3F2C20;
-  font-weight: 600;
+  font-family: 'Libertinus Sans', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 120%;
+  letter-spacing: 0%;
   padding: 8px 18px;
   border-radius: 20px;
   transition: all 0.2s ease;
@@ -155,11 +159,15 @@
   color: #ffffff;
 }
 
+.btn-auth-mobile {
+  display: none;
+}
+
 .mobile-menu-btn {
   display: none; /* Ascuns pe desktop */
-  background: none;
-  border: 1px solid #e5dfd3;
-  border-radius: 50%;
+  background: #faf7f2;
+  border: 1px solid #d5cbbf;
+  border-radius: 10px;
   width: 38px;
   height: 38px;
   cursor: pointer;
@@ -168,6 +176,7 @@
   align-items: center;
   gap: 4px;
   padding: 0;
+  transition: all 0.2s ease;
 }
 
 .mobile-menu-btn span {
@@ -201,23 +210,60 @@
     top: 100%;
     left: 0;
     width: 100%;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background-color: #f7f4ed;
     flex-direction: column;
     padding: 20px 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     border-bottom: 1px solid #e5dfd3;
     z-index: 1000;
-    gap: 14px;
+    gap: 8px;
     box-sizing: border-box;
   }
 
   .nav-menu.open .nav-item {
     font-size: 1rem;
-    padding: 16px 20px !important;
-    border-bottom: 1px solid #ede7df;
+    padding: 12px 20px !important;
+    border-bottom: none !important;
+    border-radius: 9999px !important;
     width: 100%;
     text-align: left;
     color: #3F2C20;
     box-sizing: border-box;
+    font-family: 'Libertinus Sans', Georgia, sans-serif;
+    font-weight: 700;
+  }
+
+  .nav-menu.open .nav-item.active {
+    background-color: #3F2C20;
+    color: #ffffff !important;
+  }
+
+  /* Butonul de autentificare la baza meniului mobil (conform Figma / screenshot) */
+  .btn-auth-mobile {
+    display: block !important;
+    text-decoration: none;
+    text-align: center;
+    color: #ba8648 !important;
+    border: 1.5px solid #d29e64 !important;
+    padding: 12px 24px !important;
+    border-radius: 9999px !important;
+    font-family: 'Libertinus Sans', Georgia, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    margin-top: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+    background-color: transparent;
+  }
+
+  .btn-auth-mobile:hover,
+  .btn-auth-mobile.active {
+    background-color: #3f2c20 !important;
+    color: #ffffff !important;
+    border-color: #3f2c20 !important;
   }
 }
