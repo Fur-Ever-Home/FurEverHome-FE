@@ -6,15 +6,13 @@ import Adaposturi from './pages/Adaposturi';
 import Colaborari from './pages/Colaborari';
 import DespreNoi from './pages/DespreNoi';
 import Login from './pages/Login';
-import AnimalProfile from './pages/AnimalProfile'; // 1. Importă pagina de profil pentru mobil
+import AnimalProfile from './pages/AnimalProfile';
 
-// Imporți componentele pentru paginile legale:
+// Componente pentru paginile legale
 import InformatiiLegale from './components/informatii_legale';
 import PoliticaConfidentialitate from './components/politica-confidentialitate';
 import PoliticaCookies from './components/politica-cookies';
 import GDPR from './components/GDPR';
-
-
 
 export default function App() {
   return (
@@ -26,14 +24,13 @@ export default function App() {
       <Route path="/colaborari" element={<Colaborari />} />
       <Route path="/despre-noi" element={<DespreNoi />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/animal/:id" element={<AnimalProfile />} /> {/* 2. Adaugă ruta dedicată */}
+      <Route path="/animal/:id" element={<AnimalProfile />} />
 
-      {/* Rutele noi pentru paginile legale */}
+      {/* Rutele pentru paginile legale */}
       <Route path="/informatii-legale" element={<InformatiiLegale />} />
       <Route path="/politica-confidentialitate" element={<PoliticaConfidentialitate />} />
       <Route path="/politica-cookies" element={<PoliticaCookies />} />
       <Route path="/GDPR" element={<GDPR />} />
-      
     </Routes>
   );
 }
