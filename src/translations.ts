@@ -203,6 +203,389 @@ export const translations: Record<string, TranslationKeys> = {
     btnDonate: "Donează",
     fundingCovered: "din necesarul lunar acoperit",
     senior: "Senior",
+
+    // --- Pagina Ghidul Adoptatorului ---
+    adopterGuide: {
+      breadcrumbHome: "Acasă",
+      breadcrumbCurrent: "Ghidul adoptatorului",
+      heroKicker: "GHIDUL ADOPTATORULUI",
+      heroTitleLine1: "Adopția, explicată pe înțeles.",
+      heroTitleLine2: "Fără surprize pe drum.",
+      heroSubtitle: "Află ce pași urmezi, ce acte îți trebuie și cum îți ajuți noul prieten să se simtă acasă din prima zi.",
+      pillSteps: "Pașii adopției",
+      pillFaq: "Întrebări frecvente",
+      pillCare: "Sfaturi de îngrijire",
+      precheckTitle: "Înainte să începi, întreabă-te:",
+      precheckItems: [
+        "Am timp în fiecare zi pentru el?",
+        "Sunt toți cei din casă de acord?",
+        "Îmi permit hrana și vizitele la veterinar?",
+        "Locuința mea permite animale?",
+      ],
+      precheckNote: "Dacă ai răspuns „da” la toate, ești gata de pasul 1.",
+
+      compareKicker: "ÎNCEPE DE AICI",
+      compareTitle: "Ce fel de adopție ți se potrivește?",
+      compareSubtitle: "Poți să iei un animal acasă sau să susții unul care nu poate pleca din adăpost. Ambele contează.",
+      physicalCardKicker: "ADOPȚIE FIZICĂ",
+      physicalCardTitle: "Îl iei acasă",
+      physicalCardBadge: "Ghidul de mai jos",
+      physicalCardDesc: "Animalul devine membru al familiei tale și locuiește cu tine.",
+      physicalRows: [
+        { label: "Unde locuiește", value: "La tine acasă" },
+        { label: "Ce faci tu", value: "Vii la o vizită, semnezi contractul și îl iei acasă" },
+        { label: "Cheltuieli", value: "Hrana, veterinarul și accesoriile le acoperi tu" },
+        { label: "Angajament", value: "Pe toată viața animalului, adesea 10–15 ani" },
+        { label: "Cont necesar", value: "Da, ca să programezi vizita" },
+      ],
+      physicalCardBtn: "Vezi pașii adopției ↓",
+
+      distanceCardKicker: "ADOPȚIE LA DISTANȚĂ",
+      distanceCardTitle: "Îl susții de departe",
+      distanceCardDesc: "Pentru animalele senior sau cu tratament permanent, care nu pot pleca din adăpost.",
+      distanceRows: [
+        { label: "Unde locuiește", value: "Rămâne la adăpost, în grija centrului" },
+        { label: "Ce faci tu", value: "Alegi un animal și îl susții cu o donație lunară" },
+        { label: "Cheltuieli", value: "Doar suma lunară pe care o alegi" },
+        { label: "Angajament", value: "Lunar, cât timp vrei tu" },
+        { label: "Cont necesar", value: "Da, ca să poți dona" },
+      ],
+      distanceCardBtn: "Vezi animalele pentru adopție la distanță →",
+
+      stepsSwitchAria: "Tip adopție",
+      switchPhysical: "Adopție fizică",
+      switchDistance: "Adopție la distanță",
+
+      stepsPhysicalKicker: "PAȘII ADOPȚIEI",
+      stepsPhysicalTitle: "De la „îmi place” la „bine ai venit acasă”",
+      stepsPhysicalSubtitle: "Pașii pentru adopția fizică. Pentru adopția la distanță, schimbă din comutator.",
+      stepsPhysicalList: [
+        {
+          title: "Găsește-ți prietenul",
+          desc: "Caută în Animale disponibile și filtrează după specie, vârstă sau talie. Salvează-i la favorite pe cei care îți plac.",
+        },
+        {
+          title: "Programează o vizită",
+          desc: "Din profilul animalului alegi ziua și ora. Centrul îți confirmă programarea, iar tu o vezi în Rezervările mele.",
+        },
+        {
+          title: "Cunoașteți-vă",
+          desc: "Mergi la adăpost, petreci timp cu animalul și pui toate întrebările. Poți reveni de câte ori ai nevoie.",
+        },
+        {
+          title: "Mergeți acasă",
+          desc: "Semnezi contractul de adopție la centru și primești carnetul de sănătate al animalului.",
+        },
+      ],
+      docsPhysicalTitle: "Ce acte îți trebuie",
+      docsPhysicalList: [
+        "Cartea de identitate",
+        "Contractul de adopție — îl semnezi la centru, în ziua adopției",
+        "Acordul proprietarului, dacă locuiești în chirie (unele centre îl cer)",
+      ],
+      docsPhysicalFootnote: "Taxele centru pentru cere și alte documente, le găsești în profilul centrului, la Adăposturi.",
+      goodToKnowTitle: "Bine de știut",
+      goodToKnowPhysicalList: [
+        "Programarea se face doar online, din profilul animalului",
+        "Poți muta sau anula o vizită din Rezervările mele",
+        "Un animal rezervat apare cu eticheta „Rezervat” în catalog",
+      ],
+      stepsPhysicalCta: "Vezi animalele disponibile →",
+
+      stepsDistanceKicker: "PAȘII ADOPȚIEI LA DISTANȚĂ",
+      stepsDistanceTitle: "Îl ajuți, chiar dacă rămâne la adăpost",
+      stepsDistanceSubtitle: "Pentru animalele senior sau cu tratament permanent, care nu pot fi adoptate fizic.",
+      stepsDistanceList: [
+        {
+          title: "Alege animalul",
+          desc: "Intră în Adopție la distanță și vezi animalele care au nevoie de sprijin pe termen lung.",
+        },
+        {
+          title: "Intră în cont",
+          desc: "Donațiile sunt legate de contul tău, ca să le poți urmări sau opri oricând.",
+        },
+        {
+          title: "Alege suma lunară",
+          desc: "Bara de progres îți arată cât mai lipsește până la obiectivul lunii pentru animalul ales.",
+        },
+        {
+          title: "Rămâneți în legătură",
+          desc: "Primești vești de la centru și îl poți vizita la adăpost, cu programare.",
+        },
+      ],
+      docsDistanceTitle: "Ce îți trebuie",
+      docsDistanceList: [
+        "Un cont FureverHome",
+        "O metodă de plată pentru donația lunară",
+        "Câteva minute ca să alegi animalul",
+      ],
+      docsDistanceFootnote: "Nu ai nevoie de acte, contract sau vizită la adăpost.",
+      goodToKnowDistanceList: [
+        "Animalul rămâne în grija centrului, care îi acoperă tratamentul",
+        "Vezi pe card cât s-a strâns din obiectivul lunii",
+        "Poți schimba sau opri donația din contul tău",
+      ],
+      stepsDistanceCta: "Vezi animalele pentru adopție la distanță →",
+
+      faqKicker: "ÎNTREBĂRI FRECVENTE",
+      faqTitle: "Ce ne întreabă cel mai des viitorii adoptatori",
+      faqSubtitle: "Dacă nu găsești răspunsul aici, întreabă asistentul din colțul paginii sau scrie-ne.",
+      faqContactTitle: "Ai altă întrebare?",
+      faqContactTextBefore: "Scrie-ne la ",
+      faqContactTextAfter: " sau deschide chatul.",
+      faqList: [
+        {
+          question: "Cât costă adopția?",
+          answer: "Depinde de centru. Unele nu cer nimic, altele cer o mică contribuție care acoperă vaccinurile sau sterilizarea. Suma apare în profilul centrului, așa că știi dinainte.",
+        },
+        {
+          question: "Am nevoie de cont ca să programez o vizită?",
+          answer: "Da, crearea unui cont durează un minut și îți permite să programezi vizita, să primești confirmarea adăpostului și să gestionezi rezervările tale.",
+        },
+        {
+          question: "Pot muta sau anula o programare?",
+          answer: "Da, oricând din secțiunea „Rezervările mele”. Dacă nu mai poți ajunge, anunță din timp ca alt adoptator să poată ocupa intervalul.",
+        },
+        {
+          question: "Pot adopta dacă locuiesc în chirie?",
+          answer: "Da, în majoritatea cazurilor. Unele centre pot solicita acordul scris al proprietarului pentru a se asigura că animalul nu riscă să fie returnat.",
+        },
+        {
+          question: "Ce înseamnă adopția la distanță?",
+          answer: "Susții lunar un animal care rămâne în grija adăpostului (senior sau cu tratament permanent). Primești vești despre el și îl poți vizita cu programare.",
+        },
+        {
+          question: "Ce fac dacă animalul nu se acomodează?",
+          answer: "Acomodarea durează, de regulă, până la 3 luni. Dacă întâmpini dificultăți, contactează centrul de adopție — echipa te poate ghida sau poate relua animalul în grijă dacă situația o impune.",
+        },
+        {
+          question: "Animalele sunt vaccinate și sterilizate?",
+          answer: "Majoritatea animalelor pleacă din centru deparazitate, vaccinate și sterilizate (dacă vârsta permite). Statusul exact este afișat în profilul fiecărui animal.",
+        },
+      ],
+
+      careKicker: "SFATURI DE ÎNGRIJIRE",
+      careTitle: "Primele luni împreună",
+      careSubtitle: "Bifează ce ai pregătit. Lista se schimbă în funcție de specie.",
+      speciesAria: "Alege specia",
+      progressDesc: "Bifează pe măsură ce te pregătești. Bifele rămân salvate în acest browser.",
+      progressCount: "{checked} din {total} bifate",
+      checklist: {
+        caini: {
+          label: "Câini",
+          bannerTitle: "Lista ta pentru noul câine",
+          categories: [
+            {
+              id: "before",
+              title: "Înainte să vină acasă",
+              icon: "bag",
+              items: [
+                "Castroane pentru apă și mâncare",
+                "Lesă, ham și medalion cu numărul tău de telefon",
+                "Pat sau pătură, într-un colț liniștit",
+                "Câteva zile din hrana pe care o mănâncă la adăpost",
+                "Jucării de ros și pungi pentru plimbări",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "Primele zile",
+              icon: "home",
+              items: [
+                "Lasă-l să exploreze casa în ritmul lui",
+                "Plimbări scurte și dese, mereu în lesă",
+                "Amână vizitele musafirilor o săptămână",
+                "Ore fixe pentru masă și plimbări",
+                "Programează prima vizită la veterinar",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "Prima lună",
+              icon: "calendar",
+              items: [
+                "Treci treptat la hrana nouă, în 7–10 zile",
+                "Verifică vaccinurile și deparazitarea în carnet",
+                "Răsplătește comportamentul bun cu laude",
+                "Prelungește plimbările pe măsură ce capătă încredere",
+                "Verifică dacă microcipul e înregistrat pe numele tău",
+              ],
+            },
+          ],
+        },
+        pisici: {
+          label: "Pisici",
+          bannerTitle: "Lista ta pentru noua pisică",
+          categories: [
+            {
+              id: "before",
+              title: "Înainte să vină acasă",
+              icon: "bag",
+              items: [
+                "Litieră, lopățică și așternut igienic",
+                "Castroane separate pentru apă și hrană",
+                "Cușcă de transport sigură pentru drumul spre casă",
+                "Sisale de ascuțit ghearele și un culcuș ascuns",
+                "Plase de siguranță la geamuri și balcon",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "Primele zile",
+              icon: "home",
+              items: [
+                "Pregătește o singură cameră liniștită la început",
+                "Arată-i unde sunt litiera, apa și mâncarea",
+                "Nu o forța să iasă dacă se ascunde sub pat",
+                "Vorbește-i calm și las-o să vină ea la tine",
+                "Programează un control de rutină la veterinar",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "Prima lună",
+              icon: "calendar",
+              items: [
+                "Deschide treptat accesul către restul casei",
+                "Treci treptat la hrana nouă, în 7–10 zile",
+                "Stabilește sesiuni scurte de joacă zilnică",
+                "Verifică schema de vaccinuri și deparazitare",
+                "Actualizează datele microcipului pe numele tău",
+              ],
+            },
+          ],
+        },
+        alte: {
+          label: "Alte animale",
+          bannerTitle: "Lista ta pentru noul prieten",
+          categories: [
+            {
+              id: "before",
+              title: "Înainte să vină acasă",
+              icon: "bag",
+              items: [
+                "Spațiu sau țarc adaptat speciei și taliei",
+                "Substrat, adăpătoare și boluri stabile",
+                "Ascunzători pentru reducerea stresului",
+                "Hrană specifică recomandată de adăpost",
+                "Cușcă de transport ventilată pentru drum",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "Primele zile",
+              icon: "home",
+              items: [
+                "Așază spațiul ferit de curenți de aer și zgomot",
+                "Lasă-l 48 de ore să se acomodeze fără manipulare excesivă",
+                "Monitorizează apetitul și consumul de apă",
+                "Păstrează un program constant de curățenie și hrănire",
+                "Identifică un medic veterinar cu experiență pe specie",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "Prima lună",
+              icon: "calendar",
+              items: [
+                "Introdu treptat interacțiunea și recompensele",
+                "Adaugă elemente de îmbogățire a mediului",
+                "Programează primul control veterinar complet",
+                "Verifică temperatura și umiditatea din cameră",
+                "Observă rutina zilnică și semnele de confort",
+              ],
+            },
+          ],
+        },
+      },
+
+      brandsTitle: "Branduri pe care le recomandăm",
+      brandsSubtitle: "Le-am ales pentru că sunt ușor de găsit în România și potrivite pentru un animal abia adoptat. Pentru hrană, cere și părerea veterinarului.",
+      brandsLinkText: "Vezi produsele →",
+      brandsFootnote: "Recomandările sunt orientative. FureverHome nu vinde produse.",
+      brandsList: [
+        {
+          initials: "RC",
+          name: "Royal Canin",
+          category: "Hrană",
+          description: "Hrană uscată și umedă, pe talie și vârstă.",
+          highlight: "Ușor de dozat când treci de la hrana adăpostului.",
+          url: "https://www.royalcanin.com/ro",
+        },
+        {
+          initials: "PP",
+          name: "Purina Pro Plan",
+          category: "Hrană",
+          description: "Variante pentru pui, adulți și stomac sensibil.",
+          highlight: "Bun pentru primele săptămâni, când schimbarea îl stresează.",
+          url: "https://www.purina.ro",
+        },
+        {
+          initials: "HS",
+          name: "Hill's Science Plan",
+          category: "Hrană",
+          description: "Hrană pentru toate vârstele, inclusiv senior.",
+          highlight: "Recomandată des de veterinari.",
+          url: "https://www.hillspet.ro",
+        },
+        {
+          initials: "AP",
+          name: "Applaws",
+          category: "Hrană",
+          description: "Rețete cu multă carne și puține ingrediente.",
+          highlight: "Compoziție simplă, fără aditivi artificiali.",
+          url: "https://applaws.com",
+        },
+        {
+          initials: "KG",
+          name: "KONG",
+          category: "Jucării",
+          description: "Jucării de ros care se umplu cu recompense.",
+          highlight: "Îl ține ocupat și calm când rămâne singur.",
+          url: "https://www.kongcompany.com",
+        },
+        {
+          initials: "TX",
+          name: "Trixie",
+          category: "Accesorii",
+          description: "Lese, hamuri, castroane și paturi.",
+          highlight: "Tot ce-ți trebuie la început, la preț mic.",
+          url: "https://www.trixie.de",
+        },
+        {
+          initials: "FP",
+          name: "Ferplast",
+          category: "Transport și odihnă",
+          description: "Cuști de transport și paturi solide.",
+          highlight: "Drum sigur spre casă și la veterinar.",
+          url: "https://www.ferplast.com",
+        },
+      ],
+
+      ruleTitle: "Regula 3-3-3",
+      ruleSubtitle: "Așa arată, de obicei, acomodarea unui animal adoptat. Fiecare are ritmul lui.",
+      ruleCards: [
+        {
+          kicker: "Primele",
+          title: "3 zile",
+          desc: "Se simte copleșit. Poate nu mănâncă mult și se ascunde. Dă-i liniște.",
+        },
+        {
+          kicker: "Primele",
+          title: "3 săptămâni",
+          desc: "Învață rutina casei și începe să-și arate personalitatea.",
+        },
+        {
+          kicker: "Primele",
+          title: "3 luni",
+          desc: "Se simte acasă și are încredere în tine. Acum sunteți o echipă.",
+        },
+      ],
+
+      finalCtaTitlePart1: "Ești pregătit?",
+      finalCtaTitlePart2: "Prietenul tău te așteaptă.",
+      finalCtaBtn: "Vezi animalele disponibile →",
+    },
   },
 
   en: {
@@ -405,5 +788,388 @@ export const translations: Record<string, TranslationKeys> = {
     btnDonate: "Donate",
     fundingCovered: "of monthly need covered",
     senior: "Senior",
-  }
+
+    // --- Adopter's Guide Page ---
+    adopterGuide: {
+      breadcrumbHome: "Home",
+      breadcrumbCurrent: "Adopter's guide",
+      heroKicker: "ADOPTER'S GUIDE",
+      heroTitleLine1: "Adoption, clearly explained.",
+      heroTitleLine2: "No surprises along the way.",
+      heroSubtitle: "Find out what steps to follow, what documents you need, and how to help your new friend feel at home from day one.",
+      pillSteps: "Adoption steps",
+      pillFaq: "FAQ",
+      pillCare: "Care tips",
+      precheckTitle: "Before you start, ask yourself:",
+      precheckItems: [
+        "Do I have time every day for them?",
+        "Does everyone in the household agree?",
+        "Can I afford food and vet visits?",
+        "Does my home allow pets?",
+      ],
+      precheckNote: "If you answered “yes” to all, you're ready for step 1.",
+
+      compareKicker: "START HERE",
+      compareTitle: "What type of adoption suits you?",
+      compareSubtitle: "You can bring a pet home or support one that cannot leave the shelter. Both make a difference.",
+      physicalCardKicker: "PHYSICAL ADOPTION",
+      physicalCardTitle: "Bring them home",
+      physicalCardBadge: "Guide below",
+      physicalCardDesc: "The animal becomes part of your family and lives with you.",
+      physicalRows: [
+        { label: "Where they live", value: "At your home" },
+        { label: "What you do", value: "Book a visit, sign the contract, and bring them home" },
+        { label: "Expenses", value: "You cover food, vet care, and supplies" },
+        { label: "Commitment", value: "For the animal's entire life, often 10–15 years" },
+        { label: "Account needed", value: "Yes, to schedule a visit" },
+      ],
+      physicalCardBtn: "See adoption steps ↓",
+
+      distanceCardKicker: "DISTANCE ADOPTION",
+      distanceCardTitle: "Support from afar",
+      distanceCardDesc: "For senior animals or those needing permanent treatment who cannot leave the shelter.",
+      distanceRows: [
+        { label: "Where they live", value: "Stays at the shelter, cared for by the center" },
+        { label: "What you do", value: "Choose an animal and support them with a monthly donation" },
+        { label: "Expenses", value: "Only the monthly amount you choose" },
+        { label: "Commitment", value: "Monthly, for as long as you wish" },
+        { label: "Account needed", value: "Yes, in order to donate" },
+      ],
+      distanceCardBtn: "See distance adoption animals →",
+
+      stepsSwitchAria: "Adoption type",
+      switchPhysical: "Physical adoption",
+      switchDistance: "Distance adoption",
+
+      stepsPhysicalKicker: "ADOPTION STEPS",
+      stepsPhysicalTitle: "From “I like them” to “welcome home”",
+      stepsPhysicalSubtitle: "Steps for physical adoption. For distance adoption, use the toggle switch.",
+      stepsPhysicalList: [
+        {
+          title: "Find your friend",
+          desc: "Browse Available animals and filter by species, age, or size. Save the ones you like to favorites.",
+        },
+        {
+          title: "Schedule a visit",
+          desc: "Pick the day and time on the animal's profile. The center confirms your booking, and you can track it in My Bookings.",
+        },
+        {
+          title: "Get to know each other",
+          desc: "Visit the shelter, spend time with the animal, and ask all your questions. You can come back as often as needed.",
+        },
+        {
+          title: "Go home together",
+          desc: "Sign the adoption contract at the center and receive the animal's health record booklet.",
+        },
+      ],
+      docsPhysicalTitle: "Documents you need",
+      docsPhysicalList: [
+        "Your ID card",
+        "Adoption contract — signed at the center on adoption day",
+        "Landlord's written consent, if you rent (required by some centers)",
+      ],
+      docsPhysicalFootnote: "Center-specific fees and extra document requirements are listed on each center's profile under Shelters.",
+      goodToKnowTitle: "Good to know",
+      goodToKnowPhysicalList: [
+        "Visits can only be booked online from the animal's profile",
+        "You can reschedule or cancel a visit in My Bookings",
+        "A booked animal is marked with a “Reserved” badge in the catalog",
+      ],
+      stepsPhysicalCta: "See available animals →",
+
+      stepsDistanceKicker: "DISTANCE ADOPTION STEPS",
+      stepsDistanceTitle: "Help them, even if they stay at the shelter",
+      stepsDistanceSubtitle: "For senior animals or those with permanent medical needs who cannot be physically adopted.",
+      stepsDistanceList: [
+        {
+          title: "Choose an animal",
+          desc: "Open Distance Adoption and browse the animals in need of long-term support.",
+        },
+        {
+          title: "Sign in to your account",
+          desc: "Donations are linked to your account so you can track or cancel them anytime.",
+        },
+        {
+          title: "Pick a monthly amount",
+          desc: "The progress bar shows how much is left to reach the monthly goal for your chosen pet.",
+        },
+        {
+          title: "Stay connected",
+          desc: "Receive updates from the center and visit them at the shelter by appointment.",
+        },
+      ],
+      docsDistanceTitle: "What you need",
+      docsDistanceList: [
+        "A FureverHome account",
+        "A payment method for the monthly donation",
+        "A few minutes to choose your animal",
+      ],
+      docsDistanceFootnote: "No paperwork, contract, or shelter visit required.",
+      goodToKnowDistanceList: [
+        "The animal stays in the center's care, which covers their treatment",
+        "Track how much of the monthly goal has been raised directly on the card",
+        "Change or stop your donation anytime from your account",
+      ],
+      stepsDistanceCta: "See distance adoption animals →",
+
+      faqKicker: "FREQUENTLY ASKED QUESTIONS",
+      faqTitle: "What future adopters ask us most often",
+      faqSubtitle: "If you can't find your answer here, ask the assistant in the corner or write to us.",
+      faqContactTitle: "Have another question?",
+      faqContactTextBefore: "Email us at ",
+      faqContactTextAfter: " or open the live chat.",
+      faqList: [
+        {
+          question: "How much does adoption cost?",
+          answer: "It depends on the center. Some charge nothing, while others ask for a small contribution covering vaccines or neutering. The exact amount is shown on the center's profile upfront.",
+        },
+        {
+          question: "Do I need an account to schedule a visit?",
+          answer: "Yes, creating an account takes a minute and lets you schedule your visit, receive shelter confirmation, and manage your bookings.",
+        },
+        {
+          question: "Can I reschedule or cancel an appointment?",
+          answer: "Yes, anytime from “My Bookings”. If you can no longer make it, please let us know in advance so another adopter can take the slot.",
+        },
+        {
+          question: "Can I adopt if I live in a rented apartment?",
+          answer: "Yes, in most cases. Some centers may ask for written consent from your landlord to ensure the pet won't risk being returned.",
+        },
+        {
+          question: "What does distance adoption mean?",
+          answer: "You provide monthly support for an animal that stays in the shelter's care (senior or needing permanent treatment). You get updates on them and can visit by appointment.",
+        },
+        {
+          question: "What if the animal has trouble adjusting?",
+          answer: "Adjustment usually takes up to 3 months. If you run into challenges, reach out to the adoption center — their team can guide you or take the animal back into care if necessary.",
+        },
+        {
+          question: "Are the animals vaccinated and sterilized?",
+          answer: "Most animals leave the center dewormed, vaccinated, and sterilized (age permitting). Exact medical status is listed on each animal's profile.",
+        },
+      ],
+
+      careKicker: "CARE TIPS",
+      careTitle: "The first months together",
+      careSubtitle: "Check off what you've prepared. The list adapts to each species.",
+      speciesAria: "Choose species",
+      progressDesc: "Check items off as you prepare. Your progress stays saved in this browser.",
+      progressCount: "{checked} of {total} checked",
+      checklist: {
+        caini: {
+          label: "Dogs",
+          bannerTitle: "Your checklist for your new dog",
+          categories: [
+            {
+              id: "before",
+              title: "Before coming home",
+              icon: "bag",
+              items: [
+                "Food and water bowls",
+                "Leash, harness, and ID tag with your phone number",
+                "Bed or blanket in a quiet corner",
+                "A few days' supply of the food they eat at the shelter",
+                "Chew toys and waste bags for walks",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "The first days",
+              icon: "home",
+              items: [
+                "Let them explore the home at their own pace",
+                "Short, frequent walks, always on a leash",
+                "Postpone guest visits for the first week",
+                "Fixed schedule for meals and walks",
+                "Schedule the first vet checkup",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "The first month",
+              icon: "calendar",
+              items: [
+                "Transition gradually to new food over 7–10 days",
+                "Verify vaccines and deworming in the health booklet",
+                "Reward good behavior with praise",
+                "Extend walks as confidence grows",
+                "Make sure the microchip is registered in your name",
+              ],
+            },
+          ],
+        },
+        pisici: {
+          label: "Cats",
+          bannerTitle: "Your checklist for your new cat",
+          categories: [
+            {
+              id: "before",
+              title: "Before coming home",
+              icon: "bag",
+              items: [
+                "Litter box, scoop, and hygienic litter",
+                "Separate bowls for water and food",
+                "Secure carrier for the ride home",
+                "Scratching posts and a cozy hiding bed",
+                "Safety screens on windows and balcony",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "The first days",
+              icon: "home",
+              items: [
+                "Set up a single quiet room at first",
+                "Show where the litter box, water, and food are",
+                "Don't force them out if hiding under the bed",
+                "Speak softly and let them come to you",
+                "Book a routine checkup at the vet",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "The first month",
+              icon: "calendar",
+              items: [
+                "Gradually open access to the rest of the home",
+                "Transition slowly to new food over 7–10 days",
+                "Establish short daily play sessions",
+                "Review the vaccination and deworming schedule",
+                "Update microchip registration to your name",
+              ],
+            },
+          ],
+        },
+        alte: {
+          label: "Other animals",
+          bannerTitle: "Your checklist for your new friend",
+          categories: [
+            {
+              id: "before",
+              title: "Before coming home",
+              icon: "bag",
+              items: [
+                "Habitat or enclosure suited to species and size",
+                "Bedding substrate, water bottle, and sturdy bowls",
+                "Hiding spots to reduce stress",
+                "Species-specific food recommended by the shelter",
+                "Ventilated carrier for transport",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "The first days",
+              icon: "home",
+              items: [
+                "Place the enclosure away from drafts and loud noise",
+                "Allow 48 hours to settle without excessive handling",
+                "Monitor appetite and water intake",
+                "Keep a consistent cleaning and feeding schedule",
+                "Find a veterinarian experienced with the species",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "The first month",
+              icon: "calendar",
+              items: [
+                "Gradually introduce handling and treats",
+                "Add environmental enrichment items",
+                "Schedule a full veterinary checkup",
+                "Check room temperature and humidity",
+                "Observe daily routines and signs of comfort",
+              ],
+            },
+          ],
+        },
+      },
+
+      brandsTitle: "Brands we recommend",
+      brandsSubtitle: "Chosen because they are easy to find in Romania and suited for newly adopted pets. For food, always consult your vet too.",
+      brandsLinkText: "See products →",
+      brandsFootnote: "Recommendations are for guidance only. FureverHome does not sell products.",
+      brandsList: [
+        {
+          initials: "RC",
+          name: "Royal Canin",
+          category: "Food",
+          description: "Dry and wet food tailored by size and age.",
+          highlight: "Easy to portion when switching from shelter food.",
+          url: "https://www.royalcanin.com/ro",
+        },
+        {
+          initials: "PP",
+          name: "Purina Pro Plan",
+          category: "Food",
+          description: "Formulas for puppies, adults, and sensitive stomachs.",
+          highlight: "Great for the first weeks when change causes stress.",
+          url: "https://www.purina.ro",
+        },
+        {
+          initials: "HS",
+          name: "Hill's Science Plan",
+          category: "Food",
+          description: "Nutrition for all life stages, including seniors.",
+          highlight: "Frequently recommended by veterinarians.",
+          url: "https://www.hillspet.ro",
+        },
+        {
+          initials: "AP",
+          name: "Applaws",
+          category: "Food",
+          description: "Recipes with high meat content and few ingredients.",
+          highlight: "Simple composition with no artificial additives.",
+          url: "https://applaws.com",
+        },
+        {
+          initials: "KG",
+          name: "KONG",
+          category: "Toys",
+          description: "Chew toys that can be stuffed with treats.",
+          highlight: "Keeps them busy and calm when left alone.",
+          url: "https://www.kongcompany.com",
+        },
+        {
+          initials: "TX",
+          name: "Trixie",
+          category: "Accessories",
+          description: "Leashes, harnesses, bowls, and beds.",
+          highlight: "Everything you need at the start, at a fair price.",
+          url: "https://www.trixie.de",
+        },
+        {
+          initials: "FP",
+          name: "Ferplast",
+          category: "Travel & rest",
+          description: "Sturdy travel carriers and cozy beds.",
+          highlight: "Safe trips home and to the vet.",
+          url: "https://www.ferplast.com",
+        },
+      ],
+
+      ruleTitle: "The 3-3-3 Rule",
+      ruleSubtitle: "This is how an adopted pet typically settles in. Every animal has their own pace.",
+      ruleCards: [
+        {
+          kicker: "First",
+          title: "3 days",
+          desc: "Feels overwhelmed. May not eat much and might hide. Give them peace and quiet.",
+        },
+        {
+          kicker: "First",
+          title: "3 weeks",
+          desc: "Learns the household routine and begins showing their true personality.",
+        },
+        {
+          kicker: "First",
+          title: "3 months",
+          desc: "Feels at home and trusts you completely. Now you are a team.",
+        },
+      ],
+
+      finalCtaTitlePart1: "Are you ready?",
+      finalCtaTitlePart2: "Your friend is waiting for you.",
+      finalCtaBtn: "See available animals →",
+    },
+  },
 };
