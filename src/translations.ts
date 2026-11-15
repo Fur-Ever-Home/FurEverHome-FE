@@ -180,7 +180,7 @@ export const translations: Record<string, TranslationKeys> = {
     distanceNoticeDesc: "Se afișează doar seniorii și animalele care au nevoie de tratament sau cazare permanentă și nu mai pot fi date spre adopție.",
     distanceBannerTitle: "Adopția la distanță",
     distanceBannerDesc: "Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic. Ai nevoie de cont pentru a continua.",
-    
+
     basicInfo: "INFO DE BAZĂ",
     type: "Tip",
     animalDetails: "DETALII ANIMAL",
@@ -203,6 +203,75 @@ export const translations: Record<string, TranslationKeys> = {
     btnDonate: "Donează",
     fundingCovered: "din necesarul lunar acoperit",
     senior: "Senior",
+
+    // --- Autentificare & Creare Cont ---
+    auth: {
+      welcomePrefix: "Bine ați venit la",
+      roleSwitchAria: "Tip cont",
+      roleAdopter: "Adoptator",
+      roleShelter: "Centru / Adăpost",
+      loginTitle: "Autentificare",
+      loginSubtitleAdopter:
+        "Trebuie să fii autentificat pentru a adăuga animale la favorite, a programa vizite și a adopta.",
+      loginSubtitleShelter:
+        "Trebuie să fii autentificat pentru a-ți administra animalele, programările și cererile de adopție.",
+      emailLabel: "Adresă de e-mail",
+      emailPlaceholderAdopter: "exemplu@mail.com",
+      emailPlaceholderShelter: "contact@adapost.ro",
+      passwordLabel: "Parolă",
+      forgotPassword: "Ai uitat parola?",
+      togglePasswordAria: "Afișează sau ascunde parola",
+      loginSubmitBtn: "Autentifică-te",
+      noAccountText: "Nu ai cont?",
+      createAccountLink: "Creează unul acum",
+
+      registerAdopterTitle: "Creează cont Adoptator",
+      registerShelterTitle: "Creează cont Centru / Adăpost",
+      lastNameLabel: "Nume",
+      lastNamePlaceholder: "Ex: Popescu",
+      firstNameLabel: "Prenume",
+      firstNamePlaceholder: "Ex: Maria",
+      shelterNameLabel: "Nume centru/adăpost",
+      shelterNamePlaceholder: "Numele adăpostului",
+      cuiLabel: "CUI / CIF",
+      cuiPlaceholder: "Ex: RO12345678",
+      phoneLabel: "Număr de telefon",
+      phonePrefixAria: "Prefix țară",
+      createPasswordPlaceholder: "Creează o parolă",
+      confirmPasswordLabel: "Confirmă parola",
+      confirmPasswordPlaceholder: "Reintrodu parola",
+      shelterNoteBold: "Notă:",
+      shelterNoteText:
+        "Pentru siguranța animalelor, conturile de adăpost vor fi verificate și aprobate de către echipa noastră înainte de activare. Verificarea durează între 24 și 48 de ore.",
+      registerAdopterBtn: "Creează cont",
+      registerShelterBtn: "Înregistrează-te",
+      hasAccountText: "Ai deja cont?",
+      loginLink: "Autentifică-te",
+
+      resetStep1Title: "Resetează parola",
+      resetStep1Desc:
+        "Introdu adresa de e-mail la care îți vom trimite un link pentru resetarea parolei.",
+      resetStep1Btn: "Resetează parola",
+      resetStep2Title: "Alege o parolă nouă",
+      resetStep2Desc: "Introdu noua parolă pentru contul tău și confirmă-o mai jos.",
+      newPasswordLabel: "Parolă nouă",
+      newPasswordPlaceholder: "Introdu parola nouă",
+      confirmNewPasswordLabel: "Confirmă parola nouă",
+      confirmNewPasswordPlaceholder: "Reintrodu parola nouă",
+      resetStep2Btn: "Salvează parola nouă",
+      closeModalAria: "Închide fereastra",
+
+      errRequired: "Te rugăm să completezi toate câmpurile obligatorii.",
+      errInvalidEmail: "Te rugăm să introduci o adresă de e-mail validă.",
+      errPasswordMismatch: "Parolele introduse nu coincid.",
+      errInvalidCredentials: "Adresa de e-mail sau parola este incorectă.",
+      errGeneric: "A apărut o eroare. Te rugăm să încerci din nou.",
+      successLogin: "Autentificare reușită! Te redirecționăm...",
+      successRegisterAdopter: "Contul de adoptator a fost creat cu succes!",
+      successRegisterShelter:
+        "Cererea de înregistrare a centrului a fost trimisă spre verificare (24–48h).",
+      successPasswordReset: "Parola a fost actualizată cu succes! Te poți autentifica acum.",
+    },
   },
 
   en: {
@@ -382,7 +451,7 @@ export const translations: Record<string, TranslationKeys> = {
     distanceNoticeDesc: "Only seniors and animals requiring continuous treatment or permanent shelter that cannot be physically adopted are displayed.",
     distanceBannerTitle: "Distance Adoption",
     distanceBannerDesc: "Support the care, treatment, and housing of an animal that cannot be physically adopted. You need an account to continue.",
-    
+
     basicInfo: "BASIC INFO",
     type: "Type",
     animalDetails: "ANIMAL DETAILS",
@@ -405,5 +474,74 @@ export const translations: Record<string, TranslationKeys> = {
     btnDonate: "Donate",
     fundingCovered: "of monthly need covered",
     senior: "Senior",
-  }
+
+    // --- Authentication & Registration ---
+    auth: {
+      welcomePrefix: "Welcome to",
+      roleSwitchAria: "Account type",
+      roleAdopter: "Adopter",
+      roleShelter: "Center / Shelter",
+      loginTitle: "Sign in",
+      loginSubtitleAdopter:
+        "You must be signed in to save animals to favorites, schedule visits, and adopt.",
+      loginSubtitleShelter:
+        "You must be signed in to manage your animals, appointments, and adoption requests.",
+      emailLabel: "Email address",
+      emailPlaceholderAdopter: "example@mail.com",
+      emailPlaceholderShelter: "contact@shelter.com",
+      passwordLabel: "Password",
+      forgotPassword: "Forgot password?",
+      togglePasswordAria: "Show or hide password",
+      loginSubmitBtn: "Sign in",
+      noAccountText: "Don't have an account?",
+      createAccountLink: "Create one now",
+
+      registerAdopterTitle: "Create Adopter account",
+      registerShelterTitle: "Create Center / Shelter account",
+      lastNameLabel: "Last name",
+      lastNamePlaceholder: "Ex: Popescu",
+      firstNameLabel: "First name",
+      firstNamePlaceholder: "Ex: Maria",
+      shelterNameLabel: "Center / shelter name",
+      shelterNamePlaceholder: "Shelter name",
+      cuiLabel: "Tax ID (CUI / CIF)",
+      cuiPlaceholder: "Ex: RO12345678",
+      phoneLabel: "Phone number",
+      phonePrefixAria: "Country code",
+      createPasswordPlaceholder: "Create a password",
+      confirmPasswordLabel: "Confirm password",
+      confirmPasswordPlaceholder: "Re-enter password",
+      shelterNoteBold: "Note:",
+      shelterNoteText:
+        "For the safety of the animals, shelter accounts will be verified and approved by our team before activation. Verification takes between 24 and 48 hours.",
+      registerAdopterBtn: "Create account",
+      registerShelterBtn: "Register",
+      hasAccountText: "Already have an account?",
+      loginLink: "Sign in",
+
+      resetStep1Title: "Reset password",
+      resetStep1Desc:
+        "Enter the email address where we will send you a link to reset your password.",
+      resetStep1Btn: "Reset password",
+      resetStep2Title: "Choose a new password",
+      resetStep2Desc: "Enter the new password for your account and confirm it below.",
+      newPasswordLabel: "New password",
+      newPasswordPlaceholder: "Enter new password",
+      confirmNewPasswordLabel: "Confirm new password",
+      confirmNewPasswordPlaceholder: "Re-enter new password",
+      resetStep2Btn: "Save new password",
+      closeModalAria: "Close dialog",
+
+      errRequired: "Please fill in all required fields.",
+      errInvalidEmail: "Please enter a valid email address.",
+      errPasswordMismatch: "The passwords entered do not match.",
+      errInvalidCredentials: "The email address or password is incorrect.",
+      errGeneric: "An error occurred. Please try again.",
+      successLogin: "Signed in successfully! Redirecting...",
+      successRegisterAdopter: "Your adopter account has been created!",
+      successRegisterShelter:
+        "Your shelter registration request has been submitted for verification (24–48h).",
+      successPasswordReset: "Password updated successfully! You can sign in now.",
+    },
+  },
 };
