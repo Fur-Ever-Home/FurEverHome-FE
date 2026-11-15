@@ -86,6 +86,33 @@ export default function Catalog() {
 
   const mobileTrackRef = useRef<HTMLDivElement>(null);
 
+{/*const fetchAnimals = () => {
+    setLoading(true);
+
+    const queryParams = new URLSearchParams();
+    if (filters.adoptionType) queryParams.append('adoptionType', filters.adoptionType);
+    if (filters.species) queryParams.append('species', filters.species);
+    if (filters.gender) queryParams.append('gender', filters.gender);
+    if (filters.size) queryParams.append('size', filters.size);
+    if (filters.shelter) queryParams.append('shelter', filters.shelter);
+    if (filters.vaccinated) queryParams.append('vaccinated', 'true');
+    if (filters.sterilized) queryParams.append('sterilized', 'true');
+    if (filters.dewormed) queryParams.append('dewormed', 'true');
+
+    const queryString = queryParams.toString();
+    const url = `${API_BASE_URL}/api/animals${queryString ? `?${queryString}` : ''}`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setAnimals(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Eroare la preluarea animalelor:', error);
+        setLoading(false);
+      });
+  };*/}
   const fetchAnimals = () => {
     setLoading(true);
 
@@ -126,10 +153,17 @@ export default function Catalog() {
     }
   }, [categorieParam]);
 
+{/*useEffect(() => {
+    fetchAnimals();
+  }, [categorieParam, filters.adoptionType]);*/}
   useEffect(() => {
     fetchAnimals();
   }, [categorieParam, filters]);
 
+{/*const handleResetFilters = () => {
+    setFilters(initialFilterState);
+    fetchAnimals();
+  };*/
   const handleResetFilters = () => {
     setFilters(initialFilterState);
     setLoading(true);
@@ -554,4 +588,4 @@ export default function Catalog() {
       <FloatingBtn />
     </div>
   );
-}
+}}
