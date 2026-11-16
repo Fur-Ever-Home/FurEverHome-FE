@@ -65,9 +65,9 @@ export default function Home() {
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   useEffect(() => {
-    let url = `${API_BASE_URL}/api/animals`;
+    let url = `${API_BASE_URL}/api/animals?adoptionType=fizica&limit=10`;
     if (selectedSpecies) {
-      url += `?species=${encodeURIComponent(selectedSpecies)}`;
+      url += `&species=${encodeURIComponent(selectedSpecies)}`;
     }
 
     setLoading(true);

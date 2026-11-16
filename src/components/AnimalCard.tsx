@@ -147,7 +147,19 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
               </span>
             </div>
 
-            <div className="distance-progress-container">
+           {/*<div className="distance-progress-container">
+              <div className="progress-bar-bg">
+                <div 
+                  className="progress-bar-fill" 
+                  style={{ width: `${animal.fundingPercent || 45}%` }}
+                />
+              </div>
+              <span className="progress-text">
+                {animal.fundingPercent || 45}% {t.fundingCovered || 'din necesarul lunar acoperit'}
+              </span>
+            </div>*/}
+          
+             <div className="distance-progress-container">
               <div className="progress-bar-bg">
                 <div 
                   className="progress-bar-fill" 
@@ -158,6 +170,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
                 {animal.fundingPercent ?? 0}% {t.fundingCovered || 'din necesarul lunar acoperit'}
               </span>
             </div>
+
           </>
         )}
 
