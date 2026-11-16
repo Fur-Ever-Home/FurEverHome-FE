@@ -220,6 +220,16 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           <option value="maro">{t.colorBrown || 'Maro'}</option>
           <option value="portocaliu">{t.colorOrange || 'Portocaliu / Roșcat'}</option>
           <option value="bicolor">{t.colorBicolor || 'Bicolor / Tricolor'}</option>
+          {/*daria*/}
+          <option value="gri">{lang === 'en' ? 'Grey' : 'Gri'}</option>
+          <option value="crem">{lang === 'en' ? 'Cream' : 'Crem'}</option>
+          <option value="bej">{lang === 'en' ? 'Beige' : 'Bej'}</option>
+          <option value="auriu">{lang === 'en' ? 'Golden' : 'Auriu'}</option>
+          <option value="tabby">Tabby</option>
+          <option value="tricolor">Tricolor</option>
+          <option value="sable">Sable</option>
+          <option value="verde">{lang === 'en' ? 'Green' : 'Verde'}</option>
+          <option value="roz">{lang === 'en' ? 'Pink' : 'Roz'}</option>
         </select>
       </div>
 

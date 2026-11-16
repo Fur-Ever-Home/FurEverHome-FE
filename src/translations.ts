@@ -406,4 +406,86 @@ export const translations: Record<string, TranslationKeys> = {
     fundingCovered: "of monthly need covered",
     senior: "Senior",
   }
+
+  
+};
+
+export const translateTemperament = (temp?: string, lang?: string): string => {
+  if (!temp) return lang?.toLowerCase() === "en" ? "Playful" : "Jucăuș";
+  if (lang?.toLowerCase() !== "en") return temp;
+
+  const dictionary: [RegExp, string][] = [
+    // Expresii compuse din baza de date
+    [/foarte atașat de oameni|foarte atasat de oameni/gi, "very attached to people"],
+    [/dependentă de oameni|dependenta de oameni|dependent de oameni/gi, "people-dependent"],
+    [/plină de energie|plin de energie|plina de energie/gi, "full of energy"],
+    [/plină de viață|plin de viață|plina de viata|plin de viata/gi, "full of life"],
+    [/plin de personalitate|plină de personalitate/gi, "full of personality"],
+    [/timidă la început|timid la început|timida la inceput|timid la inceput/gi, "shy at first"],
+    [/timidă inițial|timid inițial|timida initial|timid initial/gi, "initially shy"],
+    [/activă noaptea|activ noaptea|activa noaptea/gi, "active at night"],
+    [/sociabilă cu alți câini|sociabil cu alți câini|sociabila cu alti caini/gi, "sociable with other dogs"],
+    [/posesivă cu mâncarea|posesiv cu mâncarea|posesiv cu mancarea/gi, "food-possessive"],
+    [/dornică de afecțiune|dornic de afecțiune|dornic de afectiune/gi, "eager for affection"],
+    [/iubitoare de atenție|iubitor de atenție|iubitoare de atentie/gi, "attention-loving"],
+    [/senior înțelept|senior intelept/gi, "wise senior"],
+    [/extrem de/gi, "extremely"],
+
+    // Cuvinte individuale
+    [/luptătoare|luptător|luptatoare|luptator/gi, "fighter"],
+    [/curajoasă|curajos|curajoasa/gi, "brave"],
+    [/iubitoare|iubitor/gi, "loving"],
+    [/calmă|calm|calma/gi, "calm"],
+    [/blândă|blând|blanda|bland/gi, "gentle"],
+    [/recunoscătoare|recunoscător|recunoscatoare|recunoscator/gi, "grateful"],
+    [/pofticioasă|pofticios|pofticioasa/gi, "foodie"],
+    [/atașată|atașat|atasata|atasat/gi, "attached"],
+    [/sociabilă|sociabil|sociabila/gi, "sociable"],
+    [/jucăușă|jucăuș|jucausa|jucaus/gi, "playful"],
+    [/afectuoasă|afectuos|afectuoasa/gi, "affectionate"],
+    [/inteligentă|inteligent|inteligenta/gi, "smart"],
+    [/pufoasă|pufos|pufoasa/gi, "fluffy"],
+    [/curioasă|curios|curioasa/gi, "curious"],
+    [/liniștită|liniștit|linistita|linistit/gi, "quiet"],
+    [/dinamică|dinamic|dinamica/gi, "dynamic"],
+    [/prietenoasă|prietenos|prietenoasa/gi, "friendly"],
+    [/echilibrată|echilibrat|echilibrata/gi, "balanced"],
+    [/independentă|independent|independenta/gi, "independent"],
+    [/energică|energic|energica/gi, "energetic"],
+    [/timidă|timid|timida/gi, "shy"],
+    [/pașnică|pașnic|pasnica|pasnic/gi, "peaceful"],
+    [/loială|loial|loiala/gi, "loyal"],
+    [/protectoare|protector/gi, "protective"],
+    [/extrovertită|extrovertit|extrovertita/gi, "extroverted"],
+    [/sedentară|sedentar|sedentara/gi, "sedentary"],
+    [/placidă|placid|placida/gi, "placid"],
+    [/activă|activ|activa/gi, "active"],
+    [/curată|curat|curata/gi, "clean"],
+    [/relaxată|relaxat|relaxata/gi, "relaxed"],
+    [/cântăreață|cântăreț|cantareata|cantaret/gi, "singer"],
+    [/vocală|vocal|vocala/gi, "vocal"],
+    [/expresivă|expresiv|expresiva/gi, "expressive"],
+    [/solitară|solitar|solitara/gi, "solitary"],
+    [/rezistentă|rezistent|rezistenta/gi, "resilient"],
+    [/rezilientă|rezilient|rezilienta/gi, "resilient"],
+    [/sensibilă|sensibil|sensibila/gi, "sensitive"],
+    [/selectivă|selectiv|selectiva/gi, "selective"],
+    [/simpatică|simpatic|simpatica/gi, "sweet"],
+    [/comunicativă|comunicativ|comunicativa/gi, "communicative"],
+    [/deschisă|deschis|deschisa/gi, "open"],
+    [/interactivă|interactiv|interactiva/gi, "interactive"],
+    [/supraviețuitoare|supraviețuitor|supravietuitor/gi, "survivor"],
+    [/adaptabilă|adaptabil|adaptabila/gi, "adaptable"],
+    [/foarte/gi, "very"],
+    [/super/gi, "super"],
+    [/\bși\b|\bsi\b/gi, "and"],
+    [/\bdar\b/gi, "but"],
+  ];
+
+  let translated = temp;
+  for (const [regex, enWord] of dictionary) {
+    translated = translated.replace(regex, enWord);
+  }
+
+  return translated.charAt(0).toUpperCase() + translated.slice(1);
 };

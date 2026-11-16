@@ -41,6 +41,9 @@ interface Animal {
   isDistanceAdoption?: boolean;
   needType?: string;
   fundingPercent?: number;
+adoptionType?: string;
+  description?: string;
+  descriptionEn?: string;
 }
 
 const initialFilterState: FilterState = {
@@ -86,7 +89,7 @@ export default function Catalog() {
 
   const mobileTrackRef = useRef<HTMLDivElement>(null);
 
-{/*const fetchAnimals = () => {
+/*const fetchAnimals = () => {
     setLoading(true);
 
     const queryParams = new URLSearchParams();
@@ -112,7 +115,7 @@ export default function Catalog() {
         console.error('Eroare la preluarea animalelor:', error);
         setLoading(false);
       });
-  };*/}
+  };*/
   const fetchAnimals = () => {
     setLoading(true);
 
@@ -153,14 +156,14 @@ export default function Catalog() {
     }
   }, [categorieParam]);
 
-{/*useEffect(() => {
+/*useEffect(() => {
     fetchAnimals();
-  }, [categorieParam, filters.adoptionType]);*/}
+  }, [categorieParam, filters.adoptionType]);*/
   useEffect(() => {
     fetchAnimals();
   }, [categorieParam, filters]);
 
-{/*const handleResetFilters = () => {
+/*const handleResetFilters = () => {
     setFilters(initialFilterState);
     fetchAnimals();
   };*/
@@ -179,7 +182,17 @@ export default function Catalog() {
       });
   }; 
 
-  const animaleSortate = [...animals].sort((a, b) => {
+  const isDistanceMode = filters.adoptionType === 'la_distanta';
+
+  const animaleFiltrate = animals.filter((animal) => {
+    const esteAnimalDistanta =
+      Boolean(animal.isDistanceAdoption) ||
+      animal.adoptionType?.toLowerCase().includes('distanta');
+
+    return isDistanceMode ? esteAnimalDistanta : !esteAnimalDistanta;
+  });
+
+  const animaleSortate = [...animaleFiltrate].sort((a, b) => {
     const dateA = new Date(a.date || a.createdAt || Date.now()).getTime();
     const dateB = new Date(b.date || b.createdAt || Date.now()).getTime();
     if (sortOrder === 'noi') {
@@ -208,9 +221,6 @@ export default function Catalog() {
       setSelectedAnimal(animalDataForModal);
     }
   };
-
-  const isDistanceMode = filters.adoptionType === 'la_distanta';
-
   return (
     <div className="catalog-page">
       <style>{`
@@ -588,4 +598,4 @@ export default function Catalog() {
       <FloatingBtn />
     </div>
   );
-}}
+}

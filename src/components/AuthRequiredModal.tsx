@@ -1,21 +1,27 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // <-- 1. Importăm hook-ul de navigare
+import { useNavigate } from 'react-router-dom';
 import './AuthRequiredModal.css';
 
 interface AuthRequiredModalProps {
   isOpen: boolean;
   onClose: () => void;
   message: string;
+  buttonText?: string; // <-- 1. Adăugăm prop-ul pentru textul butonului
 }
 
-const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose, message }) => {
-  const navigate = useNavigate(); // <-- 2. Inițializăm navigarea
+const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  message, 
+  buttonText = "Autentifică-te" // <-- 2. Valoare implicită dacă nu e trimis
+}) => {
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
   const handleLoginClick = () => {
-    onClose(); // Închidem modalul pentru a nu rămâne deschis în fundal
-    navigate('/login'); // <-- 3. Pune aici ruta ta corectă (ex: '/autentificare' sau '/login')
+    onClose();
+    navigate('/login');
   };
 
   return (
@@ -29,9 +35,8 @@ const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose, 
           {message}
         </p>
         
-        {/* 4. Am adăugat evenimentul onClick pe buton */}
         <button className="auth-modal-btn" onClick={handleLoginClick}>
-          Autentifică-te
+          {buttonText} {/* <-- 3. Afișăm textul tradus */}
         </button>
       </div>
     </div>

@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "../config";
+/*Agnes*/
+/*import React, { useState } from "react";*/
 import { createPortal } from "react-dom";
 import { useLanguage } from "../useLanguage";
-import { translations } from "../translations";
+import { translations, translateTemperament } from "../translations";
 import FavoriteBtn from "./FavoriteBtn";
 import "./AnimalModal.css";
 import AuthRequiredModal from "./AuthRequiredModal";
@@ -45,18 +48,51 @@ interface AnimalModalProps {
     petFriendly?: boolean;
     childFriendly?: boolean;
     noAllergies?: boolean;
+    /*Agnes*/
+    
+    descriptionRo?: string;
+    descriptionEn?: string;
   };
   onClose: () => void;
   isDistanceMode?: boolean;
 }
 
-export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDistanceMode }) => {
+/*export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDistanceMode }) => {
   const { lang } = useLanguage();
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMessage, setAuthMessage] = useState("");
+
+  if (!animal) return null; */
+  export const AnimalModal: React.FC<AnimalModalProps> = ({ animal: initialAnimal, onClose, isDistanceMode }) => {
+  const { lang } = useLanguage();
+  const t = translations[lang as keyof typeof translations] || translations.ro;
+
+  // [Agnes] Pastram numele "animal" pentru datele complete aduse din backend
+  const [animal, setAnimal] = useState(initialAnimal);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMessage, setAuthMessage] = useState("");
+
+  // [Agnes] La deschiderea pop-up-ului, aducem toate pozele, fisa medicala si descrierile RO/EN
+  useEffect(() => {
+    setAnimal(initialAnimal);
+    setCurrentImageIndex(0);
+
+    if (!initialAnimal?.id) return;
+
+    fetch(`${API_BASE_URL}/api/animals/${initialAnimal.id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Eroare la incarcarea detaliilor animalului");
+        return res.json();
+      })
+      .then((data) => {
+        setAnimal((prev) => ({ ...prev, ...data }));
+      })
+      .catch((err) => console.error("[Agnes] Eroare fetch detalii animal:", err));
+  }, [initialAnimal]);
 
   if (!animal) return null;
 
@@ -90,6 +126,7 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
     if (lower.includes("broasc") || lower.includes("turtle")) return t.speciesTurtle || "Broască țestoasă";
     return species;
   };
+   
 
   // Funcție ajutătoare pentru traducerea culorii
   const translateColor = (color: string) => {
@@ -108,21 +145,29 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
   // <-- ADAUGĂ ACESTE DOUĂ FUNCȚII
   const handleDonatieClick = () => {
     if (!isLoggedIn) {
-      setAuthMessage(`Dacă vrei să donezi pentru ${animal.name} trebuie să fii logat`);
+      setAuthMessage(
+        lang?.toLowerCase() === "en"
+          ? `To donate for ${animal.name}, you need to be logged in`
+          : `Dacă vrei să donezi pentru ${animal.name} trebuie să fii logat`
+      );
       setIsAuthModalOpen(true);
       return;
     }
-    // Aici pui ce se întâmplă dacă e logat (ex. navigare spre donație)
   };
 
   const handleProgrameazaVizitaClick = () => {
     if (!isLoggedIn) {
-      setAuthMessage(`Pentru a programa o vizită alături de ${animal.name} trebuie să fii logat`);
+      setAuthMessage(
+        lang?.toLowerCase() === "en"
+          ? `To schedule a visit with ${animal.name}, you need to be logged in`
+          : `Pentru a programa o vizită alături de ${animal.name} trebuie să fii logat`
+      );
       setIsAuthModalOpen(true);
       return;
     }
-    // Aici pui ce se întâmplă dacă e logat (ex. deschizi calendarul)
   };
+    
+  
 
   return createPortal(
     <div className="modal-backdrop" onClick={onClose}>
@@ -204,7 +249,9 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
               
               {!isDistanceMode && (
                 <span className="status-badge available">
-                  {animal.status || t.statusAvailable || "Disponibil"}
+                  {lang?.toLowerCase() === "en"
+                    ? (animal.status?.toLowerCase().includes("rezerv") ? "Reserved" : animal.status?.toLowerCase().includes("adopt") ? "Adopted" : "Available")
+                    : (animal.status || "Disponibil")}
                 </span>
               )}
 
@@ -238,7 +285,7 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
                     </li>
                     <li>
                       <img src={smileIcon} alt="temperament" className="detail-icon-img" />
-                      <strong>{t.temperament || "Temperament"}:</strong> {animal.temperament || "Jucăuș"}
+                      <strong>{t.temperament || "Temperament"}:</strong> {translateTemperament(animal.temperament, lang)}
                     </li>
                     <li>
                       <img src={dropIcon} alt="color" className="detail-icon-img" />
@@ -285,24 +332,24 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
               {/* SECȚIUNE NOUĂ: Descriere și informații extra pentru scroll */}
               <div className="animal-description-section" style={{ marginTop: "20px", paddingTop: "16px", borderTop: "1px solid #e8e2d8" }}>
                 <h3 style={{ fontSize: "1.05rem", color: "#3F2C20", marginBottom: "8px" }}>
-                  Povestea lui {animal.name}
+                  {lang?.toLowerCase() === "en" ? `${animal.name}'s Story` : `Povestea lui ${animal.name}`}
                 </h3>
-                <p style={{ fontSize: "0.92rem", lineHeight: "1.6", color: "#5d534a", marginBottom: "12px" }}>
-                  {animal.description || 
-                    `${animal.name} este un suflet blând și plin de viață care așteaptă cu nerăbdare o familie iubitoare. Se bucură enorm de plimbările în aer liber, îi place să primească atenție și se adaptează rapid într-un mediu cald și liniștit.`}
-                </p>
-                <p style={{ fontSize: "0.92rem", lineHeight: "1.6", color: "#5d534a", marginBottom: "14px" }}>
-                  La adăpost, {animal.name} s-a dovedit a fi extrem de ascultător și recunoscător pentru fiecare gest de afecțiune. Are toate controalele medicale la zi și este pregătit să plece spre noua lui casă.
+                <p style={{ fontSize: "0.92rem", lineHeight: "1.6", color: "#5d534a", marginBottom: isDistanceMode ? "0" : "14px", whiteSpace: "pre-line" }}>
+                  {lang?.toLowerCase() === "en"
+                    ? (animal.descriptionEn || animal.description || `${animal.name} is a gentle and lively soul eagerly waiting for a loving family.`)
+                    : (animal.description || animal.descriptionRo || `${animal.name} este un suflet blând și plin de viață care așteaptă cu nerăbdare o familie iubitoare.`)}
                 </p>
 
                 {!isDistanceMode && (
-  <div style={{ backgroundColor: "#f7f3ed", padding: "12px 14px", borderRadius: "10px", fontSize: "0.88rem", color: "#5d534a" }}>
-    <strong style={{ color: "#3F2C20", display: "block", marginBottom: "4px" }}>
-      🐾 Procesul de adopție:
-    </strong>
-    Adopția este gratuită și presupune o scurtă vizită de cunoaștere la centru, urmată de semnarea contractului de adopție.
-  </div>
-)}
+                  <div style={{ backgroundColor: "#f7f3ed", padding: "12px 14px", borderRadius: "10px", fontSize: "0.88rem", color: "#5d534a" }}>
+                    <strong style={{ color: "#3F2C20", display: "block", marginBottom: "4px" }}>
+                      🐾 {lang?.toLowerCase() === "en" ? "Adoption process:" : "Procesul de adopție:"}
+                    </strong>
+                    {lang?.toLowerCase() === "en"
+                      ? "Adoption is free and involves a short meet-and-greet visit at the center, followed by signing the adoption contract."
+                      : "Adopția este gratuită și presupune o scurtă vizită de cunoaștere la centru, urmată de semnarea contractului de adopție."}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -335,7 +382,7 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
                   className="btn-schedule"
                   onClick={handleProgrameazaVizitaClick}
                 >
-                  {t.scheduleVisit || "Programează o vizită"}
+                  {t.scheduleVisit || (lang === "en" ? "Schedule a visit" : "Programează o vizită")}
                 </button>
               )}
               
@@ -371,10 +418,11 @@ export const AnimalModal: React.FC<AnimalModalProps> = ({ animal, onClose, isDis
       </div>
 
       <AuthRequiredModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
-        message={authMessage} 
-      />
+  isOpen={isAuthModalOpen} 
+  onClose={() => setIsAuthModalOpen(false)} 
+  message={authMessage} 
+  buttonText={t.favModalLoginBtn}
+/>
     </div>,
     document.body
   );
