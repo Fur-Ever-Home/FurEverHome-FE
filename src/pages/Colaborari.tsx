@@ -121,23 +121,81 @@ export default function Colaborari() {
     }
   };
 
-  const handleVolSubmit = (e: React.FormEvent) => {
+  const handleVolSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!volData.gdpr) {
       alert(t.volGdprAlert);
       return;
     }
-    setVolSubmitted(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/voluntariat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          numeComplet: volData.nume,
+          telefon: volData.telefon,
+          email: volData.email,
+          activitateDorita: volData.activitate,
+          disponibilitate: volData.disponibilitate,
+          despreTine: volData.despreTine,
+          acordGdpr: volData.gdpr,
+        }),
+      });
+
+      if (response.ok) {
+        setVolSubmitted(true);
+      } else {
+        alert('A apărut o eroare la salvarea datelor pe server.');
+      }
+    } catch (error) {
+      console.error('Eroare conexiune backend:', error);
+      alert('Nu s-a putut conecta la server. Verifică dacă backend-ul este pornit.');
+    }
   };
 
-  const handleDonSubmit = (e: React.FormEvent) => {
+  const handleDonSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const finalAmount = selectedAmount === 'custom' ? parseFloat(customAmount) : selectedAmount;
     if (!finalAmount || isNaN(finalAmount) || finalAmount <= 0) {
       alert(t.donAmountAlert);
       return;
     }
-    setDonSubmitted(true);
+
+    // Mapăm adăpostul selectat la id_centru din baza de date (null dacă e "oricare")
+    const centruMap: Record<string, number | null> = {
+      oricare: null,
+      labute: 1,
+      patrupede: 2,
+      comunitar: 3,
+    };
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/donatii`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          numeDonator: donData.nume,
+          emailDonator: donData.email,
+          suma: finalAmount,
+          idCentru: centruMap[donData.adapost] ?? null,
+          esteRecurenta: isRecurring,
+        }),
+      });
+
+      if (response.ok) {
+        setDonSubmitted(true);
+      } else {
+        alert('A apărut o eroare la salvarea donației.');
+      }
+    } catch (error) {
+      console.error('Eroare conexiune backend:', error);
+      alert('Nu s-a putut conecta la server. Verifică dacă backend-ul este pornit.');
+    }
   };
 
   const partners = [
