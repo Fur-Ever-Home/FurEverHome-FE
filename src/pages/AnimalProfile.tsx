@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { useLanguage } from '../useLanguage';
+import { translateTemperament } from '../translations';
 import { API_BASE_URL } from '../config';
 import FavoriteBtn from '../components/FavoriteBtn';
 import AuthRequiredModal from '../components/AuthRequiredModal';
@@ -15,6 +16,7 @@ export default function AnimalProfile() {
   const isLoggedIn = !!localStorage.getItem('token');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMessage, setAuthMessage] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const animaleList: Record<string, any> = {
     '1': {
@@ -66,14 +68,40 @@ export default function AnimalProfile() {
   const stateAnimal = location.state?.animal;
   const [fetchedAnimal, setFetchedAnimal] = useState<any | null>(null);
 
-// Citim de unde a venit utilizatorul (din state-ul trimis prin navigate)
   const fromPage = location.state?.from;
-
-  // Setăm textul butonului în funcție de pagina de proveniență
   const textInapoiRo = fromPage === 'home' ? 'Înapoi Acasă' : 'Înapoi la animale';
   const textInapoiEn = fromPage === 'home' ? 'Back to Home' : 'Back to animals';
 
-  // Funcția care decide unde ne întoarcem
+  useEffect(() => {
+    setCurrentImageIndex(0);
+    const targetId = stateAnimal?.id || id;
+    if (!targetId) return;
+
+    fetch(`${API_BASE_URL}/api/animals/${targetId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Eroare la incarcarea detaliilor');
+        return res.json();
+      })
+      .then((data) => {
+        setFetchedAnimal((prev: any) => ({ ...(prev || {}), ...data }));
+      })
+      .catch(() => {});
+  }, [id, stateAnimal]);
+
+  const rawAnimal = {
+    ...(animaleList[id || '1'] || animaleList['1']),
+    ...(stateAnimal || {}),
+    ...(fetchedAnimal || {}),
+  };
+
+  const isDistanceMode = Boolean(
+    location.state?.isDistanceMode ||
+    searchParams.get('tip') === 'la_distanta' ||
+    rawAnimal?.isDistanceAdoption ||
+    rawAnimal?.adoptionType === 'la_distanta' ||
+    rawAnimal?.adoptionType === 'distanta'
+  );
+
   const handleGoBack = () => {
     if (fromPage === 'home') {
       navigate('/');
@@ -82,44 +110,31 @@ export default function AnimalProfile() {
     }
   };
 
+  const imagesList: string[] =
+    Array.isArray(rawAnimal.images) && rawAnimal.images.length > 0
+      ? rawAnimal.images
+      : [
+          rawAnimal.imageUrl ||
+            rawAnimal.image ||
+            'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600',
+        ];
 
+  const safeIndex = currentImageIndex < imagesList.length ? currentImageIndex : 0;
+  const currentMainImage = imagesList[safeIndex];
 
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % imagesList.length);
+  };
 
-  useEffect(() => {
-    if (!stateAnimal && id) {
-      fetch(`${API_BASE_URL}/api/animals`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (Array.isArray(data)) {
-            const found = data.find((a: any) => String(a.id) === String(id));
-            if (found) setFetchedAnimal(found);
-          }
-        })
-        .catch(() => {});
-    }
-  }, [id, stateAnimal]);
-
-  const rawAnimal = stateAnimal || fetchedAnimal || animaleList[id || '1'] || animaleList['1'];
-
-  // Verificăm dacă suntem în modul de adopție la distanță
-  const isDistanceMode = Boolean(
-    location.state?.isDistanceMode ||
-    searchParams.get('tip') === 'la_distanta' ||
-    rawAnimal?.isDistanceAdoption ||
-    rawAnimal?.adoptionType === 'la_distanta'
-  );
-
-  const mainImage =
-    rawAnimal.image ||
-    rawAnimal.imageUrl ||
-    (rawAnimal.images && rawAnimal.images[0]) ||
-    'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600';
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + imagesList.length) % imagesList.length);
+  };
 
   const speciesDisplay = lang === 'en' ? (rawAnimal.speciesEn || rawAnimal.species || 'Dog') : (rawAnimal.speciesRo || rawAnimal.species || 'Câine');
   const genderDisplay = lang === 'en' ? (rawAnimal.genderEn || rawAnimal.gender || rawAnimal.sex || 'Female') : (rawAnimal.genderRo || rawAnimal.gender || rawAnimal.sex || 'Femelă');
   const ageDisplay = lang === 'en' ? (rawAnimal.ageEn || rawAnimal.age || '1 year') : (rawAnimal.ageRo || rawAnimal.age || '1 an');
   const sizeDisplay = lang === 'en' ? (rawAnimal.sizeEn || rawAnimal.size || 'Medium') : (rawAnimal.sizeRo || rawAnimal.size || 'Medie');
-  const temperamentDisplay = lang === 'en' ? (rawAnimal.temperamentEn || rawAnimal.temperament || 'Playful') : (rawAnimal.temperamentRo || rawAnimal.temperament || 'Jucăuș');
+  const temperamentDisplay = translateTemperament(rawAnimal.temperamentRo || rawAnimal.temperament, lang);
   const colorDisplay = lang === 'en' ? (rawAnimal.colorEn || rawAnimal.color || 'Brown') : (rawAnimal.colorRo || rawAnimal.color || 'Maro');
   const shelterDisplay = lang === 'en' ? (rawAnimal.shelterEn || rawAnimal.shelter || rawAnimal.location || 'Copou Paws Shelter') : (rawAnimal.shelterRo || rawAnimal.shelter || rawAnimal.location || 'Adăpostul Lăbuțe din Copou');
   const shelterTypeDisplay = lang === 'en' ? (rawAnimal.shelterTypeEn || rawAnimal.locationType || 'Center') : (rawAnimal.shelterTypeRo || rawAnimal.locationType || 'Centru');
@@ -137,29 +152,26 @@ export default function AnimalProfile() {
   const IconLeaf = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 20A17 17 0 0 1 4 6c2.5-1.5 5-.5 7 1.5M11 20c3.5 0 7-3 8-7.5-2.5 0-5.5-1.5-7.5-4C10.5 6.5 11 3.5 11 20z"/></svg>;
   const IconShare = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>;
 
-const handleDonatieClick = () => {
+  const handleDonatieClick = () => {
     if (!isLoggedIn) {
       setAuthMessage(lang === 'en' 
-        ? `You must be logged in to donate for ${rawAnimal.name}` 
+        ? `To donate for ${rawAnimal.name}, you need to be logged in` 
         : `Dacă vrei să donezi pentru ${rawAnimal.name} trebuie să fii logat`);
       setIsAuthModalOpen(true);
       return;
     }
-    // Aici pui logica de donație (ex. navigare)
   };
 
   const handleProgrameazaVizitaClick = () => {
     if (!isLoggedIn) {
       setAuthMessage(lang === 'en' 
-        ? `You must be logged in to schedule a visit with ${rawAnimal.name}` 
+        ? `To schedule a visit with ${rawAnimal.name}, you need to be logged in` 
         : `Pentru a programa o vizită alături de ${rawAnimal.name} trebuie să fii logat`);
       setIsAuthModalOpen(true);
       return;
     }
-    // Aici pui logica pentru programare
     alert(lang === 'en' ? 'Visit scheduled!' : 'Vizită programată!');
   };
-
 
   return (
     <div style={{ backgroundColor: '#FAF6F0', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -167,7 +179,6 @@ const handleDonatieClick = () => {
 
       <div style={{ maxWidth: '500px', margin: '0 auto', padding: '20px', width: '100%', boxSizing: 'border-box' }}>
         
-        {/* Buton Înapoi */}
         <button 
           onClick={handleGoBack} 
           style={{ background: 'none', border: 'none', color: '#3F2C20', fontWeight: 'bold', cursor: 'pointer', marginBottom: '15px', fontSize: '15px', padding: 0 }}
@@ -177,33 +188,76 @@ const handleDonatieClick = () => {
 
         {/* Galerie Foto Principală */}
         <div style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '12px', height: '280px', backgroundColor: '#000' }}>
-          <img src={mainImage} alt={rawAnimal.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <img src={currentMainImage} alt={rawAnimal.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           
           <div style={{ position: 'absolute', top: '12px', right: '12px', zIndex: 10 }}>
-  <FavoriteBtn animal={rawAnimal} isLoggedIn={isLoggedIn} />
-</div>
-          <button style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)', background: '#fff', border: 'none', borderRadius: '50%', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold' }}>‹</button>
-          <button style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', background: '#fff', border: 'none', borderRadius: '50%', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold' }}>›</button>
-
-          <div style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '5px' }}>
-            <span style={{ width: '16px', height: '5px', borderRadius: '3px', backgroundColor: '#fff' }}></span>
-            <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.6)' }}></span>
-            <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.6)' }}></span>
+            <FavoriteBtn animal={rawAnimal} isLoggedIn={isLoggedIn} />
           </div>
+
+          <button 
+            type="button"
+            onClick={handlePrevImage}
+            style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)', background: '#fff', border: 'none', borderRadius: '50%', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            ‹
+          </button>
+          <button 
+            type="button"
+            onClick={handleNextImage}
+            style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', background: '#fff', border: 'none', borderRadius: '50%', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            ›
+          </button>
+
+          {imagesList.length > 1 && (
+            <div style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '5px' }}>
+              {imagesList.map((_, idx) => (
+                <span
+                  key={idx}
+                  onClick={() => setCurrentImageIndex(idx)}
+                  style={{
+                    width: idx === safeIndex ? '16px' : '6px',
+                    height: '6px',
+                    borderRadius: '3px',
+                    backgroundColor: idx === safeIndex ? '#fff' : 'rgba(255,255,255,0.6)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Cele 3 miniaturi */}
-        <div style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
-          {[1, 2, 3].map((_, i) => (
-            <img key={i} src={mainImage} alt="thumb" style={{ flex: 1, height: '65px', borderRadius: '8px', objectFit: 'cover', border: i === 0 ? '2px solid #C68642' : '1px solid #DFCEB8' }} />
+        {/* Miniaturile din baza de date */}
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', overflowX: 'auto' }}>
+          {imagesList.map((imgUrl, idx) => (
+            <img
+              key={idx}
+              src={imgUrl}
+              alt={`${rawAnimal.name}-${idx}`}
+              onClick={() => setCurrentImageIndex(idx)}
+              style={{
+                width: imagesList.length === 1 ? '88px' : '72px',
+                height: '65px',
+                flexShrink: 0,
+                borderRadius: '8px',
+                objectFit: 'cover',
+                cursor: 'pointer',
+                border: idx === safeIndex ? '2px solid #C68642' : '1px solid #DFCEB8',
+                opacity: idx === safeIndex ? 1 : 0.75
+              }}
+            />
           ))}
         </div>
 
-        {/* Nume și Status (Badge-ul este ascuns la adopția la distanță) */}
+        {/* Nume și Status */}
         <h1 style={{ fontSize: '32px', color: '#3F2C20', margin: '0 0 8px 0', fontFamily: 'serif', fontWeight: 'bold' }}>{rawAnimal.name}</h1>
         {!isDistanceMode && (
           <span style={{ display: 'inline-block', backgroundColor: '#5c7d53', color: '#fff', padding: '4px 14px', borderRadius: '16px', fontSize: '12px', fontWeight: '600', marginBottom: '15px' }}>
-            {rawAnimal.status || 'Disponibil'}
+            {lang?.toLowerCase() === 'en'
+              ? (rawAnimal.status?.toLowerCase().includes('rezerv') ? 'Reserved' : rawAnimal.status?.toLowerCase().includes('adopt') ? 'Adopted' : 'Available')
+              : (rawAnimal.status || 'Disponibil')}
           </span>
         )}
 
@@ -256,30 +310,30 @@ const handleDonatieClick = () => {
           </div>
         </div>
 
-        {/* Card Descriere (Povestea animalului + Procesul de adopție doar dacă NU e la distanță) */}
+        {/* Card Descriere */}
         <div style={{ backgroundColor: '#FFFDF8', padding: '20px', borderRadius: '16px', border: '1px solid #DFCEB8', marginBottom: '25px', boxShadow: '0 4px 12px rgba(96,73,47,0.05)' }}>
           <h3 style={{ marginTop: 0, color: '#3F2C20', fontSize: '16px', marginBottom: '10px', fontWeight: 'bold' }}>
-            Povestea lui {rawAnimal.name}
+            {lang === 'en' ? `${rawAnimal.name}'s Story` : `Povestea lui ${rawAnimal.name}`}
           </h3>
-          <p style={{ fontSize: '13.5px', lineHeight: '1.6', color: '#5d534a', marginBottom: '12px' }}>
-            {rawAnimal.description ||
-              `${rawAnimal.name} este un suflet blând și plin de viață care așteaptă cu nerăbdare o familie iubitoare. Se bucură enorm de plimbările în aer liber, îi place să primească atenție și se adaptează rapid într-un mediu cald și liniștit.`}
-          </p>
-          <p style={{ fontSize: '13.5px', lineHeight: '1.6', color: '#5d534a', marginBottom: isDistanceMode ? '0' : '14px' }}>
-            La adăpost, {rawAnimal.name} s-a dovedit a fi extrem de ascultător și recunoscător pentru fiecare gest de afecțiune. Are toate controalele medicale la zi și este pregătit să primească toată grija de care are nevoie.
+          <p style={{ fontSize: '13.5px', lineHeight: '1.6', color: '#5d534a', marginBottom: isDistanceMode ? '0' : '14px', whiteSpace: 'pre-line' }}>
+            {lang === 'en'
+              ? (rawAnimal.descriptionEn || rawAnimal.description || `${rawAnimal.name} is a gentle and lively soul eagerly waiting for a loving family.`)
+              : (rawAnimal.description || rawAnimal.descriptionRo || `${rawAnimal.name} este un suflet blând și plin de viață care așteaptă cu nerăbdare o familie iubitoare.`)}
           </p>
 
           {!isDistanceMode && (
             <div style={{ backgroundColor: '#f7f3ed', padding: '12px 14px', borderRadius: '10px', fontSize: '13px', color: '#5d534a' }}>
               <strong style={{ color: '#3F2C20', display: 'block', marginBottom: '4px' }}>
-                🐾 Procesul de adopție:
+                🐾 {lang === 'en' ? 'Adoption process:' : 'Procesul de adopție:'}
               </strong>
-              Adopția este gratuită și presupune o scurtă vizită de cunoaștere la centru, urmată de semnarea contractului de adopție.
+              {lang === 'en'
+                ? 'Adoption is free and involves a short meet-and-greet visit at the center, followed by signing the adoption contract.'
+                : 'Adopția este gratuită și presupune o scurtă vizită de cunoaștere la centru, urmată de semnarea contractului de adopție.'}
             </div>
           )}
         </div>
 
-        {/* Butoane de Jos: Donează (la distanță) sau Programează o vizită (fizic) + Share */}
+        {/* Butoane de Jos */}
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '30px' }}>
           {isDistanceMode ? (
             <button
