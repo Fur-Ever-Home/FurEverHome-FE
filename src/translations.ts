@@ -180,7 +180,7 @@ export const translations: Record<string, TranslationKeys> = {
     distanceNoticeDesc: "Se afișează doar seniorii și animalele care au nevoie de tratament sau cazare permanentă și nu mai pot fi date spre adopție.",
     distanceBannerTitle: "Adopția la distanță",
     distanceBannerDesc: "Sprijină îngrijirea, tratamentul și cazarea unui animal care nu mai poate fi adoptat fizic. Ai nevoie de cont pentru a continua.",
-    
+
     basicInfo: "INFO DE BAZĂ",
     type: "Tip",
     animalDetails: "DETALII ANIMAL",
@@ -203,7 +203,8 @@ export const translations: Record<string, TranslationKeys> = {
     btnDonate: "Donează",
     fundingCovered: "din necesarul lunar acoperit",
     senior: "Senior",
-// --- Autentificare & Creare Cont ---
+
+    // --- Autentificare & Creare Cont ---
     auth: {
       welcomePrefix: "Bine ați venit la",
       roleSwitchAria: "Tip cont",
@@ -270,6 +271,389 @@ export const translations: Record<string, TranslationKeys> = {
       successRegisterShelter:
         "Cererea de înregistrare a centrului a fost trimisă spre verificare (24–48h).",
       successPasswordReset: "Parola a fost actualizată cu succes! Te poți autentifica acum.",
+    },
+
+    // --- Pagina Ghidul Adoptatorului ---
+    adopterGuide: {
+      breadcrumbHome: "Acasă",
+      breadcrumbCurrent: "Ghidul adoptatorului",
+      heroKicker: "GHIDUL ADOPTATORULUI",
+      heroTitleLine1: "Adopția, explicată pe înțeles.",
+      heroTitleLine2: "Fără surprize pe drum.",
+      heroSubtitle: "Află ce pași urmezi, ce acte îți trebuie și cum îți ajuți noul prieten să se simtă acasă din prima zi.",
+      pillSteps: "Pașii adopției",
+      pillFaq: "Întrebări frecvente",
+      pillCare: "Sfaturi de îngrijire",
+      precheckTitle: "Înainte să începi, întreabă-te:",
+      precheckItems: [
+        "Am timp în fiecare zi pentru el?",
+        "Sunt toți cei din casă de acord?",
+        "Îmi permit hrana și vizitele la veterinar?",
+        "Locuința mea permite animale?",
+      ],
+      precheckNote: "Dacă ai răspuns „da” la toate, ești gata de pasul 1.",
+
+      compareKicker: "ÎNCEPE DE AICI",
+      compareTitle: "Ce fel de adopție ți se potrivește?",
+      compareSubtitle: "Poți să iei un animal acasă sau să susții unul care nu poate pleca din adăpost. Ambele contează.",
+      physicalCardKicker: "ADOPȚIE FIZICĂ",
+      physicalCardTitle: "Îl iei acasă",
+      physicalCardBadge: "Ghidul de mai jos",
+      physicalCardDesc: "Animalul devine membru al familiei tale și locuiește cu tine.",
+      physicalRows: [
+        { label: "Unde locuiește", value: "La tine acasă" },
+        { label: "Ce faci tu", value: "Vii la o vizită, semnezi contractul și îl iei acasă" },
+        { label: "Cheltuieli", value: "Hrana, veterinarul și accesoriile le acoperi tu" },
+        { label: "Angajament", value: "Pe toată viața animalului, adesea 10–15 ani" },
+        { label: "Cont necesar", value: "Da, ca să programezi vizita" },
+      ],
+      physicalCardBtn: "Vezi pașii adopției ↓",
+
+      distanceCardKicker: "ADOPȚIE LA DISTANȚĂ",
+      distanceCardTitle: "Îl susții de departe",
+      distanceCardDesc: "Pentru animalele senior sau cu tratament permanent, care nu pot pleca din adăpost.",
+      distanceRows: [
+        { label: "Unde locuiește", value: "Rămâne la adăpost, în grija centrului" },
+        { label: "Ce faci tu", value: "Alegi un animal și îl susții cu o donație lunară" },
+        { label: "Cheltuieli", value: "Doar suma lunară pe care o alegi" },
+        { label: "Angajament", value: "Lunar, cât timp vrei tu" },
+        { label: "Cont necesar", value: "Da, ca să poți dona" },
+      ],
+      distanceCardBtn: "Vezi animalele pentru adopție la distanță →",
+
+      stepsSwitchAria: "Tip adopție",
+      switchPhysical: "Adopție fizică",
+      switchDistance: "Adopție la distanță",
+
+      stepsPhysicalKicker: "PAȘII ADOPȚIEI",
+      stepsPhysicalTitle: "De la „îmi place” la „bine ai venit acasă”",
+      stepsPhysicalSubtitle: "Pașii pentru adopția fizică. Pentru adopția la distanță, schimbă din comutator.",
+      stepsPhysicalList: [
+        {
+          title: "Găsește-ți prietenul",
+          desc: "Caută în Animale disponibile și filtrează după specie, vârstă sau talie. Salvează-i la favorite pe cei care îți plac.",
+        },
+        {
+          title: "Programează o vizită",
+          desc: "Din profilul animalului alegi ziua și ora. Centrul îți confirmă programarea, iar tu o vezi în Rezervările mele.",
+        },
+        {
+          title: "Cunoașteți-vă",
+          desc: "Mergi la adăpost, petreci timp cu animalul și pui toate întrebările. Poți reveni de câte ori ai nevoie.",
+        },
+        {
+          title: "Mergeți acasă",
+          desc: "Semnezi contractul de adopție la centru și primești carnetul de sănătate al animalului.",
+        },
+      ],
+      docsPhysicalTitle: "Ce acte îți trebuie",
+      docsPhysicalList: [
+        "Cartea de identitate",
+        "Contractul de adopție — îl semnezi la centru, în ziua adopției",
+        "Acordul proprietarului, dacă locuiești în chirie (unele centre îl cer)",
+      ],
+      docsPhysicalFootnote: "Taxele centrului pentru cerere și alte documente le găsești în profilul centrului, la Adăposturi.",
+      goodToKnowTitle: "Bine de știut",
+      goodToKnowPhysicalList: [
+        "Programarea se face doar online, din profilul animalului",
+        "Poți muta sau anula o vizită din Rezervările mele",
+        "Un animal rezervat apare cu eticheta „Rezervat” în catalog",
+      ],
+      stepsPhysicalCta: "Vezi animalele disponibile →",
+
+      stepsDistanceKicker: "PAȘII ADOPȚIEI LA DISTANȚĂ",
+      stepsDistanceTitle: "Îl ajuți, chiar dacă rămâne la adăpost",
+      stepsDistanceSubtitle: "Pentru animalele senior sau cu tratament permanent, care nu pot fi adoptate fizic.",
+      stepsDistanceList: [
+        {
+          title: "Alege animalul",
+          desc: "Intră în Adopție la distanță și vezi animalele care au nevoie de sprijin pe termen lung.",
+        },
+        {
+          title: "Intră în cont",
+          desc: "Donațiile sunt legate de contul tău, ca să le poți urmări sau opri oricând.",
+        },
+        {
+          title: "Alege suma lunară",
+          desc: "Bara de progres îți arată cât mai lipsește până la obiectivul lunii pentru animalul ales.",
+        },
+        {
+          title: "Rămâneți în legătură",
+          desc: "Primești vești de la centru și îl poți vizita la adăpost, cu programare.",
+        },
+      ],
+      docsDistanceTitle: "Ce îți trebuie",
+      docsDistanceList: [
+        "Un cont FureverHome",
+        "O metodă de plată pentru donația lunară",
+        "Câteva minute ca să alegi animalul",
+      ],
+      docsDistanceFootnote: "Nu ai nevoie de acte, contract sau vizită la adăpost.",
+      goodToKnowDistanceList: [
+        "Animalul rămâne în grija centrului, care îi acoperă tratamentul",
+        "Vezi pe card cât s-a strâns din obiectivul lunii",
+        "Poți schimba sau opri donația din contul tău",
+      ],
+      stepsDistanceCta: "Vezi animalele pentru adopție la distanță →",
+
+      faqKicker: "ÎNTREBĂRI FRECVENTE",
+      faqTitle: "Ce ne întreabă cel mai des viitorii adoptatori",
+      faqSubtitle: "Dacă nu găsești răspunsul aici, întreabă asistentul din colțul paginii sau scrie-ne.",
+      faqContactTitle: "Ai altă întrebare?",
+      faqContactTextBefore: "Scrie-ne la ",
+      faqContactTextAfter: " sau deschide chatul.",
+      faqList: [
+        {
+          question: "Cât costă adopția?",
+          answer: "Depinde de centru. Unele nu cer nimic, altele cer o mică contribuție care acoperă vaccinurile sau sterilizarea. Suma apare în profilul centrului, așa că știi dinainte.",
+        },
+        {
+          question: "Am nevoie de cont ca să programez o vizită?",
+          answer: "Da, crearea unui cont durează un minut și îți permite să programezi vizita, să primești confirmarea adăpostului și să gestionezi rezervările tale.",
+        },
+        {
+          question: "Pot muta sau anula o programare?",
+          answer: "Da, oricând din secțiunea „Rezervările mele”. Dacă nu mai poți ajunge, anunță din timp ca alt adoptator să poată ocupa intervalul.",
+        },
+        {
+          question: "Pot adopta dacă locuiesc în chirie?",
+          answer: "Da, în majoritatea cazurilor. Unele centre pot solicita acordul scris al proprietarului pentru a se asigura că animalul nu riscă să fie returnat.",
+        },
+        {
+          question: "Ce înseamnă adopția la distanță?",
+          answer: "Susții lunar un animal care rămâne în grija adăpostului (senior sau cu tratament permanent). Primești vești despre el și îl poți vizita cu programare.",
+        },
+        {
+          question: "Ce fac dacă animalul nu se acomodează?",
+          answer: "Acomodarea durează, de regulă, până la 3 luni. Dacă întâmpini dificultăți, contactează centrul de adopție — echipa te poate ghida sau poate relua animalul în grijă dacă situația o impune.",
+        },
+        {
+          question: "Animalele sunt vaccinate și sterilizate?",
+          answer: "Majoritatea animalelor pleacă din centru deparazitate, vaccinate și sterilizate (dacă vârsta permite). Statusul exact este afișat în profilul fiecărui animal.",
+        },
+      ],
+
+      careKicker: "SFATURI DE ÎNGRIJIRE",
+      careTitle: "Primele luni împreună",
+      careSubtitle: "Bifează ce ai pregătit. Lista se schimbă în funcție de specie.",
+      speciesAria: "Alege specia",
+      progressDesc: "Bifează pe măsură ce te pregătești. Bifele rămân salvate în acest browser.",
+      progressCount: "{checked} din {total} bifate",
+      checklist: {
+        caini: {
+          label: "Câini",
+          bannerTitle: "Lista ta pentru noul câine",
+          categories: [
+            {
+              id: "before",
+              title: "Înainte să vină acasă",
+              icon: "bag",
+              items: [
+                "Castroane pentru apă și mâncare",
+                "Lesă, ham și medalion cu numărul tău de telefon",
+                "Pat sau pătură, într-un colț liniștit",
+                "Câteva zile din hrana pe care o mănâncă la adăpost",
+                "Jucării de ros și pungi pentru plimbări",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "Primele zile",
+              icon: "home",
+              items: [
+                "Lasă-l să exploreze casa în ritmul lui",
+                "Plimbări scurte și dese, mereu în lesă",
+                "Amână vizitele musafirilor o săptămână",
+                "Ore fixe pentru masă și plimbări",
+                "Programează prima vizită la veterinar",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "Prima lună",
+              icon: "calendar",
+              items: [
+                "Treci treptat la hrana nouă, în 7–10 zile",
+                "Verifică vaccinurile și deparazitarea în carnet",
+                "Răsplătește comportamentul bun cu laude",
+                "Prelungește plimbările pe măsură ce capătă încredere",
+                "Verifică dacă microcipul e înregistrat pe numele tău",
+              ],
+            },
+          ],
+        },
+        pisici: {
+          label: "Pisici",
+          bannerTitle: "Lista ta pentru noua pisică",
+          categories: [
+            {
+              id: "before",
+              title: "Înainte să vină acasă",
+              icon: "bag",
+              items: [
+                "Litieră, lopățică și așternut igienic",
+                "Castroane separate pentru apă și hrană",
+                "Cușcă de transport sigură pentru drumul spre casă",
+                "Sisale de ascuțit ghearele și un culcuș ascuns",
+                "Plase de siguranță la geamuri și balcon",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "Primele zile",
+              icon: "home",
+              items: [
+                "Pregătește o singură cameră liniștită la început",
+                "Arată-i unde sunt litiera, apa și mâncarea",
+                "Nu o forța să iasă dacă se ascunde sub pat",
+                "Vorbește-i calm și las-o să vină ea la tine",
+                "Programează un control de rutină la veterinar",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "Prima lună",
+              icon: "calendar",
+              items: [
+                "Deschide treptat accesul către restul casei",
+                "Treci treptat la hrana nouă, în 7–10 zile",
+                "Stabilește sesiuni scurte de joacă zilnică",
+                "Verifică schema de vaccinuri și deparazitare",
+                "Actualizează datele microcipului pe numele tău",
+              ],
+            },
+          ],
+        },
+        alte: {
+          label: "Alte animale",
+          bannerTitle: "Lista ta pentru noul prieten",
+          categories: [
+            {
+              id: "before",
+              title: "Înainte să vină acasă",
+              icon: "bag",
+              items: [
+                "Spațiu sau țarc adaptat speciei și taliei",
+                "Substrat, adăpătoare și boluri stabile",
+                "Ascunzători pentru reducerea stresului",
+                "Hrană specifică recomandată de adăpost",
+                "Cușcă de transport ventilată pentru drum",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "Primele zile",
+              icon: "home",
+              items: [
+                "Așază spațiul ferit de curenți de aer și zgomot",
+                "Lasă-l 48 de ore să se acomodeze fără manipulare excesivă",
+                "Monitorizează apetitul și consumul de apă",
+                "Păstrează un program constant de curățenie și hrănire",
+                "Identifică un medic veterinar cu experiență pe specie",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "Prima lună",
+              icon: "calendar",
+              items: [
+                "Introdu treptat interacțiunea și recompensele",
+                "Adaugă elemente de îmbogățire a mediului",
+                "Programează primul control veterinar complet",
+                "Verifică temperatura și umiditatea din cameră",
+                "Observă rutina zilnică și semnele de confort",
+              ],
+            },
+          ],
+        },
+      },
+
+      brandsTitle: "Branduri pe care le recomandăm",
+      brandsSubtitle: "Le-am ales pentru că sunt ușor de găsit în România și potrivite pentru un animal abia adoptat. Pentru hrană, cere și părerea veterinarului.",
+      brandsLinkText: "Vezi produsele →",
+      brandsFootnote: "Recomandările sunt orientative. FureverHome nu vinde produse.",
+      brandsList: [
+        {
+          initials: "RC",
+          name: "Royal Canin",
+          category: "Hrană",
+          description: "Hrană uscată și umedă, pe talie și vârstă.",
+          highlight: "Ușor de dozat când treci de la hrana adăpostului.",
+          url: "https://www.royalcanin.com/ro",
+        },
+        {
+          initials: "PP",
+          name: "Purina Pro Plan",
+          category: "Hrană",
+          description: "Variante pentru pui, adulți și stomac sensibil.",
+          highlight: "Bun pentru primele săptămâni, când schimbarea îl stresează.",
+          url: "https://www.purina.ro",
+        },
+        {
+          initials: "HS",
+          name: "Hill's Science Plan",
+          category: "Hrană",
+          description: "Hrană pentru toate vârstele, inclusiv senior.",
+          highlight: "Recomandată des de veterinari.",
+          url: "https://www.hillspet.ro",
+        },
+        {
+          initials: "AP",
+          name: "Applaws",
+          category: "Hrană",
+          description: "Rețete cu multă carne și puține ingrediente.",
+          highlight: "Compoziție simplă, fără aditivi artificiali.",
+          url: "https://applaws.com",
+        },
+        {
+          initials: "KG",
+          name: "KONG",
+          category: "Jucării",
+          description: "Jucării de ros care se umplu cu recompense.",
+          highlight: "Îl ține ocupat și calm când rămâne singur.",
+          url: "https://www.kongcompany.com",
+        },
+        {
+          initials: "TX",
+          name: "Trixie",
+          category: "Accesorii",
+          description: "Lese, hamuri, castroane și paturi.",
+          highlight: "Tot ce-ți trebuie la început, la preț mic.",
+          url: "https://www.trixie.de",
+        },
+        {
+          initials: "FP",
+          name: "Ferplast",
+          category: "Transport și odihnă",
+          description: "Cuști de transport și paturi solide.",
+          highlight: "Drum sigur spre casă și la veterinar.",
+          url: "https://www.ferplast.com",
+        },
+      ],
+
+      ruleTitle: "Regula 3-3-3",
+      ruleSubtitle: "Așa arată, de obicei, acomodarea unui animal adoptat. Fiecare are ritmul lui.",
+      ruleCards: [
+        {
+          kicker: "Primele",
+          title: "3 zile",
+          desc: "Se simte copleșit. Poate nu mănâncă mult și se ascunde. Dă-i liniște.",
+        },
+        {
+          kicker: "Primele",
+          title: "3 săptămâni",
+          desc: "Învață rutina casei și începe să-și arate personalitatea.",
+        },
+        {
+          kicker: "Primele",
+          title: "3 luni",
+          desc: "Se simte acasă și are încredere în tine. Acum sunteți o echipă.",
+        },
+      ],
+
+      finalCtaTitlePart1: "Ești pregătit?",
+      finalCtaTitlePart2: "Prietenul tău te așteaptă.",
+      finalCtaBtn: "Vezi animalele disponibile →",
     },
   },
 
@@ -473,7 +857,8 @@ export const translations: Record<string, TranslationKeys> = {
     btnDonate: "Donate",
     fundingCovered: "of monthly need covered",
     senior: "Senior",
-// --- Authentication & Registration ---
+
+    // --- Authentication & Registration ---
     auth: {
       welcomePrefix: "Welcome to",
       roleSwitchAria: "Account type",
@@ -516,7 +901,8 @@ export const translations: Record<string, TranslationKeys> = {
       registerShelterBtn: "Register",
       hasAccountText: "Already have an account?",
       loginLink: "Sign in",
-resetStep1Title: "Reset password",
+
+      resetStep1Title: "Reset password",
       resetStep1Desc:
         "Enter the email address where we will send you a link to reset your password.",
       resetStep1Btn: "Reset password",
@@ -540,7 +926,7 @@ resetStep1Title: "Reset password",
         "Your shelter registration request has been submitted for verification (24–48h).",
       successPasswordReset: "Password updated successfully! You can sign in now.",
     },
-  
+  },
 };
 
 export const translateTemperament = (temp?: string, lang?: string): string => {
