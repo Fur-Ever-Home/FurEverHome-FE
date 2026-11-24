@@ -466,7 +466,7 @@
 }
 
 .ag-dot-list li::before {
-  content: '•';
+  content: '?';
   position: absolute;
   left: 0;
   color: #c88a4b;
