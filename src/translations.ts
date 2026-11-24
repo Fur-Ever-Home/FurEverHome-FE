@@ -926,6 +926,389 @@ export const translations: Record<string, TranslationKeys> = {
         "Your shelter registration request has been submitted for verification (24–48h).",
       successPasswordReset: "Password updated successfully! You can sign in now.",
     },
+
+    // --- Adopter's Guide Page ---
+    adopterGuide: {
+      breadcrumbHome: "Home",
+      breadcrumbCurrent: "Adopter's guide",
+      heroKicker: "ADOPTER'S GUIDE",
+      heroTitleLine1: "Adoption, clearly explained.",
+      heroTitleLine2: "No surprises along the way.",
+      heroSubtitle: "Find out what steps to follow, what documents you need, and how to help your new friend feel at home from day one.",
+      pillSteps: "Adoption steps",
+      pillFaq: "FAQ",
+      pillCare: "Care tips",
+      precheckTitle: "Before you start, ask yourself:",
+      precheckItems: [
+        "Do I have time every day for them?",
+        "Is everyone in the household on board?",
+        "Can I afford food and vet visits?",
+        "Does my home allow pets?",
+      ],
+      precheckNote: "If you answered 'yes' to all of them, you're ready for step 1.",
+
+      compareKicker: "START HERE",
+      compareTitle: "What kind of adoption suits you?",
+      compareSubtitle: "You can take an animal home or support one that cannot leave the shelter. Both matter.",
+      physicalCardKicker: "PHYSICAL ADOPTION",
+      physicalCardTitle: "Take them home",
+      physicalCardBadge: "Guide below",
+      physicalCardDesc: "The animal becomes a member of your family and lives with you.",
+      physicalRows: [
+        { label: "Where they live", value: "At your home" },
+        { label: "What you do", value: "Come for a visit, sign the contract, and take them home" },
+        { label: "Expenses", value: "You cover food, vet care, and accessories" },
+        { label: "Commitment", value: "For the animal's entire life, often 10–15 years" },
+        { label: "Account required", value: "Yes, to schedule the visit" },
+      ],
+      physicalCardBtn: "See adoption steps ↓",
+
+      distanceCardKicker: "DISTANCE ADOPTION",
+      distanceCardTitle: "Support from afar",
+      distanceCardDesc: "For senior animals or those requiring permanent treatment that cannot leave the shelter.",
+      distanceRows: [
+        { label: "Where they live", value: "Stays at the shelter, cared for by the center" },
+        { label: "What you do", value: "Pick an animal and support them with a monthly donation" },
+        { label: "Expenses", value: "Only the monthly amount you choose" },
+        { label: "Commitment", value: "Monthly, for as long as you want" },
+        { label: "Account required", value: "Yes, to donate" },
+      ],
+      distanceCardBtn: "See distance adoption animals →",
+
+      stepsSwitchAria: "Adoption type",
+      switchPhysical: "Physical adoption",
+      switchDistance: "Distance adoption",
+
+      stepsPhysicalKicker: "ADOPTION STEPS",
+      stepsPhysicalTitle: "From 'I like them' to 'welcome home'",
+      stepsPhysicalSubtitle: "Steps for physical adoption. For distance adoption, switch using the toggle.",
+      stepsPhysicalList: [
+        {
+          title: "Find your friend",
+          desc: "Browse Available animals and filter by species, age, or size. Save your favorites.",
+        },
+        {
+          title: "Schedule a visit",
+          desc: "Pick the day and time on the animal's profile. The center confirms, and you see it under My Bookings.",
+        },
+        {
+          title: "Get to know each other",
+          desc: "Visit the shelter, spend time with the animal, and ask all your questions. You can come back as often as needed.",
+        },
+        {
+          title: "Go home",
+          desc: "Sign the adoption contract at the center and receive the animal's health record.",
+        },
+      ],
+      docsPhysicalTitle: "What documents you need",
+      docsPhysicalList: [
+        "ID card",
+        "Adoption contract — signed at the center on adoption day",
+        "Landlord's approval, if you rent (required by some centers)",
+      ],
+      docsPhysicalFootnote: "Center fees for applications and other documents are listed on the center's profile under Shelters.",
+      goodToKnowTitle: "Good to know",
+      goodToKnowPhysicalList: [
+        "Visits are scheduled online only, from the animal's profile",
+        "You can reschedule or cancel a visit under My Bookings",
+        "A reserved animal appears with a 'Reserved' badge in the catalog",
+      ],
+      stepsPhysicalCta: "View available animals →",
+
+      stepsDistanceKicker: "DISTANCE ADOPTION STEPS",
+      stepsDistanceTitle: "Help them, even while they stay at the shelter",
+      stepsDistanceSubtitle: "For senior animals or those requiring permanent treatment that cannot be physically adopted.",
+      stepsDistanceList: [
+        {
+          title: "Choose the animal",
+          desc: "Go to Distance Adoption and see animals that need long-term support.",
+        },
+        {
+          title: "Sign in to your account",
+          desc: "Donations are linked to your account so you can track or stop them anytime.",
+        },
+        {
+          title: "Choose the monthly amount",
+          desc: "The progress bar shows how much is left toward the monthly goal for your chosen animal.",
+        },
+        {
+          title: "Stay in touch",
+          desc: "Get updates from the center and visit the animal at the shelter by appointment.",
+        },
+      ],
+      docsDistanceTitle: "What you need",
+      docsDistanceList: [
+        "A FureverHome account",
+        "A payment method for the monthly donation",
+        "A few minutes to choose the animal",
+      ],
+      docsDistanceFootnote: "No paperwork, contract, or shelter visit required.",
+      goodToKnowDistanceList: [
+        "The animal remains in the center's care, which covers treatment",
+        "See on the card how much of the monthly goal has been raised",
+        "You can change or stop the donation from your account",
+      ],
+      stepsDistanceCta: "View distance adoption animals →",
+
+      faqKicker: "FREQUENTLY ASKED QUESTIONS",
+      faqTitle: "What future adopters ask most often",
+      faqSubtitle: "If you don't find the answer here, ask the assistant in the corner of the page or message us.",
+      faqContactTitle: "Have another question?",
+      faqContactTextBefore: "Write to us at ",
+      faqContactTextAfter: " or open the chat.",
+      faqList: [
+        {
+          question: "How much does adoption cost?",
+          answer: "It depends on the center. Some charge nothing, while others ask for a small contribution covering vaccines or spaying/neutering. The amount is shown on the center's profile so you know upfront.",
+        },
+        {
+          question: "Do I need an account to schedule a visit?",
+          answer: "Yes, creating an account takes a minute and lets you schedule the visit, get shelter confirmation, and manage your bookings.",
+        },
+        {
+          question: "Can I reschedule or cancel a booking?",
+          answer: "Yes, anytime from the 'My Bookings' section. If you can't make it, let them know early so another adopter can take the slot.",
+        },
+        {
+          question: "Can I adopt if I rent?",
+          answer: "Yes, in most cases. Some centers may ask for written landlord approval to make sure the pet won't risk being returned.",
+        },
+        {
+          question: "What does distance adoption mean?",
+          answer: "You monthly support an animal that stays in the shelter's care (senior or requiring ongoing treatment). You get updates and can visit by appointment.",
+        },
+        {
+          question: "What if the animal doesn't settle in?",
+          answer: "Settling in usually takes up to 3 months. If you run into trouble, contact the adoption center — the team can guide you or take the animal back if needed.",
+        },
+        {
+          question: "Are the animals vaccinated and spayed/neutered?",
+          answer: "Most animals leave the center dewormed, vaccinated, and spayed/neutered (when age-appropriate). The exact status is shown on each animal's profile.",
+        },
+      ],
+
+      careKicker: "CARE TIPS",
+      careTitle: "First months together",
+      careSubtitle: "Check off what you've prepared. The list changes based on species.",
+      speciesAria: "Choose species",
+      progressDesc: "Check items off as you prepare. Your checks stay saved in this browser.",
+      progressCount: "{checked} of {total} checked",
+      checklist: {
+        caini: {
+          label: "Dogs",
+          bannerTitle: "Your checklist for your new dog",
+          categories: [
+            {
+              id: "before",
+              title: "Before they come home",
+              icon: "bag",
+              items: [
+                "Food and water bowls",
+                "Leash, harness, and ID tag with your phone number",
+                "Bed or blanket in a quiet corner",
+                "A few days' worth of the food they eat at the shelter",
+                "Chew toys and poop bags",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "First days",
+              icon: "home",
+              items: [
+                "Let them explore the home at their own pace",
+                "Short, frequent walks, always on a leash",
+                "Postpone guest visits for a week",
+                "Fixed times for meals and walks",
+                "Schedule the first vet visit",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "First month",
+              icon: "calendar",
+              items: [
+                "Transition gradually to the new food over 7–10 days",
+                "Check vaccines and deworming in the health book",
+                "Reward good behavior with praise",
+                "Lengthen walks as they gain confidence",
+                "Check that the microchip is registered in your name",
+              ],
+            },
+          ],
+        },
+        pisici: {
+          label: "Cats",
+          bannerTitle: "Your checklist for your new cat",
+          categories: [
+            {
+              id: "before",
+              title: "Before they come home",
+              icon: "bag",
+              items: [
+                "Litter box, scoop, and litter",
+                "Separate food and water bowls",
+                "Safe carrier for the trip home",
+                "Scratching post and a cozy hiding spot",
+                "Safety screens/nets on windows and balcony",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "First days",
+              icon: "home",
+              items: [
+                "Set up one quiet room at first",
+                "Show where the litter box, water, and food are",
+                "Don't force them out if they hide under the bed",
+                "Speak calmly and let them come to you",
+                "Schedule a routine vet checkup",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "First month",
+              icon: "calendar",
+              items: [
+                "Gradually open access to the rest of the home",
+                "Transition gradually to the new food over 7–10 days",
+                "Set up short daily play sessions",
+                "Check the vaccination and deworming schedule",
+                "Update microchip details to your name",
+              ],
+            },
+          ],
+        },
+        alte: {
+          label: "Other animals",
+          bannerTitle: "Your checklist for your new friend",
+          categories: [
+            {
+              id: "before",
+              title: "Before they come home",
+              icon: "bag",
+              items: [
+                "Enclosure or space suited to species and size",
+                "Bedding/substrate, waterer, and sturdy bowls",
+                "Hiding spots to reduce stress",
+                "Species-specific food recommended by the shelter",
+                "Well-ventilated carrier for transport",
+              ],
+            },
+            {
+              id: "first-days",
+              title: "First days",
+              icon: "home",
+              items: [
+                "Place the setup away from drafts and noise",
+                "Give 48 hours to settle in without excessive handling",
+                "Monitor appetite and water intake",
+                "Keep a steady cleaning and feeding routine",
+                "Find a vet experienced with the species",
+              ],
+            },
+            {
+              id: "first-month",
+              title: "First month",
+              icon: "calendar",
+              items: [
+                "Gradually introduce interaction and treats",
+                "Add environmental enrichment items",
+                "Schedule the first full vet checkup",
+                "Check room temperature and humidity",
+                "Observe daily routine and signs of comfort",
+              ],
+            },
+          ],
+        },
+      },
+
+      brandsTitle: "Brands we recommend",
+      brandsSubtitle: "We picked them because they're easy to find in Romania and suitable for a newly adopted pet. For food, ask your vet too.",
+      brandsLinkText: "See products →",
+      brandsFootnote: "Recommendations are for guidance only. FureverHome does not sell products.",
+      brandsList: [
+        {
+          initials: "RC",
+          name: "Royal Canin",
+          category: "Food",
+          description: "Dry and wet food by size and age.",
+          highlight: "Easy to portion when transitioning from shelter food.",
+          url: "https://www.royalcanin.com/ro",
+        },
+        {
+          initials: "PP",
+          name: "Purina Pro Plan",
+          category: "Food",
+          description: "Options for puppies/kittens, adults, and sensitive stomachs.",
+          highlight: "Good for the first weeks when change causes stress.",
+          url: "https://www.purina.ro",
+        },
+        {
+          initials: "HS",
+          name: "Hill's Science Plan",
+          category: "Food",
+          description: "Food for all ages, including seniors.",
+          highlight: "Frequently recommended by vets.",
+          url: "https://www.hillspet.ro",
+        },
+        {
+          initials: "AP",
+          name: "Applaws",
+          category: "Food",
+          description: "High-meat recipes with few ingredients.",
+          highlight: "Simple formula with no artificial additives.",
+          url: "https://applaws.com",
+        },
+        {
+          initials: "KG",
+          name: "KONG",
+          category: "Toys",
+          description: "Chew toys that can be stuffed with treats.",
+          highlight: "Keeps them occupied and calm when left alone.",
+          url: "https://www.kongcompany.com",
+        },
+        {
+          initials: "TX",
+          name: "Trixie",
+          category: "Accessories",
+          description: "Leashes, harnesses, bowls, and beds.",
+          highlight: "Everything you need to start, budget-friendly.",
+          url: "https://www.trixie.de",
+        },
+        {
+          initials: "FP",
+          name: "Ferplast",
+          category: "Transport & rest",
+          description: "Sturdy carriers and beds.",
+          highlight: "Safe trips home and to the vet.",
+          url: "https://www.ferplast.com",
+        },
+      ],
+
+      ruleTitle: "The 3-3-3 Rule",
+      ruleSubtitle: "This is usually what settling in looks like for an adopted pet. Each has their own pace.",
+      ruleCards: [
+        {
+          kicker: "First",
+          title: "3 days",
+          desc: "Feels overwhelmed. Might not eat much and may hide. Give them quiet space.",
+        },
+        {
+          kicker: "First",
+          title: "3 weeks",
+          desc: "Learns the household routine and starts showing their personality.",
+        },
+        {
+          kicker: "First",
+          title: "3 months",
+          desc: "Feels at home and trusts you. Now you're a team.",
+        },
+      ],
+
+      finalCtaTitlePart1: "Ready?",
+      finalCtaTitlePart2: "Your friend is waiting.",
+      finalCtaBtn: "View available animals →",
+    },
   },
 };
 
