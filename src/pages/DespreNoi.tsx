@@ -8,6 +8,7 @@ import { useLanguage } from '../useLanguage';
 import { despreNoiTranslations } from '../despreNoiTranslations';
 import './DespreNoi.css';
 import './DespreNoi.mobile.css';
+import { API_BASE_URL } from '../config';
 
 export default function DespreNoi() {
   const { lang } = useLanguage();
@@ -27,13 +28,37 @@ export default function DespreNoi() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.gdpr) {
       alert(t.formGdprAlert);
       return;
     }
-    setSubmitted(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nume: formData.nume,
+          email: formData.email,
+          subiect: formData.subiect,
+          mesaj: formData.mesaj,
+          acordGdpr: formData.gdpr,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert('A apărut o eroare la trimiterea mesajului.');
+      }
+    } catch (error) {
+      console.error('Eroare conexiune backend:', error);
+      alert('Nu s-a putut conecta la server. Verifică dacă backend-ul este pornit.');
+    }
   };
 
   const scrollToSection = (id: string) => {
