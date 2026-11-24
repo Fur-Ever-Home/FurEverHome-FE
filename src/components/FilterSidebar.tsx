@@ -33,6 +33,9 @@ interface FilterSidebarProps {
   totalResults?: number;
   isOpenMobile?: boolean;
   onCloseMobile?: () => void;
+  availableCounties?: string[];
+  availableShelters?: string[];
+  availableLocationTypes?: string[];
 }
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
@@ -43,6 +46,9 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   totalResults = 0,
   isOpenMobile = false,
   onCloseMobile,
+  availableCounties = [],
+  availableShelters = [],
+  availableLocationTypes = [],
 }) => {
   const { lang } = useLanguage();
   const t = translations[lang as keyof typeof translations] || translations.ro;
@@ -234,7 +240,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       </div>
 
       {/* LOCAȚIE */}
-      <div className="filter-group">
+      {/*<div className="filter-group">
         <label className="filter-group-title">{t.locationLabel || 'LOCAȚIE'}</label>
 
         <select 
@@ -268,6 +274,62 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           <option value="">{t.locationTypeLabel || 'Locația animalului'}</option>
           <option value="centru">{t.center || 'Centru / Adăpost'}</option>
           <option value="foster">{t.foster || 'În Foster'}</option>
+        </select>
+      </div>*/}
+      {/* LOCAȚIE */}
+      <div className="filter-group">
+        <label className="filter-group-title">{t.locationLabel || 'LOCAȚIE'}</label>
+
+        <select 
+          className="filter-select"
+          value={filters.county}
+          onChange={(e) => handleSelectChange('county', e.target.value)}
+        >
+          <option value="">{t.county || 'Județ'}</option>
+          {(availableCounties.length > 0
+            ? availableCounties
+            : ['Iași', 'București', 'Cluj', 'Timiș']
+          ).map((county) => (
+            <option key={county} value={county}>
+              {county}
+            </option>
+          ))}
+        </select>
+
+        <select 
+          className="filter-select"
+          value={filters.shelter}
+          onChange={(e) => handleSelectChange('shelter', e.target.value)}
+        >
+          <option value="">{t.shelter || 'Centru / Adăpost'}</option>
+          {(availableShelters.length > 0
+            ? availableShelters
+            : ['Asociația Lumea lui Cindy', 'Fundația Sky']
+          ).map((shelterName) => (
+            <option key={shelterName} value={shelterName}>
+              {shelterName}
+            </option>
+          ))}
+        </select>
+
+        <select 
+          className="filter-select"
+          value={filters.locationType}
+          onChange={(e) => handleSelectChange('locationType', e.target.value)}
+        >
+          <option value="">{t.locationTypeLabel || 'Locația animalului'}</option>
+          {(availableLocationTypes.length > 0
+            ? availableLocationTypes
+            : ['Shelter', 'Foster']
+          ).map((locType) => (
+            <option key={locType} value={locType}>
+              {locType === 'Shelter'
+                ? lang === 'en'
+                  ? 'Shelter'
+                  : 'Centru / Adăpost (Shelter)'
+                : locType}
+            </option>
+          ))}
         </select>
       </div>
 

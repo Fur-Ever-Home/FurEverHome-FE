@@ -14,6 +14,7 @@ import './Catalog.css';
 
 interface Animal {
   id: number;
+  id_animal?: number;
   name: string;
   species: string;
   status: string;
@@ -44,6 +45,7 @@ interface Animal {
 adoptionType?: string;
   description?: string;
   descriptionEn?: string;
+  county?: string;
 }
 
 const initialFilterState: FilterState = {
@@ -77,6 +79,7 @@ export default function Catalog() {
   const t = translations[lang as keyof typeof translations] || translations.ro;
 
   const [animals, setAnimals] = useState<Animal[]>([]);
+  const [allAnimals, setAllAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
   const [sortOrder, setSortOrder] = useState('noi');
@@ -134,6 +137,8 @@ export default function Catalog() {
     if (filters.vaccinated) queryParams.append('vaccinated', 'true');
     if (filters.sterilized) queryParams.append('sterilized', 'true');
     if (filters.dewormed) queryParams.append('dewormed', 'true');
+    if (filters.county) queryParams.append('county', filters.county);
+    
 
     const queryString = queryParams.toString();
     const url = `${API_BASE_URL}/api/animals${queryString ? `?${queryString}` : ''}`;
@@ -162,6 +167,18 @@ export default function Catalog() {
   useEffect(() => {
     fetchAnimals();
   }, [categorieParam, filters]);
+  useEffect(() => {
+  fetch(`${API_BASE_URL}/api/animals`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        setAllAnimals(data);
+      }
+    })
+    .catch((error) => {
+      console.error('Eroare la preluarea listei complete de animale:', error);
+    });
+}, []);
 
 /*const handleResetFilters = () => {
     setFilters(initialFilterState);
@@ -184,7 +201,7 @@ export default function Catalog() {
 
   const isDistanceMode = filters.adoptionType === 'la_distanta';
 
-  const animaleFiltrate = animals.filter((animal) => {
+  /*const animaleFiltrate = animals.filter((animal) => {
     const esteAnimalDistanta =
       Boolean(animal.isDistanceAdoption) ||
       animal.adoptionType?.toLowerCase().includes('distanta');
@@ -199,7 +216,80 @@ export default function Catalog() {
       return dateB - dateA;
     }
     return dateA - dateB;
+  });*/
+
+  const normalizeText = (value?: string) => (value || '').trim().toLowerCase();
+
+  const animaleFiltrate = animals.filter((animal) => {
+    const esteAnimalDistanta =
+      Boolean(animal.isDistanceAdoption) ||
+      animal.adoptionType?.toLowerCase().includes('distanta');
+
+    const matchesAdoptionType = isDistanceMode
+      ? esteAnimalDistanta
+      : !esteAnimalDistanta;
+
+    const matchesCounty =
+      !filters.county ||
+      normalizeText(animal.county).includes(normalizeText(filters.county));
+
+    const matchesShelter =
+      !filters.shelter ||
+      normalizeText(animal.shelter).includes(normalizeText(filters.shelter));
+
+    const matchesLocationType =
+      !filters.locationType ||
+      normalizeText(animal.locationType).includes(
+        normalizeText(filters.locationType)
+      );
+
+    return (
+      matchesAdoptionType &&
+      matchesCounty &&
+      matchesShelter &&
+      matchesLocationType
+    );
   });
+
+  const sourceForOptions = allAnimals.length > 0 ? allAnimals : animals;
+
+  const availableCounties = Array.from(
+    new Set(sourceForOptions.map((a) => (a.county || '').trim()).filter(Boolean))
+  );
+
+  const availableShelters = Array.from(
+    new Set(sourceForOptions.map((a) => (a.shelter || '').trim()).filter(Boolean))
+  );
+
+  const availableLocationTypes = Array.from(
+    new Set(sourceForOptions.map((a) => (a.locationType || '').trim()).filter(Boolean))
+  );
+
+  const parseDateSafe = (value?: string): number => {
+  if (!value) return NaN;
+  const normalized = value.includes(' ') && !value.includes('T')
+    ? value.replace(' ', 'T')
+    : value;
+  const ts = new Date(normalized).getTime();
+  return Number.isNaN(ts) ? NaN : ts;
+};
+
+const getAnimalId = (animal: Animal): number => {
+  return Number(animal.id ?? animal.id_animal ?? 0);
+};
+
+const animaleSortate = [...animaleFiltrate].sort((a, b) => {
+  const timeA = parseDateSafe(a.createdAt || a.date);
+  const timeB = parseDateSafe(b.createdAt || b.date);
+
+  if (!Number.isNaN(timeA) && !Number.isNaN(timeB) && timeA !== timeB) {
+    return sortOrder === 'noi' ? timeB - timeA : timeA - timeB;
+  }
+
+  const idA = getAnimalId(a);
+  const idB = getAnimalId(b);
+  return sortOrder === 'noi' ? idB - idA : idA - idB;
+});
 
   const handleMobileScroll = (direction: 'left' | 'right') => {
     if (mobileTrackRef.current) {
@@ -315,6 +405,9 @@ export default function Catalog() {
           totalResults={animaleSortate.length}
           isOpenMobile={isMobileFilterOpen}
           onCloseMobile={() => setIsMobileFilterOpen(false)}
+          availableCounties={availableCounties}
+          availableShelters={availableShelters}
+          availableLocationTypes={availableLocationTypes}
         />
 
         <main className="catalog-main-content">
