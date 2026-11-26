@@ -22,6 +22,7 @@ interface Animal {
   age: string;
   size: string;
   shelter: string;
+  shelterId?: number | null;
   vaccinated: boolean;
   dewormed: boolean;
   sterilized: boolean;
@@ -70,9 +71,11 @@ const initialFilterState: FilterState = {
 };
 
 export default function Catalog() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const categorieParam = searchParams.get('categorie');
   const tipParam = searchParams.get('tip');
+  const shelterIdParam = searchParams.get('shelterId');
+  const shelterId = shelterIdParam && /^[1-9]\d*$/.test(shelterIdParam) ? shelterIdParam : '';
   const navigate = useNavigate();
 
   const { lang } = useLanguage();
@@ -83,43 +86,19 @@ export default function Catalog() {
   const [loading, setLoading] = useState(true);
   const [selectedAnimal, setSelectedAnimal] = useState<any | null>(null);
   const [sortOrder, setSortOrder] = useState('noi');
+  const [requestVersion, setRequestVersion] = useState(0);
 
   const [filters, setFilters] = useState<FilterState>({
     ...initialFilterState,
     adoptionType: tipParam === 'la_distanta' ? 'la_distanta' : '',
+    species: categorieParam || '',
   });
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   const mobileTrackRef = useRef<HTMLDivElement>(null);
 
-/*const fetchAnimals = () => {
-    setLoading(true);
-
-    const queryParams = new URLSearchParams();
-    if (filters.adoptionType) queryParams.append('adoptionType', filters.adoptionType);
-    if (filters.species) queryParams.append('species', filters.species);
-    if (filters.gender) queryParams.append('gender', filters.gender);
-    if (filters.size) queryParams.append('size', filters.size);
-    if (filters.shelter) queryParams.append('shelter', filters.shelter);
-    if (filters.vaccinated) queryParams.append('vaccinated', 'true');
-    if (filters.sterilized) queryParams.append('sterilized', 'true');
-    if (filters.dewormed) queryParams.append('dewormed', 'true');
-
-    const queryString = queryParams.toString();
-    const url = `${API_BASE_URL}/api/animals${queryString ? `?${queryString}` : ''}`;
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setAnimals(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Eroare la preluarea animalelor:', error);
-        setLoading(false);
-      });
-  };*/
-  const fetchAnimals = () => {
+  useEffect(() => {
+    const controller = new AbortController();
     setLoading(true);
 
     const queryParams = new URLSearchParams();
@@ -130,7 +109,11 @@ export default function Catalog() {
     if (filters.ageGroup) queryParams.append('ageGroup', filters.ageGroup);
     if (filters.temperament) queryParams.append('temperament', filters.temperament);
     if (filters.color) queryParams.append('color', filters.color);
-    if (filters.shelter) queryParams.append('shelter', filters.shelter);
+    if (shelterId) {
+      queryParams.append('shelterId', shelterId);
+    } else if (filters.shelter) {
+      queryParams.append('shelter', filters.shelter);
+    }
     if (filters.locationType) queryParams.append('locationType', filters.locationType);
     if (filters.petFriendly) queryParams.append('petFriendly', 'true');
     if (filters.childFriendly) queryParams.append('childFriendly', 'true');
@@ -143,17 +126,25 @@ export default function Catalog() {
     const queryString = queryParams.toString();
     const url = `${API_BASE_URL}/api/animals${queryString ? `?${queryString}` : ''}`;
 
-    fetch(url)
-      .then((response) => response.json())
+    fetch(url, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
       .then((data) => {
-        setAnimals(data);
-        setLoading(false);
+        if (!controller.signal.aborted) setAnimals(data);
       })
       .catch((error) => {
+        if (controller.signal.aborted) return;
         console.error('Eroare la preluarea animalelor:', error);
-        setLoading(false);
+        setAnimals([]);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
       });
-  };
+
+    return () => controller.abort();
+  }, [filters, shelterId, requestVersion]);
 
   useEffect(() => {
     if (categorieParam) {
@@ -161,12 +152,6 @@ export default function Catalog() {
     }
   }, [categorieParam]);
 
-/*useEffect(() => {
-    fetchAnimals();
-  }, [categorieParam, filters.adoptionType]);*/
-  useEffect(() => {
-    fetchAnimals();
-  }, [categorieParam, filters]);
   useEffect(() => {
   fetch(`${API_BASE_URL}/api/animals`)
     .then((response) => response.json())
@@ -180,24 +165,39 @@ export default function Catalog() {
     });
 }, []);
 
-/*const handleResetFilters = () => {
-    setFilters(initialFilterState);
-    fetchAnimals();
-  };*/
+  const selectedShelterId = Number(shelterId);
+  const routeShelter = shelterId
+    ? allAnimals.find((animal) => animal.shelterId === selectedShelterId)?.shelter?.trim() ||
+      animals.find((animal) => animal.shelterId === selectedShelterId)?.shelter?.trim() ||
+      searchParams.get('shelter')?.trim() || `#${shelterId}`
+    : '';
+
+  const clearShelterParams = () => {
+    if (!searchParams.has('shelterId')) return;
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('shelterId');
+    nextParams.delete('shelter');
+    setSearchParams(nextParams, { replace: true });
+  };
+
+  const handleFilterChange = (nextFilters: FilterState) => {
+    if (shelterId && nextFilters.shelter === routeShelter) {
+      setFilters({ ...nextFilters, shelter: filters.shelter });
+      return;
+    }
+    clearShelterParams();
+    setFilters(nextFilters);
+  };
+
+  const handleClearShelter = () => {
+    clearShelterParams();
+    setFilters((previous) => ({ ...previous, shelter: '' }));
+  };
+
   const handleResetFilters = () => {
+    clearShelterParams();
     setFilters(initialFilterState);
-    setLoading(true);
-    fetch(`${API_BASE_URL}/api/animals`)
-      .then((response) => response.json())
-      .then((data) => {
-        setAnimals(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Eroare la resetarea animalelor:', error);
-        setLoading(false);
-      });
-  }; 
+  };
 
   const isDistanceMode = filters.adoptionType === 'la_distanta';
 
@@ -233,9 +233,9 @@ export default function Catalog() {
       !filters.county ||
       normalizeText(animal.county).includes(normalizeText(filters.county));
 
-    const matchesShelter =
-      !filters.shelter ||
-      normalizeText(animal.shelter).includes(normalizeText(filters.shelter));
+    const matchesShelter = shelterId
+      ? animal.shelterId === selectedShelterId
+      : !filters.shelter || normalizeText(animal.shelter).includes(normalizeText(filters.shelter));
 
     const matchesLocationType =
       !filters.locationType ||
@@ -258,7 +258,7 @@ export default function Catalog() {
   );
 
   const availableShelters = Array.from(
-    new Set(sourceForOptions.map((a) => (a.shelter || '').trim()).filter(Boolean))
+    new Set([routeShelter, ...sourceForOptions.map((a) => (a.shelter || '').trim())].filter(Boolean))
   );
 
   const availableLocationTypes = Array.from(
@@ -398,9 +398,9 @@ const animaleSortate = [...animaleFiltrate].sort((a, b) => {
       
       <div className="catalog-layout-container">
         <FilterSidebar
-          filters={filters}
-          onFilterChange={setFilters}
-          onApply={fetchAnimals}
+          filters={routeShelter ? { ...filters, shelter: routeShelter } : filters}
+          onFilterChange={handleFilterChange}
+          onApply={() => setRequestVersion((version) => version + 1)}
           onReset={handleResetFilters}
           totalResults={animaleSortate.length}
           isOpenMobile={isMobileFilterOpen}
@@ -546,6 +546,15 @@ const animaleSortate = [...animaleFiltrate].sort((a, b) => {
               </select>
             </div>
           </div>
+
+          {routeShelter && (
+            <div className="catalog-filter-badge catalog-shelter-filter">
+              <span>{t.shelter} · <strong>{routeShelter}</strong></span>
+              <button type="button" onClick={handleClearShelter}>
+                {lang === 'en' ? 'Clear shelter filter' : 'Șterge filtrul de adăpost'}
+              </button>
+            </div>
+          )}
 
           {isDistanceMode && (
             <div className="distance-banner-card">

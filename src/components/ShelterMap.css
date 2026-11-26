@@ -1,0 +1,96 @@
+.shelter-map-host {
+  width: 100%;
+  height: 100%;
+  background: #f0eadc;
+}
+
+.shelter-map-marker::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  transform: rotate(-45deg);
+  border: 2px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  background: #a66128;
+  box-shadow: 0 2px 7px #3f2c2066;
+}
+
+.shelter-map-marker::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 13px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.shelter-map-marker:is(:hover, :focus-visible)::before {
+  background: #77421d;
+}
+
+.shelter-map-marker:focus-visible {
+  outline: 2px solid #3f2c20;
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.shelter-map .leaflet-tooltip {
+  max-width: min(250px, 60vw);
+  white-space: normal;
+  color: #3f2c20;
+}
+
+.shelter-map-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  color: #3f2c20;
+  font-family: inherit;
+  overflow-wrap: anywhere;
+}
+
+.shelter-map-popup strong {
+  font-size: 1rem;
+}
+
+.shelter-map-popup a {
+  color: #6d431f;
+  text-decoration: underline;
+}
+
+.shelter-map-card-link {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #8f5123;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shelter-map-card-link:hover {
+  background: #77421d;
+}
+
+.shelter-map-message {
+  position: absolute;
+  z-index: 500;
+  top: 12px;
+  left: 12px;
+  max-width: calc(100% - 88px);
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fffbf4;
+  color: #3f2c20;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
