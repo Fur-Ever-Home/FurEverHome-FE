@@ -4,6 +4,7 @@ import { API_BASE_URL } from "../config";
 /*import React, { useState } from "react";*/
 import { createPortal } from "react-dom";
 import { useLanguage } from "../useLanguage";
+import { useAuthSession } from "../useAuthSession";
 import { translations, translateTemperament } from "../translations";
 import FavoriteBtn from "./FavoriteBtn";
 import "./AnimalModal.css";
@@ -96,7 +97,8 @@ interface AnimalModalProps {
 
   if (!animal) return null;
 
-  const isLoggedIn = !!localStorage.getItem("token");
+  const { user } = useAuthSession();
+  const isLoggedIn = Boolean(user);
 
 
   // Preluăm lista de imagini (cu fallback la imageUrl/image dacă arrays lipsește)
