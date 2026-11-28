@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { useLanguage } from '../useLanguage';
-import { useAuthSession } from '../useAuthSession';
 import { translateTemperament } from '../translations';
 import { API_BASE_URL } from '../config';
 import FavoriteBtn from '../components/FavoriteBtn';
@@ -14,8 +13,7 @@ export default function AnimalProfile() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const { lang } = useLanguage();
-  const { user } = useAuthSession();
-  const isLoggedIn = Boolean(user);
+  const isLoggedIn = !!localStorage.getItem('token');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMessage, setAuthMessage] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
