@@ -1,6 +1,7 @@
 import React from 'react';
 import FavoriteBtn from './FavoriteBtn';
 import { useLanguage } from '../useLanguage';
+import { useAuthSession } from '../useAuthSession';
 import { translations } from '../translations';
 import vaccineIcon from '../assets/vaccinat.png';
 import dewormIcon from '../assets/deparazitat.png';
@@ -34,7 +35,7 @@ export interface AnimalCardProps {
 export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode = false }) => {
   const { lang } = useLanguage();
   const t = translations[lang as keyof typeof translations] || translations.ro;
-  const isLoggedIn = !!localStorage.getItem('token');
+  const { user } = useAuthSession();
 
   const imageSrc = animal.imageUrl || animal.image || dogIcon;
   const genderValue = animal.gender || animal.sex || '';
@@ -100,7 +101,7 @@ export const AnimalCard: React.FC<AnimalCardProps> = ({ animal, isDistanceMode =
         <img src={imageSrc} alt={animal.name} className="animal-card-img" />
 
         <div className="card-fav-btn">
-          <FavoriteBtn animal={animal} isLoggedIn={isLoggedIn} />
+          <FavoriteBtn animal={animal} isLoggedIn={Boolean(user)} />
         </div>
       </div>
 
