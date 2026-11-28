@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import FavoriteAuthModal from './FavoriteAuthModal';
 import { API_BASE_URL } from '../config';
-import { CSRF_HEADER, useAuthSession } from '../useAuthSession';
 import './FavoriteBtn.css';
 
 interface Animal {
@@ -17,14 +16,13 @@ interface FavoriteBtnProps {
 }
 
 export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ animal, isLoggedIn }) => {
-  const { csrfToken } = useAuthSession();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Oprește deschiderea modalului cu fișa animalului
 
-    if (!isLoggedIn || !csrfToken) {
+    if (!isLoggedIn) {
       // Cazul 1: Utilizator neautentificat -> deschidem pop-up-ul
       setShowAuthModal(true);
       return;
@@ -36,12 +34,13 @@ export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ animal, isLoggedIn }) 
 
     try {
       if (animal.id) {
-        const response = await fetch(`${API_BASE_URL}/api/favorites/${animal.id}`, {
+        await fetch(`${API_BASE_URL}/api/favorites/${animal.id}`, {
           method: nextFavoriteState ? 'POST' : 'DELETE',
-          credentials: 'include',
-          headers: { [CSRF_HEADER]: csrfToken },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
         });
-        if (!response.ok) setIsFavorite(!nextFavoriteState);
       }
     } catch (error) {
       console.error('Eroare la actualizarea favoritului:', error);

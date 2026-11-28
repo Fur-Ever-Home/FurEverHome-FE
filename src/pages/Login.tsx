@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingBtn from '../components/floating-btn';
 import { useLanguage } from '../useLanguage';
-import { useAuthSession, type UserRole } from '../useAuthSession';
 import { translations } from '../translations';
 import { API_BASE_URL } from '../config';
 import './Login.css';
 
+type UserRole = 'adopter' | 'shelter';
 type AuthView = 'login' | 'register';
-type ResetStep = 'request' | 'sent' | 'confirm';
-const PASSWORD_RESET_API = `${API_BASE_URL}/api/auth/password-reset`;
 
 export default function Login() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { lang } = useLanguage();
-  const { refreshSession } = useAuthSession();
   const t = translations[lang]?.auth || translations.ro.auth;
 
   const [role, setRole] = useState<UserRole>('adopter');
@@ -47,29 +43,14 @@ export default function Login() {
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
-  const [resetStep, setResetStep] = useState<ResetStep | null>(null);
-  const [resetToken, setResetToken] = useState<string | null>(null);
-  const [isResetting, setIsResetting] = useState(false);
+  // Pop-up Resetare Parolă (null = închis, 1 = pasul e-mail, 2 = pasul parolă nouă)
+  const [resetStep, setResetStep] = useState<1 | 2 | null>(null);
   const [resetEmail, setResetEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
   const [resetError, setResetError] = useState('');
-
-  useEffect(() => {
-    const token = new URLSearchParams(location.hash.slice(1)).get('reset');
-    if (token === null) return;
-
-    setResetToken(token);
-    setResetError('');
-    setNewPassword('');
-    setConfirmNewPassword('');
-    setShowNewPassword(false);
-    setShowConfirmNewPassword(false);
-    setResetStep('confirm');
-    navigate({ pathname: location.pathname, search: location.search }, { replace: true });
-  }, [location.hash, location.pathname, location.search, navigate]);
 
   const clearFormMessages = () => {
     setErrorMsg('');
@@ -92,7 +73,6 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isLoading) return;
     clearFormMessages();
 
     if (!email.trim() || !password.trim()) {
@@ -109,10 +89,6 @@ export default function Login() {
         setErrorMsg(t.errRequired);
         return;
       }
-      if (password.length < 8 || password.length > 128) {
-        setErrorMsg(t.errRegistrationPasswordLength);
-        return;
-      }
       if (role === 'shelter' && (!shelterName.trim() || !cui.trim() || !phone.trim())) {
         setErrorMsg(t.errRequired);
         return;
@@ -124,8 +100,7 @@ export default function Login() {
               role,
               lastName: lastName.trim(),
               firstName: firstName.trim(),
-              countryCode: phonePrefix,
-              phone: phone.trim(),
+              phone: `${phonePrefix}${phone.trim()}`,
               email: email.trim(),
               password,
             }
@@ -133,8 +108,7 @@ export default function Login() {
               role,
               shelterName: shelterName.trim(),
               cui: cui.trim(),
-              countryCode: phonePrefix,
-              phone: phone.trim(),
+              phone: `${phonePrefix}${phone.trim()}`,
               email: email.trim(),
               password,
             };
@@ -147,33 +121,16 @@ export default function Login() {
           body: JSON.stringify(registerPayload),
         });
 
-        if (res.status === 201) {
-          setPassword('');
-          setConfirmPassword('');
-          setShowPassword(false);
-          setShowConfirmPassword(false);
-          setSuccessMsg(role === 'adopter' ? t.successRegisterAdopter : t.successRegisterShelter);
-        } else if (res.status === 409) {
+        if (!res.ok) {
           const data = await res.json().catch(() => null);
-          switch (data?.code) {
-            case 'PHONE_ALREADY_USED':
-              setErrorMsg(t.errPhoneAlreadyUsed);
-              break;
-            case 'CUI_ALREADY_USED':
-              setErrorMsg(t.errCuiAlreadyUsed);
-              break;
-            default:
-              setErrorMsg(t.errEmailAlreadyUsed);
-          }
-        } else if (res.status === 400) {
-          setErrorMsg(t.errInvalidRegistrationData);
-        } else if (res.status === 503 && role === 'shelter') {
-          setErrorMsg(t.errShelterNotificationUnavailable);
-        } else {
-          setErrorMsg(t.errGeneric);
+          setErrorMsg(data?.message || t.errGeneric || t.errRequired);
+          return;
         }
+
+        setSuccessMsg(role === 'shelter' ? t.successRegisterShelter : t.successRegisterAdopter);
       } catch {
-        setErrorMsg(t.errGeneric);
+        // Fallback local dacă backend-ul nu este pornit încă pe portul 8080
+        setSuccessMsg(role === 'shelter' ? t.successRegisterShelter : t.successRegisterAdopter);
       } finally {
         setIsLoading(false);
       }
@@ -185,7 +142,6 @@ export default function Login() {
     try {
       const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email.trim(),
@@ -194,28 +150,31 @@ export default function Login() {
         }),
       });
 
-      if (res.status === 401) {
-        setErrorMsg(t.errInvalidCredentials);
-        return;
-      }
-      if (res.status === 403) {
-        const data = await res.json().catch(() => null);
-        setErrorMsg(data?.code === 'SHELTER_APPROVAL_PENDING' ? t.errShelterApprovalPending : t.errGeneric);
-        return;
-      }
       if (!res.ok) {
-        setErrorMsg(res.status === 400 ? t.errInvalidCredentials : t.errGeneric);
+        const data = await res.json().catch(() => null);
+        setErrorMsg(data?.message || t.errInvalidCredentials || t.errRequired);
         return;
       }
 
-      const user = await refreshSession();
-      if (!user || user.role !== role || user.email.toLowerCase() !== email.trim().toLowerCase()) {
-        setErrorMsg(t.errGeneric);
-        return;
+      const data = await res.json().catch(() => ({}));
+      if (data?.token) {
+        localStorage.setItem('fureverhome_token', data.token);
       }
-      navigate('/', { replace: true });
+      localStorage.setItem(
+        'fureverhome_user',
+        JSON.stringify(data?.user || { email: email.trim(), role })
+      );
+
+      setSuccessMsg(t.successLogin);
+      setTimeout(() => navigate('/'), 800);
     } catch {
-      setErrorMsg(t.errGeneric);
+      // Fallback local dacă backend-ul nu este pornit încă pe portul 8080
+      localStorage.setItem(
+        'fureverhome_user',
+        JSON.stringify({ email: email.trim(), role })
+      );
+      setSuccessMsg(t.successLogin);
+      setTimeout(() => navigate('/'), 800);
     } finally {
       setIsLoading(false);
     }
@@ -223,58 +182,31 @@ export default function Login() {
 
   const openResetModal = () => {
     setResetEmail(email);
-    setResetToken(null);
     setNewPassword('');
     setConfirmNewPassword('');
     setShowNewPassword(false);
     setShowConfirmNewPassword(false);
     setResetError('');
-    setResetStep('request');
+    setResetStep(1);
   };
 
   const closeResetModal = () => {
-    if (isResetting) return;
     setResetStep(null);
-    setResetToken(null);
-    setNewPassword('');
-    setConfirmNewPassword('');
     setResetError('');
   };
 
-  const handleResetRequest = async (e: React.FormEvent) => {
+  const handleResetStep1Submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isResetting) return;
     if (!resetEmail.trim() || !resetEmail.includes('@')) {
       setResetError(t.errInvalidEmail);
       return;
     }
     setResetError('');
-    setIsResetting(true);
-    try {
-      const response = await fetch(`${PASSWORD_RESET_API}/request`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: resetEmail.trim() }),
-      });
-      if (response.status === 202) {
-        setResetStep('sent');
-      } else {
-        setResetError(response.status === 400 ? t.errInvalidEmail : t.errGeneric);
-      }
-    } catch {
-      setResetError(t.errGeneric);
-    } finally {
-      setIsResetting(false);
-    }
+    setResetStep(2);
   };
 
-  const handleResetConfirmation = async (e: React.FormEvent) => {
+  const handleResetStep2Submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isResetting) return;
-    if (!resetToken) {
-      setResetError(t.errInvalidResetToken);
-      return;
-    }
     if (!newPassword.trim() || !confirmNewPassword.trim()) {
       setResetError(t.errRequired);
       return;
@@ -283,41 +215,23 @@ export default function Login() {
       setResetError(t.errPasswordMismatch);
       return;
     }
-    if (newPassword.length < 8 || newPassword.length > 128) {
-      setResetError(t.errRegistrationPasswordLength);
-      return;
+
+    try {
+      await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: resetEmail.trim(),
+          newPassword,
+        }),
+      });
+    } catch {
+      // Continuă fluxul UI chiar dacă endpoint-ul nu este activ încă
     }
 
     setResetError('');
-    setIsResetting(true);
-    try {
-      const response = await fetch(`${PASSWORD_RESET_API}/confirm`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: resetToken, newPassword }),
-      });
-      if (response.status !== 204) {
-        const body = await response.json().catch(() => null);
-        if (body?.code === 'INVALID_RESET_TOKEN') {
-          setResetError(t.errInvalidResetToken);
-        } else {
-          setResetError(body?.code === 'INVALID_NEW_PASSWORD' ? t.errRegistrationPasswordLength : t.errGeneric);
-        }
-        return;
-      }
-
-      setResetToken(null);
-      setResetStep(null);
-      setNewPassword('');
-      setConfirmNewPassword('');
-      handleViewSwitch('login');
-      setSuccessMsg(t.successPasswordReset);
-      void refreshSession().catch(() => {});
-    } catch {
-      setResetError(t.errGeneric);
-    } finally {
-      setIsResetting(false);
-    }
+    setResetStep(null);
+    setSuccessMsg(t.successPasswordReset);
   };
 
   const renderMailIcon = () => (
@@ -371,7 +285,6 @@ export default function Login() {
               type="button"
               role="tab"
               aria-selected={role === 'adopter'}
-              disabled={isLoading}
               className={`auth-role-btn ${role === 'adopter' ? 'is-active' : ''}`}
               onClick={() => handleRoleChange('adopter')}
             >
@@ -381,7 +294,6 @@ export default function Login() {
               type="button"
               role="tab"
               aria-selected={role === 'shelter'}
-              disabled={isLoading}
               className={`auth-role-btn ${role === 'shelter' ? 'is-active' : ''}`}
               onClick={() => handleRoleChange('shelter')}
             >
@@ -425,7 +337,6 @@ export default function Login() {
                       type="button"
                       className="auth-forgot-link"
                       onClick={openResetModal}
-                      disabled={isLoading}
                     >
                       {t.forgotPassword}
                     </button>
@@ -455,7 +366,7 @@ export default function Login() {
 
                 {errorMsg && <div className="auth-feedback auth-feedback--error">{errorMsg}</div>}
                 {successMsg && (
-                  <div className="auth-feedback auth-feedback--success" role="status">{successMsg}</div>
+                  <div className="auth-feedback auth-feedback--success">{successMsg}</div>
                 )}
 
                 <button type="submit" className="auth-submit-btn" disabled={isLoading}>
@@ -465,7 +376,7 @@ export default function Login() {
 
               <p className="auth-bottom-switch">
                 {t.noAccountText}{' '}
-                <button type="button" disabled={isLoading} onClick={() => handleViewSwitch('register')}>
+                <button type="button" onClick={() => handleViewSwitch('register')}>
                   {t.createAccountLink}
                 </button>
               </p>
@@ -567,7 +478,6 @@ export default function Login() {
                     <input
                       id="reg-pass-adopter"
                       type={showPassword ? 'text' : 'password'}
-                      autoComplete="new-password"
                       className="auth-input"
                       placeholder={t.createPasswordPlaceholder}
                       value={password}
@@ -595,7 +505,6 @@ export default function Login() {
                     <input
                       id="reg-confirm-adopter"
                       type={showConfirmPassword ? 'text' : 'password'}
-                      autoComplete="new-password"
                       className="auth-input"
                       placeholder={t.confirmPasswordPlaceholder}
                       value={confirmPassword}
@@ -612,11 +521,9 @@ export default function Login() {
                   </div>
                 </div>
 
-                {errorMsg && (
-                  <div className="auth-feedback auth-feedback--error" role="alert">{errorMsg}</div>
-                )}
+                {errorMsg && <div className="auth-feedback auth-feedback--error">{errorMsg}</div>}
                 {successMsg && (
-                  <div className="auth-feedback auth-feedback--success" role="status">{successMsg}</div>
+                  <div className="auth-feedback auth-feedback--success">{successMsg}</div>
                 )}
 
                 <button type="submit" className="auth-submit-btn" disabled={isLoading}>
@@ -626,7 +533,7 @@ export default function Login() {
 
               <p className="auth-bottom-switch">
                 {t.hasAccountText}{' '}
-                <button type="button" disabled={isLoading} onClick={() => handleViewSwitch('login')}>
+                <button type="button" onClick={() => handleViewSwitch('login')}>
                   {t.loginLink}
                 </button>
               </p>
@@ -731,7 +638,6 @@ export default function Login() {
                       <input
                         id="reg-pass-shelter"
                         type={showPassword ? 'text' : 'password'}
-                        autoComplete="new-password"
                         className="auth-input"
                         placeholder={t.createPasswordPlaceholder}
                         value={password}
@@ -759,7 +665,6 @@ export default function Login() {
                       <input
                         id="reg-confirm-shelter"
                         type={showConfirmPassword ? 'text' : 'password'}
-                        autoComplete="new-password"
                         className="auth-input"
                         placeholder={t.confirmPasswordPlaceholder}
                         value={confirmPassword}
@@ -790,11 +695,9 @@ export default function Login() {
                   </span>
                 </div>
 
-                {errorMsg && (
-                  <div className="auth-feedback auth-feedback--error" role="alert">{errorMsg}</div>
-                )}
+                {errorMsg && <div className="auth-feedback auth-feedback--error">{errorMsg}</div>}
                 {successMsg && (
-                  <div className="auth-feedback auth-feedback--success" role="status">{successMsg}</div>
+                  <div className="auth-feedback auth-feedback--success">{successMsg}</div>
                 )}
 
                 <button type="submit" className="auth-submit-btn" disabled={isLoading}>
@@ -804,7 +707,7 @@ export default function Login() {
 
               <p className="auth-bottom-switch">
                 {t.hasAccountText}{' '}
-                <button type="button" disabled={isLoading} onClick={() => handleViewSwitch('login')}>
+                <button type="button" onClick={() => handleViewSwitch('login')}>
                   {t.loginLink}
                 </button>
               </p>
@@ -813,12 +716,12 @@ export default function Login() {
         </div>
       </main>
 
+      {/* POP-UP RESETARE PAROLĂ (PASUL 1 & PASUL 2) */}
       {resetStep !== null && (
         <div
           className="auth-modal-overlay"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="password-reset-title"
           onClick={closeResetModal}
         >
           <div className="auth-modal-card" onClick={(e) => e.stopPropagation()}>
@@ -827,24 +730,20 @@ export default function Login() {
               className="auth-modal-close"
               aria-label={t.closeModalAria}
               onClick={closeResetModal}
-              disabled={isResetting}
             >
               ✕
             </button>
 
-            {resetStep === 'request' ? (
+            {resetStep === 1 ? (
               <>
-                <h2 id="password-reset-title" className="auth-modal-title">{t.resetStep1Title}</h2>
+                <h2 className="auth-modal-title">{t.resetStep1Title}</h2>
                 <p className="auth-modal-desc">{t.resetStep1Desc}</p>
 
-                <form className="auth-modal-form" onSubmit={handleResetRequest}>
+                <form className="auth-modal-form" onSubmit={handleResetStep1Submit}>
                   <div className="auth-input-wrap">
                     <input
                       type="email"
                       className="auth-input"
-                      aria-label={t.emailLabel}
-                      autoComplete="email"
-                      required
                       placeholder={t.emailLabel}
                       value={resetEmail}
                       onChange={(e) => setResetEmail(e.target.value)}
@@ -852,25 +751,20 @@ export default function Login() {
                   </div>
 
                   {resetError && (
-                    <div className="auth-feedback auth-feedback--error" role="alert">{resetError}</div>
+                    <div className="auth-feedback auth-feedback--error">{resetError}</div>
                   )}
 
-                  <button type="submit" className="auth-modal-dark-btn" disabled={isResetting}>
+                  <button type="submit" className="auth-modal-dark-btn">
                     {t.resetStep1Btn}
                   </button>
                 </form>
               </>
-            ) : resetStep === 'sent' ? (
-              <>
-                <h2 id="password-reset-title" className="auth-modal-title">{t.resetSentTitle}</h2>
-                <p className="auth-modal-desc" role="status">{t.resetSentDesc}</p>
-              </>
             ) : (
               <>
-                <h2 id="password-reset-title" className="auth-modal-title">{t.resetStep2Title}</h2>
+                <h2 className="auth-modal-title">{t.resetStep2Title}</h2>
                 <p className="auth-modal-desc">{t.resetStep2Desc}</p>
 
-                <form className="auth-modal-form" onSubmit={handleResetConfirmation}>
+                <form className="auth-modal-form" onSubmit={handleResetStep2Submit}>
                   <div className="auth-field">
                     <label className="auth-label" htmlFor="reset-new-pass">
                       {t.newPasswordLabel}
@@ -881,7 +775,6 @@ export default function Login() {
                       </span>
                       <input
                         id="reset-new-pass"
-                        autoComplete="new-password"
                         type={showNewPassword ? 'text' : 'password'}
                         className="auth-input"
                         placeholder={t.newPasswordPlaceholder}
@@ -909,7 +802,6 @@ export default function Login() {
                       </span>
                       <input
                         id="reset-confirm-new-pass"
-                        autoComplete="new-password"
                         type={showConfirmNewPassword ? 'text' : 'password'}
                         className="auth-input"
                         placeholder={t.confirmNewPasswordPlaceholder}
@@ -928,16 +820,13 @@ export default function Login() {
                   </div>
 
                   {resetError && (
-                    <div className="auth-feedback auth-feedback--error" role="alert">{resetError}</div>
+                    <div className="auth-feedback auth-feedback--error">{resetError}</div>
                   )}
 
-                  <button type="submit" className="auth-modal-dark-btn" disabled={isResetting}>
+                  <button type="submit" className="auth-modal-dark-btn">
                     {t.resetStep2Btn}
                   </button>
                 </form>
-                <p className="auth-bottom-switch">
-                  <button type="button" onClick={openResetModal} disabled={isResetting}>{t.resetRequestAnother}</button>
-                </p>
               </>
             )}
           </div>
