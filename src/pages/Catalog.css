@@ -160,6 +160,24 @@
   text-transform: uppercase;
 }
 
+.catalog-shelter-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.catalog-shelter-filter button {
+  border: 0;
+  padding: 4px 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* GRILĂ DE CARDURI (3 coloane pe Desktop) */
 .catalog-cards-grid {
   display: grid;

@@ -98,6 +98,14 @@
   text-decoration: underline;
 }
 
+.adaposturi-search-wrapper input:focus-visible,
+.adaposturi-select:focus-visible,
+.adaposturi-reset-btn:focus-visible,
+.animal-type-filters .filter-pill:focus-visible {
+  outline: 2px solid #94602b;
+  outline-offset: 2px;
+}
+
 .adaposturi-filters-bottom {
   display: flex;
   flex-wrap: wrap;
@@ -141,10 +149,21 @@
 }
 
 .adaposturi-counter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
   font-size: 0.95rem;
   color: #5d534a;
   font-weight: 500;
   font-family: 'Libertinus Sans';
+}
+
+.adaposturi-total strong {
+  margin-left: 4px;
+  color: #3F2C20;
+  font-size: 1.15em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ==========================================
@@ -161,150 +180,25 @@
   box-sizing: border-box;
 }
 
-/* Harta schematică (Stânga - 58%) */
-.schematic-map-container {
+.shelter-map {
   position: relative;
-  flex: 0 0 58%;
+  isolation: isolate;
+  flex: 58 1 0;
+  min-width: 0;
   height: 560px;
-  background-color: #f0eadc;
-  border-radius: 16px;
+  overflow: hidden;
   border: 1px solid #e6dec5;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  border-radius: 16px;
+  background-color: #f0eadc;
   box-sizing: border-box;
-}
-
-.map-viewport {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(90deg, transparent 49%, #eae3d2 50%, transparent 51%),
-    linear-gradient(0deg, transparent 49%, #eae3d2 50%, transparent 51%);
-  background-size: 250px 250px;
-}
-
-.map-zone {
-  position: absolute;
-  background-color: #d1dcce;
-  border-radius: 30px;
-  font-size: 0.8rem;
-  color: #72826e;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 0.5px;
-}
-
-.zone-copou { top: 60px; left: 80px; width: 180px; height: 90px; border-radius: 40px; }
-.zone-pacurari { bottom: 80px; left: 60px; width: 160px; height: 80px; }
-.zone-centru { top: 80px; right: 180px; width: 170px; height: 80px; }
-.zone-tatarasi { bottom: 90px; right: 120px; width: 170px; height: 90px; border-radius: 40px; }
-
-.map-river {
-  position: absolute;
-  top: 35%;
-  left: 0;
-  width: 100%;
-  height: 35px;
-  background-color: #c8dede;
-  transform: rotate(-3deg);
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  padding-left: 300px;
-  font-size: 0.75rem;
-  color: #557575;
-  font-weight: 500;
-}
-
-.map-pin {
-  position: absolute;
-  background-color: #B97A35;
-  color: #ffffff;
-  border: 2.5px solid #ffffff;
-  width: 36px;
-  height: 36px;
-  border-radius: 50% 50% 50% 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.map-pin span {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-.map-pin:hover {
-  background-color: #c2792c;
-  transform: scale(1.15);
-  z-index: 10;
-}
-
-.pin-24 { top: 90px; left: 190px; }
-.pin-9  { top: 140px; right: 320px; }
-.pin-12 { top: 320px; left: 140px; }
-.pin-31 { bottom: 130px; left: 210px; }
-.pin-17 { top: 270px; right: 410px; }
-
-.map-footer-text {
-  position: absolute;
-  bottom: 15px;
-  left: 20px;
-  font-size: 0.75rem;
-  color: #8c8275;
-}
-
-.map-zoom-controls {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #d9d0b8;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  overflow: hidden;
-  z-index: 5;
-}
-
-.map-zoom-controls button {
-  width: 36px;
-  height: 36px;
-  background: #ffffff;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #3F2C20;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.map-zoom-controls button:first-child {
-  border-bottom: 1px solid #f0ead6;
-}
-
-.map-zoom-controls button:hover {
-  background: #faf8f2;
 }
 
 /* ==========================================
    CONTAINER CARDURI & EFECT FLIP 3D
    ================================          */
 .shelters-cards-sidebar {
-  flex: 0 0 40%;
+  flex: 40 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -319,6 +213,12 @@
 .shelter-card-container {
   perspective: 1000px;
   width: 100%;
+}
+
+.shelter-card-container:focus {
+  outline: 2px solid #94602b;
+  outline-offset: -2px;
+  border-radius: 16px;
 }
 
 .shelter-card-inner {
@@ -542,6 +442,12 @@
   margin-top: 2px;
 }
 
+.shelter-list-message {
+  color: #665c52;
+  padding: 20px;
+  text-align: center;
+}
+
 .btn-vezi-animale {
   flex: 1;
   background-color: #B97A35;
@@ -551,6 +457,8 @@
   padding: 10px 16px;
   font-size: 0.9rem;
   font-weight: 600;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: 'Libertinus Sans', sans-serif;
@@ -629,32 +537,16 @@
     width: 100%;
   }
 
-  /* Transformăm secțiunea de jos într-un carusel orizontal */
   .adaposturi-filters-bottom {
-    display: flex;
-    flex-direction: row;          /* Punem elementele pe un singur rând */
-    flex-wrap: nowrap;            /* Împiedicăm trecerea pe rând nou */
-    overflow-x: auto;             /* Permitem scroll-ul orizontal (carusel) */
-    white-space: nowrap;          /* Menținem textul pe o singură linie */
-    align-items: center;
-    gap: 10px;
-    padding-bottom: 8px;          /* Spațiu mic pentru bara de scroll */
-    width: 100%;
-    -webkit-overflow-scrolling: touch; /* Scroll fin pe iOS */
+    align-items: flex-start;
   }
 
-  /* Ascundem bara de scroll pentru un aspect mai curat (opțional) */
-  .adaposturi-filters-bottom::-webkit-scrollbar {
-    display: none;
-  }
-  .adaposturi-filters-bottom {
-    scrollbar-width: none;
+  .animal-type-filters {
+    gap: 8px;
   }
 
-  /* Asigurăm că butoanele/elementele din interior nu se micșorează și își păstrează forma */
-  .adaposturi-filters-bottom > * {
-    flex: 0 0 auto;
-    width: auto;
+  .animal-type-filters .filter-pill {
+    padding: 7px 12px;
   }
 
   /* Layout principal pe coloană */
@@ -666,29 +558,11 @@
     padding: 0 15px;
   }
 
-  /* Fix pentru harta turtită: flex: none permite respectarea înălțimii */
-  .schematic-map-container {
+  .shelter-map {
     flex: none;
     width: 100%;
     height: 340px;
   }
-
-  /* Repoziționăm zonele și pin-urile ca să încapă pe ecranul îngust al telefonului */
-  .zone-copou { top: 30px; left: 20px; width: 120px; height: 60px; font-size: 0.7rem; }
-  .zone-centru { top: 45px; right: 55px; width: 120px; height: 60px; font-size: 0.7rem; }
-  .zone-pacurari { bottom: 45px; left: 20px; width: 120px; height: 60px; font-size: 0.7rem; }
-  .zone-tatarasi { bottom: 45px; right: 25px; width: 120px; height: 60px; font-size: 0.7rem; }
-  
-  .map-river {
-    padding-left: 120px;
-    height: 26px;
-  }
-
-  .pin-24 { top: 45px; left: 95px; }
-  .pin-9  { top: 85px; right: 115px; }
-  .pin-12 { top: 175px; left: 55px; }
-  .pin-31 { bottom: 75px; left: 105px; }
-  .pin-17 { top: 155px; right: 95px; }
 
   /* Containerul de carduri */
   .shelters-cards-sidebar {
